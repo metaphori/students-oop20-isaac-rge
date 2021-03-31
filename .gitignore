@@ -1,0 +1,32 @@
+*.class
+
+# Package Files #
+*.war
+*.ear
+
+# Eclipse #
+.classpath
+.project
+.checkstyle
+.eclipse-pmd
+.settings/
+bin/
+config/
+
+# IDEA #
+.idea/
+*.iml
+out/
+
+# Maven #
+dependency-reduced-pom.xml
+target/
+
+# Gradle #
+.gradle/
+build/
+
+# logs #
+*.log
+logs/
+system/

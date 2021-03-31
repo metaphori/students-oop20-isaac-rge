@@ -59,7 +59,7 @@ tasks.withType<Test> {
 
 application {
     // Define the main class for the application
-    mainClass.set("core.NewRyleh")
+    mainClass.set("ryleh.NewRyleh")
 
     /*
      * mainClassName was deprecated by Gradle, but it is still required by John Engelman's Shadow plugin.

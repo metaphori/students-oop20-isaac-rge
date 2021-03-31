@@ -1,4 +1,4 @@
-package core;
+package ryleh;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -7,12 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import ryleh.core.GameEngine;
  
 public class Ryleh extends Application {
     public static void main(final String[] args) {
-        launch(args);
+       launch(args);
     }
-
     @Override
     public void start(final Stage primaryStage) throws Exception {
         primaryStage.setTitle("Incredibile Funziona");
@@ -23,6 +23,9 @@ public class Ryleh extends Application {
             @Override
             public void handle(final ActionEvent event) {
                 System.out.println("**bestemmione**");
+                final GameEngine engine = new GameEngine();
+                engine.initGame(primaryStage);
+                engine.mainLoop();
             }
         });
         final StackPane root = new StackPane();

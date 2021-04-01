@@ -1,17 +1,17 @@
 package ryleh.controller;
 
 import ryleh.model.GameObjectImpl;
-import ryleh.view.View;
+import ryleh.view.GraphicComponent;
 
 public class GameObjectController {
 
-    private View view;
+    private GraphicComponent view;
     private GameObjectImpl gameObject;
 
-    public View getView() {
+    public GraphicComponent getView() {
         return view;
     }
-    public void setView(View view) {
+    public void setView(GraphicComponent view) {
         this.view = view;
     }
     public GameObjectImpl getGameObject() {

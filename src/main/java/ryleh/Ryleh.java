@@ -15,22 +15,23 @@ public class Ryleh extends Application {
     }
     @Override
     public void start(final Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Incredibile Funziona");
-        final Button btn = new Button();
-        btn.setText("Bestemmia");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
- 
-            @Override
-            public void handle(final ActionEvent event) {
-                System.out.println("**bestemmione**");
-                final GameEngine engine = new GameEngine();
-                engine.initGame(primaryStage);
-                engine.mainLoop();
-            }
-        });
-        final StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        primaryStage.setScene(new Scene(root, 800, 800));
-        primaryStage.show();
+    	
+        RylehMainMenu menu = new RylehMainMenu(primaryStage);
+//        final Button btn = new Button();
+//        btn.setText("Bestemmia");
+//        btn.setOnAction(new EventHandler<ActionEvent>() {
+// 
+//            @Override
+//            public void handle(final ActionEvent event) {
+//                System.out.println("**bestemmione**");
+//                final GameEngine engine = new GameEngine();
+//                engine.initGame(primaryStage);
+//                engine.mainLoop();
+//            }
+//        });
+//        final StackPane root = new StackPane();
+//        root.getChildren().add(btn);
+//        primaryStage.setScene(new Scene(root, 800, 800));
+//        primaryStage.show();
     }
 }

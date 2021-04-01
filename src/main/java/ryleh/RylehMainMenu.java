@@ -11,6 +11,7 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
@@ -41,6 +42,8 @@ public class RylehMainMenu {
 	public RylehMainMenu(final Stage primaryStage) {
 		
 		//levelFont = FXGL.getAssetLoader().loadFont("manaspc.ttf");
+		primaryStage.setHeight(1080);
+		primaryStage.setWidth(1920);
 		createCustomButton("Start Game", "Start a new adventure", () -> {
 			final GameEngine engine = new GameEngine();
 			engine.initGame(primaryStage);
@@ -62,7 +65,7 @@ public class RylehMainMenu {
 		pane.setLeft(box);
 		Scene scene = new Scene(pane);
 		primaryStage.setScene(scene);
-		//primaryStage.setResizable(false);
+		primaryStage.setResizable(false);
 		primaryStage.setFullScreen(true);
 		primaryStage.setFullScreenExitHint("");
 		primaryStage.setTitle("Incredibile Funziona");

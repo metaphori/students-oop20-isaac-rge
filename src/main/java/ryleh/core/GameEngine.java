@@ -1,8 +1,9 @@
 package ryleh.core;
 
+import javafx.scene.Parent;
 import javafx.stage.Stage;
-import ryleh.view.View;
-import ryleh.view.Scene;
+import ryleh.view.GraphicComponent;
+import ryleh.view.ViewHandler;
 
 public class GameEngine {
     private GameState rylehState;
@@ -21,15 +22,18 @@ public class GameEngine {
      * 
      */
     public void mainLoop() {
-        long lastTime;
-        while (!rylehState.isGameOver()) {
-            final long current = System.currentTimeMillis();
-            //final int elapsed = (int)(current - lastTime);
-            rylehState.updateState();
-            System.out.println("update");
-            waitForNextFrame(current);
-            lastTime = current;
-        }
+        new Thread(()-> {
+        	while (!rylehState.isGameOver()) {
+        		long lastTime;
+                final long current = System.currentTimeMillis();
+                //final int elapsed = (int)(current - lastTime);
+                rylehState.updateState();
+                System.out.println("update");
+                waitForNextFrame(current);
+                lastTime = current;
+            }
+        }).start();
+  
     }
 
     /*

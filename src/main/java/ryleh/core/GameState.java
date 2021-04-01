@@ -1,24 +1,31 @@
 package ryleh.core;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.scene.Parent;
 import javafx.stage.Stage;
 import ryleh.controller.GameObjectController;
 import ryleh.model.World;
-import ryleh.view.Scene;
+import ryleh.view.ViewHandler;
 
 public class GameState {
-    private Scene scene;
+    private ViewHandler scene;
     private World world;
     private List<GameObjectController> objects;
     private Map<String, String> gameVars;
     private boolean isGameOver = false;
 
     public GameState(final Stage mainStage) {
-        scene = new Scene(mainStage);
+        try {
+			scene = new ViewHandler(mainStage);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         world = new World();
         objects = new ArrayList<>();
         gameVars = new HashMap<>();
@@ -35,4 +42,8 @@ public class GameState {
     public boolean isGameOver() {
         return isGameOver;
     }
+
+	public ViewHandler getScene() {
+		return scene;
+	}
 }

@@ -14,7 +14,7 @@
          </font></Label>
       <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../OOP-Project-isaac-rge/src/main/resources/assets/textures/background.png" />
+            <Image url="@../assets/texture/levels/background.png" />
          </image>
       </ImageView>
    </children>

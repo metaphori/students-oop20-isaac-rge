@@ -1,6 +1,7 @@
 package ryleh.model;
 
 import java.util.List;
+import java.util.Optional;
 
 import javafx.geometry.Point2D;
 import ryleh.model.components.Component;
@@ -10,9 +11,9 @@ public interface GameObject {
 
     Point2D getPosition();
 
-    List<? extends Component> getComponents();
+    List<Component> getComponents();
 
-    Component getComponent(Class<? extends Component> type);
+    Optional<Component> getComponent(Class<Component> type);
 
     void addComponent(Component component);
 

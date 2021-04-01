@@ -65,6 +65,7 @@ public class RylehMainMenu {
 		//primaryStage.setResizable(false);
 		primaryStage.setFullScreen(true);
 		primaryStage.setFullScreenExitHint("");
+		primaryStage.setTitle("Incredibile Funziona");
 		primaryStage.show();
 	}
 	private void createCustomButton(final String name, final String description, final Runnable action) {

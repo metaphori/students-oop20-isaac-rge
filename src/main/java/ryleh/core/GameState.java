@@ -21,21 +21,23 @@ public class GameState {
 
     public GameState(final Stage mainStage) {
         try {
-			scene = new ViewHandler(mainStage);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+                scene = new ViewHandler(mainStage);
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    }
         world = new World();
         objects = new ArrayList<>();
         gameVars = new HashMap<>();
         gameVars.put("Version", "0.1");
+        objects.add(GameFactory.getInstance().createPlayer(world));
     }
 
     public void updateState() {
         for (final GameObjectController object : this.objects) {
             object.getGameObject().onUpdate();
-            object.getView().render(object.getGameObject().getPosition());
+            //TODO change next "render" method to accept in input a object P2d
+            //object.getView().render(/*object.getGameObject().getPosition()*/);
         }
     }
 

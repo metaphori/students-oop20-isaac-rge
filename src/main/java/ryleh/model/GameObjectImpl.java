@@ -2,45 +2,69 @@ package ryleh.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.geometry.Point2D;
-import ryleh.controller.GameObjectController;
+import ryleh.common.P2d;
 import ryleh.model.components.Component;
 
 public class GameObjectImpl implements GameObject {
     private Type type;
-    private Point2D position;
-    private List<? extends Component> components;
+    private String id;
+    private P2d position;
+    private World world;
+    private List<Component> components;
 
     public GameObjectImpl() {
-        position = new Point2D(0,0);
+        position = new P2d(0,0);
         components = new ArrayList<>();
     }
 
-    public void onUpdate () {
-        position = position.add(new Point2D (1, 1));
+    @Override
+    public void onAdded(final World world) {
+        this.world = world;
+        this.id = world.generateId("gameObject");
     }
-    public Point2D getPosition() {
+
+    @Override
+    public void onUpdate() {
+        components.forEach(i -> i.onUpdate());
+    }
+
+    @Override
+    public P2d getPosition() {
         return position;
     }
-    public void setPosition(Point2D position) {
+    @Override
+    public void setPosition(final P2d position) {
         this.position = position;
     }
     @Override
-    public List<? extends Component> getComponents() {
+    public List<Component> getComponents() {
         return components;
     }
     @Override
-    public Component getComponent(final Class<? extends Component> type) {
-        // TODO Auto-generated method stub
-        return null;
+    public Optional<Component> getComponent(final Class<Component> type) {
+        return components.stream().filter(type::isInstance).findAny();
     }
     @Override
     public void addComponent(final Component component) {
-        // TODO Auto-generated method stub
+        this.components.add(component);
+        component.setGameObject(this);
     }
     @Override
     public Type getType() {
         return type;
     }
+
+    @Override
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "GameObjectImpl [id=" + id + ", type=" + type + "]";
+    }
+
 }

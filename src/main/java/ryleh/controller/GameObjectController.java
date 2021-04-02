@@ -1,23 +1,30 @@
 package ryleh.controller;
 
-import ryleh.model.GameObjectImpl;
+import ryleh.core.EntityBuilder;
+import ryleh.model.GameObject;
 import ryleh.view.GraphicComponent;
 
 public class GameObjectController {
 
     private GraphicComponent view;
-    private GameObjectImpl gameObject;
+    private GameObject gameObject;
+
+    public GameObjectController(final GraphicComponent view, final GameObject gameObject) {
+        super();
+        this.view = view;
+        this.gameObject = gameObject;
+    }
 
     public GraphicComponent getView() {
         return view;
     }
-    public void setView(GraphicComponent view) {
+    public void setView(final GraphicComponent view) {
         this.view = view;
     }
-    public GameObjectImpl getGameObject() {
+    public GameObject getGameObject() {
         return gameObject;
     }
-    public void setGameObject(GameObjectImpl gameObject) {
+    public void setGameObject(final GameObject gameObject) {
         this.gameObject = gameObject;
     }
 }

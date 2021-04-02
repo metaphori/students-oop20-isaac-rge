@@ -47,5 +47,9 @@ public class GameEngine {
                 } catch (Exception ex){}
         }
     }
+    
+    public static EntityBuilder entityBuilder() {
+        return new EntityBuilder();
+    }
 
 }

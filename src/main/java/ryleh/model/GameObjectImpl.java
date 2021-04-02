@@ -5,33 +5,38 @@ import java.util.List;
 import java.util.Optional;
 
 import javafx.geometry.Point2D;
+import ryleh.common.P2d;
 import ryleh.model.components.Component;
 
 public class GameObjectImpl implements GameObject {
     private Type type;
-    private Point2D position;
+    private String id;
+    private P2d position;
+    private World world;
     private List<Component> components;
 
     public GameObjectImpl() {
-        position = new Point2D(0,0);
+        position = new P2d(0,0);
         components = new ArrayList<>();
     }
 
-    /*
-     * 
-     */
+    @Override
+    public void onAdded(final World world) {
+        this.world = world;
+        this.id = world.generateId("gameObject");
+    }
+
     @Override
     public void onUpdate() {
         components.forEach(i -> i.onUpdate());
     }
-    /*
-     * 
-     */
+
     @Override
-    public Point2D getPosition() {
+    public P2d getPosition() {
         return position;
     }
-    public void setPosition(Point2D position) {
+    @Override
+    public void setPosition(final P2d position) {
         this.position = position;
     }
     @Override
@@ -53,36 +58,13 @@ public class GameObjectImpl implements GameObject {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((components == null) ? 0 : components.hashCode());
-        result = prime * result + ((position == null) ? 0 : position.hashCode());
-        result = prime * result + ((type == null) ? 0 : type.hashCode());
-        return result;
+    public void setType(Type type) {
+        this.type = type;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        GameObjectImpl other = (GameObjectImpl) obj;
-        if (components == null) {
-            if (other.components != null)
-                return false;
-        } else if (!components.equals(other.components))
-            return false;
-        if (position == null) {
-            if (other.position != null)
-                return false;
-        } else if (!position.equals(other.position))
-            return false;
-        if (type != other.type)
-            return false;
-        return true;
+    public String toString() {
+        return "GameObjectImpl [id=" + id + ", type=" + type + "]";
     }
+
 }

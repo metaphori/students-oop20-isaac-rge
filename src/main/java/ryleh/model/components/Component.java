@@ -14,8 +14,8 @@ public abstract class Component {
         this.world = world;
         id = world.generateId("component");
     }
-    public void onAdded() {
-        System.out.println(this + " added to GameObject: " + object);
+    public void onAdded(final GameObject object) {
+        this.object = object;
     }
 
     public void onUpdate() {

@@ -4,12 +4,12 @@ import ryleh.core.EntityBuilder;
 import ryleh.model.GameObject;
 import ryleh.view.GraphicComponent;
 
-public class GameObjectController {
+public class Entity {
 
     private GraphicComponent view;
     private GameObject gameObject;
 
-    public GameObjectController(final GraphicComponent view, final GameObject gameObject) {
+    public Entity(final GraphicComponent view, final GameObject gameObject) {
         super();
         this.view = view;
         this.gameObject = gameObject;

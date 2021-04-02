@@ -1,7 +1,7 @@
 package ryleh.core;
 
 import ryleh.common.P2d;
-import ryleh.controller.GameObjectController;
+import ryleh.controller.Entity;
 import ryleh.model.GameObject;
 import ryleh.model.GameObjectImpl;
 import ryleh.model.Type;
@@ -42,7 +42,7 @@ public class EntityBuilder {
         return this;
     }
 
-    public GameObjectController build() {
-        return new GameObjectController(graphic, object);
+    public Entity build() {
+        return new Entity(graphic, object);
     }
 }

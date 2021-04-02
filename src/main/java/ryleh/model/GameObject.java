@@ -33,7 +33,7 @@ public interface GameObject {
     /*
      * 
      */
-    Optional<Component> getComponent(Class<Component> type);
+    Optional<Component> getComponent(Class<? extends Component> type);
 
     /*
      * 

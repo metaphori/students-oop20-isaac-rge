@@ -1,9 +1,11 @@
 package ryleh.core;
 
-import ryleh.controller.GameObjectController;
+import ryleh.controller.Entity;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
+import ryleh.view.PlayerGraphicComponent;
+import ryleh.view.ViewHandler;
 
 public class GameFactory {
      private static GameFactory instance;
@@ -17,13 +19,15 @@ public class GameFactory {
             return instance;
     }
 
-     public GameObjectController createPlayer(final World world) {
-         GameObjectController e = GameEngine.entityBuilder()
+     public Entity createPlayer(final World world, final ViewHandler view) {
+         Entity e = GameEngine.entityBuilder()
                  .type(Type.PLAYER)
                  .position(0, 0)
                  .with(new PhysicsComponent(world))
+                 .view(new PlayerGraphicComponent())
                  .build();
          world.addGameObject(e.getGameObject());
+         view.addGraphicComponent(e.getView());
          return e;
      }
 }

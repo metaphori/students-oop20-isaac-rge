@@ -1,6 +1,7 @@
 package ryleh.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.event.EventHandler;
@@ -15,11 +16,12 @@ public class ViewHandler {
 
     private Stage stage;
     private List<GraphicComponent> graphicComponents;
+    private Scene scene;
 
     public ViewHandler(final Stage stage) throws IOException {
         this.stage = stage;
         final Parent root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/SimpleGui.fxml"));
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
         this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent event) {
@@ -28,6 +30,12 @@ public class ViewHandler {
         });
         this.stage.setScene(scene);
         this.stage.setFullScreen(true);
+        this.graphicComponents = new ArrayList<>();
+    }
+    
+    public void addGraphicComponent(final GraphicComponent graphic) {
+    	this.graphicComponents.add(graphic);
+    	graphic.onAdded(scene);
     }
 
     public Stage getStage() {
@@ -38,5 +46,9 @@ public class ViewHandler {
         // TODO Auto-generated method stub
         this.graphicComponents.forEach(i -> i.render());
     }
+
+	public Scene getScene() {
+		return scene;
+	}
 
 }

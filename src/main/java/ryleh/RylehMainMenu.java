@@ -9,9 +9,7 @@ import com.sun.javafx.font.FontFactory;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
@@ -22,13 +20,14 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import ryleh.core.GameEngine;
 
 public class RylehMainMenu {
-
-//	private final double width = 
-//	private final double height = Screen.getPrimary().getVisualBounds().getHeight();
+	private final double width = Screen.getPrimary().getBounds().getWidth();
+	private final double height = Screen.getPrimary().getBounds().getHeight();
 	private final int font = (int) (30);
 	private final Color startColor = Color.CORNFLOWERBLUE;
 	private final Color hoverColor = Color.CADETBLUE;
@@ -40,46 +39,59 @@ public class RylehMainMenu {
 	private BorderPane pane = new BorderPane();
 	
 	public RylehMainMenu(final Stage primaryStage) {
-		
 		//levelFont = FXGL.getAssetLoader().loadFont("manaspc.ttf");
-		primaryStage.setHeight(1080);
-		primaryStage.setWidth(1920);
-		createCustomButton("Start Game", "Start a new adventure", () -> {
+		this.box.getChildren().add(createCustomButton("Start Game", "Start a new adventure", () -> {
 			final GameEngine engine = new GameEngine();
 			engine.initGame(primaryStage);
 			engine.mainLoop();
-		});
-		createCustomButton("Options", "Change in game options", null);
-		createCustomButton("Quit Game", "Exit to desktop", () -> {
-			System.exit(0);
-		});
-		separator.setOrientation(Orientation.HORIZONTAL);
-		separator.setTranslateX(font / 2);
-		description.setFont(Font.font(font));
-		description.setFill(startColor);
-		description.setTranslateY(separator.getTranslateY() + 10);
-		box.setAlignment(Pos.CENTER_LEFT);
-		box.setTranslateX(font);
-		box.getChildren().addAll(this.nodes);
-		box.getChildren().addAll(separator, description);
-		pane.setLeft(box);
-		Scene scene = new Scene(pane);
-		primaryStage.setScene(scene);
+		}));
+		this.box.getChildren().add(createCustomButton("Options", "Change in game options", null));
+		this.box.getChildren().add(createCustomButton("Quit Game", "Exit to desktop", () -> {
+			createCustomAlert();
+		}));
+		this.separator.setOrientation(Orientation.HORIZONTAL);
+		this.separator.setTranslateX(font / 2);
+		this.description.setFont(new Font(font));
+		this.description.setFill(startColor);
+		this.description.setTranslateY(separator.getTranslateY() + 10);
+		this.box.setAlignment(Pos.CENTER_LEFT);
+		this.box.setTranslateX(font);
+		this.box.getChildren().addAll(this.separator, this.description);
+		this.pane.setLeft(this.box);
+		primaryStage.setScene(new Scene(this.pane, width, height));
 		primaryStage.setResizable(false);
-		primaryStage.setFullScreen(true);
-		primaryStage.setFullScreenExitHint("");
 		primaryStage.setTitle("Incredibile Funziona");
 		primaryStage.show();
 	}
-	private void createCustomButton(final String name, final String description, final Runnable action) {
-		HBox hbox = new HBox(font / 2);
+	private void createCustomAlert() {
+		Stage window = new Stage();
+		HBox confirm = new HBox(font);
+		VBox container = new VBox();
+		Text question = new Text("Do you really want to quit this beatiful game?");
+		question.setFont(new Font(font));
+		confirm.getChildren().add(createCustomButton("YES", "", () -> System.exit(0)));
+		confirm.getChildren().add(createCustomButton("NO", "", () -> window.close()));
+		confirm.setAlignment(Pos.CENTER);
+		container.getChildren().add(question);
+		container.getChildren().add(confirm);
+		container.setAlignment(Pos.CENTER);
+		window.initModality(Modality.APPLICATION_MODAL);
+		window.setTitle("Quit Game");
+		window.setWidth(this.width / 3);
+		window.setHeight(this.height / 3);
+		window.setScene(new Scene(container));
+		window.setResizable(false);
+		window.showAndWait();
+	}
+	private Node createCustomButton(final String name, final String description, final Runnable action) {
+		HBox hbox = new HBox(name.length());
 		Rectangle side = new Rectangle(font / 4, font);
-		Text text = new Text(name);
-		createCustomText(text, description, action);
-		createSideRectangle(side, text);
+		Text btnText = new Text(name);
+		createCustomText(btnText, description, action);
+		createSideRectangle(side, btnText);
 		hbox.setAlignment(Pos.CENTER_LEFT);
-		hbox.getChildren().addAll(side, text);
-		this.nodes.add(hbox);
+		hbox.getChildren().addAll(side, btnText);
+		return hbox;
 	}
 	private void createCustomText(final Text text, final String description, final Runnable action) {
 		text.setFont(Font.font(font));

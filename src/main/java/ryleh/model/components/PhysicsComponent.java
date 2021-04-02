@@ -4,16 +4,19 @@ import ryleh.common.P2d;
 import ryleh.common.V2d;
 import ryleh.model.GameObject;
 import ryleh.model.World;
+import ryleh.model.physics.Direction;
 
 public class PhysicsComponent extends Component {
     private V2d velocity;
     private P2d position;
-    private static int SPEED = 5;
+    private int speed;
+    private Direction direction;
 
-    public PhysicsComponent(final World world) {
+    public PhysicsComponent(final World world, final int speed) {
         super(world);
         this.position = new P2d(960, 300);
         this.velocity = new V2d(0, 0);
+        this.speed = speed;
     }
 
     @Override
@@ -24,9 +27,9 @@ public class PhysicsComponent extends Component {
     }
 
     @Override
-    public void onUpdate() {
+    public void onUpdate(final int dt) {
         P2d temp = this.position;
-        this.position.x = this.position.x + velocity.x;
+        this.position.x = this.position.x + velocity.x * dt * 0.001;
 
         if (world.isOutOfBounds(this.position)) {
             this.position = temp;
@@ -35,7 +38,7 @@ public class PhysicsComponent extends Component {
             object.setPosition(this.position);
         }
         temp = this.position;
-        this.position.y = this.position.y + velocity.y;
+        this.position.y = this.position.y + velocity.y * dt * 0.001;
 
         if (world.isOutOfBounds(this.position)) {
             this.position = temp;
@@ -48,11 +51,22 @@ public class PhysicsComponent extends Component {
     }
 
     public void setVelocityX(final int sign) {
-        this.velocity.x = sign * SPEED;
+        this.velocity.x = sign * speed;
     }
 
     public void setVelocityY(final int sign) {
-        this.velocity.y = sign * SPEED;
+        this.velocity.y = sign * speed;
+    }
+
+    public void setVelocity(final V2d velocity) {
+        this.velocity = velocity.mul(speed);
+    }
+
+    public void setDirection(final Direction direction) { 
+        this.direction = direction;
+    }
+    public Direction getDirection() {
+        return this.direction;
     }
 
 }

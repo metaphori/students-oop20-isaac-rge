@@ -39,9 +39,9 @@ public class GameState {
         InputController.initInput(view.getScene(), this.getEntityByType(Type.PLAYER).get());
     }
 
-    public void updateState() {
+    public void updateState(int deltaTime) {
         for (final Entity object : this.objects) {
-            object.getGameObject().onUpdate();
+            object.getGameObject().onUpdate(deltaTime);
             //TODO change next "render" method to accept in input a object P2d
             object.getView().render(toPoint2D(object.getGameObject().getPosition()));
         }

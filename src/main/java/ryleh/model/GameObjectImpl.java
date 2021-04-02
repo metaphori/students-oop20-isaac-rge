@@ -27,8 +27,8 @@ public class GameObjectImpl implements GameObject {
     }
 
     @Override
-    public void onUpdate() {
-        components.forEach(i -> i.onUpdate());
+    public void onUpdate(final int deltaTime) {
+        components.forEach(i -> i.onUpdate(deltaTime));
     }
 
     @Override
@@ -44,7 +44,7 @@ public class GameObjectImpl implements GameObject {
         return components;
     }
     @Override
-    public Optional<Component> getComponent(final Class<? extends Component> type) {
+    public Optional<? extends Component> getComponent(final Class<? extends Component> type) {
         return components.stream().filter(type::isInstance).findAny();
     }
     @Override

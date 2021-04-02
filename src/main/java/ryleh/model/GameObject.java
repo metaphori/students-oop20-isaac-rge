@@ -15,7 +15,7 @@ public interface GameObject {
     /*
      * 
      */
-    void onUpdate();
+    void onUpdate(int deltaTime);
     /*
      * 
      */
@@ -33,7 +33,7 @@ public interface GameObject {
     /*
      * 
      */
-    Optional<Component> getComponent(Class<? extends Component> type);
+    Optional<? extends Component> getComponent(Class<? extends Component> type);
 
     /*
      * 

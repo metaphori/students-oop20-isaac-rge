@@ -23,7 +23,7 @@ public class GameFactory {
          Entity e = GameEngine.entityBuilder()
                  .type(Type.PLAYER)
                  .position(0, 0)
-                 .with(new PhysicsComponent(world))
+                 .with(new PhysicsComponent(world, 1000))
                  .view(new PlayerGraphicComponent())
                  .build();
          world.addGameObject(e.getGameObject());

@@ -18,7 +18,7 @@ public abstract class Component {
         this.object = object;
     }
 
-    public void onUpdate() {
+    public void onUpdate(final int dt) {
         System.out.println(this + " si sta aggiornando");
     }
 

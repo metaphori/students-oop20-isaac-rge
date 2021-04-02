@@ -7,7 +7,7 @@ import ryleh.view.ViewHandler;
 
 public class GameEngine {
     private GameState rylehState;
-    private long period = 20; 
+    private long period = 40;
 
     /*
      * 
@@ -23,17 +23,15 @@ public class GameEngine {
      */
     public void mainLoop() {
         new Thread(()-> {
-        	while (!rylehState.isGameOver()) {
-        		long lastTime;
+            long lastTime = System.currentTimeMillis();
+            while (!rylehState.isGameOver()) {
                 final long current = System.currentTimeMillis();
-                //final int elapsed = (int)(current - lastTime);
-                rylehState.updateState();
-                System.out.println("update");
+                final int elapsed = (int) (current - lastTime);
+                rylehState.updateState(elapsed);
                 waitForNextFrame(current);
                 lastTime = current;
             }
         }).start();
-  
     }
 
     /*
@@ -47,7 +45,6 @@ public class GameEngine {
                 } catch (Exception ex){}
         }
     }
-    
     public static EntityBuilder entityBuilder() {
         return new EntityBuilder();
     }

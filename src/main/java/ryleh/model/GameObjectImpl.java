@@ -44,7 +44,7 @@ public class GameObjectImpl implements GameObject {
         return components;
     }
     @Override
-    public Optional<Component> getComponent(final Class<Component> type) {
+    public Optional<Component> getComponent(final Class<? extends Component> type) {
         return components.stream().filter(type::isInstance).findAny();
     }
     @Override

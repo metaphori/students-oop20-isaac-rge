@@ -1,8 +1,10 @@
 package ryleh.view.enemies;
 
 import javafx.geometry.Point2D;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import ryleh.view.GraphicComponent;
@@ -33,7 +35,9 @@ public class EnemyShooterGraphicComponent implements GraphicComponent{
 
 	@Override
 	public void onAdded(final Scene scene) {
-		scene.getRoot().getChildren().add(rectangle);
+		Parent root=scene.getRoot();
+        ((AnchorPane) root).getChildren().add(rectangle);
+//		scene.getRoot().getChildren().add(rectangle);
 	}
 
 }

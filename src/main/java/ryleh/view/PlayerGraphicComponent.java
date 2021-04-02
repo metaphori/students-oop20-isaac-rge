@@ -5,6 +5,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -14,43 +16,48 @@ public class PlayerGraphicComponent implements GraphicComponent {
 	private Rectangle rectangle;
 	
 	public PlayerGraphicComponent() {
-		rectangle = new Rectangle();
-		rectangle.setFill(new ImagePattern(new Image("PlayerDown.png")));
+		rectangle = new Rectangle(170, 170);
+		
+		rectangle.setFill(Color.WHITE);
+		//rectangle.setFill(new ImagePattern(new Image("PlayerDown.png")));
 	}
 	
-	private void updateImage( ? direction) {
-		switch(direction) {
-		case RIGHT:
-			rectangle.setFill(new ImagePattern(new Image("PlayerRight.png")));
-			break;
-			
-		case LEFT:
-			rectangle.setFill(new ImagePattern(new Image("PlayerLeft.png")));
-			break;
-			
-		case UP:
-			rectangle.setFill(new ImagePattern(new Image("PlayerUp.png")));
-			break;
-			
-		case DOWN:
-			rectangle.setFill(new ImagePattern(new Image("PlayerDown.png")));
-			break;
-			
-		default:
-			break;
-		}
-	}
+//	private void updateImage( ? direction) {
+//		switch(direction) {
+//		case RIGHT:
+//			rectangle.setFill(new ImagePattern(new Image("PlayerRight.png")));
+//			break;
+//			
+//		case LEFT:
+//			rectangle.setFill(new ImagePattern(new Image("PlayerLeft.png")));
+//			break;
+//			
+//		case UP:
+//			rectangle.setFill(new ImagePattern(new Image("PlayerUp.png")));
+//			break;
+//			
+//		case DOWN:
+//			rectangle.setFill(new ImagePattern(new Image("PlayerDown.png")));
+//			break;
+//			
+//		default:
+//			break;
+//		}
+//	}
 	
 	@Override
 	public void onAdded(final Scene scene) {
-		scene.getRoot().getChildren().add(rectangle);
+		Parent root=scene.getRoot();
+        ((AnchorPane) root).getChildren().add(rectangle);
+//		scene.getRoot().getChildren().add(rectangle);
 	}
 
 	@Override
 	public void render(final Point2D position) { // onUpdate
 		rectangle.setX(position.getX());
 		rectangle.setY(position.getY());
-		this.updateImage( ? direction); // aggiorna la texture in base alla direzione in cui si sta muovendo (eventualmente con animazione)
+		System.out.println(rectangle);
+//		this.updateImage( ? direction); // aggiorna la texture in base alla direzione in cui si sta muovendo (eventualmente con animazione)
 	}
 	
 	@Override

@@ -5,23 +5,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
+import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
-import ryleh.controller.GameObjectController;
+import ryleh.common.P2d;
+import ryleh.controller.Entity;
+import ryleh.controller.InputController;
+import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.view.ViewHandler;
 
 public class GameState {
-    private ViewHandler scene;
+    private ViewHandler view;
     private World world;
-    private List<GameObjectController> objects;
+    private List<Entity> objects;
     private Map<String, String> gameVars;
     private boolean isGameOver = false;
 
     public GameState(final Stage mainStage) {
         try {
-                scene = new ViewHandler(mainStage);
+                view = new ViewHandler(mainStage);
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -30,14 +35,15 @@ public class GameState {
         objects = new ArrayList<>();
         gameVars = new HashMap<>();
         gameVars.put("Version", "0.1");
-        objects.add(GameFactory.getInstance().createPlayer(world));
+        objects.add(GameFactory.getInstance().createPlayer(world, view));
+        InputController.initInput(view.getScene(), this.getEntityByType(Type.PLAYER).get());
     }
 
     public void updateState() {
-        for (final GameObjectController object : this.objects) {
+        for (final Entity object : this.objects) {
             object.getGameObject().onUpdate();
             //TODO change next "render" method to accept in input a object P2d
-            //object.getView().render(/*object.getGameObject().getPosition()*/);
+            object.getView().render(toPoint2D(object.getGameObject().getPosition()));
         }
     }
 
@@ -46,6 +52,14 @@ public class GameState {
     }
 
 	public ViewHandler getScene() {
-		return scene;
+		return view;
+	}
+	
+	private Point2D toPoint2D (final P2d point) {
+		return new Point2D(point.x, point.y);
+	}
+	
+	public Optional<Entity> getEntityByType(final Type type) {
+		return objects.stream().filter(i -> i.getGameObject().getType().equals(type)).findAny();
 	}
 }

@@ -38,6 +38,7 @@ public class GameState {
         objects.add(GameFactory.getInstance().createPlayer(world, view));
         objects.add(GameFactory.getInstance().createEnemyDrunk(world, view));
         objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
+        objects.add(GameFactory.getInstance().createEnemySpinner(world, view));
         InputController.initInput(view.getScene(), this.getEntityByType(Type.PLAYER).get());
     }
 

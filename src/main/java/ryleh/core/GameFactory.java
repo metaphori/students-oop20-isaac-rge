@@ -9,6 +9,7 @@ import ryleh.model.components.BulletComponent;
 import ryleh.model.components.DrunkComponent;
 import ryleh.model.components.PhysicsComponent;
 import ryleh.model.components.ShooterComponent;
+import ryleh.model.components.SpinnerComponent;
 import ryleh.view.PlayerGraphicComponent;
 import ryleh.view.ViewHandler;
 
@@ -40,6 +41,17 @@ public class GameFactory {
                  .type(Type.ENEMY_SHOOTER)
                  .position(300, 800)
                  .with(new ShooterComponent(world,view))
+                 .view(new PlayerGraphicComponent())
+                 .build();
+         world.addGameObject(e.getGameObject());
+         view.addGraphicComponent(e.getView());
+         return e;
+     }
+     public Entity createEnemySpinner(final World world,final ViewHandler view) {
+    	 Entity e = GameEngine.entityBuilder()
+                 .type(Type.ENEMY_SPINNER)
+                 .position(700, 200)
+                 .with(new SpinnerComponent(world,view))
                  .view(new PlayerGraphicComponent())
                  .build();
          world.addGameObject(e.getGameObject());

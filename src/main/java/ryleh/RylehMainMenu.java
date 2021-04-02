@@ -11,7 +11,6 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -40,7 +39,6 @@ public class RylehMainMenu {
 	private BorderPane pane = new BorderPane();
 	
 	public RylehMainMenu(final Stage primaryStage) {
-		
 		//levelFont = FXGL.getAssetLoader().loadFont("manaspc.ttf");
 		this.box.getChildren().add(createCustomButton("Start Game", "Start a new adventure", () -> {
 			final GameEngine engine = new GameEngine();
@@ -58,16 +56,10 @@ public class RylehMainMenu {
 		this.description.setTranslateY(separator.getTranslateY() + 10);
 		this.box.setAlignment(Pos.CENTER_LEFT);
 		this.box.setTranslateX(font);
-		this.box.getChildren().addAll(separator, description);
-		this.pane.setLeft(box);
-		Scene scene = new Scene(pane);
-//		primaryStage.setHeight(this.height);
-//		primaryStage.setWidth(this.width);
-		primaryStage.setScene(scene);
+		this.box.getChildren().addAll(this.separator, this.description);
+		this.pane.setLeft(this.box);
+		primaryStage.setScene(new Scene(this.pane, width, height));
 		primaryStage.setResizable(false);
-		primaryStage.setMaximized(true);
-//		primaryStage.setFullScreen(true);
-//		primaryStage.setFullScreenExitHint("");
 		primaryStage.setTitle("Incredibile Funziona");
 		primaryStage.show();
 	}
@@ -88,6 +80,7 @@ public class RylehMainMenu {
 		window.setWidth(this.width / 3);
 		window.setHeight(this.height / 3);
 		window.setScene(new Scene(container));
+		window.setResizable(false);
 		window.showAndWait();
 	}
 	private Node createCustomButton(final String name, final String description, final Runnable action) {

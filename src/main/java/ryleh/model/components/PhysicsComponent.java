@@ -44,7 +44,7 @@ public class PhysicsComponent extends Component {
             object.setPosition(this.position);
         }
 
-        System.out.println("Position of " + super.object + " is " + position);
+       // System.out.println("Position of " + super.object + " is " + position);
     }
 
     public void setVelocityX(final int sign) {

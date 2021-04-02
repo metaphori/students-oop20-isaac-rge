@@ -49,5 +49,11 @@ public class World {
         gameObjects.add(object);
         object.onAdded(this);
     }
+    public double getWidthBound() {
+    	return  Math.round((this.worldWidth * (1 - boundsWidthProportion)) / 2);
+    }
+    public double getHeightBound() {
+    	return Math.round((this.worldHeight - boundsHeightProportion * this.worldHeight) / 2);
+    }
 
 }

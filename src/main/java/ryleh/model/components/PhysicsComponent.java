@@ -18,6 +18,7 @@ public class PhysicsComponent extends Component {
         this.position = new P2d(300, 300);
         this.velocity = new V2d(0, 0);
         this.speed = speed;
+        this.direction = Direction.IDLE;
     }
 
     @Override
@@ -33,7 +34,7 @@ public class PhysicsComponent extends Component {
         this.position.x = this.position.x + velocity.x * dt * 0.001;
         final HitBox box = object.getHitBox();
         box.getForm().setPosition(position);
-        System.out.println(box);
+        //System.out.println(box);
 
         if (box.isOutOfBounds(world.getBounds())) {
             //System.exit(0);

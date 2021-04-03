@@ -7,7 +7,7 @@ import ryleh.view.ViewHandler;
 
 public class GameEngine {
     private GameState rylehState;
-    private long period = 40;
+    private long period = 20;
 
     /*
      * 

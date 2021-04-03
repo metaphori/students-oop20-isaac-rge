@@ -5,6 +5,8 @@ import java.util.List;
 import ryleh.common.P2d;
 import ryleh.common.Rectangle2d;
 import ryleh.common.Shape2d;
+import ryleh.controller.Event;
+import ryleh.controller.EventListener;
 
 public class World {
 
@@ -16,7 +18,10 @@ public class World {
     private static double boundsWidthProportion = 0.710;
     private static double boundsHeightProportion = 0.650;
 
-    public World() {
+    private EventListener eventListener;
+
+    public World(EventListener eventListener) {
+    	this.eventListener = eventListener;
         this.gameObjects = new ArrayList<>();
         final int upperLeftX =  (int) Math.round((this.worldWidth * (1 - boundsWidthProportion)) / 2);
         final int upperLeftY = (int) Math.round((this.worldHeight - boundsHeightProportion * this.worldHeight) / 2);
@@ -59,5 +64,14 @@ public class World {
     public Shape2d getBounds() {
         return this.bounds;
     }
+
+	public void removeGameObject(GameObject gameObject) {
+		this.gameObjects.remove(gameObject);
+		//to  check if needed to remove components
+	}
+	
+	public void notifyWorldEvent(Event e) {
+		this.eventListener.notifyEvent(e);
+	}
 
 }

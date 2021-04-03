@@ -18,7 +18,9 @@ public class P2d implements java.io.Serializable {
     public P2d sum(V2d v){
         return new P2d(x+v.x,y+v.y);
     }
-
+    public P2d subPoint(P2d p){
+        return new P2d(x-p.x,y-p.y);
+    }
     public V2d sub(P2d v){
         return new V2d(x-v.x,y-v.y);
     }

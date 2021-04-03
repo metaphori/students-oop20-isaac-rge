@@ -10,7 +10,7 @@ public class Circle2d implements Shape2d {
         this.center = center;
     }
 
-    public Circle2d(int radius) {
+    public Circle2d(final int radius) {
         this.radius = radius;
     }
 

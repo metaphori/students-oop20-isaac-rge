@@ -12,50 +12,35 @@ public class PhysicsComponent extends Component {
     private P2d position;
     private int speed;
     private Direction direction;
+    private P2d lastPos;
 
     public PhysicsComponent(final World world, final int speed) {
         super(world);
-        this.position = new P2d(300, 300);
+        this.position = new P2d(0, 0);
         this.velocity = new V2d(0, 0);
+        this.lastPos = new P2d(0, 0);
         this.speed = speed;
         this.direction = Direction.IDLE;
     }
 
     @Override
     public void onAdded(final GameObject object) {
-        // TODO Auto-generated method stub
         super.onAdded(object);
         this.position = object.getPosition();
     }
 
     @Override
     public void onUpdate(final int dt) {
-        P2d temp = this.position;
-        this.position.x = this.position.x + velocity.x * dt * 0.001;
-        final HitBox box = object.getHitBox();
-        box.getForm().setPosition(position);
-        //System.out.println(box);
-
-        if (box.isOutOfBounds(world.getBounds())) {
-            //System.exit(0);
-            this.position = temp;
-            box.getForm().setPosition(position);
+        if (object.getHitBox().isOutOfBounds(world.getBounds())) {
+            this.position = lastPos;
+            this.setVelocityY(0);
+            this.setVelocityX(0);
+            this.direction = Direction.IDLE;
         } else {
-            object.setPosition(this.position);
+            lastPos = new P2d(this.position.x, this.position.y);
+            this.position = this.position.sum(velocity.mul(dt * 0.001));
         }
-        temp = this.position;
-        this.position.y = this.position.y + velocity.y * dt * 0.001;
-        box.getForm().setPosition(this.position);
-
-        if (box.isOutOfBounds(world.getBounds())) {
-            //System.exit(0);
-            this.position = temp;
-            box.getForm().setPosition(position);
-        } else {
-            object.setPosition(this.position);
-        }
-
-       // System.out.println("Position of " + super.object + " is " + position);
+        object.setPosition(this.position);
     }
 
     public void setVelocityX(final int sign) {

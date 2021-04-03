@@ -36,15 +36,15 @@ public class GameFactory {
      public Entity createPlayer(final World world, final ViewHandler view) {
          Entity e = GameEngine.entityBuilder()
                  .type(Type.PLAYER)
-                 .position(950, 540)
+                 .position(960, 540)
                  .with(new PhysicsComponent(world, 1000))
                  .view(new AnimatedPlayerGraphicComponent())
-                 .bbox(new CircleHitBox(new Circle2d(190)))
+                 .bbox(new CircleHitBox(new Circle2d(100)))
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
          if (player == null) {
-        	 player = e;
+        	player = e;
          }
          ((AnimatedPlayerGraphicComponent) e.getView()).setDirection( ((PhysicsComponent) e.getGameObject().getComponent(PhysicsComponent.class).get()).getDirection());
          return e;

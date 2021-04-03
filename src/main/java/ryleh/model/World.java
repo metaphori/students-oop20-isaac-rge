@@ -11,24 +11,25 @@ import ryleh.controller.EventListener;
 public class World {
 
     private List<GameObject> gameObjects;
-    private Rectangle2d bounds; 
+    private final Rectangle2d bounds; 
     private int rylehId = 0;
-    private int worldWidth = 1920;
-    private int worldHeight = 1080;
-    private static double boundsWidthProportion = 0.710;
-    private static double boundsHeightProportion = 0.650;
+    private static final int WORLD_WIDTH = 1920;
+    private static final int WORLD_HEIGHT = 1080;
+    //private static double boundsWidthProportion = 0.900;
+    //private static double boundsHeightProportion = 0.800;
 
-    private EventListener eventListener;
+    private final EventListener eventListener;
 
-    public World(EventListener eventListener) {
+    public World(final EventListener eventListener) {
     	this.eventListener = eventListener;
         this.gameObjects = new ArrayList<>();
-        final int upperLeftX =  (int) Math.round((this.worldWidth * (1 - boundsWidthProportion)) / 2);
-        final int upperLeftY = (int) Math.round((this.worldHeight - boundsHeightProportion * this.worldHeight) / 2);
+        //final int upperLeftX =  (int) Math.round((this.WORLD_WIDTH * (1 - boundsWidthProportion)) / 2);
+        //final int upperLeftY = (int) Math.round((World.WORLD_HEIGHT - boundsHeightProportion * World.WORLD_HEIGHT) / 2);
 
-        bounds = new Rectangle2d((int) Math.round(boundsWidthProportion * worldWidth), 
-                        (int) Math.round(boundsHeightProportion * worldHeight),
-                        upperLeftX, upperLeftY);
+        //bounds = new Rectangle2d((int) Math.round(boundsWidthProportion * WORLD_WIDTH), 
+        //                (int) Math.round(boundsHeightProportion * WORLD_HEIGHT),
+        //                upperLeftX, upperLeftY);
+        bounds = new Rectangle2d(1407, 736, 252, 172);
 
         System.out.println(bounds.upperLeft + " " + bounds.lowerRight);
     }
@@ -55,23 +56,23 @@ public class World {
         object.onAdded(this);
     }
     public double getWidthBound() {
-    	return  Math.round((this.worldWidth * (1 - boundsWidthProportion)) / 2);
+    	return bounds.width;
     }
     public double getHeightBound() {
-    	return Math.round((this.worldHeight - boundsHeightProportion * this.worldHeight) / 2);
+    	return bounds.height;
     }
 
     public Shape2d getBounds() {
         return this.bounds;
     }
 
-	public void removeGameObject(GameObject gameObject) {
-		this.gameObjects.remove(gameObject);
+    public void removeGameObject(GameObject gameObject) {
+	this.gameObjects.remove(gameObject);
 		//to  check if needed to remove components
-	}
+    }
 	
-	public void notifyWorldEvent(Event e) {
-		this.eventListener.notifyEvent(e);
-	}
+    public void notifyWorldEvent(Event e) {
+	this.eventListener.notifyEvent(e);
+    }
 
 }

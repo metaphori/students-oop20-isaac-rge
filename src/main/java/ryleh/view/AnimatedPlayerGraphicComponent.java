@@ -14,7 +14,7 @@ private Direction direction;
 
 
 	/*
-	//blocco per generare una direzione a caso finchè non posso ottenerla in modo certo
+	//blocco per generare una direzione a caso finchï¿½ non posso ottenerla in modo certo
 	//private Direction direction = Direction.IDLE;
 	private Direction getRandomDirection() {
 		Random r = new Random();
@@ -191,9 +191,9 @@ private Direction direction;
 	public void render(final Point2D position, final int deltaTime) {
 		rectangle.setX(position.getX());
 		rectangle.setY(position.getY());
-		System.out.println(rectangle);
+		//System.out.println(rectangle);
 		currentTime = currentTime + 1;
-		System.out.print("zio brecco ecco la direzione " + this.direction);
+		//System.out.print("zio brecco ecco la direzione " + this.direction);
 		this.updateImage(direction);
 	}
 	

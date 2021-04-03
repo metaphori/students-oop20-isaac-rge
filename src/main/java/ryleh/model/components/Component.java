@@ -19,7 +19,7 @@ public abstract class Component {
     }
 
     public void onUpdate(final int dt) {
-        System.out.println(this + " si sta aggiornando");
+        //System.out.println(this + " si sta aggiornando");
     }
 
     @Override

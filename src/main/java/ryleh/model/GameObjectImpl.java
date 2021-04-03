@@ -28,6 +28,7 @@ public class GameObjectImpl implements GameObject {
     public void onAdded(final World world) {
         this.world = world;
         this.id = world.generateId("gameObject");
+        box.getForm().setPosition(position);
     }
 
     @Override

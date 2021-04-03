@@ -14,7 +14,7 @@ public class PhysicsComponent extends Component {
 
     public PhysicsComponent(final World world, final int speed) {
         super(world);
-        this.position = new P2d(960, 300);
+        this.position = new P2d(300, 300);
         this.velocity = new V2d(0, 0);
         this.speed = speed;
     }
@@ -47,7 +47,7 @@ public class PhysicsComponent extends Component {
             object.setPosition(this.position);
         }
 
-        System.out.println("Position of " + super.object + " is " + position);
+       // System.out.println("Position of " + super.object + " is " + position);
     }
 
     public void setVelocityX(final int sign) {

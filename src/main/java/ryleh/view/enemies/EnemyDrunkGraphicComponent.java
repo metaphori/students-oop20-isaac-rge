@@ -37,7 +37,6 @@ public class EnemyDrunkGraphicComponent implements GraphicComponent{
 	public void onAdded(final Scene scene) {
 		Parent root=scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
-//		scene.getRoot().getChildren().add(rectangle);
 	}
 
 }

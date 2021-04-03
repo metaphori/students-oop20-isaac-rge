@@ -7,12 +7,14 @@ import java.util.Optional;
 import javafx.geometry.Point2D;
 import ryleh.common.P2d;
 import ryleh.model.components.Component;
+import ryleh.model.physics.HitBox;
 
 public class GameObjectImpl implements GameObject {
     private Type type;
     private String id;
     private P2d position;
     private World world;
+    private HitBox box;
     private List<Component> components;
 
     public GameObjectImpl() {
@@ -38,6 +40,7 @@ public class GameObjectImpl implements GameObject {
     @Override
     public void setPosition(final P2d position) {
         this.position = position;
+        box.getForm().setPosition(position);
     }
     @Override
     public List<Component> getComponents() {
@@ -50,7 +53,7 @@ public class GameObjectImpl implements GameObject {
     @Override
     public void addComponent(final Component component) {
         this.components.add(component);
-        component.setGameObject(this);
+        component.onAdded(this);
     }
     @Override
     public Type getType() {
@@ -58,13 +61,23 @@ public class GameObjectImpl implements GameObject {
     }
 
     @Override
-    public void setType(Type type) {
+    public void setType(final Type type) {
         this.type = type;
     }
 
     @Override
     public String toString() {
         return "GameObjectImpl [id=" + id + ", type=" + type + "]";
+    }
+
+    @Override
+    public void setHitBox(final HitBox box) {
+        this.box = box;
+    }
+
+    @Override
+    public HitBox getHitBox() {
+        return this.box;
     }
 
 }

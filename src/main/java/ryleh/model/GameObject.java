@@ -6,6 +6,7 @@ import java.util.Optional;
 import javafx.geometry.Point2D;
 import ryleh.common.P2d;
 import ryleh.model.components.Component;
+import ryleh.model.physics.HitBox;
 
 public interface GameObject {
     /*
@@ -48,4 +49,12 @@ public interface GameObject {
      * 
      */
     void setType(Type type);
+    /*
+     * 
+     */
+    void setHitBox(HitBox box);
+    /*
+     * 
+     */
+    HitBox getHitBox();
 }

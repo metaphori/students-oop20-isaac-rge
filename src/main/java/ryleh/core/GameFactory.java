@@ -1,9 +1,11 @@
 package ryleh.core;
 
+import ryleh.common.Circle2d;
 import ryleh.controller.Entity;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
+import ryleh.model.physics.CircleHitBox;
 import ryleh.view.PlayerGraphicComponent;
 import ryleh.view.ViewHandler;
 
@@ -25,6 +27,7 @@ public class GameFactory {
                  .position(0, 0)
                  .with(new PhysicsComponent(world, 1000))
                  .view(new PlayerGraphicComponent())
+                 .bbox(new CircleHitBox(new Circle2d(190)))
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());

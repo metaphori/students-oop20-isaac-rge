@@ -3,20 +3,18 @@ package ryleh.view.other;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
 
-public class DoorGraphicComponent implements GraphicComponent{
+public class FireGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
 	
-	public DoorGraphicComponent() {
-		rectangle = new Rectangle(); // da settare dimensioni porta
-		rectangle.setFill(Textures.DOOR.getImagePattern());
+	public FireGraphicComponent() {
+		rectangle = new Rectangle(190, 190);
+		rectangle.setFill(Textures.FIRE.getImagePattern());
 	}
 
 	private void updateImage() {
@@ -36,7 +34,7 @@ public class DoorGraphicComponent implements GraphicComponent{
 
 	@Override
 	public void onAdded(final Scene scene) {
-		Parent root=scene.getRoot();
+		Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
 	}
 

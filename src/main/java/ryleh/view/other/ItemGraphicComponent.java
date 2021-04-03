@@ -1,4 +1,4 @@
-package ryleh.view;
+package ryleh.view.other;
 
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
@@ -7,6 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import ryleh.view.GraphicComponent;
+import ryleh.view.Textures;
 
 public class ItemGraphicComponent implements GraphicComponent{
 

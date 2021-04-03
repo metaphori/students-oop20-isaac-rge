@@ -96,5 +96,4 @@ public class PlayerGraphicComponent implements GraphicComponent {
 	@Override
 	public void render() {
 	}
-
 }

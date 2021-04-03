@@ -4,6 +4,7 @@ import ryleh.controller.Entity;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
+import ryleh.view.AnimatedPlayerGraphicComponent;
 import ryleh.view.PlayerGraphicComponent;
 import ryleh.view.ViewHandler;
 
@@ -24,7 +25,7 @@ public class GameFactory {
                  .type(Type.PLAYER)
                  .position(0, 0)
                  .with(new PhysicsComponent(world, 1000))
-                 .view(new PlayerGraphicComponent())
+                 .view(new AnimatedPlayerGraphicComponent())
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());

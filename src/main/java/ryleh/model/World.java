@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import ryleh.common.P2d;
 import ryleh.common.Rectangle2d;
+import ryleh.common.Shape2d;
 
 public class World {
 
@@ -20,11 +21,10 @@ public class World {
         final int upperLeftX =  (int) Math.round((this.worldWidth * (1 - boundsWidthProportion)) / 2);
         final int upperLeftY = (int) Math.round((this.worldHeight - boundsHeightProportion * this.worldHeight) / 2);
 
-        
         bounds = new Rectangle2d((int) Math.round(boundsWidthProportion * worldWidth), 
                         (int) Math.round(boundsHeightProportion * worldHeight),
                         upperLeftX, upperLeftY);
-        
+
         System.out.println(bounds.upperLeft + " " + bounds.lowerRight);
     }
 
@@ -48,6 +48,16 @@ public class World {
     public void addGameObject(GameObject object) {
         gameObjects.add(object);
         object.onAdded(this);
+    }
+    public double getWidthBound() {
+    	return  Math.round((this.worldWidth * (1 - boundsWidthProportion)) / 2);
+    }
+    public double getHeightBound() {
+    	return Math.round((this.worldHeight - boundsHeightProportion * this.worldHeight) / 2);
+    }
+
+    public Shape2d getBounds() {
+        return this.bounds;
     }
 
 }

@@ -45,8 +45,20 @@ public class V2d implements java.io.Serializable {
     public V2d mul(double fact){
         return new V2d(x*fact,y*fact);
     }
-
+    public static V2d fromAngle(double degrees) {
+        return new V2d(GameMath.cosDeg((float)degrees), GameMath.sinDeg((float)degrees));
+    }
     public String toString(){
         return "V2d("+x+","+y+")";
+    }
+    public V2d mulLocal(double a) {
+        this.x *= a;
+        this.y *= a;
+        return this;
+    }
+    public V2d addLocal(V2d v) {
+        this.x += v.x;
+        this.y += v.y;
+        return this;
     }
 }

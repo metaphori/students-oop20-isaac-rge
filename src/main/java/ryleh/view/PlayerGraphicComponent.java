@@ -20,7 +20,7 @@ public class PlayerGraphicComponent implements GraphicComponent {
 	private Rectangle rectangle;
 
 	
-	//blocco per generare una direzione a caso finchè non posso ottenerla in modo certo
+	//blocco per generare una direzione a caso finchï¿½ non posso ottenerla in modo certo
 	//private Direction direction = Direction.IDLE;
 	private Direction getRandomDirection() {
 		Random r = new Random();

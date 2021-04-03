@@ -36,6 +36,10 @@ public class GameState {
         gameVars = new HashMap<>();
         gameVars.put("Version", "0.1");
         objects.add(GameFactory.getInstance().createPlayer(world, view));
+        objects.add(GameFactory.getInstance().createEnemyDrunk(world, view));
+       // objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
+        //objects.add(GameFactory.getInstance().createEnemySpinner(world, view));
+        objects.add(GameFactory.getInstance().createEnemyLurker(world, view));
         InputController.initInput(view.getScene(), this.getEntityByType(Type.PLAYER).get());
     }
 

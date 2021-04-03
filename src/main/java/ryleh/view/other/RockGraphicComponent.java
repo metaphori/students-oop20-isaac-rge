@@ -1,22 +1,20 @@
-package ryleh.view.enemies;
+package ryleh.view.other;
 
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
 
-public class EnemyLurkerGraphicComponent implements GraphicComponent{
+public class RockGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
 	
-	public EnemyLurkerGraphicComponent() {
-		rectangle = new Rectangle(100, 100);
-		rectangle.setFill(Textures.ENEMY_LURKER.getImagePattern());
+	public RockGraphicComponent() {
+		rectangle = new Rectangle(155, 155);
+		rectangle.setFill(Textures.ROCK2.getImagePattern());
 	}
 
 	private void updateImage() {

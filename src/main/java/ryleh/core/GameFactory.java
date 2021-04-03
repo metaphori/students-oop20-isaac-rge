@@ -10,6 +10,7 @@ import ryleh.model.components.BulletComponent;
 import ryleh.model.components.DrunkComponent;
 import ryleh.model.components.LurkerComponent;
 import ryleh.model.components.PhysicsComponent;
+import ryleh.view.AnimatedPlayerGraphicComponent;
 import ryleh.model.physics.CircleHitBox;
 import ryleh.model.components.ShooterComponent;
 import ryleh.model.components.SpinnerComponent;
@@ -34,7 +35,7 @@ public class GameFactory {
                  .type(Type.PLAYER)
                  .position(950, 540)
                  .with(new PhysicsComponent(world, 1000))
-                 .view(new PlayerGraphicComponent())
+                 .view(new AnimatedPlayerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(190)))
                  .build();
          world.addGameObject(e.getGameObject());

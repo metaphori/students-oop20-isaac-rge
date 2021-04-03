@@ -22,10 +22,6 @@ public abstract class Component {
         System.out.println(this + " si sta aggiornando");
     }
 
-    public void setGameObject(final GameObject object) {
-        this.object = object;
-    }
-
     @Override
     public String toString() {
         return "Component [id=" + id + "]";

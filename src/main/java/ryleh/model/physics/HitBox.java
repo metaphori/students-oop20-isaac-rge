@@ -1,7 +1,12 @@
 package ryleh.model.physics;
 
-public interface HitBox<T> {
+import ryleh.common.Shape2d;
 
-    T getForm();
-    boolean isCollidingWith(HitBox<T> box);
+public interface HitBox {
+    Shape2d getForm();
+
+    boolean isCollidingWith(HitBox box);
+    
+    boolean isOutOfBounds(Shape2d bounds);
+
 }

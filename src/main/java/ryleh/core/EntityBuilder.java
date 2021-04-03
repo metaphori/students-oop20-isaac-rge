@@ -7,6 +7,7 @@ import ryleh.model.GameObjectImpl;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.Component;
+import ryleh.model.physics.HitBox;
 import ryleh.view.GraphicComponent;
 
 public class EntityBuilder {
@@ -39,6 +40,11 @@ public class EntityBuilder {
 
     public EntityBuilder view(final GraphicComponent view) {
         graphic = view;
+        return this;
+    }
+
+    public EntityBuilder bbox(final HitBox bbox) {
+        object.setHitBox(bbox);
         return this;
     }
 

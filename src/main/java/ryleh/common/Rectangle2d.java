@@ -1,6 +1,6 @@
 package ryleh.common;
 
-public class Rectangle2d {
+public class Rectangle2d implements Shape2d{
 
     public int height;
     public int width;
@@ -34,7 +34,7 @@ public class Rectangle2d {
         this.width = (int) new V2d(upperLeft, upperRight).module();
         this.height = (int) new V2d(upperLeft, lowerLeft).module();
     }
-
+    @Override
     public boolean contains(final P2d position) {
         return position.x > this.upperLeft.x
                && position.x < this.upperRight.x 
@@ -47,6 +47,23 @@ public class Rectangle2d {
                 && this.contains(rectangle.lowerRight)
                 && this.contains(rectangle.upperRight)
                 && this.contains(rectangle.lowerLeft);
+    }
+    @Override
+    public void setPosition(final P2d position) {
+        final V2d transform = new V2d(this.upperLeft, position);
+        this.upperLeft = this.upperLeft.sum(transform);
+        this.upperRight = this.upperRight.sum(transform);
+        this.lowerLeft = this.lowerLeft.sum(transform);
+        this.lowerRight = this.lowerRight.sum(transform);
+    }
+    @Override
+    public P2d getPosition() {
+        return this.upperLeft;
+    }
+    @Override
+    //TODO no implementation right now!
+    public boolean intersect(Shape2d shape) {
+        return false;
     }
 
 }

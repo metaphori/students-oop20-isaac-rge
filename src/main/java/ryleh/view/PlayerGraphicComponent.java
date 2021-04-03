@@ -17,7 +17,6 @@ public class PlayerGraphicComponent implements GraphicComponent {
 	
 	public PlayerGraphicComponent() {
 		rectangle = new Rectangle(170, 170);
-		
 		rectangle.setFill(Color.WHITE);
 		//rectangle.setFill(new ImagePattern(new Image("PlayerDown.png")));
 	}

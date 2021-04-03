@@ -7,6 +7,7 @@ import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.BulletComponent;
 import ryleh.model.components.DrunkComponent;
+import ryleh.model.components.LurkerComponent;
 import ryleh.model.components.PhysicsComponent;
 import ryleh.model.components.ShooterComponent;
 import ryleh.model.components.SpinnerComponent;
@@ -15,6 +16,7 @@ import ryleh.view.ViewHandler;
 
 public class GameFactory {
      private static GameFactory instance;
+     private Entity player = null;
 
      private GameFactory() { }
 
@@ -34,6 +36,9 @@ public class GameFactory {
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
+         if(player==null) {
+        	 player = e;
+         }
          return e;
      }
      public Entity createEnemyShooter(final World world,final ViewHandler view) {
@@ -80,5 +85,15 @@ public class GameFactory {
          view.addGraphicComponent(e.getView());
          return e;
      }
-     
+     public Entity createEnemyLurker(final World world,final ViewHandler view) {
+    	 Entity e = GameEngine.entityBuilder()
+                 .type(Type.ENEMY_LURKER)
+                 .position(1000, 100)
+                 .with(new LurkerComponent(world,player))
+                 .view(new PlayerGraphicComponent())
+                 .build();
+         world.addGameObject(e.getGameObject());
+         view.addGraphicComponent(e.getView());
+         return e;
+     }
 }

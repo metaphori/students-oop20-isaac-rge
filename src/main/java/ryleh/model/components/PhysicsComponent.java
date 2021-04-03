@@ -12,7 +12,7 @@ public class PhysicsComponent extends Component {
 
     public PhysicsComponent(final World world) {
         super(world);
-        this.position = new P2d(960, 300);
+        this.position = new P2d(300, 300);
         this.velocity = new V2d(0, 0);
     }
 

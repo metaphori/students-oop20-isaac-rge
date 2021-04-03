@@ -13,8 +13,8 @@ public class DoorGraphicComponent implements GraphicComponent{
 	private Rectangle rectangle;
 	
 	public DoorGraphicComponent() {
-		rectangle = new Rectangle();
-		rectangle.setFill(new ImagePattern(new Image("Door.png")));
+		rectangle = new Rectangle(); // da settare dimensioni porta
+		rectangle.setFill(Textures.DOOR.getImagePattern());
 	}
 
 	private void updateImage() {
@@ -26,7 +26,7 @@ public class DoorGraphicComponent implements GraphicComponent{
 	}
 
 	@Override
-	public void render(final Point2D position) { //onUpdate()
+	public void render(final Point2D position) {
 		rectangle.setX(position.getX());
 		rectangle.setY(position.getY());
 		this.updateImage();
@@ -36,7 +36,6 @@ public class DoorGraphicComponent implements GraphicComponent{
 	public void onAdded(final Scene scene) {
 		Parent root=scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
-		//scene.getRoot().getChildren().add(rectangle);
 	}
 
 }

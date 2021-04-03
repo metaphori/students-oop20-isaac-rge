@@ -41,4 +41,9 @@ public class Circle2d implements Shape2d {
         return this.radius;
     }
 
+    @Override
+    public String toString() {
+        return "Circle2d [radius=" + radius + ", center=" + center + "]";
+    }
+
 }

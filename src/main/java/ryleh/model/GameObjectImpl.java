@@ -7,6 +7,7 @@ import java.util.Optional;
 import javafx.geometry.Point2D;
 import ryleh.common.P2d;
 import ryleh.model.components.Component;
+import ryleh.model.physics.CircleHitBox;
 import ryleh.model.physics.HitBox;
 
 public class GameObjectImpl implements GameObject {
@@ -20,6 +21,7 @@ public class GameObjectImpl implements GameObject {
     public GameObjectImpl() {
         position = new P2d(0,0);
         components = new ArrayList<>();
+        this.box = new CircleHitBox(190);
     }
 
     @Override

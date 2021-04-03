@@ -24,7 +24,7 @@ public class GameFactory {
      public Entity createPlayer(final World world, final ViewHandler view) {
          Entity e = GameEngine.entityBuilder()
                  .type(Type.PLAYER)
-                 .position(0, 0)
+                 .position(950, 540)
                  .with(new PhysicsComponent(world, 1000))
                  .view(new PlayerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(190)))

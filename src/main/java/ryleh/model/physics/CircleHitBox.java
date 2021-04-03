@@ -33,5 +33,9 @@ public class CircleHitBox implements HitBox {
                 && bounds.contains(this.form.getPosition().sum(new V2d(form.getRadius(), 0)))
                 && bounds.contains(this.form.getPosition().sum(new V2d(-form.getRadius(), 0))));
     }
+    @Override
+    public String toString() {
+        return "CircleHitBox [form=" + form + "]";
+    }
 
 }

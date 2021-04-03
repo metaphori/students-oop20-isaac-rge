@@ -25,7 +25,10 @@ public enum Textures {
 	ROCK2("assets/texture/obstacles/rock2.png"),
 	DOOR("assets/texture/levels/door.png"), // da fixare, animazoine non valida
 	BACKGROUND("assets/texture/levels/background.png"),
-	ITEMS("assets/texture/items/chest.png"), // da fixare, animazione non valida
+	
+	ITEM1("assets/texture/items/Chest1.png"),
+	ITEM2("assets/texture/items/Chest2.png"),
+	ITEM3("assets/texture/items/Chest3.png"),
 	
 	ENEMY_DRUNK("assets/texture/enemies/Enemy1.png"),
 	ENEMY_SHOOTER("assets/texture/enemies/Enemy2.png"),

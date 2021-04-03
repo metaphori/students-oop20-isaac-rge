@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -24,7 +25,7 @@ public class ViewHandler {
         scene = new Scene(root);
         this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
-			public void handle(WindowEvent event) {
+			public void handle(final WindowEvent event) {
 				System.exit(0);
 			}
         });
@@ -32,7 +33,12 @@ public class ViewHandler {
         this.stage.setFullScreen(true);
         this.graphicComponents = new ArrayList<>();
     }
-    
+
+    public void removeGraphicComponent(final GraphicComponent graphic) {
+        ((AnchorPane) scene.getRoot()).getChildren().remove(graphic);
+        this.graphicComponents.remove(graphic);
+    }
+
     public void addGraphicComponent(final GraphicComponent graphic) {
     	this.graphicComponents.add(graphic);
     	graphic.onAdded(scene);
@@ -41,11 +47,6 @@ public class ViewHandler {
     public Stage getStage() {
 		return stage;
 	}
-
-	public void render(String id) {
-        // TODO Auto-generated method stub
-        this.graphicComponents.forEach(i -> i.render());
-    }
 
 	public Scene getScene() {
 		return scene;

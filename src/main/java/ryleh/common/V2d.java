@@ -54,11 +54,11 @@ public class V2d implements java.io.Serializable {
     public V2d mulLocal(double a) {
         this.x *= a;
         this.y *= a;
-        return this;
+        return new V2d(this.x, this.y);
     }
     public V2d addLocal(V2d v) {
         this.x += v.x;
         this.y += v.y;
-        return this;
+        return new V2d(this.x, this.y);
     }
 }

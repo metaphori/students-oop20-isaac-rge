@@ -10,6 +10,7 @@ import ryleh.model.physics.Direction;
 public class AnimatedPlayerGraphicComponent implements GraphicComponent{
 
 private Rectangle rectangle;
+private Direction direction;
 
 
 	/*
@@ -75,7 +76,7 @@ private Rectangle rectangle;
 			break;
 
 		case LEFT:
-			if (!rectangle.getFill().equals(Textures.PLAYER_LEFT.getImagePattern())) {
+			if (!rectangle.getFill().equals(Textures.PLAYER_LEFT.getImagePattern()) && lastDir != Direction.LEFT) {
 				rectangle.setFill(Textures.PLAYER_LEFT.getImagePattern());
 				lastDir = Direction.LEFT;
 				currentTime = 0;
@@ -103,7 +104,7 @@ private Rectangle rectangle;
 			break;
 
 		case UP:
-			if (!rectangle.getFill().equals(Textures.PLAYER_UP.getImagePattern())) {
+			if (!rectangle.getFill().equals(Textures.PLAYER_UP.getImagePattern()) && lastDir != Direction.UP) {
 				rectangle.setFill(Textures.PLAYER_UP.getImagePattern());
 				lastDir = Direction.UP;
 				currentTime = 0;
@@ -131,7 +132,7 @@ private Rectangle rectangle;
 			break;
 
 		case DOWN:
-			if (!rectangle.getFill().equals(Textures.PLAYER_DOWN.getImagePattern())) {
+			if (!rectangle.getFill().equals(Textures.PLAYER_DOWN.getImagePattern()) && lastDir != Direction.DOWN) {
 				rectangle.setFill(Textures.PLAYER_DOWN.getImagePattern());
 				lastDir = Direction.DOWN;
 				currentTime = 0;
@@ -187,15 +188,16 @@ private Rectangle rectangle;
 	}
 
 	@Override
-	public void render(final Point2D position) {
+	public void render(final Point2D position, final int deltaTime) {
 		rectangle.setX(position.getX());
 		rectangle.setY(position.getY());
 		System.out.println(rectangle);
 		currentTime = currentTime + 1;
-		this.updateImage(Direction.RIGHT);
+		System.out.print("zio brecco ecco la direzione " + this.direction);
+		this.updateImage(direction);
 	}
 	
-	@Override
-	public void render() {
+	public void setDirection(final Direction direction) {
+		this.direction = direction;
 	}
 }

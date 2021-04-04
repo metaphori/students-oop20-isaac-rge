@@ -10,7 +10,7 @@ import ryleh.model.components.BulletComponent;
 import ryleh.model.components.DrunkComponent;
 import ryleh.model.components.LurkerComponent;
 import ryleh.model.components.PhysicsComponent;
-import ryleh.view.AnimatedPlayerGraphicComponent;
+import ryleh.view.PlayerGraphicComponent;
 import ryleh.model.physics.CircleHitBox;
 import ryleh.model.components.ShooterComponent;
 import ryleh.model.components.SpinnerComponent;
@@ -38,7 +38,7 @@ public class GameFactory {
                  .type(Type.PLAYER)
                  .position(960, 540)
                  .with(new PhysicsComponent(world, 1000))
-                 .view(new AnimatedPlayerGraphicComponent())
+                 .view(new PlayerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(100)))
                  .build();
          world.addGameObject(e.getGameObject());
@@ -46,7 +46,7 @@ public class GameFactory {
          if (player == null) {
         	player = e;
          }
-         ((AnimatedPlayerGraphicComponent) e.getView()).setDirection( ((PhysicsComponent) e.getGameObject().getComponent(PhysicsComponent.class).get()).getDirection());
+         ((PlayerGraphicComponent) e.getView()).setDirection( ((PhysicsComponent) e.getGameObject().getComponent(PhysicsComponent.class).get()).getDirection());
          return e;
      }
      public Entity createEnemyShooter(final World world, final ViewHandler view) {
@@ -87,7 +87,7 @@ public class GameFactory {
                  .type(Type.ENEMY_BULLET)
                  .position(0, 0)
                  .with(new BulletComponent(world, origin, direction))
-                 .view(new AnimatedPlayerGraphicComponent() )
+                 .view(new PlayerGraphicComponent() )
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());

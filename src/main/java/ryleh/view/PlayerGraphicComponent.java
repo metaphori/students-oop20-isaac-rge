@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import ryleh.model.physics.Direction;
 
-public class AnimatedPlayerGraphicComponent implements GraphicComponent{
+public class PlayerGraphicComponent implements GraphicComponent{
 
 private Rectangle rectangle;
 private Direction direction;
@@ -37,7 +37,7 @@ private Direction direction;
 	
 	
 	
-	public AnimatedPlayerGraphicComponent() {
+	public PlayerGraphicComponent() {
 		rectangle = new Rectangle(190, 190);
 		rectangle.setFill(Textures.PLAYER_DOWN.getImagePattern());
 	}

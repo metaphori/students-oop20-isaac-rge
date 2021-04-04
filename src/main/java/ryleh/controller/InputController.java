@@ -3,11 +3,11 @@ package ryleh.controller;
 import javafx.scene.Scene;
 import ryleh.model.components.PhysicsComponent;
 import ryleh.model.physics.Direction;
-import ryleh.view.AnimatedPlayerGraphicComponent;
+import ryleh.view.PlayerGraphicComponent;
 
 public class InputController {
 	public static void initInput(final Scene scene, final Entity entity){
-		AnimatedPlayerGraphicComponent graphic = (AnimatedPlayerGraphicComponent) entity.getView();
+		PlayerGraphicComponent graphic = (PlayerGraphicComponent) entity.getView();
 		final PhysicsComponent physics = (PhysicsComponent) entity.getGameObject()
 		        .getComponent(PhysicsComponent.class).get();
 		scene.setOnKeyPressed(key -> {

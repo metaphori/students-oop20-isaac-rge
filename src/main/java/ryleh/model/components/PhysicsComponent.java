@@ -31,16 +31,28 @@ public class PhysicsComponent extends Component {
 
     @Override
     public void onUpdate(final int dt) {
-        if (object.getHitBox().isOutOfBounds(world.getBounds())) {
-            this.position = lastPos;
-            this.setVelocityY(0);
-            this.setVelocityX(0);
-            this.direction = Direction.IDLE;
+        if (this.canMove()) {
+            move(dt);
         } else {
-            lastPos = new P2d(this.position.x, this.position.y);
-            this.position = this.position.sum(velocity.mul(dt * 0.001));
+            resetPos();
         }
         object.setPosition(this.position);
+    }
+
+    protected void move (final int dt) {
+        lastPos = new P2d(this.position.x, this.position.y);
+        this.position = this.position.sum(velocity.mul(dt * 0.001));
+    }
+
+    protected void resetPos() {
+        this.position = lastPos;
+        this.setVelocityY(0);
+        this.setVelocityX(0);
+        this.direction = Direction.IDLE;
+    }
+
+    protected boolean canMove() {
+        return !object.getHitBox().isOutOfBounds(world.getBounds());
     }
 
     public void setVelocityX(final int sign) {

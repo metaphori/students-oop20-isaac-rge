@@ -53,7 +53,7 @@ public class GameFactory {
     	 Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_SHOOTER)
                  .position(300, 800)
-                 .with(new ShooterComponent(world, view))
+                 .with(new ShooterComponent(world, view, player))
                  .view(new EnemyShooterGraphicComponent())
                  .build();
          world.addGameObject(e.getGameObject());
@@ -77,6 +77,7 @@ public class GameFactory {
                  .position(960, 540)
                  .with(new DrunkComponent(world))
                  .view(new EnemyDrunkGraphicComponent())
+                 .bbox(new CircleHitBox(new Circle2d(50)))
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -96,9 +97,10 @@ public class GameFactory {
      public Entity createEnemyLurker(final World world, final ViewHandler view) {
     	 Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_LURKER)
-                 .position(1000, 100)
+                 .position(800, 200)
                  .with(new LurkerComponent(world, player))
                  .view(new EnemyLurkerGraphicComponent())
+                 .bbox(new CircleHitBox(new Circle2d(100)))
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());

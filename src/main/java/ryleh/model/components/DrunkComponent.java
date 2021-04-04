@@ -15,7 +15,7 @@ public class DrunkComponent extends Component {
 
     private double directionAngle = GameMath.toDegrees(GameMath.randomInRange(-1, 1) * Math.PI*2);
 
-    private double moveSpeed = 0.015;
+    private double moveSpeed = 0.15;
     private int rotationSpeed = GameMath.randomInt(-100, 100);
 
     private double tx = GameMath.randomInRange(1000, 10000);
@@ -38,7 +38,7 @@ public class DrunkComponent extends Component {
 	@Override
 	 public void onUpdate(int deltaTime) {
 	        adjustAngle();
-	        move();
+	        move(deltaTime);
 
 	       // entity.setRotation(entity.getRotation() * 0.9 + directionAngle * 0.1);
 
@@ -50,13 +50,13 @@ public class DrunkComponent extends Component {
 	    private void adjustAngle() {
 	        if (GameMath.randomBoolean(angleAdjustRate)) {
 	            // never rotate further than 20 degrees
-	            directionAngle += Math.min(GameMath.toDegrees((GameMath.smoothNoise(tx) - 0.5)), 20);
+	            directionAngle += Math.min(GameMath.toDegrees((GameMath.smoothNoise(tx) - 0.5)), 45);
 	        }
 	    }
 	    
-	    private void move() {
+	    private void move(int dt) {
 	        V2d directionVector = V2d.fromAngle(directionAngle).mulLocal(moveSpeed);
-	        this.velocity.addLocal(directionVector).mulLocal(1); //add time per frame value to mulLocal
+	        this.velocity.addLocal(directionVector).mulLocal(dt * 0.001); //add time per frame value to mulLocal
 	        this.position = this.position.sum(this.velocity);
 	        object.setPosition(this.position);
 	        //System.out.println("VELOCITY : \t " + this.velocity.toString());
@@ -65,10 +65,14 @@ public class DrunkComponent extends Component {
 
 	    //TODO to rewrite
 	    private void checkScreenBounds() {
-	        if (world.isOutOfBounds(this.position)) {
-	            P2d newDirectionVector = new P2d(world.getWidthBound()/2,world.getHeightBound()/2);//.subPoint(object.getPosition());
-	            double angle = GameMath.toDegrees(Math.atan(newDirectionVector.y/ newDirectionVector.x));
-	            directionAngle = newDirectionVector.x> 0 ? angle : 180 + angle;
+	    	if(object.getHitBox().isOutOfBounds(world.getBounds())){
+	    		//System.out.println("Position of " + super.object + " is " + this.position);
+	            //P2d newDirectionVector = new P2d(world.getWidthBound()/2,world.getHeightBound()/2);//.subPoint(object.getPosition());
+	            //System.out.println("Position of " + super.object + " is " + newDirectionVector);
+	            //double angle = GameMath.toDegrees((Math.atan(newDirectionVector.y/ newDirectionVector.x)));
+	            //directionAngle = newDirectionVector.x> 0 ? angle : 180 - angle;
+	            this.velocity.x=-this.velocity.x;
+	            this.velocity.y=-this.velocity.y;
 	        }
 	    }
 }

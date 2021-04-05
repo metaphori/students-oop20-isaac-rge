@@ -32,9 +32,9 @@ public class EnemySpinnerGraphicComponent implements GraphicComponent{
 	public void render(final Point2D position, final int deltaTime) {
 		rectangle.setX(position.getX());
 		rectangle.setY(position.getY());
-		rotation.setPivotX(position.getX());
-		rotation.setPivotY(position.getY());
-		rectangle.getTransforms().add(rotation);
+//		rotation.setPivotX(position.getX());
+//		rotation.setPivotY(position.getY());
+//		rectangle.getTransforms().add(rotation);
 		this.updateImage();
 	}
 

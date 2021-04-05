@@ -19,8 +19,8 @@ public class InputController {
 	public InputController(final Scene scene, final Entity player) {
 		this.scene = scene;
 		this.player = player;
-		this.graphic = (PlayerGraphicComponent) player.getView();
-		this.physics = (PhysicsComponent) player.getGameObject()
+		this.graphic = (PlayerGraphicComponent) this.player.getView();
+		this.physics = (PhysicsComponent) this.player.getGameObject()
 		        .getComponent(PhysicsComponent.class).get();
 	}
 	
@@ -74,7 +74,6 @@ public class InputController {
 			physics.setVelocity(Direction.IDLE.getPoint());
 			physics.setDirection(Direction.IDLE);
 			graphic.setDirection(Direction.IDLE);
-			
 		}
 	}
 }

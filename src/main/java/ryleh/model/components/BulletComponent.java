@@ -16,7 +16,7 @@ public class BulletComponent extends Component{
 		System.out.println("Sono Spawnato");
 		this.position = origin;
 		//this.velocity = direction.mul(speed);
-	    this.velocity = new V2d(0, 0);
+	    this.velocity = direction;
 	}
 	@Override
 	public void onAdded(GameObject object) {
@@ -26,6 +26,7 @@ public class BulletComponent extends Component{
 	public void onUpdate(final int dt) {
 	    move(dt);
 	    cheeckCollision();
+	    System.out.print("posizione" + this.position);
 	 }
 	private void cheeckCollision() {
 	}

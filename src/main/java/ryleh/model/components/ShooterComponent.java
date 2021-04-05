@@ -41,12 +41,12 @@ public class ShooterComponent extends Component{
 	    
 	    public void shoot() {
 	        if (System.currentTimeMillis() - weaponTimer >= 2000) {
-	            V2d directionToPlayer = new V2d(player.getGameObject().getPosition().x,player.getGameObject().getPosition().y)
-	            		.sub(new V2d(this.position.x,this.position.y))
+	            V2d directionToPlayer = new V2d(player.getGameObject().getPosition().x, player.getGameObject().getPosition().y)
+	            		.sub(new V2d(this.position.x, this.position.y))
 	            		.getNormalized()
 	            		.mulLocal(bulletSpeed);
 	            System.out.println("Helo");
-	            //GameFactory.getInstance().createBullet(world, view, position, directionToPlayer)
+	            //GameFactory.getInstance().createBullet(world, view, position, directionToPlayer);
 	            weaponTimer = System.currentTimeMillis();
 	        }
 	    }

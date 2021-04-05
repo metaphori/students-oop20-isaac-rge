@@ -1,5 +1,7 @@
 package ryleh.view;
 
+import java.util.List;
+
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,151 +13,66 @@ public class PlayerGraphicComponent implements GraphicComponent{
 
 private Rectangle rectangle;
 private Direction direction;
-
-
-	/*
-	//blocco per generare una direzione a caso finch� non posso ottenerla in modo certo
-	//private Direction direction = Direction.IDLE;
-	private Direction getRandomDirection() {
-		Random r = new Random();
-		int random;
-		random = r.nextInt(4);
-		switch (random) {
-		case 0:
-			return Direction.UP;
-		case 1:
-			return Direction.DOWN;
-		case 2:
-			return Direction.LEFT;
-		case 3:
-			return Direction.RIGHT;
-		default:
-			return Direction.IDLE;
-		}
-	}
-	*/
-	
-	
 	
 	public PlayerGraphicComponent() {
 		rectangle = new Rectangle(190, 190);
 		rectangle.setFill(Textures.PLAYER_DOWN.getImagePattern());
 	}
 	
-	int currentTime = 0;
-	Direction lastDir = Direction.IDLE;
+	private Direction lastDir = Direction.IDLE;
 	
+	private AnimationLoop animRight = new AnimationLoop(
+				List.of(Textures.PLAYER_RIGHT.getImagePattern(), Textures.PLAYER_RIGHT2.getImagePattern(), Textures.PLAYER_RIGHT.getImagePattern(), Textures.PLAYER_RIGHT4.getImagePattern()), 5);
+	private AnimationLoop animLeft = new AnimationLoop(
+				List.of(Textures.PLAYER_LEFT.getImagePattern(), Textures.PLAYER_LEFT2.getImagePattern(), Textures.PLAYER_LEFT.getImagePattern(), Textures.PLAYER_LEFT4.getImagePattern()), 5);
+	private AnimationLoop animUp = new AnimationLoop(
+				List.of(Textures.PLAYER_UP.getImagePattern(), Textures.PLAYER_UP2.getImagePattern(), Textures.PLAYER_UP.getImagePattern(), Textures.PLAYER_UP4.getImagePattern()), 5);
+	private AnimationLoop animDown = new AnimationLoop(
+				List.of(Textures.PLAYER_DOWN.getImagePattern(), Textures.PLAYER_DOWN2.getImagePattern(), Textures.PLAYER_DOWN.getImagePattern(), Textures.PLAYER_DOWN4.getImagePattern()), 5);
+
 	private void updateImage(final Direction direction) {
 		switch (direction) {
 		case RIGHT:
 			if (!rectangle.getFill().equals(Textures.PLAYER_RIGHT.getImagePattern()) && lastDir != Direction.RIGHT) {
-				rectangle.setFill(Textures.PLAYER_RIGHT.getImagePattern());
+				rectangle = animRight.setFrame(rectangle);
+				animRight.resetTimer();
 				lastDir = Direction.RIGHT;
-				currentTime = 0;
 			} else {
-				switch (currentTime) {
-				case 4:
-					rectangle.setFill(Textures.PLAYER_RIGHT.getImagePattern());
-					break;
-				case 8:
-					rectangle.setFill(Textures.PLAYER_RIGHT2.getImagePattern());
-					break;
-				case 12:
-					rectangle.setFill(Textures.PLAYER_RIGHT.getImagePattern());
-					break;
-				case 16:
-					rectangle.setFill(Textures.PLAYER_RIGHT4.getImagePattern());
-					break;
-				case 17:
-					currentTime = 0;
-					break;
-				default:
-					break;
-				}
+				animRight.incTimer();
+				rectangle = animRight.setFrame(rectangle);
 			}
 			break;
 
 		case LEFT:
 			if (!rectangle.getFill().equals(Textures.PLAYER_LEFT.getImagePattern()) && lastDir != Direction.LEFT) {
-				rectangle.setFill(Textures.PLAYER_LEFT.getImagePattern());
+				rectangle = animLeft.setFrame(rectangle);
+				animLeft.resetTimer();
 				lastDir = Direction.LEFT;
-				currentTime = 0;
 			} else {
-				switch (currentTime) {
-				case 4:
-					rectangle.setFill(Textures.PLAYER_LEFT.getImagePattern());
-					break;
-				case 8:
-					rectangle.setFill(Textures.PLAYER_LEFT2.getImagePattern());
-					break;
-				case 12:
-					rectangle.setFill(Textures.PLAYER_LEFT.getImagePattern());
-					break;
-				case 16:
-					rectangle.setFill(Textures.PLAYER_LEFT4.getImagePattern());
-					break;
-				case 17:
-					currentTime = 0;
-					break;
-				default:
-					break;
-				}
+				animLeft.incTimer();
+				rectangle = animLeft.setFrame(rectangle);
 			}
 			break;
 
 		case UP:
 			if (!rectangle.getFill().equals(Textures.PLAYER_UP.getImagePattern()) && lastDir != Direction.UP) {
-				rectangle.setFill(Textures.PLAYER_UP.getImagePattern());
+				rectangle = animUp.setFrame(rectangle);
+				animUp.resetTimer();
 				lastDir = Direction.UP;
-				currentTime = 0;
 			} else {
-				switch (currentTime) {
-				case 4:
-					rectangle.setFill(Textures.PLAYER_UP.getImagePattern());
-					break;
-				case 8:
-					rectangle.setFill(Textures.PLAYER_UP2.getImagePattern());
-					break;
-				case 12:
-					rectangle.setFill(Textures.PLAYER_UP.getImagePattern());
-					break;
-				case 16:
-					rectangle.setFill(Textures.PLAYER_UP4.getImagePattern());
-					break;
-				case 17:
-					currentTime = 0;
-					break;
-				default:
-					break;
-				}
+				animUp.incTimer();
+				rectangle = animUp.setFrame(rectangle);
 			}
 			break;
 
 		case DOWN:
 			if (!rectangle.getFill().equals(Textures.PLAYER_DOWN.getImagePattern()) && lastDir != Direction.DOWN) {
-				rectangle.setFill(Textures.PLAYER_DOWN.getImagePattern());
+				rectangle = animDown.setFrame(rectangle);
+				animDown.resetTimer();
 				lastDir = Direction.DOWN;
-				currentTime = 0;
 			} else {
-				switch (currentTime) {
-				case 4:
-					rectangle.setFill(Textures.PLAYER_DOWN.getImagePattern());
-					break;
-				case 8:
-					rectangle.setFill(Textures.PLAYER_DOWN2.getImagePattern());
-					break;
-				case 12:
-					rectangle.setFill(Textures.PLAYER_DOWN.getImagePattern());
-					break;
-				case 16:
-					rectangle.setFill(Textures.PLAYER_DOWN4.getImagePattern());
-					break;
-				case 17:
-					currentTime = 0;
-					break;
-				default:
-					break;
-				}
+				animDown.incTimer();
+				rectangle = animDown.setFrame(rectangle);
 			}
 			break;
 
@@ -180,7 +97,7 @@ private Direction direction;
 			break;
 		}
 	}
-	
+
 	@Override
 	public void onAdded(final Scene scene) {
 		Parent root = scene.getRoot();
@@ -191,9 +108,6 @@ private Direction direction;
 	public void render(final Point2D position, final int deltaTime) {
 		rectangle.setX(position.getX());
 		rectangle.setY(position.getY());
-		//System.out.println(rectangle);
-		currentTime = currentTime + 1;
-		//System.out.print("zio brecco ecco la direzione " + this.direction);
 		this.updateImage(direction);
 	}
 	

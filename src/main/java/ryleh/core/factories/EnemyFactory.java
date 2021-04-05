@@ -1,13 +1,15 @@
-package ryleh.core;
+package ryleh.core.factories;
 
 import ryleh.common.Circle2d;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
 import ryleh.controller.Entity;
+import ryleh.core.GameEngine;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.BulletComponent;
 import ryleh.model.components.DrunkComponent;
+import ryleh.model.components.HealthIntComponent;
 import ryleh.model.components.LurkerComponent;
 import ryleh.model.components.PhysicsComponent;
 import ryleh.view.PlayerGraphicComponent;
@@ -21,40 +23,24 @@ import ryleh.view.enemies.EnemyShooterGraphicComponent;
 import ryleh.view.enemies.EnemySpinnerGraphicComponent;
 import ryleh.view.other.RockGraphicComponent;
 
-public class GameFactory {
-     private static GameFactory instance;
-     private Entity player = null;
+public class EnemyFactory {
+     private static EnemyFactory instance;
 
-     private GameFactory() { }
+     private EnemyFactory() { }
 
-     public static GameFactory getInstance(){
+     public static EnemyFactory getInstance() {
             if (instance == null) {
-                    instance = new GameFactory();
+                    instance = new EnemyFactory();
             }
             return instance;
     }
 
-     public Entity createPlayer(final World world, final ViewHandler view) {
-         Entity e = GameEngine.entityBuilder()
-                 .type(Type.PLAYER)
-                 .position(960, 540)
-                 .with(new PhysicsComponent(world, 1000))
-                 .view(new PlayerGraphicComponent())
-                 .bbox(new CircleHitBox(new Circle2d(100)))
-                 .build();
-         world.addGameObject(e.getGameObject());
-         view.addGraphicComponent(e.getView());
-         if (player == null) {
-        	player = e;
-         }
-         ((PlayerGraphicComponent) e.getView()).setDirection( ((PhysicsComponent) e.getGameObject().getComponent(PhysicsComponent.class).get()).getDirection());
-         return e;
-     }
      public Entity createEnemyShooter(final World world, final ViewHandler view) {
     	 Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_SHOOTER)
                  .position(300, 800)
-                 .with(new ShooterComponent(world, view, player))
+                 .with(new ShooterComponent(world, view, BasicFactory.getInstance().getPlayer()))
+                 .with(new HealthIntComponent(world, 5))
                  .view(new EnemyShooterGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
                  .build();
@@ -67,6 +53,7 @@ public class GameFactory {
                  .type(Type.ENEMY_SPINNER)
                  .position(900, 500)
                  .with(new SpinnerComponent(world, view))
+                 .with(new HealthIntComponent(world, 5))
                  .view(new EnemySpinnerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
                  .build();
@@ -79,6 +66,7 @@ public class GameFactory {
                  .type(Type.ENEMY_DRUNK)
                  .position(960, 540)
                  .with(new DrunkComponent(world))
+                 .with(new HealthIntComponent(world, 5))
                  .view(new EnemyDrunkGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
                  .build();
@@ -101,8 +89,10 @@ public class GameFactory {
     	 Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_LURKER)
                  .position(800, 200)
-                 .with(new LurkerComponent(world, player))
-                 .view(new EnemyLurkerGraphicComponent(player.getGameObject().getPosition()))
+                 .with(new LurkerComponent(world, BasicFactory.getInstance().getPlayer()))
+                 .with(new HealthIntComponent(world, 5))
+                 .view(new EnemyLurkerGraphicComponent(
+                         BasicFactory.getInstance().getPlayer().getGameObject().getPosition()))
                  .bbox(new CircleHitBox(new Circle2d(50)))
                  .build();
          world.addGameObject(e.getGameObject());
@@ -114,20 +104,9 @@ public class GameFactory {
                  .type(Type.ENEMY_DRUNKSPINNER)
                  .position(1200, 540)
                  .with(new DrunkComponent(world))
+                 .with(new HealthIntComponent(world, 5))
                  .view(new EnemySpinnerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
-                 .build();
-         world.addGameObject(e.getGameObject());
-         view.addGraphicComponent(e.getView());
-         return e;
-     }
-
-     public Entity createRock(final World world, final ViewHandler view) {
-         Entity e = GameEngine.entityBuilder()
-                 .type(Type.ROCK)
-                 .position(600, 400)
-                 .view(new RockGraphicComponent())
-                 .bbox(new CircleHitBox(45))
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());

@@ -15,6 +15,8 @@ import ryleh.common.V2d;
 import ryleh.controller.Entity;
 import ryleh.controller.EventHandler;
 import ryleh.controller.InputController;
+import ryleh.core.factories.BasicFactory;
+import ryleh.core.factories.EnemyFactory;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.view.ViewHandler;
@@ -35,32 +37,31 @@ public class GameState {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                     }
+        this.eventHandler = new EventHandler(this);
         world = new World(eventHandler);
         objects = new ArrayList<>();
         gameVars = new HashMap<>();
         gameVars.put("Version", "0.1");
-        objects.add(GameFactory.getInstance().createPlayer(world, view));
+        //NEXT LINES SHOULD ALL BE DELEGATED TO LEVEL HANDLER
+        objects.add(BasicFactory.getInstance().createPlayer(world, view));
         //objects.add(GameFactory.getInstance().createEnemyDrunk(world, view));
-        objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
+        objects.add(EnemyFactory.getInstance().createEnemyShooter(world, view));
         //objects.add(GameFactory.getInstance().createEnemyDrunkSpinner(world, view));
         //objects.add(GameFactory.getInstance().createEnemySpinner(world, view));
         //objects.add(GameFactory.getInstance().createEnemyLurker(world, view));
         //objects.add(GameFactory.getInstance().createBullet(world, view, new P2d(200, 200), new V2d(1,0)));
         input = new InputController(this.view.getScene(), this.getEntityByType(Type.PLAYER).get());
         input.initInput();
-        objects.add(GameFactory.getInstance().createRock(world, view));
-        
-
-        this.eventHandler = new EventHandler(this);
+        objects.add(BasicFactory.getInstance().createRock(world, view));
     }
 
-    public void removeEntity(Entity entity) {
+    public void removeEntity(final Entity entity) {
     	objects.remove(entity);
     	view.removeGraphicComponent(entity.getView());
     	world.removeGameObject(entity.getGameObject());
     }
 
-    public void updateState(int deltaTime) {
+    public void updateState(final int deltaTime) {
         for (final Entity object : this.objects) {
             object.getGameObject().onUpdate(deltaTime);
             //TODO change next "render" method to accept in input a object P2d

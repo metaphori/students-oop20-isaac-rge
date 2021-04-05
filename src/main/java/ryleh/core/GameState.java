@@ -42,6 +42,7 @@ public class GameState {
         // objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
         //objects.add(GameFactory.getInstance().createEnemySpinner(world, view));
         objects.add(GameFactory.getInstance().createEnemyLurker(world, view));
+        objects.add(GameFactory.getInstance().createRock(world, view));
         InputController.initInput(view.getScene(), this.getEntityByType(Type.PLAYER).get());
         this.eventHandler = new EventHandler(this);
     }

@@ -15,7 +15,7 @@ public class SpinnerComponent extends Component{
 
 	   public SpinnerComponent(World world , ViewHandler view) {
 		   super(world);
-		   this.position = new P2d(700,200);
+		   this.position = new P2d(0,0);
 		   this.velocity = new V2d(0,0);
 		   this.view=view;
 		}
@@ -24,9 +24,8 @@ public class SpinnerComponent extends Component{
 			super.onAdded(object);
 			this.position = object.getPosition();
 		}
-	    public void onUpdate() {
-	    	shoot();
-	    	spin();
+	    public void onUpdate(int dt) {
+	    	//shoot();
 	    }
 		    
 		public void shoot() {
@@ -34,9 +33,6 @@ public class SpinnerComponent extends Component{
 				V2d directionToPlayer = new V2d(-1,0);
 		            //GameFactory.getInstance().createBullet(world, view, position, directionToPlayer);
 		            weaponTimer = System.currentTimeMillis();
-		        }
 		    }
-		private void spin() {
-			//spinner.rotateBy(GameMath.toDegrees(Math.PI/(Math.PI)/30));
 		}
 }

@@ -8,30 +8,30 @@ import ryleh.view.ViewHandler;
 
 public class BulletComponent extends Component{
 	private P2d position;
-	private double speed = 25;
+	private int speed = 25;
 	private V2d velocity;
 
 	public BulletComponent(World world , P2d origin, V2d direction) {
 		super(world);
+		System.out.println("Sono Spawnato");
 		this.position = origin;
-		this.velocity = direction.mul(speed);
+		//this.velocity = direction.mul(speed);
+	    this.velocity = new V2d(0, 0);
 	}
 	@Override
 	public void onAdded(GameObject object) {
 		super.onAdded(object);
 		this.position = object.getPosition();
 	}
-	public void onUpdate() {
-	    move();
+	public void onUpdate(final int dt) {
+	    move(dt);
 	    cheeckCollision();
 	 }
 	private void cheeckCollision() {
-		// TODO Auto-generated method stub
-		
 	}
-	private void move() {
-		
-		
+	protected void move(final int dt) {
+		this.position = this.position.sum(velocity.mul(dt * 0.001));
+		object.setPosition(this.position);
 	}
 
 }

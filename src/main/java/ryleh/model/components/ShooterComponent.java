@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 
+import javafx.application.Platform;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
 import ryleh.controller.Entity;
@@ -34,17 +35,18 @@ public class ShooterComponent extends Component{
 			super.onAdded(object);
 			this.position = object.getPosition();
 		}
-	    public void onUpdate() {
+	    public void onUpdate(int dt) {
 	    	shoot();
 	    }
 	    
 	    public void shoot() {
-	        if (weaponTimer - System.currentTimeMillis() >= 2000) {
+	        if (System.currentTimeMillis() - weaponTimer >= 2000) {
 	            V2d directionToPlayer = new V2d(player.getGameObject().getPosition().x,player.getGameObject().getPosition().y)
 	            		.sub(new V2d(this.position.x,this.position.y))
 	            		.getNormalized()
 	            		.mulLocal(bulletSpeed);
-	            //GameFactory.getInstance().createBullet(world, view, position, directionToPlayer);
+	            System.out.println("Helo");
+	            //GameFactory.getInstance().createBullet(world, view, position, directionToPlayer)
 	            weaponTimer = System.currentTimeMillis();
 	        }
 	    }

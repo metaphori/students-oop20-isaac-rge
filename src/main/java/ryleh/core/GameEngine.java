@@ -27,6 +27,7 @@ public class GameEngine {
             while (!rylehState.isGameOver()) {
                 final long current = System.currentTimeMillis();
                 final int elapsed = (int) (current - lastTime);
+                rylehState.updateInput();
                 rylehState.updateState(elapsed);
                 waitForNextFrame(current);
                 lastTime = current;

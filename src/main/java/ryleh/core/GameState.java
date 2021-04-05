@@ -25,6 +25,7 @@ public class GameState {
     private Map<String, String> gameVars;
     private boolean isGameOver = false;
     private EventHandler eventHandler;
+    private InputController input;
 
     public GameState(final Stage mainStage) {
         try {
@@ -42,7 +43,8 @@ public class GameState {
         // objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
         //objects.add(GameFactory.getInstance().createEnemySpinner(world, view));
         objects.add(GameFactory.getInstance().createEnemyLurker(world, view));
-        InputController.initInput(view.getScene(), this.getEntityByType(Type.PLAYER).get());
+        input = new InputController(this.view.getScene(), this.getEntityByType(Type.PLAYER).get());
+        input.initInput();
         this.eventHandler = new EventHandler(this);
     }
 
@@ -75,5 +77,8 @@ public class GameState {
 	
 	public Optional<Entity> getEntityByType(final Type type) {
 		return objects.stream().filter(i -> i.getGameObject().getType().equals(type)).findAny();
+	}
+	public void updateInput() {
+		this.input.updateInput();
 	}
 }

@@ -3,6 +3,7 @@ package ryleh.model.components;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
 import ryleh.model.GameObject;
+import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.physics.Direction;
 import ryleh.model.physics.HitBox;
@@ -52,7 +53,8 @@ public class PhysicsComponent extends Component {
     }
 
     protected boolean canMove() {
-        return !object.getHitBox().isOutOfBounds(world.getBounds());
+        return !(object.getHitBox().isOutOfBounds(world.getBounds()) || world.getGameObjects().stream()
+                .filter(i -> i.getType().equals(Type.ROCK)).anyMatch(r -> object.getHitBox().isCollidingWith(r.getHitBox())));
     }
 
     public void setVelocityX(final int sign) {

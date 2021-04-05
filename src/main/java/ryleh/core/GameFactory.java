@@ -19,6 +19,7 @@ import ryleh.view.enemies.EnemyDrunkGraphicComponent;
 import ryleh.view.enemies.EnemyLurkerGraphicComponent;
 import ryleh.view.enemies.EnemyShooterGraphicComponent;
 import ryleh.view.enemies.EnemySpinnerGraphicComponent;
+import ryleh.view.other.RockGraphicComponent;
 
 public class GameFactory {
      private static GameFactory instance;
@@ -99,6 +100,18 @@ public class GameFactory {
                  .position(1000, 100)
                  .with(new LurkerComponent(world, player))
                  .view(new EnemyLurkerGraphicComponent())
+                 .build();
+         world.addGameObject(e.getGameObject());
+         view.addGraphicComponent(e.getView());
+         return e;
+     }
+
+     public Entity createRock(final World world, final ViewHandler view) {
+         Entity e = GameEngine.entityBuilder()
+                 .type(Type.ROCK)
+                 .position(600, 400)
+                 .view(new RockGraphicComponent())
+                 .bbox(new CircleHitBox(45))
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());

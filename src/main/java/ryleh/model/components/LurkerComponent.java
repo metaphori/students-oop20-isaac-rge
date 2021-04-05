@@ -8,7 +8,7 @@ import ryleh.model.World;
 
 public class LurkerComponent extends Component {
 		private long adjustDirectionTimer = System.currentTimeMillis();
-	    private long adjustDelay = 1500;
+	    private long adjustDelay = 500;
 	    private int moveSpeed = 50;
 	    private P2d position;
 	    private V2d velocity;

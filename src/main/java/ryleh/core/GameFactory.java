@@ -54,8 +54,9 @@ public class GameFactory {
     	 Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_SHOOTER)
                  .position(300, 800)
-                 .with(new ShooterComponent(world, view))
+                 .with(new ShooterComponent(world, view, player))
                  .view(new EnemyShooterGraphicComponent())
+                 .bbox(new CircleHitBox(new Circle2d(50)))
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -64,9 +65,10 @@ public class GameFactory {
      public Entity createEnemySpinner(final World world, final ViewHandler view) {
     	 Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_SPINNER)
-                 .position(700, 200)
+                 .position(900, 500)
                  .with(new SpinnerComponent(world, view))
                  .view(new EnemySpinnerGraphicComponent())
+                 .bbox(new CircleHitBox(new Circle2d(50)))
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -78,6 +80,7 @@ public class GameFactory {
                  .position(960, 540)
                  .with(new DrunkComponent(world))
                  .view(new EnemyDrunkGraphicComponent())
+                 .bbox(new CircleHitBox(new Circle2d(50)))
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -88,7 +91,7 @@ public class GameFactory {
                  .type(Type.ENEMY_BULLET)
                  .position(0, 0)
                  .with(new BulletComponent(world, origin, direction))
-                 .view(new PlayerGraphicComponent() )
+                 .view(new EnemyShooterGraphicComponent() )
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -97,9 +100,22 @@ public class GameFactory {
      public Entity createEnemyLurker(final World world, final ViewHandler view) {
     	 Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_LURKER)
-                 .position(1000, 100)
+                 .position(800, 200)
                  .with(new LurkerComponent(world, player))
-                 .view(new EnemyLurkerGraphicComponent())
+                 .view(new EnemyLurkerGraphicComponent(player.getGameObject().getPosition()))
+                 .bbox(new CircleHitBox(new Circle2d(50)))
+                 .build();
+         world.addGameObject(e.getGameObject());
+         view.addGraphicComponent(e.getView());
+         return e;
+     }
+     public Entity createEnemyDrunkSpinner(final World world, final ViewHandler view) {
+    	 Entity e = GameEngine.entityBuilder()
+                 .type(Type.ENEMY_DRUNKSPINNER)
+                 .position(1200, 540)
+                 .with(new DrunkComponent(world))
+                 .view(new EnemySpinnerGraphicComponent())
+                 .bbox(new CircleHitBox(new Circle2d(50)))
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());

@@ -3,9 +3,10 @@ package ryleh.controller;
 import javafx.scene.Scene;
 import ryleh.model.components.PhysicsComponent;
 import ryleh.model.physics.Direction;
-import ryleh.view.AnimatedPlayerGraphicComponent;
+import ryleh.view.PlayerGraphicComponent;
 
 public class InputController {
+
 	private boolean isMoveUp;
 	private boolean isMoveDown;
 	private boolean isMoveLeft;
@@ -26,7 +27,6 @@ public class InputController {
 	public void initInput(){
 		this.scene.setOnKeyPressed(key -> {
 			switch (key.getCode()) {
-			//TODO change to V2d indication (adesso c'è il metodo cape)
 			case A: {
 				isMoveLeft = true;
 			}
@@ -64,22 +64,6 @@ public class InputController {
 			case S: {
 				isMoveDown = false;
 			}
-//			case A:  physics.setVelocityX(0);
-//					physics.setDirection(Direction.IDLE);
-//					graphic.setDirection(Direction.IDLE);
-//				break;
-//			case D:  physics.setVelocityX(0);
-//					physics.setDirection(Direction.IDLE);
-//					graphic.setDirection(Direction.IDLE);
-//				break;
-//			case W:  physics.setVelocityY(0);
-//					physics.setDirection(Direction.IDLE);
-//					graphic.setDirection(Direction.IDLE);
-//				break;
-//			case S: physics.setVelocityY(0);
-//					physics.setDirection(Direction.IDLE);
-//					graphic.setDirection(Direction.IDLE);
-//				break;
 			default:
 				break;
 			}

@@ -40,11 +40,15 @@ public class GameState {
         gameVars.put("Version", "0.1");
         objects.add(GameFactory.getInstance().createPlayer(world, view));
         objects.add(GameFactory.getInstance().createEnemyDrunk(world, view));
-        // objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
-        //objects.add(GameFactory.getInstance().createEnemySpinner(world, view));
+        //objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
+      //  objects.add(GameFactory.getInstance().createEnemySpinner(world, view));
         objects.add(GameFactory.getInstance().createEnemyLurker(world, view));
+
         input = new InputController(this.view.getScene(), this.getEntityByType(Type.PLAYER).get());
         input.initInput();
+        objects.add(GameFactory.getInstance().createRock(world, view));
+        
+
         this.eventHandler = new EventHandler(this);
     }
 

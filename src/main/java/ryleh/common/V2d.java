@@ -32,6 +32,10 @@ public class V2d implements java.io.Serializable {
     public V2d sum(V2d v){
         return new V2d(x+v.x,y+v.y);
     }
+    
+    public V2d sub(V2d v){
+    	return new V2d(x-v.x,y-v.y);
+    }
 
     public double module(){
         return (double)Math.sqrt(x*x+y*y);

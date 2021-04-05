@@ -11,7 +11,7 @@ public class InputController {
 	private boolean isMoveDown;
 	private boolean isMoveLeft;
 	private boolean isMoveRight;
-	private final AnimatedPlayerGraphicComponent graphic;
+	private final PlayerGraphicComponent graphic;
 	private final PhysicsComponent physics; 
 	private final Scene scene;
 	private final Entity player;
@@ -19,7 +19,7 @@ public class InputController {
 	public InputController(final Scene scene, final Entity player) {
 		this.scene = scene;
 		this.player = player;
-		this.graphic = (AnimatedPlayerGraphicComponent) player.getView();
+		this.graphic = (PlayerGraphicComponent) player.getView();
 		this.physics = (PhysicsComponent) player.getGameObject()
 		        .getComponent(PhysicsComponent.class).get();
 	}
@@ -27,21 +27,13 @@ public class InputController {
 	public void initInput(){
 		this.scene.setOnKeyPressed(key -> {
 			switch (key.getCode()) {
-			case A: {
-				isMoveLeft = true;
-			}
+			case A: isMoveLeft = true;
 				break;
-			case D: {
-				isMoveRight = true;
-			}
+			case D: isMoveRight = true;
 				break;
-			case W: {
-				isMoveUp = true;
-			}
+			case W: isMoveUp = true;
 				break;
-			case S: {
-				isMoveDown = true;
-			}
+			case S: isMoveDown = true;
 				break;
 			default:
 				break;
@@ -49,21 +41,13 @@ public class InputController {
 		});
 		scene.setOnKeyReleased(key -> {
 			switch (key.getCode()) {
-			case A: {
-				isMoveLeft = false;
-			}
+			case A: isMoveLeft = false;
 				break;
-			case D: {
-				isMoveRight = false;
-			}
+			case D: isMoveRight = false;
 				break;
-			case W: {
-				isMoveUp = false;
-			}
+			case W: isMoveUp = false;
 				break;
-			case S: {
-				isMoveDown = false;
-			}
+			case S: isMoveDown = false;
 			default:
 				break;
 			}

@@ -64,7 +64,6 @@ public class GameState {
     public void updateState(final int deltaTime) {
         for (final Entity object : this.objects) {
             object.getGameObject().onUpdate(deltaTime);
-            //TODO change next "render" method to accept in input a object P2d
             object.getView().render(toPoint2D(new P2d(object.getGameObject().getPosition().x -95, object.getGameObject().getPosition().y - 95 )), deltaTime);
         }
         eventHandler.checkEvents();

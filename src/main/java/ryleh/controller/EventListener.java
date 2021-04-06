@@ -2,5 +2,5 @@ package ryleh.controller;
 
 public interface EventListener {
 	
-	public void notifyEvent(Event e);
+	void notifyEvent(Event e);
 }

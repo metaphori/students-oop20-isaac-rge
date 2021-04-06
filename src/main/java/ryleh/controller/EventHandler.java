@@ -17,7 +17,15 @@ public class EventHandler implements EventListener{
 	
 	public void checkEvents() {
 		eventQueue.forEach(e -> {
-			//TODO verifiche per i vari eventi che implementano Event.
+			if (e instanceof EnemyCollisionEvent) {
+				EnemyCollisionEvent enEvent = (EnemyCollisionEvent) e;
+				enEvent.handle();
+			} else if (e instanceof ItemPickUpEvent) {
+				ItemPickUpEvent pickEvent = (ItemPickUpEvent) e;
+				pickEvent.handle();
+			} else if (e instanceof BulletSpawnEvent) {
+				BulletSpawnEvent bulletSpawn = (BulletSpawnEvent) e;
+			}
 		});
 	}
 	

@@ -11,11 +11,13 @@ public class AnimationLoop {
 	int timer;
 	private int frameDuration;
 	private List<ImagePattern> frames;
+	private boolean cycleFinished;
 	
 	public AnimationLoop(final List<ImagePattern> frames, final int duration) {
 		this.frames = new ArrayList<>(frames);
 		this.timer = 0;
 		this.frameDuration = duration;
+		this.cycleFinished = false;
 	}
 	
 	public void incTimer() {
@@ -29,6 +31,7 @@ public class AnimationLoop {
 		for (int i = 1; i <= this.frames.size() + 1; i++) {
 			if (timer == (frameDuration * frames.size()) + 1) {
 				this.resetTimer();
+				this.cycleFinished = true;
 			} else {
 				if (timer == frameDuration * i) {
 					rectangle.setFill(this.frames.get(i - 1));
@@ -37,6 +40,10 @@ public class AnimationLoop {
 			}
 		}
 		return rectangle;
+	}
+	
+	public boolean isCycleFinished() {
+		return this.cycleFinished;
 	}
 	
 	//-----------//

@@ -57,4 +57,12 @@ public interface GameObject {
      * 
      */
     HitBox getHitBox();
+    /*
+     * 
+     */
+	void setzIndex(int zIndex);
+	/*
+	 * 
+	 */
+	int getzIndex();
 }

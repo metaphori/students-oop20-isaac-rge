@@ -45,6 +45,7 @@ public class GameFactory {
                  .with(new PhysicsComponent(world, 1000))
                  .view(new PlayerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(100)))
+                 .zIndex(2)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -61,6 +62,7 @@ public class GameFactory {
                  .with(new ShooterComponent(world, view, player))
                  .view(new EnemyShooterGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
+                 .zIndex(0)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -73,6 +75,7 @@ public class GameFactory {
                  .with(new SpinnerComponent(world, view))
                  .view(new EnemySpinnerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
+                 .zIndex(1)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -85,6 +88,7 @@ public class GameFactory {
                  .with(new DrunkComponent(world))
                  .view(new EnemyDrunkGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
+                 .zIndex(3)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -95,7 +99,8 @@ public class GameFactory {
                  .type(Type.ENEMY_BULLET)
                  .position(0, 0)
                  .with(new BulletComponent(world, origin, direction))
-                 .view(new EnemyShooterGraphicComponent() )
+                 .view(new EnemyShooterGraphicComponent())
+                 .zIndex(0)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -108,6 +113,7 @@ public class GameFactory {
                  .with(new LurkerComponent(world, player))
                  .view(new EnemyLurkerGraphicComponent(player.getGameObject().getPosition()))
                  .bbox(new CircleHitBox(new Circle2d(50)))
+                 .zIndex(0)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -120,6 +126,7 @@ public class GameFactory {
                  .with(new DrunkComponent(world))
                  .view(new EnemySpinnerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
+                 .zIndex(0)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -132,6 +139,7 @@ public class GameFactory {
                  .position(600, 400)
                  .view(new RockGraphicComponent())
                  .bbox(new CircleHitBox(45))
+                 .zIndex(0)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());

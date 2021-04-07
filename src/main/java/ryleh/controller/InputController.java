@@ -57,18 +57,30 @@ public class InputController {
 		if (isMoveUp) {
 			physics.setVelocity(Direction.UP.getPoint());
 			physics.setDirection(Direction.UP);
+			if(!physics.getBlocked().equals(Direction.UP)) {
+			    physics.resetBlocked();
+			}
 			graphic.setDirection(Direction.UP);
 		} else if (isMoveDown) {
 			physics.setVelocity(Direction.DOWN.getPoint());
 			physics.setDirection(Direction.DOWN);
+			if(!physics.getBlocked().equals(Direction.DOWN)) {
+                            physics.resetBlocked();
+                        }
 			graphic.setDirection(Direction.DOWN);
 		} else if (isMoveLeft) {
 			physics.setVelocity(Direction.LEFT.getPoint());
 			physics.setDirection(Direction.LEFT);
+			if(!physics.getBlocked().equals(Direction.LEFT)) {
+                            physics.resetBlocked();
+                        }
 			graphic.setDirection(Direction.LEFT);
 		} else if (isMoveRight) {
 			physics.setVelocity(Direction.RIGHT.getPoint());
 			physics.setDirection(Direction.RIGHT);
+			if(!physics.getBlocked().equals(Direction.RIGHT)) {
+                            physics.resetBlocked();
+                        }
 			graphic.setDirection(Direction.RIGHT);	
 		} else {
 			physics.setVelocity(Direction.IDLE.getPoint());

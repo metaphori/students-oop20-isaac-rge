@@ -55,8 +55,13 @@ public class GameObjectImpl implements GameObject {
     }
     @Override
     public void addComponent(final Component component) {
-        this.components.add(component);
-        component.onAdded(this);
+        if (this.components.stream().anyMatch(i -> component.getClass().isInstance(i))) {
+            throw new IllegalStateException();
+        }
+        else {
+            this.components.add(component);
+            component.onAdded(this);
+        }
     }
     @Override
     public Type getType() {

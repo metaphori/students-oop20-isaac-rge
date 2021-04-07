@@ -12,6 +12,7 @@ public class PhysicsComponent extends Component {
     private P2d position;
     private int speed;
     private Direction direction;
+    private Direction blocked;
     private P2d lastPos;
 
     public PhysicsComponent(final World world, final int speed) {
@@ -21,27 +22,31 @@ public class PhysicsComponent extends Component {
         this.lastPos = new P2d(0, 0);
         this.speed = speed;
         this.direction = Direction.IDLE;
+        this.blocked = Direction.IDLE;
     }
 
     @Override
     public void onAdded(final GameObject object) {
         super.onAdded(object);
         this.position = object.getPosition();
+        this.move(0);
     }
 
     @Override
     public void onUpdate(final int dt) {
-        if (this.canMove()) {
+        if (this.canMove() && !this.blocked.equals(this.direction)) {
             move(dt);
+            return;
         } else {
+            this.blocked = this.direction;
             resetPos();
         }
-        object.setPosition(this.position);
     }
 
     protected void move (final int dt) {
         lastPos = new P2d(this.position.x, this.position.y);
         this.position = this.position.sum(velocity.mul(dt * 0.001));
+        object.setPosition(this.position);
     }
 
     protected void resetPos() {
@@ -49,6 +54,7 @@ public class PhysicsComponent extends Component {
         this.setVelocityY(0);
         this.setVelocityX(0);
         this.direction = Direction.IDLE;
+        object.setPosition(this.position);
     }
 
     protected boolean canMove() {
@@ -73,6 +79,12 @@ public class PhysicsComponent extends Component {
     }
     public Direction getDirection() {
         return this.direction;
+    }
+    public Direction getBlocked() {
+        return this.blocked;
+    }
+    public void resetBlocked() {
+        this.blocked = Direction.IDLE;
     }
 
 }

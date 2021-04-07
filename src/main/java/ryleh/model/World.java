@@ -67,12 +67,12 @@ public class World {
     }
 
     public void removeGameObject(GameObject gameObject) {
-	this.gameObjects.remove(gameObject);
+    	this.gameObjects.remove(gameObject);
 		//to  check if needed to remove components
     }
 	
     public void notifyWorldEvent(Event e) {
-	this.eventListener.notifyEvent(e);
+    	this.eventListener.notifyEvent(e);
     }
 
 }

@@ -19,6 +19,8 @@ import ryleh.view.Textures;
 public class EnemyLurkerGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
+	private long adjustDirectionTimer = System.currentTimeMillis();
+    private long adjustDelay = 500;
 	private P2d playerDirection;
 	private Rotate rotation = new Rotate();
 	private V2d velocity;
@@ -38,13 +40,24 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent{
 
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
-		V2d directionToPlayer = new V2d(this.player.getPosition(),new P2d(position.getX()-rectangle.getWidth()/2,position.getY()-rectangle.getHeight()/2))
-					.getNormalized()
-					.mul(moveSpeed);
-		System.out.println(directionToPlayer.toString());
-		rotation.setAngle(GameMath.toDegrees((Math.atan(directionToPlayer.y/ directionToPlayer.x))));
 		rectangle.setX(position.getX()-rectangle.getWidth()/2);
 		rectangle.setY(position.getY()-rectangle.getHeight()/2);
+		if (System.currentTimeMillis() - adjustDirectionTimer >= adjustDelay) {
+			V2d directionToPlayer = new V2d(this.player.getPosition(),new P2d(position.getX()-rectangle.getWidth()/2,position.getY()-rectangle.getHeight()/2))
+					.getNormalized()
+					.mul(moveSpeed);
+//			rotation.setAngle(GameMath.toDegrees((Math.atan(directionToPlayer.y/ directionToPlayer.x))));
+//			rotation.setPivotX(position.getX());
+//	  		rotation.setPivotY(position.getY());
+//			rectangle.getTransforms().add(rotation);
+			rectangle.setRotate(GameMath.toDegrees((Math.atan(directionToPlayer.y/ directionToPlayer.x))));
+    		adjustDirectionTimer = System.currentTimeMillis();
+    	}
+//		V2d directionToPlayer = new V2d(this.player.getPosition(),new P2d(position.getX()-rectangle.getWidth()/2,position.getY()-rectangle.getHeight()/2))
+//					.getNormalized()
+//					.mul(moveSpeed);
+//		System.out.println(directionToPlayer.toString());
+//		rotation.setAngle(GameMath.toDegrees((Math.atan(directionToPlayer.y/ directionToPlayer.x))));
 //        rotation.setPivotX(position.getX());
 //  		rotation.setPivotY(position.getY());
 //     	rectangle.getTransforms().add(rotation);

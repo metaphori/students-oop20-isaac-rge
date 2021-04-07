@@ -35,25 +35,24 @@ public class GameState {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                     }
+        this.eventHandler = new EventHandler(this);
         world = new World(eventHandler);
         objects = new ArrayList<>();
         gameVars = new HashMap<>();
         gameVars.put("Version", "0.1");
         objects.add(GameFactory.getInstance().createPlayer(world, view));
-        //objects.add(GameFactory.getInstance().createEnemyDrunk(world, view));
-        objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
+        objects.add(GameFactory.getInstance().createEnemyDrunk(world, view));
+        //objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
         //objects.add(GameFactory.getInstance().createEnemyDrunkSpinner(world, view));
         //objects.add(GameFactory.getInstance().createEnemySpinner(world, view));
-        //objects.add(GameFactory.getInstance().createEnemyLurker(world, view));
+        objects.add(GameFactory.getInstance().createEnemyLurker(world, view));
+        objects.add(GameFactory.getInstance().createItem(world, view));
         //objects.add(GameFactory.getInstance().createBullet(world, view, new P2d(200, 200), new V2d(1,0)));
         input = new InputController(this.view.getScene(), this.getEntityByType(Type.PLAYER).get());
         input.initInput();
         objects.add(GameFactory.getInstance().createRock(world, view));
-        
-
-        this.eventHandler = new EventHandler(this);
     }
-
+    
     public void removeEntity(Entity entity) {
     	objects.remove(entity);
     	view.removeGraphicComponent(entity.getView());
@@ -86,5 +85,8 @@ public class GameState {
 	}
 	public void updateInput() {
 		this.input.updateInput();
+	}
+	public List<Entity> getEntities() {
+		return this.objects;
 	}
 }

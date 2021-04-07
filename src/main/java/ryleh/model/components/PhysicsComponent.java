@@ -6,7 +6,6 @@ import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.physics.Direction;
-import ryleh.model.physics.HitBox;
 
 public class PhysicsComponent extends Component {
     private V2d velocity;

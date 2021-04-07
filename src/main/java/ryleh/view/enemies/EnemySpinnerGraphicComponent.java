@@ -29,9 +29,9 @@ public class EnemySpinnerGraphicComponent implements GraphicComponent{
 	}
 	
 	@Override
-	public void render(final Point2D position, final int deltaTime) {
-		rectangle.setX(position.getX());
-		rectangle.setY(position.getY());
+	public void render(final Point2D position, final double deltaTime) {
+		rectangle.setX(position.getX()-rectangle.getWidth()/2);
+		rectangle.setY(position.getY()-rectangle.getHeight()/2);
 		rotation.setPivotX(position.getX());
 		rotation.setPivotY(position.getY());
 		rectangle.getTransforms().add(rotation);

@@ -4,7 +4,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 
 public interface GraphicComponent {
-    public void render(Point2D position, int deltaTime);
+    public void render(Point2D position, double deltaF);
 
     public void onAdded(Scene scene);
 }

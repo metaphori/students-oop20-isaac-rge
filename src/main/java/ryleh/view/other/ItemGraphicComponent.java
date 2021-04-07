@@ -24,7 +24,7 @@ public class ItemGraphicComponent implements GraphicComponent{
 
 	//DA CONTROLLARE SE FUHNZIONA EFFETTIVAMENTE O MENO
 	@Override
-	public void render(final Point2D position, final int deltaTime) {
+	public void render(final Point2D position, final double deltaTime) {
 		if (!fixed) {
 			rectangle.setX(position.getX());
 			rectangle.setY(position.getY());

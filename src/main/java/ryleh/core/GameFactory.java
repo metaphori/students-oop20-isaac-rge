@@ -1,5 +1,7 @@
 package ryleh.core;
 
+import java.util.List;
+
 import ryleh.common.Circle2d;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
@@ -102,7 +104,7 @@ public class GameFactory {
                  .type(Type.ENEMY_LURKER)
                  .position(800, 200)
                  .with(new LurkerComponent(world, player))
-                 .view(new EnemyLurkerGraphicComponent(player.getGameObject().getPosition()))
+                 .view(new EnemyLurkerGraphicComponent(player.getGameObject()))
                  .bbox(new CircleHitBox(new Circle2d(50)))
                  .build();
          world.addGameObject(e.getGameObject());

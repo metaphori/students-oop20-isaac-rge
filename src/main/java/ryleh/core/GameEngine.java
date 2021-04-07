@@ -8,6 +8,7 @@ import ryleh.view.ViewHandler;
 public class GameEngine {
     private GameState rylehState;
     private long period = 20;
+    private boolean running = true;
 
     /*
      * 
@@ -23,14 +24,42 @@ public class GameEngine {
      */
     public void mainLoop() {
         new Thread(()-> {
-            long lastTime = System.currentTimeMillis();
-            while (!rylehState.isGameOver()) {
-                final long current = System.currentTimeMillis();
-                final int elapsed = (int) (current - lastTime);
-                rylehState.updateState(elapsed);
-                waitForNextFrame(current);
-                lastTime = current;
-            }
+        	long initialTime = System.nanoTime();
+        	final double UPS = 60;
+        	final double FPS = 60;
+        	final double timeU = 1000000000 / UPS;
+        	final double timeF = 1000000000 / FPS;
+        	double deltaU = 0, deltaF = 0;
+        	int frames = 0, ticks = 0;
+        	long timer = System.currentTimeMillis();
+
+        	    while (running) {
+
+        	        long currentTime = System.nanoTime();
+        	        deltaU += (currentTime - initialTime) / timeU;
+        	        deltaF += (currentTime - initialTime) / timeF;
+        	        initialTime = currentTime;
+
+        	        if (deltaU >= 1) {
+        	        	rylehState.updateState(deltaU);
+        	            ticks++;
+        	            deltaU--;
+        	        }
+
+        	        if (deltaF >= 1) {
+        	            rylehState.updateRender(deltaF);
+        	            frames++;
+        	            deltaF--;
+        	        }
+        	    }
+//            long lastTime = System.currentTimeMillis();
+//            while (!rylehState.isGameOver()) {
+//                final long current = System.currentTimeMillis();
+//                final int elapsed = (int) (current - lastTime);
+//                rylehState.updateState(elapsed);
+//                waitForNextFrame(current);
+//                lastTime = current;
+//            }
         }).start();
     }
 

@@ -11,6 +11,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 import ryleh.common.P2d;
+import ryleh.common.V2d;
 import ryleh.controller.Entity;
 import ryleh.controller.EventHandler;
 import ryleh.controller.InputController;
@@ -39,8 +40,10 @@ public class GameState {
         gameVars.put("Version", "0.1");
         objects.add(GameFactory.getInstance().createPlayer(world, view));
         objects.add(GameFactory.getInstance().createEnemyDrunk(world, view));
-        //objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
-      //  objects.add(GameFactory.getInstance().createEnemySpinner(world, view));
+        objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
+        objects.add(GameFactory.getInstance().createEnemySpinner(world, view));
+       // objects.add(GameFactory.getInstance().createEnemyDrunkSpinner(world, view));
+        //objects.add(GameFactory.getInstance().createBullet(world, view ,objects.get(2).getGameObject().getPosition(),new V2d(1,0)));
         objects.add(GameFactory.getInstance().createEnemyLurker(world, view));
         objects.add(GameFactory.getInstance().createRock(world, view));
         InputController.initInput(view.getScene(), this.getEntityByType(Type.PLAYER).get());
@@ -53,13 +56,19 @@ public class GameState {
     	world.removeGameObject(entity.getGameObject());
     }
 
-    public void updateState(int deltaTime) {
+    public void updateState(double deltaU) {
         for (final Entity object : this.objects) {
-            object.getGameObject().onUpdate(deltaTime);
-            //TODO change next "render" method to accept in input a object P2d
-            object.getView().render(toPoint2D(new P2d(object.getGameObject().getPosition().x -95, object.getGameObject().getPosition().y - 95 )), deltaTime);
+            object.getGameObject().onUpdate(deltaU);
         }
         eventHandler.checkEvents();
+    }
+    
+    public void updateRender(double deltaF) {
+    	 //TODO change next "render" method to accept in input a object P2d
+    	for(final Entity object : this.objects) {
+    		object.getView().render(toPoint2D(new P2d(object.getGameObject().getPosition().x -95, object.getGameObject().getPosition().y - 95 )), deltaF);
+    	}
+    	
     }
 
     public boolean isGameOver() {

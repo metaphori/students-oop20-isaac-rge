@@ -27,11 +27,21 @@ public class ItemGraphicComponent implements GraphicComponent{
 	
 	@Override
 	public void render(final Point2D position, final int deltaTime) {
+
 		//if(!fixed) {
 			rectangle.setX(position.getX());
 			rectangle.setY(position.getY());
 		//}
 			this.updateImage();
+
+		/*if (!fixed) {
+		}
+		if (animPlayed) {
+			timer++;
+		}
+		rectangle.setX(position.getX());
+		rectangle.setY(position.getY());*/
+
 	}
 
 	private void updateImage() {

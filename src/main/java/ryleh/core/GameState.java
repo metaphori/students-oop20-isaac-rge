@@ -18,6 +18,9 @@ import ryleh.common.V2d;
 import ryleh.controller.Entity;
 import ryleh.controller.EventHandler;
 import ryleh.controller.InputController;
+import ryleh.controller.levels.LevelHandler;
+import ryleh.core.factories.BasicFactory;
+import ryleh.core.factories.EnemyFactory;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.view.ViewHandler;
@@ -30,6 +33,7 @@ public class GameState {
     private boolean isGameOver = false;
     private EventHandler eventHandler;
     private InputController input;
+    private LevelHandler levelHandler;
 
     public GameState(final Stage mainStage) {
         try {
@@ -38,17 +42,27 @@ public class GameState {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                     }
+        this.eventHandler = new EventHandler(this);
         world = new World(eventHandler);
         objects = new ArrayList<>();
         gameVars = new HashMap<>();
         gameVars.put("Version", "0.1");
-        objects.add(GameFactory.getInstance().createEnemySpinner(world, view));
+
+        this.levelHandler = new LevelHandler(this);
+        //NEXT LINES SHOULD ALL BE DELEGATED TO LEVEL HANDLER
+        objects.add(BasicFactory.getInstance().createPlayer(world, view));
+        //objects.add(GameFactory.getInstance().createEnemyDrunk(world, view));
+        objects.add(EnemyFactory.getInstance().createEnemyShooter(world, view));
+
         objects.add(GameFactory.getInstance().createPlayer(world, view));
         objects.add(GameFactory.getInstance().createEnemyDrunk(world, view));
-        objects.add(GameFactory.getInstance().createRock(world, view));
         //objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
+
         //objects.add(GameFactory.getInstance().createEnemyDrunkSpinner(world, view));
-        //objects.add(GameFactory.getInstance().createEnemyLurker(world, view));
+        //objects.add(GameFactory.getInstance().createEnemySpinner(world, view));
+        objects.add(GameFactory.getInstance().createEnemyLurker(world, view));
+        objects.add(GameFactory.getInstance().createItem(world, view));
+
         //objects.add(GameFactory.getInstance().createBullet(world, view, new P2d(200, 200), new V2d(1,0)));
         //objects.add(GameFactory.getInstance().createItem(world, view));
 
@@ -65,9 +79,6 @@ public class GameState {
 
         input = new InputController(this.view.getScene(), this.getEntityByType(Type.PLAYER).get());
         input.initInput();
-
-
-        this.eventHandler = new EventHandler(this);
     }
 
     public void removeEntity(Entity entity) {
@@ -76,10 +87,9 @@ public class GameState {
     	world.removeGameObject(entity.getGameObject());
     }
 
-    public void updateState(int deltaTime) {
+    public void updateState(final int deltaTime) {
         for (final Entity object : this.objects) {
             object.getGameObject().onUpdate(deltaTime);
-            //TODO change next "render" method to accept in input a object P2d
             object.getView().render(toPoint2D(new P2d(object.getGameObject().getPosition().x -95, object.getGameObject().getPosition().y - 95 )), deltaTime);
         }
         eventHandler.checkEvents();
@@ -89,18 +99,27 @@ public class GameState {
         return isGameOver;
     }
 
-	public ViewHandler getScene() {
-		return view;
-	}
+    public ViewHandler getScene() {
+	return view;
+    }
 	
-	private Point2D toPoint2D (final P2d point) {
-		return new Point2D(point.x, point.y);
-	}
+    private Point2D toPoint2D (final P2d point) {
+        return new Point2D(point.x, point.y);
+    }
 	
-	public Optional<Entity> getEntityByType(final Type type) {
-		return objects.stream().filter(i -> i.getGameObject().getType().equals(type)).findAny();
-	}
-	public void updateInput() {
-		this.input.updateInput();
-	}
+
+    public Optional<Entity> getEntityByType(final Type type) {
+	return objects.stream().filter(i -> i.getGameObject().getType().equals(type)).findAny();
+    }
+
+    public World getWorld() {
+        return this.world;
+    }
+
+    public void updateInput() {
+	this.input.updateInput();
+    }
+    public List<Entity> getEntities() {
+	return this.objects;
+    }
 }

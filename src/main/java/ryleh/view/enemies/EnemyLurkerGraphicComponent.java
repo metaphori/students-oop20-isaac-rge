@@ -27,7 +27,7 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent{
 	private int moveSpeed=50;
 	private GameObject player;
 	
-	public EnemyLurkerGraphicComponent(GameObject player) {
+	public EnemyLurkerGraphicComponent(final GameObject player) {
 		rectangle = new Rectangle(100, 100);
 		rectangle.setFill(Textures.ENEMY_LURKER.getImagePattern());
 		this.player=player;

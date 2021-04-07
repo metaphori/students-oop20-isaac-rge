@@ -33,7 +33,7 @@ public class PhysicsComponent extends Component {
     }
 
     @Override
-    public void onUpdate(final int dt) {
+    public void onUpdate(final double dt) {
         if (this.canMove() && !this.blocked.equals(this.direction)) {
             move(dt);
             return;

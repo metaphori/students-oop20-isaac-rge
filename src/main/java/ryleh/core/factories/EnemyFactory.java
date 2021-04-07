@@ -92,7 +92,7 @@ public class EnemyFactory {
                  .with(new LurkerComponent(world, BasicFactory.getInstance().getPlayer()))
                  .with(new HealthIntComponent(world, 5))
                  .view(new EnemyLurkerGraphicComponent(
-                         BasicFactory.getInstance().getPlayer().getGameObject().getPosition()))
+                         BasicFactory.getInstance().getPlayer().getGameObject()))
                  .bbox(new CircleHitBox(new Circle2d(50)))
                  .build();
          world.addGameObject(e.getGameObject());

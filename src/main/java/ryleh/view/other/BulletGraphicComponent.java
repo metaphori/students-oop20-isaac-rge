@@ -18,13 +18,13 @@ public class BulletGraphicComponent implements GraphicComponent{
 		rectangle.setFill(Color.BLACK);
 	}
 	@Override
-	public void render(Point2D position, int deltaTime) {
+	public void render(final Point2D position, final double deltaTime) {
 		rectangle.setX(position.getX());
 		rectangle.setY(position.getY());
 	}
 
 	@Override
-	public void onAdded(Scene scene) {
+	public void onAdded(final Scene scene) {
 		Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
 	}

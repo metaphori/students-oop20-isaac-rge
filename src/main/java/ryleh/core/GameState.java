@@ -28,7 +28,7 @@ import ryleh.view.ViewHandler;
 public class GameState {
     private ViewHandler view;
     private World world;
-    private List<Entity> objects;
+    private List<Entity> entities;
     private Map<String, String> gameVars;
     private boolean isGameOver = false;
     private EventHandler eventHandler;
@@ -44,62 +44,60 @@ public class GameState {
                     }
         this.eventHandler = new EventHandler(this);
         world = new World(eventHandler);
-        objects = new ArrayList<>();
+        entities = new ArrayList<>();
         gameVars = new HashMap<>();
         gameVars.put("Version", "0.1");
 
         this.levelHandler = new LevelHandler(this);
         //NEXT LINES SHOULD ALL BE DELEGATED TO LEVEL HANDLER
-        objects.add(BasicFactory.getInstance().createPlayer(world, view));
+        entities.add(GameFactory.getInstance().createPlayer(world, view));
         //objects.add(GameFactory.getInstance().createEnemyDrunk(world, view));
-        objects.add(EnemyFactory.getInstance().createEnemyShooter(world, view));
-
-        objects.add(GameFactory.getInstance().createPlayer(world, view));
-        objects.add(GameFactory.getInstance().createEnemyDrunk(world, view));
+        entities.add(GameFactory.getInstance().createEnemyShooter(world, view));
+        entities.add(GameFactory.getInstance().createEnemyDrunk(world, view));
         //objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
-        objects.add(GameFactory.getInstance().createEnemySpinner(world, view));
-        objects.add(GameFactory.getInstance().createEnemyDrunkSpinner(world, view));
+        entities.add(GameFactory.getInstance().createEnemySpinner(world, view));
+        entities.add(GameFactory.getInstance().createEnemyDrunkSpinner(world, view));
         //objects.add(GameFactory.getInstance().createBullet(world, view ,objects.get(2).getGameObject().getPosition(),new V2d(1,0)));
-        objects.add(GameFactory.getInstance().createEnemyLurker(world, view));
-        objects.add(GameFactory.getInstance().createItem(world, view));
+        entities.add(GameFactory.getInstance().createEnemyLurker(world, view));
+        entities.add(GameFactory.getInstance().createItem(world, view));
+        entities.add(GameFactory.getInstance().createRock(world, view));
 
         //objects.add(GameFactory.getInstance().createBullet(world, view, new P2d(200, 200), new V2d(1,0)));
         //objects.add(GameFactory.getInstance().createItem(world, view));
 
-        Collections.sort(objects, new Comparator<Entity>() {
+        Collections.sort(entities, new Comparator<Entity>() {
 			@Override
 			public int compare(Entity o1, Entity o2) {
 				return o1.getGameObject().getzIndex() - o2.getGameObject().getzIndex();
 			}
         });
 
-        for( Entity e : objects) {
-        	System.out.print(" | " + e.getGameObject().getType() + " " + e.getGameObject().getzIndex());
-        }
-
         input = new InputController(this.view.getScene(), this.getEntityByType(Type.PLAYER).get());
         input.initInput();
     }
 
     public void removeEntity(Entity entity) {
-    	objects.remove(entity);
+    	entities.remove(entity);
     	view.removeGraphicComponent(entity.getView());
     	world.removeGameObject(entity.getGameObject());
     }
 
     public void updateState(double deltaU) {
-        for (final Entity object : this.objects) {
+        input.updateInput();
+        for (final Entity object : this.entities) {
             object.getGameObject().onUpdate(deltaU);
+        }
+        if (this.getEntityByType(Type.ENEMY_SHOOTER).isPresent()) {
+            this.removeEntity(this.getEntityByType(Type.ENEMY_SHOOTER).get());
         }
         eventHandler.checkEvents();
     }
-    
+
     public void updateRender(double deltaF) {
     	 //TODO change next "render" method to accept in input a object P2d
-    	for(final Entity object : this.objects) {
+    	for(final Entity object : this.entities) {
     		object.getView().render(toPoint2D(new P2d(object.getGameObject().getPosition().x -95, object.getGameObject().getPosition().y - 95 )), deltaF);
     	}
-    	
     }
 
     public boolean isGameOver() {
@@ -116,7 +114,7 @@ public class GameState {
 	
 
     public Optional<Entity> getEntityByType(final Type type) {
-	return objects.stream().filter(i -> i.getGameObject().getType().equals(type)).findAny();
+	return entities.stream().filter(i -> i.getGameObject().getType().equals(type)).findAny();
     }
 
     public World getWorld() {
@@ -127,6 +125,6 @@ public class GameState {
 	this.input.updateInput();
     }
     public List<Entity> getEntities() {
-	return this.objects;
+	return this.entities;
     }
 }

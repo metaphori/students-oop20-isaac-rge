@@ -56,8 +56,8 @@ public class EntityBuilder {
         return new Entity(graphic, object);
     }
 
-	public EntityBuilder zIndex(final int zIndex) {
-		object.setzIndex(zIndex);
-		return this;
-	}
+    public EntityBuilder zIndex(final int zIndex) {
+	object.setzIndex(zIndex);
+	return this;
+    }
 }

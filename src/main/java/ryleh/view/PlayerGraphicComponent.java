@@ -12,7 +12,7 @@ import ryleh.model.physics.Direction;
 public class PlayerGraphicComponent implements GraphicComponent{
 
 private Rectangle rectangle;
-private Direction direction;
+private Direction direction = Direction.IDLE;
 	
 	public PlayerGraphicComponent() {
 		rectangle = new Rectangle(190, 190);
@@ -100,8 +100,8 @@ private Direction direction;
 
 	@Override
 	public void onAdded(final Scene scene) {
-		Parent root = scene.getRoot();
-        ((AnchorPane) root).getChildren().add(rectangle);
+	    Parent root = scene.getRoot();
+            ((AnchorPane) root).getChildren().add(rectangle);
 	}
 
 	@Override

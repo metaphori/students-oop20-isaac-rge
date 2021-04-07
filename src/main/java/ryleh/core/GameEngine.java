@@ -32,11 +32,9 @@ public class GameEngine {
         	final double timeU = 1000000000 / UPS;
         	final double timeF = 1000000000 / FPS;
         	double deltaU = 0, deltaF = 0;
-        	int frames = 0, ticks = 0;
         	long timer = System.currentTimeMillis();
 
         	    while (running) {
-
         	        long currentTime = System.nanoTime();
         	        deltaU += (currentTime - initialTime) / timeU;
         	        deltaF += (currentTime - initialTime) / timeF;
@@ -44,13 +42,11 @@ public class GameEngine {
 
         	        if (deltaU >= 1) {
         	        	rylehState.updateState(deltaU);
-        	            ticks++;
         	            deltaU--;
         	        }
 
         	        if (deltaF >= 1) {
         	            rylehState.updateRender(deltaF);
-        	            frames++;
         	            deltaF--;
         	        }
         	    }

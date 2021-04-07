@@ -12,24 +12,23 @@ import ryleh.model.World;
 public class ItemComponent extends Component {
 
 	private P2d position;
-	public ItemComponent(World world) {
+	public ItemComponent(final World world) {
 		super(world);
 		this.position = new P2d(0, 0);
 	}
 
 	@Override
-	public void onAdded(GameObject object) {
+	public void onAdded(final GameObject object) {
 		// TODO Auto-generated method stub
 		super.onAdded(object);
 		this.position = object.getPosition();
 	}
 
 	@Override
-	public void onUpdate(int dt) {
+	public void onUpdate(final double dt) {
 		// TODO Auto-generated method stub
 		super.onUpdate(dt);
 		isCollidingWithPlayer();
-		
 	}
 
 	private void isCollidingWithPlayer() {

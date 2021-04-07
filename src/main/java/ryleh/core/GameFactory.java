@@ -155,6 +155,7 @@ public class GameFactory {
     			 .with(new ItemComponent(world))
     			 .view(new ItemGraphicComponent())
     			 .bbox(new CircleHitBox(new Circle2d(30)))
+    			 .zIndex(0)
     			 .build();
     	 world.addGameObject(e.getGameObject());
     	 view.addGraphicComponent(e.getView());

@@ -36,4 +36,8 @@ public class EnemyShooterGraphicComponent implements GraphicComponent{
         ((AnchorPane) root).getChildren().add(rectangle);
 	}
 
+    public Object getNode() {
+        return rectangle;
+    }
+
 }

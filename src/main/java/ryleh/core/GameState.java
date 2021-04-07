@@ -15,6 +15,7 @@ import ryleh.common.V2d;
 import ryleh.controller.Entity;
 import ryleh.controller.EventHandler;
 import ryleh.controller.InputController;
+import ryleh.controller.levels.LevelHandler;
 import ryleh.core.factories.BasicFactory;
 import ryleh.core.factories.EnemyFactory;
 import ryleh.model.Type;
@@ -29,6 +30,7 @@ public class GameState {
     private boolean isGameOver = false;
     private EventHandler eventHandler;
     private InputController input;
+    private LevelHandler levelHandler;
 
     public GameState(final Stage mainStage) {
         try {
@@ -42,6 +44,7 @@ public class GameState {
         objects = new ArrayList<>();
         gameVars = new HashMap<>();
         gameVars.put("Version", "0.1");
+        this.levelHandler = new LevelHandler(this);
         //NEXT LINES SHOULD ALL BE DELEGATED TO LEVEL HANDLER
         objects.add(BasicFactory.getInstance().createPlayer(world, view));
         //objects.add(GameFactory.getInstance().createEnemyDrunk(world, view));
@@ -73,18 +76,21 @@ public class GameState {
         return isGameOver;
     }
 
-	public ViewHandler getScene() {
-		return view;
-	}
+    public ViewHandler getScene() {
+	return view;
+    }
 	
-	private Point2D toPoint2D (final P2d point) {
-		return new Point2D(point.x, point.y);
-	}
+    private Point2D toPoint2D (final P2d point) {
+        return new Point2D(point.x, point.y);
+    }
 	
-	public Optional<Entity> getEntityByType(final Type type) {
-		return objects.stream().filter(i -> i.getGameObject().getType().equals(type)).findAny();
-	}
-	public void updateInput() {
-		this.input.updateInput();
-	}
+    public Optional<Entity> getEntityByType(final Type type) {
+	return objects.stream().filter(i -> i.getGameObject().getType().equals(type)).findAny();
+    }
+    public void updateInput() {
+        this.input.updateInput();
+    }
+    public World getWorld() {
+        return this.world;
+    }
 }

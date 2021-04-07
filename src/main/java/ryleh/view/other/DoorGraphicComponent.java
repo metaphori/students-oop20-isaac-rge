@@ -25,7 +25,7 @@ public class DoorGraphicComponent implements GraphicComponent{
 	
 
 	@Override
-	public void render(final Point2D position, final int deltaTime) {
+	public void render(final Point2D position, final double deltaTime) {
 		rectangle.setX(position.getX());
 		rectangle.setY(position.getY());
 		this.updateImage();

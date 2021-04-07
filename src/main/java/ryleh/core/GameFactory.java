@@ -1,5 +1,7 @@
 package ryleh.core;
 
+import java.util.List;
+
 import ryleh.common.Circle2d;
 import ryleh.common.P2d;
 import ryleh.common.Shape2d;
@@ -19,6 +21,7 @@ import ryleh.model.components.ShooterComponent;
 import ryleh.model.components.SpinnerComponent;
 import ryleh.view.ViewHandler;
 import ryleh.view.enemies.EnemyDrunkGraphicComponent;
+import ryleh.view.enemies.EnemyDrunkSpinnerGraphicComponent;
 import ryleh.view.enemies.EnemyLurkerGraphicComponent;
 import ryleh.view.enemies.EnemyShooterGraphicComponent;
 import ryleh.view.enemies.EnemySpinnerGraphicComponent;
@@ -111,7 +114,7 @@ public class GameFactory {
                  .type(Type.ENEMY_LURKER)
                  .position(800, 200)
                  .with(new LurkerComponent(world, player))
-                 .view(new EnemyLurkerGraphicComponent(player.getGameObject().getPosition()))
+                 .view(new EnemyLurkerGraphicComponent(player.getGameObject()))
                  .bbox(new CircleHitBox(new Circle2d(50)))
                  .zIndex(0)
                  .build();
@@ -124,7 +127,7 @@ public class GameFactory {
                  .type(Type.ENEMY_DRUNKSPINNER)
                  .position(1200, 540)
                  .with(new DrunkComponent(world))
-                 .view(new EnemySpinnerGraphicComponent())
+                 .view(new EnemyDrunkSpinnerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
                  .zIndex(0)
                  .build();

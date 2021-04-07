@@ -43,9 +43,9 @@ public class PhysicsComponent extends Component {
         }
     }
 
-    protected void move (final int dt) {
+    protected void move (final double dt) {
         lastPos = new P2d(this.position.x, this.position.y);
-        this.position = this.position.sum(velocity.mul(dt * 0.001));
+        this.position = this.position.sum(velocity.mul(dt * 0.01));
         object.setPosition(this.position);
     }
 

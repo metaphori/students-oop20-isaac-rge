@@ -2,10 +2,13 @@ package ryleh.core;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
@@ -39,17 +42,30 @@ public class GameState {
         objects = new ArrayList<>();
         gameVars = new HashMap<>();
         gameVars.put("Version", "0.1");
+        objects.add(GameFactory.getInstance().createEnemySpinner(world, view));
         objects.add(GameFactory.getInstance().createPlayer(world, view));
-        //objects.add(GameFactory.getInstance().createEnemyDrunk(world, view));
-        objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
+        objects.add(GameFactory.getInstance().createEnemyDrunk(world, view));
+        objects.add(GameFactory.getInstance().createRock(world, view));
+        //objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
         //objects.add(GameFactory.getInstance().createEnemyDrunkSpinner(world, view));
-        //objects.add(GameFactory.getInstance().createEnemySpinner(world, view));
         //objects.add(GameFactory.getInstance().createEnemyLurker(world, view));
         //objects.add(GameFactory.getInstance().createBullet(world, view, new P2d(200, 200), new V2d(1,0)));
+        //objects.add(GameFactory.getInstance().createItem(world, view));
+
+        Collections.sort(objects, new Comparator<Entity>() {
+			@Override
+			public int compare(Entity o1, Entity o2) {
+				return o1.getGameObject().getzIndex() - o2.getGameObject().getzIndex();
+			}
+        });
+
+        for( Entity e : objects) {
+        	System.out.print(" | " + e.getGameObject().getType() + " " + e.getGameObject().getzIndex());
+        }
+
         input = new InputController(this.view.getScene(), this.getEntityByType(Type.PLAYER).get());
         input.initInput();
-        objects.add(GameFactory.getInstance().createRock(world, view));
-        
+
 
         this.eventHandler = new EventHandler(this);
     }

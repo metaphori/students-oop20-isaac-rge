@@ -16,6 +16,8 @@ public class GameEngine {
     public void initGame(final Stage stage) {
         // TODO Auto-generated method stub
         //this.ryehView = new Scene(stage);
+    	//stage.setWidth(854);
+    	//stage.setHeight(480);
         rylehState = new GameState(stage);
     }
 

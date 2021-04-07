@@ -8,7 +8,7 @@ import javafx.application.Platform;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
 import ryleh.controller.Entity;
-import ryleh.core.GameFactory;
+import ryleh.core.factories.EnemyFactory;
 import ryleh.model.GameObject;
 import ryleh.model.World;
 import ryleh.view.ViewHandler;
@@ -42,12 +42,13 @@ public class ShooterComponent extends Component{
 	    
 	    public void shoot() {
 	        if (System.currentTimeMillis() - weaponTimer >= 2000) {
-	            V2d directionToPlayer = new V2d(player.getGameObject().getPosition().x,player.getGameObject().getPosition().y)
-	            		.sub(new V2d(this.position.x,this.position.y))
+	            V2d directionToPlayer = new V2d(player.getGameObject().getPosition().x, player.getGameObject().getPosition().y)
+	            		.sub(new V2d(this.position.x, this.position.y))
 	            		.getNormalized()
 	            		.mulLocal(bulletSpeed);
 	            System.out.println("Helo");
 	            //objects.add(GameFactory.getInstance().createBullet(world, view, position, directionToPlayer));
+
 	            weaponTimer = System.currentTimeMillis();
 	        }
 	    }

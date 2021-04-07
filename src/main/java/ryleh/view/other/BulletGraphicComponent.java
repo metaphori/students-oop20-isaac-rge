@@ -4,33 +4,28 @@ import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
 
-public class RockGraphicComponent implements GraphicComponent{
+public class BulletGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
 	
-	public RockGraphicComponent() {
-		rectangle = new Rectangle(155, 155);
-		rectangle.setFill(Textures.ROCK2.getImagePattern());
+	public BulletGraphicComponent() {
+		rectangle = new Rectangle(20, 20);
+		rectangle.setFill(Color.BLACK);
 	}
-
-	private void updateImage() {
-
-	}
-
 	@Override
-	public void render(final Point2D position, final double deltaTime) {
+	public void render(Point2D position, int deltaTime) {
 		rectangle.setX(position.getX());
 		rectangle.setY(position.getY());
 	}
 
 	@Override
-	public void onAdded(final Scene scene) {
+	public void onAdded(Scene scene) {
 		Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
 	}
-
 }

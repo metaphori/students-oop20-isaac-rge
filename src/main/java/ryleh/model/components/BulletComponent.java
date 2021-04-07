@@ -26,6 +26,7 @@ public class BulletComponent extends Component{
 	public void onUpdate(final double dt) {
 	    move(dt);
 	    cheeckCollision();
+	    System.out.print("posizione" + this.position);
 	 }
 	private void cheeckCollision() {
 	}

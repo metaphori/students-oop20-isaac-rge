@@ -34,7 +34,11 @@ public class EntityBuilder {
     }
 
     public EntityBuilder with(final Component component) {
-        object.addComponent(component);
+        try {
+            object.addComponent(component);
+        } catch (IllegalStateException e){
+            //TODO log system to show into JavaFX Scene
+        }
         return this;
     }
 
@@ -51,4 +55,9 @@ public class EntityBuilder {
     public Entity build() {
         return new Entity(graphic, object);
     }
+
+	public EntityBuilder zIndex(final int zIndex) {
+		object.setzIndex(zIndex);
+		return this;
+	}
 }

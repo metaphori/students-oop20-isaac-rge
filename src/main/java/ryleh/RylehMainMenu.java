@@ -27,8 +27,11 @@ import javafx.stage.Stage;
 import ryleh.core.GameEngine;
 
 public class RylehMainMenu {
-	private final double width = Screen.getPrimary().getBounds().getWidth();
-	private final double height = Screen.getPrimary().getBounds().getHeight();
+	private final double width = 1920;
+	private final double height = 1080;
+	
+	//private final double width = Screen.getPrimary().getBounds().getWidth();
+	//private final double height = Screen.getPrimary().getBounds().getHeight();
 	private final int font = (int) (30);
 	private final Color startColor = Color.CORNFLOWERBLUE;
 	private final Color hoverColor = Color.CADETBLUE;

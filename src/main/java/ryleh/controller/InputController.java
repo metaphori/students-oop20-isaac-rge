@@ -6,28 +6,34 @@ import ryleh.model.physics.Direction;
 import ryleh.view.PlayerGraphicComponent;
 
 public class InputController {
-	public static void initInput(final Scene scene, final Entity entity){
-		PlayerGraphicComponent graphic = (PlayerGraphicComponent) entity.getView();
-		final PhysicsComponent physics = (PhysicsComponent) entity.getGameObject()
+
+	private boolean isMoveUp;
+	private boolean isMoveDown;
+	private boolean isMoveLeft;
+	private boolean isMoveRight;
+	private final PlayerGraphicComponent graphic;
+	private final PhysicsComponent physics; 
+	private final Scene scene;
+	private final Entity player;
+	
+	public InputController(final Scene scene, final Entity player) {
+		this.scene = scene;
+		this.player = player;
+		this.graphic = (PlayerGraphicComponent) this.player.getView();
+		this.physics = (PhysicsComponent) this.player.getGameObject()
 		        .getComponent(PhysicsComponent.class).get();
-		scene.setOnKeyPressed(key -> {
+	}
+	
+	public void initInput(){
+		this.scene.setOnKeyPressed(key -> {
 			switch (key.getCode()) {
-			//TODO change to V2d indication (adesso c'è il metodo cape)
-			case A: physics.setVelocityX(-1);
-					physics.setDirection(Direction.LEFT);
-					graphic.setDirection(Direction.LEFT);
+			case A: isMoveLeft = true;
 				break;
-			case D: physics.setVelocityX(1);
-					physics.setDirection(Direction.RIGHT);
-					graphic.setDirection(Direction.RIGHT);
+			case D: isMoveRight = true;
 				break;
-			case W: physics.setVelocityY(-1);
-					physics.setDirection(Direction.UP);
-					graphic.setDirection(Direction.UP);
+			case W: isMoveUp = true;
 				break;
-			case S: physics.setVelocityY(1);
-					physics.setDirection(Direction.DOWN);
-					graphic.setDirection(Direction.DOWN);
+			case S: isMoveDown = true;
 				break;
 			default:
 				break;
@@ -35,25 +41,51 @@ public class InputController {
 		});
 		scene.setOnKeyReleased(key -> {
 			switch (key.getCode()) {
-			case A:  physics.setVelocityX(0);
-					physics.setDirection(Direction.IDLE);
-					graphic.setDirection(Direction.IDLE);
+			case A: isMoveLeft = false;
 				break;
-			case D:  physics.setVelocityX(0);
-					physics.setDirection(Direction.IDLE);
-					graphic.setDirection(Direction.IDLE);
+			case D: isMoveRight = false;
 				break;
-			case W:  physics.setVelocityY(0);
-					physics.setDirection(Direction.IDLE);
-					graphic.setDirection(Direction.IDLE);
+			case W: isMoveUp = false;
 				break;
-			case S: physics.setVelocityY(0);
-					physics.setDirection(Direction.IDLE);
-					graphic.setDirection(Direction.IDLE);
-				break;
+			case S: isMoveDown = false;
 			default:
 				break;
 			}
 		});
+	}
+	public void updateInput() {
+		if (isMoveUp) {
+			physics.setVelocity(Direction.UP.getPoint());
+			physics.setDirection(Direction.UP);
+			if(!physics.getBlocked().equals(Direction.UP)) {
+			    physics.resetBlocked();
+			}
+			graphic.setDirection(Direction.UP);
+		} else if (isMoveDown) {
+			physics.setVelocity(Direction.DOWN.getPoint());
+			physics.setDirection(Direction.DOWN);
+			if(!physics.getBlocked().equals(Direction.DOWN)) {
+                            physics.resetBlocked();
+                        }
+			graphic.setDirection(Direction.DOWN);
+		} else if (isMoveLeft) {
+			physics.setVelocity(Direction.LEFT.getPoint());
+			physics.setDirection(Direction.LEFT);
+			if(!physics.getBlocked().equals(Direction.LEFT)) {
+                            physics.resetBlocked();
+                        }
+			graphic.setDirection(Direction.LEFT);
+		} else if (isMoveRight) {
+			physics.setVelocity(Direction.RIGHT.getPoint());
+			physics.setDirection(Direction.RIGHT);
+			if(!physics.getBlocked().equals(Direction.RIGHT)) {
+                            physics.resetBlocked();
+                        }
+			graphic.setDirection(Direction.RIGHT);	
+		} else {
+			physics.setVelocity(Direction.IDLE.getPoint());
+			physics.setDirection(Direction.IDLE);
+			graphic.setDirection(Direction.IDLE);
+		}
 	}
 }

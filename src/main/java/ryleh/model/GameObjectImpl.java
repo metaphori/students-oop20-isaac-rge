@@ -17,6 +17,7 @@ public class GameObjectImpl implements GameObject {
     private World world;
     private HitBox box;
     private List<Component> components;
+    private int zIndex;
 
     public GameObjectImpl() {
         position = new P2d(0,0);
@@ -55,8 +56,13 @@ public class GameObjectImpl implements GameObject {
     }
     @Override
     public void addComponent(final Component component) {
-        this.components.add(component);
-        component.onAdded(this);
+        if (this.components.stream().anyMatch(i -> component.getClass().isInstance(i))) {
+            throw new IllegalStateException();
+        }
+        else {
+            this.components.add(component);
+            component.onAdded(this);
+        }
     }
     @Override
     public Type getType() {
@@ -82,5 +88,15 @@ public class GameObjectImpl implements GameObject {
     public HitBox getHitBox() {
         return this.box;
     }
+
+	@Override
+	public void setzIndex(int zIndex) {
+		this.zIndex = zIndex;
+	}
+
+	@Override
+	public int getzIndex() {
+		return this.zIndex;
+	}
 
 }

@@ -18,7 +18,7 @@ public abstract class Component {
         this.object = object;
     }
 
-    public void onUpdate(final int dt) {
+    public void onUpdate(final double deltaTime) {
         //System.out.println(this + " si sta aggiornando");
     }
 

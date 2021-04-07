@@ -16,7 +16,7 @@ public interface GameObject {
     /*
      * 
      */
-    void onUpdate(int deltaTime);
+    void onUpdate(double deltaU);
     /*
      * 
      */

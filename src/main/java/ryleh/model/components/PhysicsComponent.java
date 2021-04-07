@@ -31,7 +31,7 @@ public class PhysicsComponent extends Component {
     }
 
     @Override
-    public void onUpdate(final int dt) {
+    public void onUpdate(final double dt) {
         if (this.canMove()) {
             move(dt);
         } else {
@@ -40,9 +40,9 @@ public class PhysicsComponent extends Component {
         object.setPosition(this.position);
     }
 
-    protected void move (final int dt) {
+    protected void move (final double dt) {
         lastPos = new P2d(this.position.x, this.position.y);
-        this.position = this.position.sum(velocity.mul(dt * 0.001));
+        this.position = this.position.sum(velocity.mul(dt * 0.01));
     }
 
     protected void resetPos() {

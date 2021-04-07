@@ -19,6 +19,7 @@ public class ShooterComponent extends Component{
 	    private long weaponTimer = System.currentTimeMillis();
 		private P2d position;
 		private V2d velocity;
+		private List<Entity> objects;
 		private ViewHandler view;
 		private double bulletSpeed = 0.15;
 		Entity player;
@@ -35,7 +36,7 @@ public class ShooterComponent extends Component{
 			super.onAdded(object);
 			this.position = object.getPosition();
 		}
-	    public void onUpdate(int dt) {
+	    public void onUpdate(double dt) {
 	    	shoot();
 	    }
 	    
@@ -46,8 +47,15 @@ public class ShooterComponent extends Component{
 	            		.getNormalized()
 	            		.mulLocal(bulletSpeed);
 	            System.out.println("Helo");
-	            //GameFactory.getInstance().createBullet(world, view, position, directionToPlayer)
+	            //objects.add(GameFactory.getInstance().createBullet(world, view, position, directionToPlayer));
 	            weaponTimer = System.currentTimeMillis();
 	        }
+	    }
+	    public V2d getDirection() {
+	    	V2d directionToPlayer = new V2d(player.getGameObject().getPosition().x,player.getGameObject().getPosition().y)
+            		.sub(new V2d(this.position.x,this.position.y))
+            		.getNormalized()
+            		.mulLocal(bulletSpeed);
+	    	return directionToPlayer;
 	    }
 }

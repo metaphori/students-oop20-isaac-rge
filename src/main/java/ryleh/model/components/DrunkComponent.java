@@ -36,7 +36,7 @@ public class DrunkComponent extends Component {
 	}
 
 	@Override
-	 public void onUpdate(int deltaTime) {
+	 public void onUpdate(double deltaTime) {
 	        adjustAngle();
 	        move(deltaTime);
 
@@ -54,9 +54,9 @@ public class DrunkComponent extends Component {
 	        }
 	    }
 	    
-	    private void move(int dt) {
+	    private void move(double deltaTime) {
 	        V2d directionVector = V2d.fromAngle(directionAngle).mulLocal(moveSpeed);
-	        this.velocity.addLocal(directionVector).mulLocal(dt * 0.001); //add time per frame value to mulLocal
+	        this.velocity.addLocal(directionVector).mulLocal(deltaTime * 0.001); //add time per frame value to mulLocal
 	        this.position = this.position.sum(this.velocity);
 	        object.setPosition(this.position);
 	        //System.out.println("VELOCITY : \t " + this.velocity.toString());

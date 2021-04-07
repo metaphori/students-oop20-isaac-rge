@@ -32,7 +32,7 @@ public class GameObjectImpl implements GameObject {
     }
 
     @Override
-    public void onUpdate(final int deltaTime) {
+    public void onUpdate(final double deltaTime) {
         components.forEach(i -> i.onUpdate(deltaTime));
     }
 

@@ -18,6 +18,7 @@ import ryleh.model.components.ShooterComponent;
 import ryleh.model.components.SpinnerComponent;
 import ryleh.view.ViewHandler;
 import ryleh.view.enemies.EnemyDrunkGraphicComponent;
+import ryleh.view.enemies.EnemyDrunkSpinnerGraphicComponent;
 import ryleh.view.enemies.EnemyLurkerGraphicComponent;
 import ryleh.view.enemies.EnemyShooterGraphicComponent;
 import ryleh.view.enemies.EnemySpinnerGraphicComponent;
@@ -116,7 +117,7 @@ public class GameFactory {
                  .type(Type.ENEMY_DRUNKSPINNER)
                  .position(1200, 540)
                  .with(new DrunkComponent(world))
-                 .view(new EnemySpinnerGraphicComponent())
+                 .view(new EnemyDrunkSpinnerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
                  .build();
          world.addGameObject(e.getGameObject());

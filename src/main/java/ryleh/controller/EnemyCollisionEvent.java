@@ -12,7 +12,6 @@ public class EnemyCollisionEvent extends AbstractEvent {
 	}
 	
 	public void handle() {
-		System.out.println("Hai colliso con un nemico, -1");
 	}
 
 }

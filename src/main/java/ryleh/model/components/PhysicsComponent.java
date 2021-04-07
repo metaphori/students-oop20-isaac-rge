@@ -2,12 +2,10 @@ package ryleh.model.components;
 
 import ryleh.common.P2d;
 import ryleh.common.V2d;
-import ryleh.controller.EnemyCollisionEvent;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.physics.Direction;
-import ryleh.model.physics.HitBox;
 
 public class PhysicsComponent extends Component {
     private V2d velocity;
@@ -39,7 +37,6 @@ public class PhysicsComponent extends Component {
             resetPos();
         }
         object.setPosition(this.position);
-        checkEnemyCollision();
     }
 
     protected void move (final int dt) {
@@ -57,14 +54,6 @@ public class PhysicsComponent extends Component {
     protected boolean canMove() {
         return !(object.getHitBox().isOutOfBounds(world.getBounds()) || world.getGameObjects().stream()
                 .filter(i -> i.getType().equals(Type.ROCK)).anyMatch(r -> object.getHitBox().isCollidingWith(r.getHitBox())));
-    }
-    public void checkEnemyCollision() {
-    	 if(world.getGameObjects().stream()
-                .filter(i -> i.getType().equals(Type.ENEMY_DRUNK)).anyMatch(r -> object.getHitBox().isCollidingWith(r.getHitBox()))) {
-    		 world.notifyWorldEvent(new EnemyCollisionEvent(object, world.getGameObjects().stream().filter(i -> i.getType().equals(Type.ENEMY_DRUNK))
-    				 .filter(r -> object.getHitBox().isCollidingWith(r.getHitBox())).findFirst().get()));
-    		 System.out.println("evento lanciato");
-    	 }
     }
 
     public void setVelocityX(final int sign) {

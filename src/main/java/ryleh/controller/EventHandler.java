@@ -5,7 +5,7 @@ import java.util.List;
 
 import ryleh.core.GameState;
 
-public class EventHandler implements EventListener{
+public class EventHandler implements EventListener {
 	
 	private GameState gameState;
 	private List<Event> eventQueue;
@@ -18,13 +18,17 @@ public class EventHandler implements EventListener{
 	public void checkEvents() {
 		eventQueue.forEach(e -> {
 			if (e instanceof EnemyCollisionEvent) {
-				EnemyCollisionEvent enEvent = (EnemyCollisionEvent) e;
-				enEvent.handle();
+				EnemyCollisionEvent enemyEvent = (EnemyCollisionEvent) e;
+				enemyEvent.handle();
 			} else if (e instanceof ItemPickUpEvent) {
-				ItemPickUpEvent pickEvent = (ItemPickUpEvent) e;
-				pickEvent.handle();
+				ItemPickUpEvent pickUpEvent = (ItemPickUpEvent) e;
+				pickUpEvent.handle();
 			} else if (e instanceof BulletSpawnEvent) {
 				BulletSpawnEvent bulletSpawn = (BulletSpawnEvent) e;
+				bulletSpawn.handle();
+			} else if (e instanceof ObstacleCollisionEvent) {
+				ObstacleCollisionEvent obstacleCollision = (ObstacleCollisionEvent) e;
+				obstacleCollision.handle();
 			}
 		});
 	}

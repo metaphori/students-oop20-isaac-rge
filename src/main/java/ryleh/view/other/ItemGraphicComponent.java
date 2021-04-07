@@ -26,12 +26,12 @@ public class ItemGraphicComponent implements GraphicComponent{
 	@Override
 	public void render(final Point2D position, final int deltaTime) {
 		if (!fixed) {
-			rectangle.setX(position.getX());
-			rectangle.setY(position.getY());
 		}
 		if (animPlayed) {
 			timer++;
 		}
+		rectangle.setX(position.getX());
+		rectangle.setY(position.getY());
 	}
 	
 	//metodo che viene chiamato solo al momento della collisione

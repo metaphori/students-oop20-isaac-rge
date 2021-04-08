@@ -166,7 +166,7 @@ public class GameFactory {
      public Entity createFire(final World world, final ViewHandler view) {
     	 Entity e = GameEngine.entityBuilder()
     			 .type(Type.FIRE)
-    			 .position(400, 600)
+    			 .position(1500, 600)
     			 .view(new FireGraphicComponent())
     			 .bbox(new CircleHitBox(45))
     			 .zIndex(0)

@@ -58,5 +58,10 @@ public class ItemGraphicComponent implements GraphicComponent{
 	//in teoria questo metodo dovrebbe essere utile per sapere quando eliminarlo dal mondo, ovvero quando termina l''animazione 
 	public boolean isAnimFinished() {
 		return animItem.isCycleFinished();
-	}	
+	}
+	
+	@Override
+	public Object getNode() {
+		return rectangle;
+	}
 }

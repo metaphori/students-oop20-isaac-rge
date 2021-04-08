@@ -21,6 +21,7 @@ import ryleh.view.enemies.EnemyDrunkGraphicComponent;
 import ryleh.view.enemies.EnemyLurkerGraphicComponent;
 import ryleh.view.enemies.EnemyShooterGraphicComponent;
 import ryleh.view.enemies.EnemySpinnerGraphicComponent;
+import ryleh.view.other.FireGraphicComponent;
 import ryleh.view.other.RockGraphicComponent;
 
 public class BasicFactory {
@@ -44,6 +45,7 @@ public class BasicFactory {
                  .with(new HealthIntComponent(world, 3))
                  .view(new PlayerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(100)))
+                 .zIndex(0)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -59,6 +61,7 @@ public class BasicFactory {
                  .position(600, 400)
                  .view(new RockGraphicComponent())
                  .bbox(new CircleHitBox(45))
+                 .zIndex(0)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -67,5 +70,18 @@ public class BasicFactory {
 
      public Entity getPlayer() {
          return this.player;
+     }
+
+     public Entity createFire(final World world, final ViewHandler view) {
+    	 Entity e = GameEngine.entityBuilder()
+    			 .type(Type.FIRE)
+    			 .position(400, 600)
+    			 .view(new FireGraphicComponent())
+    			 .bbox(new CircleHitBox(45))
+    			 .zIndex(0)
+    			 .build();
+    	 world.addGameObject(e.getGameObject());
+    	 view.addGraphicComponent(e.getView());
+    	 return e;
      }
 }

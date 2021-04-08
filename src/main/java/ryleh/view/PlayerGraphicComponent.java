@@ -114,4 +114,9 @@ private Direction direction = Direction.IDLE;
 	public void setDirection(final Direction direction) {
 		this.direction = direction;
 	}
+	
+	@Override
+	public Object getNode() {
+		return rectangle;
+	}
 }

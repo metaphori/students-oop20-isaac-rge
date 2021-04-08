@@ -36,5 +36,8 @@ public class DoorGraphicComponent implements GraphicComponent{
 		Parent root=scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
 	}
-
+	@Override
+	public Object getNode() {
+		return rectangle;
+	}
 }

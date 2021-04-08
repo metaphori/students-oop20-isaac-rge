@@ -61,6 +61,7 @@ public class GameState {
         entities.add(GameFactory.getInstance().createEnemyLurker(world, view));
         entities.add(GameFactory.getInstance().createItem(world, view));
         entities.add(GameFactory.getInstance().createRock(world, view));
+        entities.add(GameFactory.getInstance().createFire(world, view));
 
         //objects.add(GameFactory.getInstance().createBullet(world, view, new P2d(200, 200), new V2d(1,0)));
         //objects.add(GameFactory.getInstance().createItem(world, view));

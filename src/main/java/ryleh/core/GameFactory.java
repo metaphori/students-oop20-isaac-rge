@@ -25,6 +25,7 @@ import ryleh.view.enemies.EnemyDrunkSpinnerGraphicComponent;
 import ryleh.view.enemies.EnemyLurkerGraphicComponent;
 import ryleh.view.enemies.EnemyShooterGraphicComponent;
 import ryleh.view.enemies.EnemySpinnerGraphicComponent;
+import ryleh.view.other.FireGraphicComponent;
 import ryleh.view.other.ItemGraphicComponent;
 import ryleh.view.other.RockGraphicComponent;
 
@@ -48,7 +49,7 @@ public class GameFactory {
                  .with(new PhysicsComponent(world, 1000))
                  .view(new PlayerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(100)))
-                 .zIndex(2)
+                 .zIndex(1)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -65,7 +66,7 @@ public class GameFactory {
                  .with(new ShooterComponent(world, view, player))
                  .view(new EnemyShooterGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
-                 .zIndex(0)
+                 .zIndex(1)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -78,7 +79,7 @@ public class GameFactory {
                  .with(new SpinnerComponent(world, view))
                  .view(new EnemySpinnerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
-                 .zIndex(1)
+                 .zIndex(10)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -91,7 +92,7 @@ public class GameFactory {
                  .with(new DrunkComponent(world))
                  .view(new EnemyDrunkGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
-                 .zIndex(3)
+                 .zIndex(0)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -116,7 +117,7 @@ public class GameFactory {
                  .with(new LurkerComponent(world, player))
                  .view(new EnemyLurkerGraphicComponent(player.getGameObject()))
                  .bbox(new CircleHitBox(new Circle2d(50)))
-                 .zIndex(0)
+                 .zIndex(9)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -129,7 +130,7 @@ public class GameFactory {
                  .with(new DrunkComponent(world))
                  .view(new EnemyDrunkSpinnerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
-                 .zIndex(0)
+                 .zIndex(8)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
@@ -155,6 +156,19 @@ public class GameFactory {
     			 .with(new ItemComponent(world))
     			 .view(new ItemGraphicComponent())
     			 .bbox(new CircleHitBox(new Circle2d(30)))
+    			 .zIndex(0)
+    			 .build();
+    	 world.addGameObject(e.getGameObject());
+    	 view.addGraphicComponent(e.getView());
+    	 return e;
+     }
+
+     public Entity createFire(final World world, final ViewHandler view) {
+    	 Entity e = GameEngine.entityBuilder()
+    			 .type(Type.FIRE)
+    			 .position(400, 600)
+    			 .view(new FireGraphicComponent())
+    			 .bbox(new CircleHitBox(45))
     			 .zIndex(0)
     			 .build();
     	 world.addGameObject(e.getGameObject());

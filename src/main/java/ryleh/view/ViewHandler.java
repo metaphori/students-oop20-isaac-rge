@@ -37,7 +37,6 @@ public class ViewHandler {
     }
 
     public void removeGraphicComponent(final GraphicComponent graphic) {
-        //TODO add to GraphicComponent interface "getNode()" method
         ((AnchorPane) scene.getRoot()).getChildren().filtered(i ->
         ((ItemGraphicComponent) graphic).getNode().equals(i)).get(0).setVisible(false);
         //remove(((EnemyShooterGraphicComponent) graphic).getNode());

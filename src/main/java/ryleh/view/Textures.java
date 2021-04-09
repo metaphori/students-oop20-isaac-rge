@@ -20,10 +20,18 @@ public enum Textures {
 	PLAYER_LEFT2("assets/texture/player/PlayerLeft2.png"),
 	PLAYER_LEFT4("assets/texture/player/PlayerLeft4.png"),
 	
-	FIRE("assets/texture/obstacles/fire.png"),
+	FIRE1("assets/texture/obstacles/Fire1.png"),
+	FIRE2("assets/texture/obstacles/Fire2.png"),
+	
 	ROCK("assets/texture/obstacles/rock.png"),
 	ROCK2("assets/texture/obstacles/rock2.png"),
-	DOOR("assets/texture/levels/door.png"), // da fixare, animazoine non valida
+	
+	DOOR1("assets/texture/levels/Door1.png"),
+	DOOR2("assets/texture/levels/Door2.png"),
+	DOOR3("assets/texture/levels/Door3.png"),
+	DOOR4("assets/texture/levels/Door4.png"),
+	DOOR5("assets/texture/levels/Door5.png"),
+	
 	BACKGROUND("assets/texture/levels/background.png"),
 	
 	ITEM1("assets/texture/items/Chest1.png"),

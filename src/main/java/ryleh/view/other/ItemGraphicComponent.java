@@ -16,13 +16,27 @@ import ryleh.view.Textures;
 public class ItemGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
-	private AnimationLoop animItem = new AnimationLoop(List.of(Textures.ITEM1.getImagePattern(), Textures.ITEM2.getImagePattern(), Textures.ITEM3.getImagePattern()), 4);
-	private boolean fixed = false;
-	private boolean animPlayed = false;
+	private boolean animPlayed;
+	private AnimationLoop animItem = new AnimationLoop(List.of(Textures.ITEM1.getImagePattern(), 
+															   Textures.ITEM2.getImagePattern(), 
+															   Textures.ITEM3.getImagePattern()), 
+													   10);
+	//private boolean fixed = false;
+	
 	
 	public ItemGraphicComponent() {
-		rectangle = new Rectangle(190, 190);
-		rectangle.setFill(Textures.ITEM1.getImagePattern());
+		this.rectangle = new Rectangle(190, 190);
+		this.rectangle.setFill(Textures.ITEM1.getImagePattern());
+		this.animPlayed = false;
+	}
+	
+	public void setAnimPlayed() {
+		this.animPlayed = true;
+	}
+	
+	public void playAnimation() {
+		rectangle = animItem.setFrame(rectangle);
+		animItem.incTimer();
 	}
 	
 	@Override
@@ -31,8 +45,9 @@ public class ItemGraphicComponent implements GraphicComponent{
 			rectangle.setX(position.getX());
 			rectangle.setY(position.getY());
 		//}
-			this.updateImage();
-
+			if (this.animPlayed) {
+				this.playAnimation();
+			}
 		/*if (!fixed) {
 		}
 		if (animPlayed) {
@@ -40,12 +55,6 @@ public class ItemGraphicComponent implements GraphicComponent{
 		}
 		rectangle.setX(position.getX());
 		rectangle.setY(position.getY());*/
-
-	}
-
-	private void updateImage() {
-		animItem.incTimer();
-		rectangle = animItem.setFrame(rectangle);
 	}
 
 	@Override
@@ -55,11 +64,11 @@ public class ItemGraphicComponent implements GraphicComponent{
         //this.fixed = true;
 	}
 	
-	//in teoria questo metodo dovrebbe essere utile per sapere quando eliminarlo dal mondo, ovvero quando termina l''animazione 
-	public boolean isAnimFinished() {
+	public boolean isAnimFinished() { // questo metodo serve negli eventi, per sapere quando cancellare l'entit� dal mondo ( sia view che model, credo)
 		return animItem.isCycleFinished();
 	}
-
+  
+  @Override
 	public Object getNode() {
 		return this.rectangle;
 	}	

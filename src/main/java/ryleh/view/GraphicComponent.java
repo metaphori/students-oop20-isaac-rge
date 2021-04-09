@@ -7,4 +7,6 @@ public interface GraphicComponent {
     public void render(Point2D position, double deltaF);
 
     public void onAdded(Scene scene);
+    
+    public Object getNode();
 }

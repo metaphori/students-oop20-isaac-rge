@@ -36,4 +36,9 @@ public class EnemyDrunkGraphicComponent implements GraphicComponent{
         ((AnchorPane) root).getChildren().add(rectangle);
 	}
 
+	@Override
+	public Object getNode() {
+		return rectangle;
+	}
+
 }

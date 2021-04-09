@@ -82,10 +82,12 @@ public class GameState {
     	world.removeGameObject(entity.getGameObject());
     }
 
-    public void updateState(double deltaU) {
+    public void updateState(double dt) {
         input.updateInput();
         for (final Entity object : this.entities) {
-            object.getGameObject().onUpdate(deltaU);
+            object.getGameObject().onUpdate(dt);
+            object.getView().render(toPoint2D(new P2d(
+                    object.getGameObject().getPosition().x - 95, object.getGameObject().getPosition().y - 95 )), dt);
         }
         eventHandler.checkEvents();
     }

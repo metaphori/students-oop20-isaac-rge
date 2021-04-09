@@ -1,77 +1,45 @@
 package ryleh.core;
 
-import javafx.scene.Parent;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
-import ryleh.view.GraphicComponent;
-import ryleh.view.ViewHandler;
+import javafx.util.Duration;
 
 public class GameEngine {
     private GameState rylehState;
-    private long period = 20;
-    private boolean running = true;
+    private double period = 1000/60;
 
     /*
      * 
      */
     public void initGame(final Stage stage) {
-        // TODO Auto-generated method stub
-        //this.ryehView = new Scene(stage);
-    	//stage.setWidth(854);
-    	//stage.setHeight(480);
         rylehState = new GameState(stage);
     }
 
     /*
-     * 
+     * Uses a JavaFx class, called Timeline, to handle one keyframe (that corresponds to one gameloop's update). 
+     * This operation is done once every "period"
      */
     public void mainLoop() {
-        new Thread(()-> {
-        	long initialTime = System.nanoTime();
-        	final double UPS = 60;
-        	final double FPS = 60;
-        	final double timeU = 1000000000 / UPS;
-        	final double timeF = 1000000000 / FPS;
-        	double deltaU = 0, deltaF = 0;
-        	long timer = System.currentTimeMillis();
+        final Duration oneFrameAmt = Duration.millis(period);
+        final KeyFrame oneFrame = new KeyFrame(oneFrameAmt,
+           new EventHandler<>() {
 
-        	    while (running) {
-        	        long currentTime = System.nanoTime();
-        	        deltaU += (currentTime - initialTime) / timeU;
-        	        deltaF += (currentTime - initialTime) / timeF;
-        	        initialTime = currentTime;
-
-        	        if (deltaU >= 1) {
-        	        	rylehState.updateState(deltaU);
-        	            deltaU--;
-        	        }
-
-        	        if (deltaF >= 1) {
-        	            rylehState.updateRender(deltaF);
-        	            deltaF--;
-        	        }
-        	    }
-//            long lastTime = System.currentTimeMillis();
-//            while (!rylehState.isGameOver()) {
-//                final long current = System.currentTimeMillis();
-//                final int elapsed = (int) (current - lastTime);
-//                rylehState.updateState(elapsed);
-//                waitForNextFrame(current);
-//                lastTime = current;
-//            }
-        }).start();
-    }
-
-    /*
-     * 
-     */
-    protected void waitForNextFrame(long current){
-        final long dt = System.currentTimeMillis() - current;
-        if (dt < period){
-                try {
-                        Thread.sleep(period-dt);
-                } catch (Exception ex){}
+        @Override
+        public void handle(final ActionEvent event) {
+            rylehState.updateState(period);
         }
+        }); // oneFrame
+
+        // sets the game world's game loop (Timeline)
+        final Timeline loop = new Timeline(oneFrame);
+        loop.setCycleCount(Animation.INDEFINITE);
+        loop.play(); 
     }
+
     public static EntityBuilder entityBuilder() {
         return new EntityBuilder();
     }

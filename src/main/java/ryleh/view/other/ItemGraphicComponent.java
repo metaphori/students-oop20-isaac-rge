@@ -64,12 +64,12 @@ public class ItemGraphicComponent implements GraphicComponent{
         //this.fixed = true;
 	}
 	
-	public boolean isAnimFinished() { // questo metodo serve negli eventi, per sapere quando cancellare l'entità dal mondo ( sia view che model, credo)
+	public boolean isAnimFinished() { // questo metodo serve negli eventi, per sapere quando cancellare l'entitï¿½ dal mondo ( sia view che model, credo)
 		return animItem.isCycleFinished();
 	}
-	
-	@Override
+  
+  @Override
 	public Object getNode() {
-		return rectangle;
-	}
+		return this.rectangle;
+	}	
 }

@@ -1,12 +1,17 @@
 package ryleh.model.components;
 
+import java.util.Optional;
+
 import ryleh.common.P2d;
 import ryleh.common.V2d;
+import ryleh.controller.EnemyCollisionEvent;
 import ryleh.controller.Entity;
 import ryleh.model.GameObject;
+import ryleh.model.Type;
 import ryleh.model.World;
 
 public class LurkerComponent extends Component {
+	
 		private long adjustDirectionTimer = System.currentTimeMillis();
 	    private long adjustDelay = 500;
 	    private int moveSpeed = 50;
@@ -31,6 +36,7 @@ public class LurkerComponent extends Component {
 	    @Override
 	    public void onUpdate(final double deltaTime) {
 	        move();
+	        this.isCollidingWithPlayer();
 	       // rotate();
 	    }
 
@@ -50,6 +56,15 @@ public class LurkerComponent extends Component {
 	                .mul(moveSpeed);
 	        velocity = velocity.addLocal(directionToPlayer).mul(0.016);
 	    }
+	    private void isCollidingWithPlayer() {
+			Optional<GameObject> colliding = world.getGameObjects().stream()
+					.filter(obj -> obj.getType().equals(Type.PLAYER))
+					.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
+					.findFirst();
+			if (colliding.isPresent()) {
+				world.notifyWorldEvent(new EnemyCollisionEvent(colliding.get(), object));
+			}
+		}
 
 
 }

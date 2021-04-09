@@ -10,7 +10,7 @@ import ryleh.model.Type;
 import ryleh.model.World;
 
 public class ItemComponent extends Component {
-
+	
 	private P2d position;
 	public ItemComponent(final World world) {
 		super(world);
@@ -19,14 +19,12 @@ public class ItemComponent extends Component {
 
 	@Override
 	public void onAdded(final GameObject object) {
-		// TODO Auto-generated method stub
 		super.onAdded(object);
 		this.position = object.getPosition();
 	}
 
 	@Override
 	public void onUpdate(final double dt) {
-		// TODO Auto-generated method stub
 		super.onUpdate(dt);
 		isCollidingWithPlayer();
 	}

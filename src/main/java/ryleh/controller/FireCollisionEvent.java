@@ -1,6 +1,7 @@
 package ryleh.controller;
 
 import ryleh.model.GameObject;
+import ryleh.model.components.HealthIntComponent;
 
 public class FireCollisionEvent extends AbstractEvent {
 
@@ -11,8 +12,8 @@ public class FireCollisionEvent extends AbstractEvent {
 	}
 
 	void handle() {
-		// TODO Auto-generated method stub
-		
+		HealthIntComponent comp = (HealthIntComponent) this.getPlayer().getComponent(HealthIntComponent.class).get();
+		comp.damage(1);
 	}
 
 }

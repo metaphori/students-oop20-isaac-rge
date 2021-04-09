@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import ryleh.view.enemies.EnemyShooterGraphicComponent;
+import ryleh.view.other.ItemGraphicComponent;
 
 public class ViewHandler {
 
@@ -37,7 +38,7 @@ public class ViewHandler {
 
     public void removeGraphicComponent(final GraphicComponent graphic) {
         ((AnchorPane) scene.getRoot()).getChildren().filtered(i ->
-        ((EnemyShooterGraphicComponent) graphic).getNode().equals(i)).get(0).setVisible(false);
+        ((ItemGraphicComponent) graphic).getNode().equals(i)).get(0).setVisible(false);
         //remove(((EnemyShooterGraphicComponent) graphic).getNode());
         this.graphicComponents.remove(graphic);
     }

@@ -1,10 +1,14 @@
 package ryleh.model.components;
 
+import java.util.Optional;
+
 import javafx.geometry.Rectangle2D;
 import ryleh.common.GameMath;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
+import ryleh.controller.EnemyCollisionEvent;
 import ryleh.model.GameObject;
+import ryleh.model.Type;
 import ryleh.model.World;
 
 public class DrunkComponent extends Component {
@@ -22,21 +26,21 @@ public class DrunkComponent extends Component {
     private double tpf = 33.3;
 
 	
-	public DrunkComponent(World world) {
+	public DrunkComponent(final World world) {
 		super(world);
-		this.position = new P2d(500,500);
-		this.velocity = new V2d(0,0);
+		this.position = new P2d(500, 500);
+		this.velocity = new V2d(0, 0);
 	}
 
 
 	@Override
-	public void onAdded(GameObject object) {
+	public void onAdded(final GameObject object) {
 		super.onAdded(object);
 		this.position = object.getPosition();
 	}
 
 	@Override
-	 public void onUpdate(double deltaTime) {
+	 public void onUpdate(final double deltaTime) {
 	        adjustAngle();
 	        move(deltaTime);
 
@@ -45,6 +49,7 @@ public class DrunkComponent extends Component {
 	       // tx += tpf;
 
 	       checkScreenBounds();
+	       this.isCollidingWithPlayer();
 	    }
 
 	    private void adjustAngle() {
@@ -53,7 +58,6 @@ public class DrunkComponent extends Component {
 	            directionAngle += Math.min(GameMath.toDegrees((GameMath.smoothNoise(tx) - 0.5)), 45);
 	        }
 	    }
-	    
 	    private void move(double deltaTime) {
 	        V2d directionVector = V2d.fromAngle(directionAngle).mulLocal(moveSpeed);
 	        this.velocity.addLocal(directionVector).mulLocal(deltaTime * 0.001); //add time per frame value to mulLocal
@@ -65,14 +69,23 @@ public class DrunkComponent extends Component {
 
 	    //TODO to rewrite
 	    private void checkScreenBounds() {
-	    	if(object.getHitBox().isOutOfBounds(world.getBounds())){
+	    	if (object.getHitBox().isOutOfBounds(world.getBounds())){
 	    		//System.out.println("Position of " + super.object + " is " + this.position);
 	            //P2d newDirectionVector = new P2d(world.getWidthBound()/2,world.getHeightBound()/2);//.subPoint(object.getPosition());
 	            //System.out.println("Position of " + super.object + " is " + newDirectionVector);
 	            //double angle = GameMath.toDegrees((Math.atan(newDirectionVector.y/ newDirectionVector.x)));
 	            //directionAngle = newDirectionVector.x> 0 ? angle : 180 - angle;
-	            this.velocity.x=-this.velocity.x;
-	            this.velocity.y=-this.velocity.y;
+	            this.velocity.x = -this.velocity.x;
+	            this.velocity.y = -this.velocity.y;
 	        }
 	    }
+	    private void isCollidingWithPlayer() {
+			Optional<GameObject> colliding = world.getGameObjects().stream()
+					.filter(obj -> obj.getType().equals(Type.PLAYER))
+					.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
+					.findFirst();
+			if (colliding.isPresent()) {
+				world.notifyWorldEvent(new EnemyCollisionEvent(colliding.get(), object));
+			}
+		}
 }

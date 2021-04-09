@@ -11,6 +11,7 @@ import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.BulletComponent;
 import ryleh.model.components.DrunkComponent;
+import ryleh.model.components.HealthIntComponent;
 import ryleh.model.components.ItemComponent;
 import ryleh.model.components.LurkerComponent;
 import ryleh.model.components.PhysicsComponent;
@@ -47,6 +48,7 @@ public class GameFactory {
                  .type(Type.PLAYER)
                  .position(960, 540)
                  .with(new PhysicsComponent(world, 1000))
+                 .with(new HealthIntComponent(world, 3))
                  .view(new PlayerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(100)))
                  .zIndex(1)

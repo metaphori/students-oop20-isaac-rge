@@ -87,9 +87,6 @@ public class GameState {
         for (final Entity object : this.entities) {
             object.getGameObject().onUpdate(deltaU);
         }
-        if (this.getEntityByType(Type.ENEMY_SHOOTER).isPresent()) {
-            this.removeEntity(this.getEntityByType(Type.ENEMY_SHOOTER).get());
-        }
         eventHandler.checkEvents();
     }
 

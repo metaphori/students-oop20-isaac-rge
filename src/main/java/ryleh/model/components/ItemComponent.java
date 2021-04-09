@@ -19,14 +19,12 @@ public class ItemComponent extends Component {
 
 	@Override
 	public void onAdded(final GameObject object) {
-		// TODO Auto-generated method stub
 		super.onAdded(object);
 		this.position = object.getPosition();
 	}
 
 	@Override
 	public void onUpdate(final double dt) {
-		// TODO Auto-generated method stub
 		super.onUpdate(dt);
 		isCollidingWithPlayer();
 	}

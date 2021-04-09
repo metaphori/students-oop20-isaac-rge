@@ -11,7 +11,7 @@ public class GameOverEvent extends AbstractEvent {
 	@Override
 	void handle() {
 		//cambio di scena e arrivo della scritta gameOver
-		System.exit(0);
+		//System.exit(0);
 	}
 
 }

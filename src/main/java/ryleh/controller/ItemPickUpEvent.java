@@ -2,10 +2,8 @@ package ryleh.controller;
 
 import java.util.Random;
 
-import ryleh.core.GameState;
 import ryleh.model.GameObject;
-import ryleh.model.components.ItemComponent;
-import ryleh.model.components.PhysicsComponent;
+import ryleh.model.components.HealthIntComponent;
 
 public class ItemPickUpEvent extends AbstractEvent {
 	
@@ -17,31 +15,28 @@ public class ItemPickUpEvent extends AbstractEvent {
 	}
 	
 	public void handle() {
-		ItemComponent comp = (ItemComponent) item.getComponent(ItemComponent.class).get();
-		//comp.randomItem();
 		randomItem();
-		System.out.println("Hai raccolto un oggeto");
+	}
+	public GameObject getItem() {
+		return this.item;
 	}
 
 	private void randomItem() {
 		Random item = new Random();
 		int nextItem = item.nextInt(3);
 		switch (nextItem) {
-		case 0: //healthUp();
-			System.out.println("una vita in più");
+		case 0: healthUp();
 			break;
-		case 1: //speedUp();
-			System.out.println("SpeedUp");
+		case 1: healthUp();
 			break;
-		case 2:  //shootSpeedUp();
-			System.out.println("Spara spara");
+		case 2: healthUp();
 			break;
 		default:
 			break;
 		}
 	}
-	private void speedUp() {
-		PhysicsComponent physics = (PhysicsComponent) this.getPlayer().getComponent(PhysicsComponent.class).get();
-		//physics.setSpeedUp();
+	private void healthUp() {
+		HealthIntComponent health = (HealthIntComponent) this.getPlayer().getComponent(HealthIntComponent.class).get();
+		health.heal(1);
 	}
 }

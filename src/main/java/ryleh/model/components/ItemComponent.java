@@ -10,7 +10,7 @@ import ryleh.model.Type;
 import ryleh.model.World;
 
 public class ItemComponent extends Component {
-
+	
 	private P2d position;
 	public ItemComponent(final World world) {
 		super(world);

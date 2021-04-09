@@ -8,6 +8,7 @@ import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.HealthIntComponent;
+import ryleh.view.other.ItemGraphicComponent;
 
 public class EventHandler implements EventListener {
 	
@@ -29,7 +30,9 @@ public class EventHandler implements EventListener {
 			} else if (e instanceof ItemPickUpEvent) {
 				ItemPickUpEvent pickUpEvent = (ItemPickUpEvent) e;
 				pickUpEvent.handle();
-				this.removeEntity(pickUpEvent.getItem());
+				ItemGraphicComponent graphic = (ItemGraphicComponent) this.gameState.getEntityByType(Type.ITEM).get().getView();
+				graphic.setAnimPlayed();
+				//this.removeEntity(pickUpEvent.getItem());
 			} else if (e instanceof BulletSpawnEvent) {
 				BulletSpawnEvent bulletSpawn = (BulletSpawnEvent) e;
 				bulletSpawn.handle();

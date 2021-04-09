@@ -15,7 +15,6 @@ public class EnemyCollisionEvent extends AbstractEvent {
 	public void handle() {
 		HealthIntComponent comp = (HealthIntComponent) this.getPlayer().getComponent(HealthIntComponent.class).get();
 		comp.damage(1);
-		System.out.println("vite" + comp.getCurrentHp());
 	}
 
 }

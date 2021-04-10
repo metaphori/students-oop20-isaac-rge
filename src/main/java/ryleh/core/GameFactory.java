@@ -26,6 +26,7 @@ import ryleh.view.enemies.EnemyDrunkSpinnerGraphicComponent;
 import ryleh.view.enemies.EnemyLurkerGraphicComponent;
 import ryleh.view.enemies.EnemyShooterGraphicComponent;
 import ryleh.view.enemies.EnemySpinnerGraphicComponent;
+import ryleh.view.other.BulletGraphicComponent;
 import ryleh.view.other.FireGraphicComponent;
 import ryleh.view.other.ItemGraphicComponent;
 import ryleh.view.other.RockGraphicComponent;
@@ -105,7 +106,7 @@ public class GameFactory {
                  .type(Type.ENEMY_BULLET)
                  .position(0, 0)
                  .with(new BulletComponent(world, origin, direction))
-                 .view(new EnemyShooterGraphicComponent())
+                 .view(new BulletGraphicComponent())
                  .zIndex(0)
                  .build();
          world.addGameObject(e.getGameObject());

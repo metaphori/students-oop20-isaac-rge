@@ -1,7 +1,7 @@
 package ryleh.model.components;
 
 import ryleh.common.Timer;
-import ryleh.controller.GameOverEvent;
+import ryleh.controller.events.GameOverEvent;
 import ryleh.model.World;
 
 public class HealthIntComponent extends Component {
@@ -25,6 +25,7 @@ public class HealthIntComponent extends Component {
 		if (timer.isElapsed()) {
 			this.isImmortal = false;
 		}
+		//should treat GameOver not as an event
 		if (this.currentHp <= 0) {
 	          world.notifyWorldEvent(new GameOverEvent(object));
 	    }

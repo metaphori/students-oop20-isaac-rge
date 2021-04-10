@@ -16,8 +16,8 @@ import javafx.stage.Stage;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
 import ryleh.controller.Entity;
-import ryleh.controller.EventHandler;
 import ryleh.controller.InputController;
+import ryleh.controller.events.EventHandler;
 import ryleh.controller.levels.LevelHandler;
 import ryleh.core.factories.BasicFactory;
 import ryleh.core.factories.EnemyFactory;
@@ -73,8 +73,11 @@ public class GameState {
 			}
         });
 
-        input = new InputController(this.view.getScene(), this.getEntityByType(Type.PLAYER).get());
+        input = new InputController(this);
         input.initInput();
+    }
+    public void addEntity(Entity entity) {
+    	this.entities.add(entity);
     }
 
     public void removeEntity(Entity entity) {

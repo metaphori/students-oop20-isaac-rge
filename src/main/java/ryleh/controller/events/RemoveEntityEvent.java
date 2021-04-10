@@ -10,7 +10,6 @@ public class RemoveEntityEvent extends AbstractEvent {
 
 	@Override
 	void handle() {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -26,8 +26,7 @@ public class BulletComponent extends Component{
 	}
 	public void onUpdate(final double dt) {
 	    move(dt);
-	    cheeckCollision();
-	    System.out.print("posizione" + this.position);
+	    //cheeckCollision();
 	 }
 	private void cheeckCollision() {
 		if (object.getHitBox().isOutOfBounds(world.getBounds())){

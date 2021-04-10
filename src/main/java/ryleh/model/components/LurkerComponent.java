@@ -22,7 +22,7 @@ public class LurkerComponent extends Component {
 	    public LurkerComponent(final World world, final Entity entity) {
 	    	super(world);
 	    	player = entity.getGameObject();
-	    	this.position = new P2d(1000, 150);
+	    	this.position = new P2d(0, 0);
 	        this.velocity = new V2d(0, 0);
 	    }
 

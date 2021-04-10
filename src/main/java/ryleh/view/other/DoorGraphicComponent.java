@@ -39,14 +39,14 @@ public class DoorGraphicComponent implements GraphicComponent{
 		animDoor.incTimer();
 	}
 	
-	public boolean isAnimFinished() { // questo metodo serve negli eventi, per sapere quando cancellare l'entità dal mondo ( sia view che model, credo)
+	public boolean isAnimFinished() { // questo metodo serve negli eventi, per sapere quando cancellare l'entitï¿½ dal mondo ( sia view che model, credo)
 		return animDoor.isCycleFinished();
 	}
 
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
-		rectangle.setX(position.getX());
-		rectangle.setY(position.getY());
+		rectangle.setX(position.getX()-rectangle.getWidth()/2);
+		rectangle.setY(position.getY()-rectangle.getHeight()/2);
 		if (this.animPlayed) {
 			this.playAnimation();
 		}

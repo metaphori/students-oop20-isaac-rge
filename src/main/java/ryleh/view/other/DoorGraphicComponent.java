@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import ryleh.common.Config;
 import ryleh.view.AnimationLoop;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
@@ -16,6 +17,8 @@ import ryleh.view.Textures;
 public class DoorGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
+	private int width;
+	private int height;
 	private boolean animPlayed;
 	private AnimationLoop animDoor = new AnimationLoop(List.of(Textures.DOOR1.getImagePattern(), 
 															   Textures.DOOR2.getImagePattern(), 
@@ -25,7 +28,9 @@ public class DoorGraphicComponent implements GraphicComponent{
 														8);
 	
 	public DoorGraphicComponent() {
-		this.rectangle = new Rectangle(190, 190);
+		this.height = Textures.DOOR1.getHeight();
+		this.width = Textures.DOOR1.getWidth();
+		this.rectangle = new Rectangle(width, height);
 		this.rectangle.setFill(Textures.DOOR1.getImagePattern());
 		this.animPlayed = false;
 	}

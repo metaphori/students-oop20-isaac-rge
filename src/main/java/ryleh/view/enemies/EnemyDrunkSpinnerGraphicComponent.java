@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import ryleh.common.Config;
 import ryleh.common.GameMath;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
@@ -20,10 +21,14 @@ public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent{
     private long adjustDelay = 100;
     private double moveSpeed = 50;
     private double angle=0;
+	private int width;
+	private int height;
 	
 	public EnemyDrunkSpinnerGraphicComponent() {
-		rectangle = new Rectangle(100, 100);
-		rectangle.setFill(Textures.ENEMY_DRUNKSPINNER.getImagePattern());
+		this.height = Textures.ENEMY_DRUNKSPINNER.getHeight();
+		this.width = Textures.ENEMY_DRUNKSPINNER.getWidth();
+		this.rectangle = new Rectangle(width, height);
+		this.rectangle.setFill(Textures.ENEMY_DRUNKSPINNER.getImagePattern());
 	}
 
 	private void updateImage() {

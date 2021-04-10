@@ -24,11 +24,12 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import ryleh.common.Config;
 import ryleh.core.GameEngine;
 
 public class RylehMainMenu {
-	private final double width = 1920;
-	private final double height = 1080;
+	private final double width = Config.STANDARD_WIDTH;
+	private final double height =Config.STANDARD_HEIGHT;
 	
 	//private final double width = Screen.getPrimary().getBounds().getWidth();
 	//private final double height = Screen.getPrimary().getBounds().getHeight();
@@ -46,6 +47,12 @@ public class RylehMainMenu {
 		//levelFont = FXGL.getAssetLoader().loadFont("manaspc.ttf");
 		this.box.getChildren().add(createCustomButton("Start Game", "Start a new adventure", () -> {
 			final GameEngine engine = new GameEngine();
+			
+			
+			primaryStage.setHeight(height);
+			primaryStage.setWidth(width);
+			 
+			 
 			engine.initGame(primaryStage);
 			engine.mainLoop();
 		}));

@@ -32,7 +32,8 @@ public class ViewHandler {
 			}
         });
         this.stage.setScene(scene);
-        this.stage.setFullScreen(true);
+        this.stage.setFullScreen(false);
+        //this.stage.setFullScreen(true);
         this.graphicComponents = new ArrayList<>();
     }
 

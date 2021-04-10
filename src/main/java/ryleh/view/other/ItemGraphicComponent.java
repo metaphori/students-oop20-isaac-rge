@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import ryleh.common.Config;
 import ryleh.view.AnimationLoop;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
@@ -17,6 +18,8 @@ public class ItemGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
 	private boolean animPlayed;
+	private int width;
+	private int height;
 	private AnimationLoop animItem = new AnimationLoop(List.of(Textures.ITEM1.getImagePattern(), 
 															   Textures.ITEM2.getImagePattern(), 
 															   Textures.ITEM3.getImagePattern()), 
@@ -25,7 +28,9 @@ public class ItemGraphicComponent implements GraphicComponent{
 	
 	
 	public ItemGraphicComponent() {
-		this.rectangle = new Rectangle(190, 190);
+		this.height = Textures.ITEM1.getHeight();
+		this.width = Textures.ITEM1.getWidth();
+		this.rectangle = new Rectangle(width, height);
 		this.rectangle.setFill(Textures.ITEM1.getImagePattern());
 		this.animPlayed = false;
 	}

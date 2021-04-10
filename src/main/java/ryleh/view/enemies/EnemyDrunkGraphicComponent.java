@@ -7,16 +7,21 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import ryleh.common.Config;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
 
 public class EnemyDrunkGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
+	private int width;
+	private int height;
 
 	public EnemyDrunkGraphicComponent() {
-		rectangle = new Rectangle(90, 90);
-		rectangle.setFill(Textures.ENEMY_DRUNK.getImagePattern());
+		this.height = Textures.ENEMY_DRUNK.getHeight();
+		this.width = Textures.ENEMY_DRUNK.getWidth();
+		this.rectangle = new Rectangle(width, height);
+		this.rectangle.setFill(Textures.ENEMY_DRUNK.getImagePattern());
 	}
 
 	private void updateImage() {

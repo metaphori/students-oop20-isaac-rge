@@ -38,8 +38,8 @@ public class EnemyFactory {
      public Entity createEnemyShooter(final World world, final ViewHandler view) {
     	 Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_SHOOTER)
-                 .position(300, 800)
-                 .with(new ShooterComponent(world, view, BasicFactory.getInstance().getPlayer()))
+                 .position(960, 540)
+                 .with(new ShooterComponent(world, BasicFactory.getInstance().getPlayer()))
                  .with(new HealthIntComponent(world, 5))
                  .view(new EnemyShooterGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
@@ -52,7 +52,7 @@ public class EnemyFactory {
     	 Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_SPINNER)
                  .position(900, 500)
-                 .with(new SpinnerComponent(world, view))
+                 .with(new SpinnerComponent(world,BasicFactory.getInstance().getPlayer()))
                  .with(new HealthIntComponent(world, 5))
                  .view(new EnemySpinnerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
@@ -79,7 +79,8 @@ public class EnemyFactory {
                  .type(Type.ENEMY_BULLET)
                  .position(0, 0)
                  .with(new BulletComponent(world, origin, direction))
-                 .view(new EnemyShooterGraphicComponent() )
+                 .view(new EnemyShooterGraphicComponent())
+                 .bbox(new CircleHitBox(new Circle2d(50)))
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());

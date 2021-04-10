@@ -91,7 +91,7 @@ public class GameState {
         for (final Entity object : this.entities) {
             object.getGameObject().onUpdate(dt);
             object.getView().render(toPoint2D(new P2d(
-                    object.getGameObject().getPosition().x - 95, object.getGameObject().getPosition().y - 95 )), dt);
+                    object.getGameObject().getPosition().x, object.getGameObject().getPosition().y)), dt);
         }
         eventHandler.checkEvents();
     }

@@ -65,5 +65,9 @@ public class Rectangle2d implements Shape2d{
     public boolean intersect(Shape2d shape) {
         return false;
     }
+	@Override
+	public P2d getCenter() {
+		return new P2d((this.upperLeft.x +this.lowerRight.x)/2,(this.upperLeft.y+this.lowerRight.y)/2);
+	}
 
 }

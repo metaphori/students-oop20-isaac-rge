@@ -25,8 +25,8 @@ public class EnemyShooterGraphicComponent implements GraphicComponent{
 
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
-		rectangle.setX(position.getX());
-		rectangle.setY(position.getY());
+		rectangle.setX(position.getX()-rectangle.getWidth()/2);
+		rectangle.setY(position.getY()-rectangle.getHeight()/2);
 		this.updateImage();
 	}
 

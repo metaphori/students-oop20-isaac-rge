@@ -28,7 +28,7 @@ public class DrunkComponent extends Component {
 	
 	public DrunkComponent(final World world) {
 		super(world);
-		this.position = new P2d(500, 500);
+		this.position = new P2d(0, 0);
 		this.velocity = new V2d(0, 0);
 	}
 

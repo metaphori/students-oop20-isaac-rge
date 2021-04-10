@@ -42,6 +42,8 @@ public class EventHandler implements EventListener {
 				BulletSpawnEvent spawn = (BulletSpawnEvent) e;
 				this.gameState.addEntity(GameFactory.getInstance().createBullet(this.gameState.getWorld(), this.gameState.getScene(),
 						spawn.getPosition(), spawn.getVelocity()));
+			} else if (e instanceof NewLevelEvent) {
+				this.gameState.generateNewLevel();
 			}
 		});
 		this.eventQueue.clear();

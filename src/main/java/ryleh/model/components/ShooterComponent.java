@@ -8,8 +8,9 @@ import java.util.Timer;
 import javafx.application.Platform;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
-import ryleh.controller.EnemyCollisionEvent;
 import ryleh.controller.Entity;
+import ryleh.controller.events.BulletSpawnEvent;
+import ryleh.controller.events.EnemyCollisionEvent;
 import ryleh.core.factories.EnemyFactory;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
@@ -51,7 +52,7 @@ public class ShooterComponent extends Component {
 	            		.mulLocal(bulletSpeed);
 	            System.out.println("Helo");
 	            //objects.add(GameFactory.getInstance().createBullet(world, view, position, directionToPlayer));
-
+	            world.notifyWorldEvent(new BulletSpawnEvent(object, this.position, directionToPlayer));
 	            weaponTimer = System.currentTimeMillis();
 	        }
 	    }

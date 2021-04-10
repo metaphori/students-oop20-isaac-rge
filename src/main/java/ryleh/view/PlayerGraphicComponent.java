@@ -2,21 +2,32 @@ package ryleh.view;
 
 import java.util.List;
 
+import javafx.animation.FadeTransition;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import ryleh.model.physics.Direction;
 
 public class PlayerGraphicComponent implements GraphicComponent{
 
 private Rectangle rectangle;
 private Direction direction = Direction.IDLE;
+private FadeTransition playerFade;
+private Boolean invincible;
+
 	
 	public PlayerGraphicComponent() {
-		rectangle = new Rectangle(190, 190);
-		rectangle.setFill(Textures.PLAYER_DOWN.getImagePattern());
+		this.rectangle = new Rectangle(190, 190);
+		this.rectangle.setFill(Textures.PLAYER_DOWN.getImagePattern());
+		this.playerFade = new FadeTransition(Duration.millis(200), rectangle);
+	    this.playerFade.setFromValue(1.0);
+	    this.playerFade.setToValue(0.0);
+	    this.playerFade.setCycleCount(4);
+	    this.playerFade.setAutoReverse(true);
+		this.invincible = false;
 	}
 	
 	private Direction lastDir = Direction.IDLE;
@@ -108,9 +119,20 @@ private Direction direction = Direction.IDLE;
 	public void render(final Point2D position, final double deltaTime) {
 		rectangle.setX(position.getX());
 		rectangle.setY(position.getY());
+		this.checkInvincible();
 		this.updateImage(direction);
 	}
 	
+	private void checkInvincible() {
+		if (this.invincible) {
+			this.playerFade.play();
+		} 
+	}
+
+	public void setInvincible(Boolean invincible) {
+		this.invincible = invincible;
+	}
+
 	public void setDirection(final Direction direction) {
 		this.direction = direction;
 	}

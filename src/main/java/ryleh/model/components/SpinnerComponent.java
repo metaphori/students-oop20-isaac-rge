@@ -2,9 +2,13 @@ package ryleh.model.components;
 
 import java.util.Optional;
 
+
+import javafx.geometry.Point2D;
 import ryleh.common.GameMath;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
+import ryleh.controller.Entity;
+import ryleh.controller.events.BulletSpawnEvent;
 import ryleh.controller.events.EnemyCollisionEvent;
 import ryleh.controller.events.ItemPickUpEvent;
 import ryleh.model.GameObject;
@@ -17,13 +21,14 @@ public class SpinnerComponent extends Component {
 	   private long weaponTimer = System.currentTimeMillis();
 	   private P2d position;
 	   private V2d velocity;
-	   private ViewHandler view;
+	   private double bulletSpeed = 0.15;
+	   private Entity player;
 
-	   public SpinnerComponent(final World world, final ViewHandler view) {
+	   public SpinnerComponent(final World world,final Entity player) {
 		   super(world);
 		   this.position = new P2d(0, 0);
 		   this.velocity = new V2d(0, 0);
-		   this.view = view;
+		   this.player = player;
 		}
 		@Override
 		public void onAdded(final GameObject object) {
@@ -32,14 +37,18 @@ public class SpinnerComponent extends Component {
 		}
 		@Override
 	    public void onUpdate(final double dt) {
-	    	//shoot();
+	    	shoot();
 	    	this.isCollidingWithPlayer();
 	    }
 		public void shoot() {
-			if (weaponTimer - System.currentTimeMillis() >= 2000) {
-				V2d directionToPlayer = new V2d(-1, 0);
+			if (System.currentTimeMillis()-weaponTimer >= 2000) {
+				V2d directionToPlayer = new V2d(player.getGameObject().getPosition().x, player.getGameObject().getPosition().y)
+	            		.sub(new V2d(this.position.x, this.position.y))
+	            		.getNormalized()
+	            		.mulLocal(bulletSpeed);
 		            //GameFactory.getInstance().createBullet(world, view, position, directionToPlayer);
-		            weaponTimer = System.currentTimeMillis();
+				world.notifyWorldEvent(new BulletSpawnEvent(object, object.getHitBox().getForm().getCenter(), directionToPlayer));
+		        weaponTimer = System.currentTimeMillis();
 		    }
 		}
 		private void isCollidingWithPlayer() {

@@ -2,6 +2,7 @@ package ryleh.model.components;
 
 import ryleh.common.P2d;
 import ryleh.common.V2d;
+import ryleh.controller.events.RemoveEntityEvent;
 import ryleh.model.GameObject;
 import ryleh.model.World;
 import ryleh.view.ViewHandler;
@@ -29,6 +30,9 @@ public class BulletComponent extends Component{
 	    System.out.print("posizione" + this.position);
 	 }
 	private void cheeckCollision() {
+		if (object.getHitBox().isOutOfBounds(world.getBounds())){
+			world.notifyWorldEvent(new RemoveEntityEvent(object));
+		}
 	}
 	protected void move(final double dt) {
 		this.position = this.position.sum(velocity.mul(dt * 0.1));

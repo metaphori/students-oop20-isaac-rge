@@ -161,8 +161,6 @@ public class LevelHandler {
 		} while ((spawnPoints.containsKey(random) && entityCounter < ROWS * COLUMNS) || random.equals(playerSpawn)
 				 || getDistanceFromSpawn(random) < minDistance);
 		entityCounter++;
-		System.out.println(random);
-		System.out.println(spawnPoints);
 		return random;
 	}
 	private double getDistanceFromSpawn(final Pair<Integer, Integer> point) {

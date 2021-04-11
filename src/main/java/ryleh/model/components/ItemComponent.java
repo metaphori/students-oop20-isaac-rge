@@ -11,9 +11,11 @@ import ryleh.model.World;
 public class ItemComponent extends Component {
 	
 	private P2d position;
+	private boolean isOpen;
 	public ItemComponent(final World world) {
 		super(world);
 		this.position = new P2d(0, 0);
+		this.isOpen = false;
 	}
 
 	@Override
@@ -29,12 +31,15 @@ public class ItemComponent extends Component {
 	}
 
 	private void isCollidingWithPlayer() {
-		Optional<GameObject> colliding = world.getGameObjects().stream()
-				.filter(obj -> obj.getType().equals(Type.PLAYER))
-				.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
-				.findFirst();
-		if (colliding.isPresent()) {
-			world.notifyWorldEvent(new ItemPickUpEvent(colliding.get(), object));
+		if (!this.isOpen) {
+			Optional<GameObject> colliding = world.getGameObjects().stream()
+					.filter(obj -> obj.getType().equals(Type.PLAYER))
+					.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
+					.findFirst();
+			if (colliding.isPresent()) {
+				world.notifyWorldEvent(new ItemPickUpEvent(colliding.get(), object));
+				this.isOpen = true;
+			}
 		}
 	}
 }

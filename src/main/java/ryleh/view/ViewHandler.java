@@ -16,6 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import ryleh.common.Config;
 import ryleh.view.enemies.EnemyShooterGraphicComponent;
 import ryleh.view.other.ItemGraphicComponent;
 
@@ -31,7 +32,7 @@ public class ViewHandler {
     
     public ViewHandler(final Stage stage) throws IOException {
         this.stage = stage;
-        rectangle = new Rectangle(854, 480);
+        rectangle = new Rectangle(Config.STANDARD_WIDTH, Config.STANDARD_HEIGHT);
         rectangle.setFill(Textures.BACKGROUND.getImagePattern());
         root = new AnchorPane();
         root.setStyle("-fx-background-color: black;");
@@ -51,7 +52,7 @@ public class ViewHandler {
 
     public void removeGraphicComponent(final GraphicComponent graphic) {
         ((AnchorPane) scene.getRoot()).getChildren().filtered(i ->
-        ((ItemGraphicComponent) graphic).getNode().equals(i)).get(0).setVisible(false);
+        (graphic).getNode().equals(i)).get(0).setVisible(false);
         //remove(((EnemyShooterGraphicComponent) graphic).getNode());
         this.graphicComponents.remove(graphic);
     }

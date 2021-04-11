@@ -16,6 +16,7 @@ public class ItemPickUpEvent extends AbstractEvent {
 	
 	public void handle() {
 		randomItem();
+		System.out.println("Hai raccoolto un oggetto");
 	}
 	public GameObject getItem() {
 		return this.item;
@@ -36,7 +37,7 @@ public class ItemPickUpEvent extends AbstractEvent {
 		}
 	}
 	private void healthUp() {
-		HealthIntComponent health = (HealthIntComponent) this.getPlayer().getComponent(HealthIntComponent.class).get();
+		HealthIntComponent health = (HealthIntComponent) this.getTarget().getComponent(HealthIntComponent.class).get();
 		health.heal(1);
 	}
 }

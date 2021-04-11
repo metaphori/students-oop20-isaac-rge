@@ -51,14 +51,14 @@ public final class LevelDesigner {
 				}
 			}
 		}
-		System.out.println("questa � la lista dei nemici");
-		System.out.print(entities + "\n");
-		System.out.println("questo � il numero dei nemici");
-		System.out.print(enemyNumber + "\n");
-		System.out.println("questo � il range di difficolt�");
-		System.out.print(difficultyRange + "\n");
-		System.out.println("questo � il livello definitivo di difficolt�");
-		System.out.print(difficulty + "\n");
+//		System.out.println("questa � la lista dei nemici");
+//		System.out.print(entities + "\n");
+//		System.out.println("questo � il numero dei nemici");
+//		System.out.print(enemyNumber + "\n");
+//		System.out.println("questo � il range di difficolt�");
+//		System.out.print(difficultyRange + "\n");
+//		System.out.println("questo � il livello definitivo di difficolt�");
+//		System.out.print(difficulty + "\n");
 	}
 	private void generateItems() {
 		if (levelNum % 3 == 0) {

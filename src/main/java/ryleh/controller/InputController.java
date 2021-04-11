@@ -71,6 +71,7 @@ public class InputController {
 		if (isShooting) {
 			world.notifyWorldEvent(new BulletSpawnEvent(this.player.getGameObject(), this.player.getGameObject().getPosition(), 
 					new V2d(0, 2)));
+			world.notifyWorldEvent(new NewLevelEvent(this.player.getGameObject()));
 		}
 		if (isMoveUp) {
 			physics.setVelocity(Direction.UP.getPoint());
@@ -87,7 +88,6 @@ public class InputController {
                         }
 			graphic.setDirection(Direction.DOWN);
 		} else if (isMoveLeft) {
-			world.notifyWorldEvent(new NewLevelEvent(this.player.getGameObject()));
 			physics.setVelocity(Direction.LEFT.getPoint());
 			physics.setDirection(Direction.LEFT);
 			if (!physics.getBlocked().equals(Direction.LEFT)) {

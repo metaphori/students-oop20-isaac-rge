@@ -53,42 +53,44 @@ public class GameState {
 
         this.levelHandler = new LevelHandler(this);
         this.player = GameFactory.getInstance().createPlayer(world, view, levelHandler.getPosition(levelHandler.playerSpawn));
-        generateNewLevel();
+        this.generateNewLevel();
     }
     public Entity getPlayer() {
-		return this.player;
-	}
-	public void addEntity(Entity entity) {
+	return this.player;
+    }
+    public void addEntity(final Entity entity) {
     	this.entities.add(entity);
     }
-	public void generateNewLevel() {
-		world.getGameObjects().clear();
-		entities.clear();
-		view.getGraphicComponents().clear();
-		try {
-			view.setLevelScene();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		levelHandler.generateNewLevel();
-		view.addGraphicComponent(player.getView());
-		world.addGameObject(player.getGameObject());
-		entities.add(player);
-		//player.getGameObject().setPosition(levelHandler.getPosition(levelHandler.playerSpawn));
-		((PhysicsComponent)player.getGameObject().getComponent(PhysicsComponent.class).get()).setPosition(levelHandler.getPosition(levelHandler.playerSpawn));
-		entities.addAll(levelHandler.getEntities());
-		Collections.sort(entities, new Comparator<Entity>() {
-			@Override
-			public int compare(final Entity o1, final Entity o2) {
-				return o1.getGameObject().getzIndex() - o2.getGameObject().getzIndex();
-			}
-	    });
-		input = new InputController(this);
-	    input.initInput();
-	    levelHandler.debug();
-
+    public void generateNewLevel() {
+	world.getGameObjects().clear();
+	entities.clear();
+	view.getGraphicComponents().clear();
+	try {
+		view.setLevelScene();
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
 	}
+	levelHandler.generateNewLevel();
+	view.addGraphicComponent(player.getView());
+	world.addGameObject(player.getGameObject());
+	entities.add(player);
+	//player.getGameObject().setPosition(levelHandler.getPosition(levelHandler.playerSpawn));
+	((PhysicsComponent) player.getGameObject().getComponent(PhysicsComponent.class).get())
+	    .setPosition(levelHandler.getPosition(levelHandler.playerSpawn));
+
+	entities.addAll(levelHandler.getEntities());
+	Collections.sort(entities, new Comparator<Entity>() {
+	    @Override
+		public int compare(final Entity o1, final Entity o2) {
+			return o1.getGameObject().getzIndex() - o2.getGameObject().getzIndex();
+		}
+	});
+	input = new InputController(this);
+	input.initInput();
+	levelHandler.debug();
+
+    }
 
     public void removeEntity(Entity entity) {
     	entities.remove(entity);
@@ -125,6 +127,9 @@ public class GameState {
         return new Point2D(point.x * Config.SCALE_MODIFIER, point.y * Config.SCALE_MODIFIER);
     }
 	
+    public LevelHandler getLevelHandler() {
+        return this.levelHandler;
+    }
 
     public Optional<Entity> getEntityByType(final Type type) {
 	return entities.stream().filter(i -> i.getGameObject().getType().equals(type)).findAny();

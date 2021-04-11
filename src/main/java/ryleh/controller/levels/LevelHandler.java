@@ -181,7 +181,7 @@ public class LevelHandler {
 		    //BasicFactory.getInstance().createItem(this.getPosition(this.playerSpawn));
 		}
 	}
-	private void spawnDoor() {
+	public void spawnDoor() {
 		//BasicFactory.getInstance().createDoor(this.getPosition(new Pair<>(0,2)));
 	}
 	public void decreaseEnemies() {

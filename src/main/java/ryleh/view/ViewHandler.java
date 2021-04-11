@@ -6,14 +6,10 @@ import java.util.List;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import ryleh.common.Config;
@@ -25,11 +21,8 @@ public class ViewHandler {
     private Stage stage;
     private List<GraphicComponent> graphicComponents;
     private Scene scene;
-    private AnchorPane root;
-    private ImageView background;
-    private Rectangle rectangle;
-    private Rectangle rectangle2;
-    
+    private Parent root;
+
     public ViewHandler(final Stage stage) throws IOException {
         this.stage = stage;
         rectangle = new Rectangle(Config.STANDARD_WIDTH, Config.STANDARD_HEIGHT);
@@ -58,10 +51,9 @@ public class ViewHandler {
     }
     
     public void setLevelScene() throws IOException {
-    	root = new AnchorPane();
-    	root.setStyle("-fx-background-color: black;");
-    	((AnchorPane) root).getChildren().add(rectangle);
+    	root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/SimpleGui.fxml"));
     	scene.setRoot(root);
+//    	this.stage.setFullScreen(true);
     }
 
     public void addGraphicComponent(final GraphicComponent graphic) {

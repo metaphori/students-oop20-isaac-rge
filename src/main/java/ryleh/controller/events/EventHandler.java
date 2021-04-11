@@ -25,22 +25,23 @@ public class EventHandler implements EventListener {
 		this.checkPlayerState();
 		this.eventQueue.forEach(e -> {
 			if (e instanceof EnemyCollisionEvent) {
-				EnemyCollisionEvent enemyEvent = (EnemyCollisionEvent) e;
+				final EnemyCollisionEvent enemyEvent = (EnemyCollisionEvent) e;
 				enemyEvent.handle();
 			} else if (e instanceof ItemPickUpEvent) {
-				ItemPickUpEvent pickUpEvent = (ItemPickUpEvent) e;
+				final ItemPickUpEvent pickUpEvent = (ItemPickUpEvent) e;
 				pickUpEvent.handle();
-				ItemGraphicComponent graphic = (ItemGraphicComponent) this.gameState.getEntityByType(Type.ITEM).get().getView();
+				final ItemGraphicComponent graphic = (
+				        ItemGraphicComponent) this.gameState.getEntityByType(Type.ITEM).get().getView();
 				graphic.setAnimPlayed();
 			} else if (e instanceof GameOverEvent) {
-				GameOverEvent gameOver = (GameOverEvent) e;
+				final GameOverEvent gameOver = (GameOverEvent) e;
 				gameOver.handle();
 			} else if (e instanceof BulletSpawnEvent) {
 				BulletSpawnEvent spawn = (BulletSpawnEvent) e;
 				this.gameState.addEntity(GameFactory.getInstance().createBullet(this.gameState.getWorld(), this.gameState.getScene(),
 						spawn.getPosition(), spawn.getVelocity(), spawn.getTarget().getType()));
 			} else if (e instanceof FireCollisionEvent) {
-				FireCollisionEvent fire = (FireCollisionEvent) e;
+				final FireCollisionEvent fire = (FireCollisionEvent) e;
 				fire.handle();
 			} else if (e instanceof NewLevelEvent) {
 				this.gameState.generateNewLevel();
@@ -50,6 +51,10 @@ public class EventHandler implements EventListener {
 			} else if (e instanceof RemoveEntityEvent) {
 				RemoveEntityEvent remove = (RemoveEntityEvent) e;
 				this.removeEntity(remove.getTarget());
+
+			} else if (e instanceof EnemiesDefeatedEvent) {
+			    this.gameState.getLevelHandler().spawnItem();
+			    this.gameState.getLevelHandler().spawnDoor();
 			}
 		});
 		this.eventQueue.clear();

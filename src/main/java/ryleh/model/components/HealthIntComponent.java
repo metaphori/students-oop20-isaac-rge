@@ -31,8 +31,8 @@ public class HealthIntComponent extends Component {
 	    }
 	}
 
-    /*
-     * Decreases currentHp. If it's below zero, it will call a death event
+    /**
+     * Decreases currentHp. If it's below zero, it will call a death event.
      */
     public void damage(final int dmg) {
     	if (!this.isImmortal) {
@@ -41,8 +41,9 @@ public class HealthIntComponent extends Component {
     	timer.startTimer();
     	this.isImmortal = true;
     }
-	/*
-     * Increases currentHp only if not exceeds maxHp
+    /**
+     * Increases currentHp only if not exceeds maxHp.
+     * @param heal Amount of HP healed
      */
     public void heal(final int heal) {
         this.currentHp = this.currentHp >= this.maxHp ? this.maxHp : this.currentHp + heal;
@@ -51,9 +52,10 @@ public class HealthIntComponent extends Component {
     public void increaseMaxHp(final int inc) {
         this.maxHp += inc;
     }
-    /*
-     * Decreases max health. Can't have maximum health below 1
-     * If current hp is bigger than new maxHp, currentHp is automatically set to maximum
+    /**
+     * Decreases max health. Can't have maximum health below 1.
+     * If current HP is bigger than new maxHp, currentHp is automatically set to maximum.
+     * @param dec Amount of HP decreased
      */
     public void decreaseMaxHp(final int dec) {
         this.maxHp = this.maxHp == 1 ? 1 :  this.maxHp - dec;

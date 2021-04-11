@@ -47,9 +47,8 @@ public class ViewHandler {
     
     public void setLevelScene() throws IOException {
     	root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/SimpleGui.fxml"));
-    	scene = new Scene(root);
-    	this.stage.setScene(scene);
-    	this.stage.setFullScreen(true);
+    	scene.setRoot(root);
+//    	this.stage.setFullScreen(true);
     }
 
     public void addGraphicComponent(final GraphicComponent graphic) {

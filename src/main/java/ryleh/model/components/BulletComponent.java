@@ -14,7 +14,6 @@ public class BulletComponent extends Component{
 
 	public BulletComponent(World world , P2d origin, V2d direction) {
 		super(world);
-		System.out.println("Sono Spawnato");
 		this.position = origin;
 		this.velocity = direction.mul(speed);
 	   // this.velocity = new V2d(0, 0);

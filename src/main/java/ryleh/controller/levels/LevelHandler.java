@@ -76,6 +76,7 @@ public class LevelHandler {
 		designer.clearLevel();
 		hasItem = false;
 		nRooms++;
+		entityCounter = 0;
 		final List<Type> entityList = designer.generateLevelEntities();
 //		if (entityList.contains(Type.ENEMY_DRUNKSPINNER)) {
 //			spawnPoints.put(new Pair<>(4, 0), null);
@@ -153,12 +154,15 @@ public class LevelHandler {
 	public Pair<Integer, Integer> getRandomSpawnPoint(final double minDistance) {
 		//TODO 
 		final Random generator = new Random();
+		boolean flag = false;
 		Pair<Integer, Integer> random;
 		do {
-			 random = new Pair<>(generator.nextInt(COLUMNS), generator.nextInt(ROWS));
-		} while (spawnPoints.containsKey(random) && entityCounter < ROWS * COLUMNS && !random.equals(playerSpawn)
-				 && getDistanceFromSpawn(random)<minDistance);
+				random = new Pair<>(generator.nextInt(COLUMNS), generator.nextInt(ROWS));
+		} while ((spawnPoints.containsKey(random) && entityCounter < ROWS * COLUMNS) || random.equals(playerSpawn)
+				 || getDistanceFromSpawn(random) < minDistance);
 		entityCounter++;
+		System.out.println(random);
+		System.out.println(spawnPoints);
 		return random;
 	}
 	private double getDistanceFromSpawn(final Pair<Integer, Integer> point) {
@@ -197,5 +201,7 @@ public class LevelHandler {
 	public Collection<Entity> getEntities(){
 		return spawnPoints.values();
 	}
-	
+	public void debug() {
+		spawnPoints.forEach((k,v) -> System.out.println("chiave" + k + "\t valore" + v));
+	}
 }

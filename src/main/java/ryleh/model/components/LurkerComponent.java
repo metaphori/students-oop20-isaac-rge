@@ -35,7 +35,7 @@ public class LurkerComponent extends Component {
 
 	    @Override
 	    public void onUpdate(final double deltaTime) {
-	        move();
+	       // move();
 	        this.isCollidingWithPlayer();
 	       // rotate();
 	    }

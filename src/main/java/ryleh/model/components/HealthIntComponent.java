@@ -9,7 +9,7 @@ public class HealthIntComponent extends Component {
 	private int currentHp;
     private int maxHp;
     private boolean isImmortal = false;
-    private Timer timer;
+	private Timer timer;
     private static final double WAIT_TIME = 2000;
 
 	public HealthIntComponent(final World world, final int maxHp) {
@@ -74,6 +74,8 @@ public class HealthIntComponent extends Component {
 	public void setCurrentHp(int currentHp) {
 		this.currentHp = currentHp;
 	}
-
+	public boolean isImmortal() {
+		return isImmortal;
+	}
 
 }

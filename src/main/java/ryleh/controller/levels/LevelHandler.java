@@ -9,9 +9,9 @@ import ryleh.common.P2d;
 import ryleh.common.Pair;
 import ryleh.common.Rectangle2d;
 import ryleh.controller.Entity;
-import ryleh.core.GameFactory;
 import ryleh.core.GameState;
 import ryleh.core.factories.BasicFactory;
+import ryleh.core.factories.EnemyFactory;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.view.ViewHandler;
@@ -56,13 +56,13 @@ public class LevelHandler {
 	public LevelHandler(final GameState gameState) {
 	    this.gameState = gameState;
 	    this.world = gameState.getWorld();
-	    this.view = gameState.getScene();
+	    this.view = gameState.getView();
 	    this.designer = new LevelDesigner();
 	    spawnPoints = new HashMap<>();
 	    boundsCoord = ((Rectangle2d) world.getBounds()).upperLeft;
 	    boundsWidth = world.getWidthBound();
 	    boundsHeight = world.getHeightBound();
-	    playerSpawn = new Pair<>(Math.round(COLUMNS / 2), ROWS - 2);
+	    playerSpawn = new Pair<>((COLUMNS + 1) / 2, ROWS - 2);
 	    nEnemies = 0;
 	    hasItem = false;
 	    entityCounter = 0;
@@ -88,44 +88,44 @@ public class LevelHandler {
 			case ENEMY_DRUNK:
 				nEnemies++;
 				temp = getRandomSpawnPoint(DRUNK_SPAWN_DISTANCE);
-				entity = GameFactory.getInstance().createEnemyDrunk(world, view, getPosition(temp));
+				entity = EnemyFactory.getInstance().createEnemyDrunk(this.gameState, getPosition(temp));
 				break;
 			case ENEMY_LURKER:
 				nEnemies++;
 				temp = getRandomSpawnPoint(LURKER_SPAWN_DISTANCE);
-				entity = GameFactory.getInstance().createEnemyLurker(world, view, getPosition(temp));
+				entity = EnemyFactory.getInstance().createEnemyLurker(this.gameState, getPosition(temp));
 				break;
 			case ENEMY_SHOOTER:
 				nEnemies++;
 				temp = getRandomSpawnPoint(SHOOTER_SPAWN_DISTANCE);
-				entity = GameFactory.getInstance().createEnemyShooter(world, view, getPosition(temp));
+				entity = EnemyFactory.getInstance().createEnemyShooter(this.gameState, getPosition(temp));
 				break;
 			case ENEMY_SPINNER:
 				nEnemies++;
 				temp = getRandomSpawnPoint(SPINNER_SPAWN_DISTANCE);
-				entity = GameFactory.getInstance().createEnemySpinner(world, view, getPosition(temp));
+				entity = EnemyFactory.getInstance().createEnemySpinner(this.gameState, getPosition(temp));
 				break;
 			case ENEMY_DRUNKSPINNER:
 				nEnemies++;
 				temp = getRandomSpawnPoint(DRUNK_SPAWN_DISTANCE);
-				entity = GameFactory.getInstance().createEnemyDrunkSpinner(world, view, getPosition(temp));
+				entity = EnemyFactory.getInstance().createEnemyDrunkSpinner(this.gameState, getPosition(temp));
 				break;
 			case ROCK:
 				temp = getRandomSpawnPoint(ROCK_SPAWN_DISTANCE);
-				entity = GameFactory.getInstance().createRock(world, view, getPosition(temp));
+				entity = BasicFactory.getInstance().createRock(this.gameState, getPosition(temp));
 				break;	
 			case FIRE:
 				temp = getRandomSpawnPoint(FIRE_SPAWN_DISTANCE);
-				entity = GameFactory.getInstance().createFire(world, view, getPosition(temp));
+				entity = BasicFactory.getInstance().createFire(this.gameState, getPosition(temp));
 				break;	
 			case ITEM: //Spawn mechanics when all enemies are defeated 
 				temp = getRandomSpawnPoint(ITEM_SPAWN_DISTANCE);
-				entity = GameFactory.getInstance().createItem(world, view, getPosition(temp));
+				entity = BasicFactory.getInstance().createItem(this.gameState, getPosition(temp));
 				hasItem = true;
 				break;
 			default:
 				temp = getRandomSpawnPoint(ROCK_SPAWN_DISTANCE);
-				entity = GameFactory.getInstance().createRock(world, view, getPosition(temp));
+				entity = BasicFactory.getInstance().createRock(this.gameState, getPosition(temp));
 				break;
 			}
 			addEntity(temp,entity);

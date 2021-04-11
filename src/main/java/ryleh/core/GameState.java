@@ -52,7 +52,7 @@ public class GameState {
         gameVars.put("Version", "0.1");
 
         this.levelHandler = new LevelHandler(this);
-        this.player = GameFactory.getInstance().createPlayer(world, view, levelHandler.getPosition(levelHandler.playerSpawn));
+        this.player = BasicFactory.getInstance().createPlayer(this, levelHandler.getPosition(levelHandler.playerSpawn));
         this.generateNewLevel();
     }
     public Entity getPlayer() {
@@ -108,18 +108,11 @@ public class GameState {
         eventHandler.checkEvents();
     }
 
-    public void updateRender(double deltaF) {
-    	 //TODO change next "render" method to accept in input a object P2d
-    	for(final Entity object : this.entities) {
-    		object.getView().render(toPoint2D(new P2d(object.getGameObject().getPosition().x -95, object.getGameObject().getPosition().y - 95 )), deltaF);
-    	}
-    }
-
     public boolean isGameOver() {
         return isGameOver;
     }
 
-    public ViewHandler getScene() {
+    public ViewHandler getView() {
 	return view;
     }
 	

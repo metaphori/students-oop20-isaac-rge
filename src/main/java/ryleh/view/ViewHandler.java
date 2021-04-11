@@ -44,7 +44,7 @@ public class ViewHandler {
         //remove(((EnemyShooterGraphicComponent) graphic).getNode());
         this.graphicComponents.remove(graphic);
     }
-    
+
     public void setLevelScene() throws IOException {
     	root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/SimpleGui.fxml"));
     	scene.setRoot(root);

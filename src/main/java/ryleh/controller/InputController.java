@@ -25,7 +25,7 @@ public class InputController {
 	private World world;
 	
 	public InputController(final GameState state) {
-		this.scene = state.getScene().getScene();
+		this.scene = state.getView().getScene();
 		this.world = state.getWorld();
 		this.player = state.getPlayer();
 		this.graphic = (PlayerGraphicComponent) this.player.getView();

@@ -20,7 +20,7 @@ public class BulletGraphicComponent implements GraphicComponent{
 		this.height = (int) (Config.SCALE_MODIFIER * 20);
 		this.width = (int) (Config.SCALE_MODIFIER * 20);
 		this.rectangle = new Rectangle(width, height);
-		rectangle.setFill(Color.BLACK);
+		rectangle.setFill(Textures.BULLET.getImagePattern());
 	}
 	@Override
 	public void render(final Point2D position, final double deltaTime) {

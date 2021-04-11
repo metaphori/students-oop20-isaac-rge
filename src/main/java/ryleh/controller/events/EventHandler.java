@@ -39,6 +39,8 @@ public class EventHandler implements EventListener {
 			} else if (e instanceof FireCollisionEvent) {
 				FireCollisionEvent fire = (FireCollisionEvent) e;
 				fire.handle();
+			} else if (e instanceof NewLevelEvent) {
+				this.gameState.generateNewLevel();
 			}
 		});
 		this.eventQueue.clear();

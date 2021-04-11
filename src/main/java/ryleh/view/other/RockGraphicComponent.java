@@ -5,15 +5,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import ryleh.common.Config;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
 
 public class RockGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
+	private int width;
+	private int height;
 	
 	public RockGraphicComponent() {
-		rectangle = new Rectangle(155, 155);
+		this.height = Textures.ROCK.getHeight();
+		this.width = Textures.ROCK.getWidth();
+		this.rectangle = new Rectangle(width, height);
 		rectangle.setFill(Textures.ROCK2.getImagePattern());
 	}
 
@@ -23,8 +28,8 @@ public class RockGraphicComponent implements GraphicComponent{
 
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
-		rectangle.setX(position.getX());
-		rectangle.setY(position.getY());
+		rectangle.setX(position.getX()-rectangle.getWidth()/2);
+		rectangle.setY(position.getY()-rectangle.getHeight()/2);
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import ryleh.common.Config;
 import ryleh.view.AnimationLoop;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
@@ -16,6 +17,8 @@ import ryleh.view.Textures;
 public class DoorGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
+	private int width;
+	private int height;
 	private boolean animPlayed;
 	private AnimationLoop animDoor = new AnimationLoop(List.of(Textures.DOOR1.getImagePattern(), 
 															   Textures.DOOR2.getImagePattern(), 
@@ -25,7 +28,9 @@ public class DoorGraphicComponent implements GraphicComponent{
 														8);
 	
 	public DoorGraphicComponent() {
-		this.rectangle = new Rectangle(190, 190);
+		this.height = Textures.DOOR1.getHeight();
+		this.width = Textures.DOOR1.getWidth();
+		this.rectangle = new Rectangle(width, height);
 		this.rectangle.setFill(Textures.DOOR1.getImagePattern());
 		this.animPlayed = false;
 	}
@@ -39,14 +44,14 @@ public class DoorGraphicComponent implements GraphicComponent{
 		animDoor.incTimer();
 	}
 	
-	public boolean isAnimFinished() { // questo metodo serve negli eventi, per sapere quando cancellare l'entità dal mondo ( sia view che model, credo)
+	public boolean isAnimFinished() { // questo metodo serve negli eventi, per sapere quando cancellare l'entitï¿½ dal mondo ( sia view che model, credo)
 		return animDoor.isCycleFinished();
 	}
 
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
-		rectangle.setX(position.getX());
-		rectangle.setY(position.getY());
+		rectangle.setX(position.getX()-rectangle.getWidth()/2);
+		rectangle.setY(position.getY()-rectangle.getHeight()/2);
 		if (this.animPlayed) {
 			this.playAnimation();
 		}

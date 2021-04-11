@@ -46,4 +46,10 @@ public class Circle2d implements Shape2d {
         return "Circle2d [radius=" + radius + ", center=" + center + "]";
     }
 
+	@Override
+	public P2d getCenter() {
+		// TODO Auto-generated method stub
+		return this.getPosition();
+	}
+
 }

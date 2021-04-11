@@ -28,7 +28,7 @@ public class DrunkComponent extends Component {
 	
 	public DrunkComponent(final World world) {
 		super(world);
-		this.position = new P2d(500, 500);
+		this.position = new P2d(0, 0);
 		this.velocity = new V2d(0, 0);
 	}
 
@@ -42,7 +42,7 @@ public class DrunkComponent extends Component {
 	@Override
 	 public void onUpdate(final double deltaTime) {
 	        adjustAngle();
-	        move(deltaTime);
+	        //move(deltaTime);
 
 	       // entity.setRotation(entity.getRotation() * 0.9 + directionAngle * 0.1);
 

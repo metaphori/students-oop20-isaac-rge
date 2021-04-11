@@ -7,15 +7,20 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import ryleh.common.Config;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
 
 public class EnemyShooterGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
+	private int width;
+	private int height;
 	
 	public EnemyShooterGraphicComponent() {
-		rectangle = new Rectangle(100, 100);
+		this.height = Textures.ENEMY_SHOOTER.getHeight();
+		this.width = Textures.ENEMY_SHOOTER.getHeight();
+		this.rectangle = new Rectangle(width, height);
 		rectangle.setFill(Textures.ENEMY_SHOOTER.getImagePattern());
 	}
 
@@ -25,8 +30,8 @@ public class EnemyShooterGraphicComponent implements GraphicComponent{
 
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
-		rectangle.setX(position.getX());
-		rectangle.setY(position.getY());
+		rectangle.setX(position.getX()-rectangle.getWidth()/2);
+		rectangle.setY(position.getY()-rectangle.getHeight()/2);
 		this.updateImage();
 	}
 

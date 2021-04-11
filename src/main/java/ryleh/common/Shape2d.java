@@ -8,4 +8,6 @@ public interface Shape2d {
     P2d getPosition();
 
     boolean intersect(Shape2d shape);
+    
+    P2d getCenter();
 }

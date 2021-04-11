@@ -70,7 +70,6 @@ public class World {
     	this.gameObjects.remove(gameObject);
 		//to  check if needed to remove components
     }
-	
     public void notifyWorldEvent(Event e) {
     	this.eventListener.notifyEvent(e);
     }

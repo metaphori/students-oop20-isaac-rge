@@ -44,10 +44,10 @@ public class GameFactory {
             return instance;
     }
 
-     public Entity createPlayer(final World world, final ViewHandler view) {
+     public Entity createPlayer(final World world, final ViewHandler view, final P2d position) {
          Entity e = GameEngine.entityBuilder()
                  .type(Type.PLAYER)
-                 .position(960, 540)
+                 .position(position)
                  .with(new PhysicsComponent(world, 1000))
                  .with(new HealthIntComponent(world, 3))
                  .view(new PlayerGraphicComponent())
@@ -62,11 +62,11 @@ public class GameFactory {
          ((PlayerGraphicComponent) e.getView()).setDirection( ((PhysicsComponent) e.getGameObject().getComponent(PhysicsComponent.class).get()).getDirection());
          return e;
      }
-     public Entity createEnemyShooter(final World world, final ViewHandler view) {
+     public Entity createEnemyShooter(final World world, final ViewHandler view, final P2d position) {
     	 Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_SHOOTER)
-                 .position(300, 800)
-                 .with(new ShooterComponent(world, view, player))
+                 .position(position)
+                 .with(new ShooterComponent(world, player))
                  .view(new EnemyShooterGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
                  .zIndex(1)
@@ -75,11 +75,11 @@ public class GameFactory {
          view.addGraphicComponent(e.getView());
          return e;
      }
-     public Entity createEnemySpinner(final World world, final ViewHandler view) {
+     public Entity createEnemySpinner(final World world, final ViewHandler view, final P2d position) {
     	 Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_SPINNER)
-                 .position(900, 500)
-                 .with(new SpinnerComponent(world, view))
+                 .position(position)
+                 .with(new SpinnerComponent(world, player))
                  .view(new EnemySpinnerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
                  .zIndex(10)
@@ -88,10 +88,10 @@ public class GameFactory {
          view.addGraphicComponent(e.getView());
          return e;
      }
-     public Entity createEnemyDrunk(final World world, final ViewHandler view) {
+     public Entity createEnemyDrunk(final World world, final ViewHandler view, final P2d position) {
     	 Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_DRUNK)
-                 .position(960, 540)
+                 .position(position)
                  .with(new DrunkComponent(world))
                  .view(new EnemyDrunkGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
@@ -104,7 +104,7 @@ public class GameFactory {
      public Entity createBullet(final World world, final ViewHandler view, final P2d origin, final V2d direction) {
     	 Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_BULLET)
-                 .position(0, 0)
+                 .position(origin)
                  .with(new BulletComponent(world, origin, direction))
                  .view(new BulletGraphicComponent())
                  .zIndex(0)
@@ -113,10 +113,10 @@ public class GameFactory {
          view.addGraphicComponent(e.getView());
          return e;
      }
-     public Entity createEnemyLurker(final World world, final ViewHandler view) {
+     public Entity createEnemyLurker(final World world, final ViewHandler view, final P2d position) {
     	 Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_LURKER)
-                 .position(800, 200)
+                 .position(position)
                  .with(new LurkerComponent(world, player))
                  .view(new EnemyLurkerGraphicComponent(player.getGameObject()))
                  .bbox(new CircleHitBox(new Circle2d(50)))
@@ -126,10 +126,10 @@ public class GameFactory {
          view.addGraphicComponent(e.getView());
          return e;
      }
-     public Entity createEnemyDrunkSpinner(final World world, final ViewHandler view) {
+     public Entity createEnemyDrunkSpinner(final World world, final ViewHandler view, final P2d position) {
     	 Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_DRUNKSPINNER)
-                 .position(1200, 540)
+                 .position(position)
                  .with(new DrunkComponent(world))
                  .view(new EnemyDrunkSpinnerGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
@@ -140,22 +140,22 @@ public class GameFactory {
          return e;
      }
 
-     public Entity createRock(final World world, final ViewHandler view) {
+     public Entity createRock(final World world, final ViewHandler view, final P2d position) {
          Entity e = GameEngine.entityBuilder()
                  .type(Type.ROCK)
-                 .position(600, 400)
+                 .position(position)
                  .view(new RockGraphicComponent())
                  .bbox(new CircleHitBox(45))
-                 .zIndex(0)
+                 .zIndex(1)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
          return e;
      }
-     public Entity createItem(final World world, final ViewHandler view) {
+     public Entity createItem(final World world, final ViewHandler view, final P2d position) {
     	 Entity e = GameEngine.entityBuilder()
     			 .type(Type.ITEM)
-    			 .position(500, 600)
+    			 .position(position)
     			 .with(new ItemComponent(world))
     			 .view(new ItemGraphicComponent())
     			 .bbox(new CircleHitBox(new Circle2d(30)))
@@ -166,13 +166,13 @@ public class GameFactory {
     	 return e;
      }
 
-     public Entity createFire(final World world, final ViewHandler view) {
+     public Entity createFire(final World world, final ViewHandler view, final P2d position) {
     	 Entity e = GameEngine.entityBuilder()
     			 .type(Type.FIRE)
-    			 .position(1500, 600)
+    			 .position(position)
     			 .view(new FireGraphicComponent())
     			 .bbox(new CircleHitBox(45))
-    			 .zIndex(0)
+    			 .zIndex(1)
     			 .build();
     	 world.addGameObject(e.getGameObject());
     	 view.addGraphicComponent(e.getView());

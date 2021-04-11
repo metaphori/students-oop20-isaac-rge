@@ -3,6 +3,7 @@ package ryleh.controller;
 import javafx.scene.Scene;
 import ryleh.common.V2d;
 import ryleh.controller.events.BulletSpawnEvent;
+import ryleh.controller.events.NewLevelEvent;
 import ryleh.core.GameState;
 import ryleh.model.Type;
 import ryleh.model.World;
@@ -26,7 +27,7 @@ public class InputController {
 	public InputController(final GameState state) {
 		this.scene = state.getScene().getScene();
 		this.world = state.getWorld();
-		this.player = state.getEntityByType(Type.PLAYER).get();
+		this.player = state.getPlayer();
 		this.graphic = (PlayerGraphicComponent) this.player.getView();
 		this.physics = (PhysicsComponent) this.player.getGameObject()
 		        .getComponent(PhysicsComponent.class).get();
@@ -86,6 +87,7 @@ public class InputController {
                         }
 			graphic.setDirection(Direction.DOWN);
 		} else if (isMoveLeft) {
+			world.notifyWorldEvent(new NewLevelEvent(this.player.getGameObject()));
 			physics.setVelocity(Direction.LEFT.getPoint());
 			physics.setDirection(Direction.LEFT);
 			if (!physics.getBlocked().equals(Direction.LEFT)) {

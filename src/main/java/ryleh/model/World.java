@@ -5,8 +5,8 @@ import java.util.List;
 import ryleh.common.P2d;
 import ryleh.common.Rectangle2d;
 import ryleh.common.Shape2d;
-import ryleh.controller.Event;
-import ryleh.controller.EventListener;
+import ryleh.controller.events.Event;
+import ryleh.controller.events.EventListener;
 
 public class World {
 
@@ -70,7 +70,6 @@ public class World {
     	this.gameObjects.remove(gameObject);
 		//to  check if needed to remove components
     }
-	
     public void notifyWorldEvent(Event e) {
     	this.eventListener.notifyEvent(e);
     }

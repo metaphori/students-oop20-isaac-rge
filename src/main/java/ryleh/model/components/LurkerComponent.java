@@ -4,8 +4,8 @@ import java.util.Optional;
 
 import ryleh.common.P2d;
 import ryleh.common.V2d;
-import ryleh.controller.EnemyCollisionEvent;
 import ryleh.controller.Entity;
+import ryleh.controller.events.EnemyCollisionEvent;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
@@ -22,7 +22,7 @@ public class LurkerComponent extends Component {
 	    public LurkerComponent(final World world, final Entity entity) {
 	    	super(world);
 	    	player = entity.getGameObject();
-	    	this.position = new P2d(1000, 150);
+	    	this.position = new P2d(0, 0);
 	        this.velocity = new V2d(0, 0);
 	    }
 

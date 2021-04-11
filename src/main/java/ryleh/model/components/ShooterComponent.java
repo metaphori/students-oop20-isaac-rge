@@ -8,8 +8,9 @@ import java.util.Timer;
 import javafx.application.Platform;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
-import ryleh.controller.EnemyCollisionEvent;
 import ryleh.controller.Entity;
+import ryleh.controller.events.BulletSpawnEvent;
+import ryleh.controller.events.EnemyCollisionEvent;
 import ryleh.core.factories.EnemyFactory;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
@@ -22,21 +23,19 @@ public class ShooterComponent extends Component {
 	    private long weaponTimer = System.currentTimeMillis();
 		private P2d position;
 		private V2d velocity;
-		private List<Entity> objects;
-		private ViewHandler view;
 		private double bulletSpeed = 0.15;
-		Entity player;
-	    public ShooterComponent(final World world, final ViewHandler view, final Entity player) {
+		private Entity player;
+	    public ShooterComponent(final World world, final Entity player) {
 			super(world);
-			this.position = new P2d(500, 500);
+			this.position = new P2d(0, 0);
 			this.velocity = new V2d(0, 0);
-			this.view = view;
 			this.player = player;
 		}
 		@Override
 		public void onAdded(final GameObject object) {
 			super.onAdded(object);
 			this.position = object.getPosition();
+			//object.setPosition(this.position);
 		}
 		@Override
 	    public void onUpdate(final double dt) {
@@ -49,9 +48,7 @@ public class ShooterComponent extends Component {
 	            		.sub(new V2d(this.position.x, this.position.y))
 	            		.getNormalized()
 	            		.mulLocal(bulletSpeed);
-	            System.out.println("Helo");
-	            //objects.add(GameFactory.getInstance().createBullet(world, view, position, directionToPlayer));
-
+	            world.notifyWorldEvent(new BulletSpawnEvent(object, object.getHitBox().getForm().getCenter(), directionToPlayer));
 	            weaponTimer = System.currentTimeMillis();
 	        }
 	    }

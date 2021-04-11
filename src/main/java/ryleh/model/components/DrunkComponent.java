@@ -6,7 +6,7 @@ import javafx.geometry.Rectangle2D;
 import ryleh.common.GameMath;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
-import ryleh.controller.EnemyCollisionEvent;
+import ryleh.controller.events.EnemyCollisionEvent;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
@@ -28,7 +28,7 @@ public class DrunkComponent extends Component {
 	
 	public DrunkComponent(final World world) {
 		super(world);
-		this.position = new P2d(500, 500);
+		this.position = new P2d(0, 0);
 		this.velocity = new V2d(0, 0);
 	}
 

@@ -86,5 +86,9 @@ public class PhysicsComponent extends Component {
     public void resetBlocked() {
         this.blocked = Direction.IDLE;
     }
-
+    //THIS IS A PRIMITIVE METHOD WITH NO WAY OF CHECKING BOUNDS OR HITBOXES
+	public void setPosition(P2d position) {
+		this.position=position;
+		object.setPosition(this.position);
+	}
 }

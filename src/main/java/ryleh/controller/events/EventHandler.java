@@ -1,13 +1,16 @@
-package ryleh.controller;
+package ryleh.controller.events;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ryleh.core.GameFactory;
 import ryleh.core.GameState;
+import ryleh.core.factories.EnemyFactory;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.HealthIntComponent;
+import ryleh.view.other.ItemGraphicComponent;
 
 public class EventHandler implements EventListener {
 	
@@ -29,13 +32,18 @@ public class EventHandler implements EventListener {
 			} else if (e instanceof ItemPickUpEvent) {
 				ItemPickUpEvent pickUpEvent = (ItemPickUpEvent) e;
 				pickUpEvent.handle();
-				this.removeEntity(pickUpEvent.getItem());
-			} else if (e instanceof BulletSpawnEvent) {
-				BulletSpawnEvent bulletSpawn = (BulletSpawnEvent) e;
-				bulletSpawn.handle();
+				ItemGraphicComponent graphic = (ItemGraphicComponent) this.gameState.getEntityByType(Type.ITEM).get().getView();
+				graphic.setAnimPlayed();
+				//this.removeEntity(pickUpEvent.getItem());
 			} else if (e instanceof GameOverEvent) {
 				GameOverEvent gameOver = (GameOverEvent) e;
 				gameOver.handle();
+			} else if (e instanceof BulletSpawnEvent) {
+				BulletSpawnEvent spawn = (BulletSpawnEvent) e;
+				this.gameState.addEntity(GameFactory.getInstance().createBullet(this.gameState.getWorld(), this.gameState.getScene(),
+						spawn.getPosition(), spawn.getVelocity()));
+			} else if (e instanceof NewLevelEvent) {
+				this.gameState.generateNewLevel();
 			}
 		});
 		this.eventQueue.clear();

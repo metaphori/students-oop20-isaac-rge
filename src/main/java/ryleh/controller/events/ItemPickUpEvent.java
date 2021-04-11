@@ -1,4 +1,4 @@
-package ryleh.controller;
+package ryleh.controller.events;
 
 import java.util.Random;
 

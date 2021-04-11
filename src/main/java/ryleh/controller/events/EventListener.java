@@ -1,4 +1,4 @@
-package ryleh.controller;
+package ryleh.controller.events;
 
 public interface EventListener {
 	

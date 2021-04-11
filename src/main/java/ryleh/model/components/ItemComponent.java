@@ -1,10 +1,9 @@
 package ryleh.model.components;
 
 import java.util.Optional;
-import java.util.Random;
 
 import ryleh.common.P2d;
-import ryleh.controller.ItemPickUpEvent;
+import ryleh.controller.events.ItemPickUpEvent;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;

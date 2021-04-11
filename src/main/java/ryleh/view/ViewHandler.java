@@ -20,10 +20,11 @@ public class ViewHandler {
     private Stage stage;
     private List<GraphicComponent> graphicComponents;
     private Scene scene;
+    private Parent root;
 
     public ViewHandler(final Stage stage) throws IOException {
         this.stage = stage;
-        final Parent root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/SimpleGui.fxml"));
+        root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/SimpleGui.fxml"));
         scene = new Scene(root);
         this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
@@ -43,13 +44,24 @@ public class ViewHandler {
         //remove(((EnemyShooterGraphicComponent) graphic).getNode());
         this.graphicComponents.remove(graphic);
     }
+    
+    public void setLevelScene() throws IOException {
+    	root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/SimpleGui.fxml"));
+    	scene = new Scene(root);
+    	this.stage.setScene(scene);
+    	this.stage.setFullScreen(true);
+    }
 
     public void addGraphicComponent(final GraphicComponent graphic) {
     	this.graphicComponents.add(graphic);
     	graphic.onAdded(scene);
     }
 
-    public Stage getStage() {
+    public List<GraphicComponent> getGraphicComponents() {
+		return graphicComponents;
+	}
+
+	public Stage getStage() {
 		return stage;
 	}
 

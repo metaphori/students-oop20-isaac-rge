@@ -16,13 +16,14 @@ import javafx.stage.Stage;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
 import ryleh.controller.Entity;
-import ryleh.controller.EventHandler;
 import ryleh.controller.InputController;
+import ryleh.controller.events.EventHandler;
 import ryleh.controller.levels.LevelHandler;
 import ryleh.core.factories.BasicFactory;
 import ryleh.core.factories.EnemyFactory;
 import ryleh.model.Type;
 import ryleh.model.World;
+import ryleh.model.components.PhysicsComponent;
 import ryleh.view.ViewHandler;
 
 public class GameState {
@@ -34,6 +35,7 @@ public class GameState {
     private EventHandler eventHandler;
     private InputController input;
     private LevelHandler levelHandler;
+    private Entity player;
 
     public GameState(final Stage mainStage) {
         try {
@@ -49,33 +51,57 @@ public class GameState {
         gameVars.put("Version", "0.1");
 
         this.levelHandler = new LevelHandler(this);
+        this.player = GameFactory.getInstance().createPlayer(world, view, levelHandler.getPosition(levelHandler.playerSpawn));
         //NEXT LINES SHOULD ALL BE DELEGATED TO LEVEL HANDLER
-        entities.add(GameFactory.getInstance().createPlayer(world, view));
-        //objects.add(GameFactory.getInstance().createEnemyDrunk(world, view));
-        entities.add(GameFactory.getInstance().createEnemyShooter(world, view));
-        entities.add(GameFactory.getInstance().createEnemyDrunk(world, view));
-        //objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
-        entities.add(GameFactory.getInstance().createEnemySpinner(world, view));
-        entities.add(GameFactory.getInstance().createEnemyDrunkSpinner(world, view));
-        //objects.add(GameFactory.getInstance().createBullet(world, view ,objects.get(2).getGameObject().getPosition(),new V2d(1,0)));
-        entities.add(GameFactory.getInstance().createEnemyLurker(world, view));
-        entities.add(GameFactory.getInstance().createItem(world, view));
-        entities.add(GameFactory.getInstance().createRock(world, view));
-        entities.add(GameFactory.getInstance().createFire(world, view));
+       // entities.add(player);
+//        //objects.add(GameFactory.getInstance().createEnemyDrunk(world, view));
+//        entities.add(GameFactory.getInstance().createEnemyShooter(world, view));
+//        entities.add(GameFactory.getInstance().createEnemyDrunk(world, view));
+//        //objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
+//        entities.add(GameFactory.getInstance().createEnemySpinner(world, view));
+//        entities.add(GameFactory.getInstance().createEnemyDrunkSpinner(world, view));
+//        //objects.add(GameFactory.getInstance().createBullet(world, view ,objects.get(2).getGameObject().getPosition(),new V2d(1,0)));
+//        entities.add(GameFactory.getInstance().createEnemyLurker(world, view));
+//        entities.add(GameFactory.getInstance().createItem(world, view));
+//        entities.add(GameFactory.getInstance().createRock(world, view));
+//        entities.add(GameFactory.getInstance().createFire(world, view));
 
         //objects.add(GameFactory.getInstance().createBullet(world, view, new P2d(200, 200), new V2d(1,0)));
-        //objects.add(GameFactory.getInstance().createItem(world, view));
-
-        Collections.sort(entities, new Comparator<Entity>() {
+        //objects.add(GameFactory.getInstance().createItem(world, view))
+        generateNewLevel();
+    }
+    public Entity getPlayer() {
+		return this.player;
+	}
+	public void addEntity(Entity entity) {
+    	this.entities.add(entity);
+    }
+	public void generateNewLevel() {
+		world.getGameObjects().clear();
+		entities.clear();
+		view.getGraphicComponents().clear();
+		try {
+			view.setLevelScene();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		levelHandler.generateNewLevel();
+		view.addGraphicComponent(player.getView());
+		world.addGameObject(player.getGameObject());
+		entities.add(player);
+		((PhysicsComponent)player.getGameObject().getComponent(PhysicsComponent.class).get()).setPosition(levelHandler.getPosition(levelHandler.playerSpawn));
+		entities.addAll(levelHandler.getEntities());
+		Collections.sort(entities, new Comparator<Entity>() {
 			@Override
-			public int compare(Entity o1, Entity o2) {
+			public int compare(final Entity o1, final Entity o2) {
 				return o1.getGameObject().getzIndex() - o2.getGameObject().getzIndex();
 			}
-        });
+	    });
+		input = new InputController(this);
+	    input.initInput();
 
-        input = new InputController(this.view.getScene(), this.getEntityByType(Type.PLAYER).get());
-        input.initInput();
-    }
+	}
 
     public void removeEntity(Entity entity) {
     	entities.remove(entity);
@@ -88,7 +114,7 @@ public class GameState {
         for (final Entity object : this.entities) {
             object.getGameObject().onUpdate(dt);
             object.getView().render(toPoint2D(new P2d(
-                    object.getGameObject().getPosition().x - 95, object.getGameObject().getPosition().y - 95 )), dt);
+                    object.getGameObject().getPosition().x, object.getGameObject().getPosition().y)), dt);
         }
         eventHandler.checkEvents();
     }

@@ -10,6 +10,7 @@ import ryleh.controller.Entity;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.BulletComponent;
+import ryleh.model.components.CollisionComponent;
 import ryleh.model.components.DrunkComponent;
 import ryleh.model.components.FireComponent;
 import ryleh.model.components.HealthIntComponent;
@@ -68,8 +69,10 @@ public class GameFactory {
                  .type(Type.ENEMY_SHOOTER)
                  .position(position)
                  .with(new ShooterComponent(world, player))
+                 .with(new HealthIntComponent(world,1))
+                 .with(new CollisionComponent(world))
                  .view(new EnemyShooterGraphicComponent())
-                 .bbox(new CircleHitBox(new Circle2d(50)))
+                 .bbox(new CircleHitBox(new Circle2d(75)))
                  .zIndex(1)
                  .build();
          world.addGameObject(e.getGameObject());
@@ -81,8 +84,10 @@ public class GameFactory {
                  .type(Type.ENEMY_SPINNER)
                  .position(position)
                  .with(new SpinnerComponent(world, player))
+                 .with(new HealthIntComponent(world,1))
+                 .with(new CollisionComponent(world))
                  .view(new EnemySpinnerGraphicComponent())
-                 .bbox(new CircleHitBox(new Circle2d(50)))
+                 .bbox(new CircleHitBox(new Circle2d(75)))
                  .zIndex(10)
                  .build();
          world.addGameObject(e.getGameObject());
@@ -90,12 +95,15 @@ public class GameFactory {
          return e;
      }
      public Entity createEnemyDrunk(final World world, final ViewHandler view, final P2d position) {
+    	 Type type = Type.ENEMY_DRUNK;
     	 Entity e = GameEngine.entityBuilder()
-                 .type(Type.ENEMY_DRUNK)
+                 .type(type)
                  .position(position)
                  .with(new DrunkComponent(world))
+                 .with(new HealthIntComponent(world,1))
+                 .with(new CollisionComponent(world))
                  .view(new EnemyDrunkGraphicComponent())
-                 .bbox(new CircleHitBox(new Circle2d(50)))
+                 .bbox(new CircleHitBox(new Circle2d(75)))
                  .with(new HealthIntComponent(world, 1))
                  .zIndex(0)
                  .build();
@@ -109,7 +117,7 @@ public class GameFactory {
                  .position(origin)
                  .with(new BulletComponent(world, origin, direction))
                  .view(new BulletGraphicComponent())
-                 .bbox(new CircleHitBox(new Circle2d(5)))
+                 .bbox(new CircleHitBox(new Circle2d(15)))
                  .zIndex(0)
                  .build();
          world.addGameObject(e.getGameObject());
@@ -121,8 +129,10 @@ public class GameFactory {
                  .type(Type.ENEMY_LURKER)
                  .position(position)
                  .with(new LurkerComponent(world, player))
+                 .with(new HealthIntComponent(world,1))
+                 .with(new CollisionComponent(world))
                  .view(new EnemyLurkerGraphicComponent(player.getGameObject()))
-                 .bbox(new CircleHitBox(new Circle2d(50)))
+                 .bbox(new CircleHitBox(new Circle2d(75)))
                  .zIndex(9)
                  .build();
          world.addGameObject(e.getGameObject());
@@ -134,8 +144,10 @@ public class GameFactory {
                  .type(Type.ENEMY_DRUNKSPINNER)
                  .position(position)
                  .with(new DrunkComponent(world))
+                 .with(new HealthIntComponent(world,1))
+                 .with(new CollisionComponent(world))
                  .view(new EnemyDrunkSpinnerGraphicComponent())
-                 .bbox(new CircleHitBox(new Circle2d(50)))
+                 .bbox(new CircleHitBox(new Circle2d(75)))
                  .zIndex(8)
                  .build();
          world.addGameObject(e.getGameObject());
@@ -174,6 +186,7 @@ public class GameFactory {
     			 .type(Type.FIRE)
     			 .position(position)
     			 .with(new FireComponent(world))
+    			 .with(new CollisionComponent(world))
     			 .view(new FireGraphicComponent())
     			 .bbox(new CircleHitBox(45))
     			 .zIndex(1)

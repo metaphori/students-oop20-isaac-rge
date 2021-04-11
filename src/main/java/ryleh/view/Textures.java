@@ -43,7 +43,9 @@ public enum Textures {
 	ENEMY_SHOOTER("assets/texture/enemies/Enemy2.png", 100, 100),
 	ENEMY_LURKER("assets/texture/enemies/Enemy3.png", 100, 100),
 	ENEMY_SPINNER("assets/texture/enemies/Enemy4.png", 100, 100),
-	ENEMY_DRUNKSPINNER("assets/texture/enemies/Enemy5.png", 100, 100);
+	ENEMY_DRUNKSPINNER("assets/texture/enemies/Enemy5.png", 100, 100),
+	
+	BULLET("assets/texture/enemies/Bullet.png",20, 20);
 
 	String texture;
 	private int width;

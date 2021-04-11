@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import ryleh.core.GameState;
 import ryleh.core.factories.BasicFactory;
+import ryleh.model.GameObject;
 import ryleh.model.Type;
+import ryleh.model.components.HealthIntComponent;
+import ryleh.view.PlayerGraphicComponent;
 import ryleh.view.other.ItemGraphicComponent;
 
 public class EventHandler implements EventListener {
@@ -20,6 +23,7 @@ public class EventHandler implements EventListener {
 	 * This method is called once every game loop. It checks all events inside the Event Queue and handles their behavior.
 	 */
 	public void checkEvents() {
+		this.checkPlayerState();
 		this.eventQueue.forEach(e -> {
 			if (e instanceof EnemyCollisionEvent) {
 				final EnemyCollisionEvent enemyEvent = (EnemyCollisionEvent) e;
@@ -43,6 +47,13 @@ public class EventHandler implements EventListener {
 				fire.handle();
 			} else if (e instanceof NewLevelEvent) {
 				this.gameState.generateNewLevel();
+			} else if (e instanceof BulletCollisionEvent) {
+				BulletCollisionEvent bullet = (BulletCollisionEvent) e;
+				bullet.handle();
+			} else if (e instanceof RemoveEntityEvent) {
+				RemoveEntityEvent remove = (RemoveEntityEvent) e;
+				this.removeEntity(remove.getTarget());
+
 			} else if (e instanceof EnemiesDefeatedEvent) {
 			    this.gameState.getLevelHandler().spawnItem();
 			    this.gameState.getLevelHandler().spawnDoor();
@@ -54,6 +65,14 @@ public class EventHandler implements EventListener {
 	@Override
 	public void notifyEvent(final Event e) {
 		this.eventQueue.add(e);
+	}
+	private void removeEntity(final GameObject target) {
+		this.gameState.removeEntity(this.gameState.getEntities().stream().filter(e -> e.getGameObject().equals(target)).findAny().get());
+	}
+	private void checkPlayerState() {
+		HealthIntComponent comp = (HealthIntComponent) this.gameState.getPlayer().getGameObject().getComponent(HealthIntComponent.class).get();
+		PlayerGraphicComponent playerGraphic = (PlayerGraphicComponent) this.gameState.getEntityByType(Type.PLAYER).get().getView();
+		playerGraphic.setInvincible(comp.isImmortal());
 	}
 	
 }

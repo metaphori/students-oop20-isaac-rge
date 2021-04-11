@@ -51,6 +51,7 @@ public class SpinnerComponent extends Component {
 		        weaponTimer = System.currentTimeMillis();
 		    }
 		}
+		//TODO this method repeats in every enemy component
 		private void isCollidingWithPlayer() {
 			Optional<GameObject> colliding = world.getGameObjects().stream()
 					.filter(obj -> obj.getType().equals(Type.PLAYER))

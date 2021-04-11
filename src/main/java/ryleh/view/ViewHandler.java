@@ -10,8 +10,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import ryleh.common.Config;
 import ryleh.view.enemies.EnemyShooterGraphicComponent;
 import ryleh.view.other.ItemGraphicComponent;
 
@@ -21,10 +23,15 @@ public class ViewHandler {
     private List<GraphicComponent> graphicComponents;
     private Scene scene;
     private Parent root;
+    private Rectangle rectangle;
 
     public ViewHandler(final Stage stage) throws IOException {
         this.stage = stage;
-        root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/SimpleGui.fxml"));
+        rectangle = new Rectangle(Config.STANDARD_WIDTH, Config.STANDARD_HEIGHT);
+        rectangle.setFill(Textures.BACKGROUND.getImagePattern());
+        root = new AnchorPane();
+        root.setStyle("-fx-background-color: black;");
+        ((AnchorPane) root).getChildren().add(rectangle);
         scene = new Scene(root);
         this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
@@ -40,7 +47,7 @@ public class ViewHandler {
 
     public void removeGraphicComponent(final GraphicComponent graphic) {
         ((AnchorPane) scene.getRoot()).getChildren().filtered(i ->
-        ((ItemGraphicComponent) graphic).getNode().equals(i)).get(0).setVisible(false);
+        (graphic).getNode().equals(i)).get(0).setVisible(false);
         //remove(((EnemyShooterGraphicComponent) graphic).getNode());
         this.graphicComponents.remove(graphic);
     }

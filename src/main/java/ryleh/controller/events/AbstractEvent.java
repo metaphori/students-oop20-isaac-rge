@@ -9,7 +9,7 @@ public abstract class AbstractEvent implements Event {
 	protected AbstractEvent(final GameObject target) {
 		this.target = target;
 	}
-	public GameObject getPlayer() {
+	public GameObject getTarget() {
 		return this.target;
 	}
 	abstract void handle();

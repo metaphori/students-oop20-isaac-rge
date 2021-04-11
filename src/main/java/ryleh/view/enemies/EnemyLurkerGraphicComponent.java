@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
+import ryleh.common.Config;
 import ryleh.common.GameMath;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
@@ -26,10 +27,14 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent{
 	private V2d velocity;
 	private int moveSpeed=50;
 	private GameObject player;
+	private int width;
+	private int height;
 	
 	public EnemyLurkerGraphicComponent(final GameObject player) {
-		rectangle = new Rectangle(100, 100);
-		rectangle.setFill(Textures.ENEMY_LURKER.getImagePattern());
+		this.height = Textures.ENEMY_LURKER.getHeight();
+		this.width = Textures.ENEMY_LURKER.getWidth();
+		this.rectangle = new Rectangle(width, height);
+		this.rectangle.setFill(Textures.ENEMY_LURKER.getImagePattern());
 		this.player=player;
 		this.velocity=new V2d(0,0);
 	}

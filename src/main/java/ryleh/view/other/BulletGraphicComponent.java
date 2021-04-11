@@ -6,15 +6,20 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import ryleh.common.Config;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
 
 public class BulletGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
+	private int width;
+	private int height;
 	
 	public BulletGraphicComponent() {
-		rectangle = new Rectangle(20, 20);
+		this.height = (int) (Config.SCALE_MODIFIER * 20);
+		this.width = (int) (Config.SCALE_MODIFIER * 20);
+		this.rectangle = new Rectangle(width, height);
 		rectangle.setFill(Color.BLACK);
 	}
 	@Override

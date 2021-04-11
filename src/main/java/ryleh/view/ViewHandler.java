@@ -32,7 +32,9 @@ public class ViewHandler {
 				System.exit(0);
 			}
         });
-        this.stage.setFullScreen(true);
+        this.stage.setScene(scene);
+        this.stage.setFullScreen(false);
+        //this.stage.setFullScreen(true);
         this.graphicComponents = new ArrayList<>();
     }
 

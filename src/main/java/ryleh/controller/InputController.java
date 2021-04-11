@@ -16,6 +16,7 @@ public class InputController {
 	private boolean isMoveDown;
 	private boolean isMoveLeft;
 	private boolean isMoveRight;
+	private boolean isShooting;
 	private final PlayerGraphicComponent graphic;
 	private final PhysicsComponent physics; 
 	private final Scene scene;
@@ -42,6 +43,8 @@ public class InputController {
 				break;
 			case S: isMoveDown = true;
 				break;
+			case SPACE: isShooting = true;
+				break;
 			default:
 				break;
 			}
@@ -55,15 +58,20 @@ public class InputController {
 			case W: isMoveUp = false;
 				break;
 			case S: isMoveDown = false;
+				break;
+			case SPACE: isShooting = false;
+				break;
 			default:
 				break;
 			}
 		});
 	}
 	public void updateInput() {
-		if (isMoveUp) {
+		if (isShooting) {
 			world.notifyWorldEvent(new BulletSpawnEvent(this.player.getGameObject(), this.player.getGameObject().getPosition(), 
 					new V2d(0, 2)));
+		}
+		if (isMoveUp) {
 			physics.setVelocity(Direction.UP.getPoint());
 			physics.setDirection(Direction.UP);
 			if (!physics.getBlocked().equals(Direction.UP)) {

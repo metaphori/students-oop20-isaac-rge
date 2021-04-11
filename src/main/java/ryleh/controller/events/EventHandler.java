@@ -5,11 +5,8 @@ import java.util.List;
 
 import ryleh.core.GameFactory;
 import ryleh.core.GameState;
-import ryleh.core.factories.EnemyFactory;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
-import ryleh.model.World;
-import ryleh.model.components.HealthIntComponent;
 import ryleh.view.other.ItemGraphicComponent;
 
 public class EventHandler implements EventListener {
@@ -23,8 +20,6 @@ public class EventHandler implements EventListener {
 	}
 	
 	public void checkEvents() {
-//		HealthIntComponent comp = (HealthIntComponent) gameState.getEntityByType(Type.PLAYER).get().getGameObject().getComponent(HealthIntComponent.class).get();
-//		comp.damage(1);
 		this.eventQueue.forEach(e -> {
 			if (e instanceof EnemyCollisionEvent) {
 				EnemyCollisionEvent enemyEvent = (EnemyCollisionEvent) e;
@@ -34,7 +29,6 @@ public class EventHandler implements EventListener {
 				pickUpEvent.handle();
 				ItemGraphicComponent graphic = (ItemGraphicComponent) this.gameState.getEntityByType(Type.ITEM).get().getView();
 				graphic.setAnimPlayed();
-				//this.removeEntity(pickUpEvent.getItem());
 			} else if (e instanceof GameOverEvent) {
 				GameOverEvent gameOver = (GameOverEvent) e;
 				gameOver.handle();
@@ -42,6 +36,9 @@ public class EventHandler implements EventListener {
 				BulletSpawnEvent spawn = (BulletSpawnEvent) e;
 				this.gameState.addEntity(GameFactory.getInstance().createBullet(this.gameState.getWorld(), this.gameState.getScene(),
 						spawn.getPosition(), spawn.getVelocity()));
+			} else if (e instanceof FireCollisionEvent) {
+				FireCollisionEvent fire = (FireCollisionEvent) e;
+				fire.handle();
 			}
 		});
 		this.eventQueue.clear();

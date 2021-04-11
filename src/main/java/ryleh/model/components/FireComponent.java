@@ -1,25 +1,37 @@
 package ryleh.model.components;
 
+import java.util.Optional;
+
+import ryleh.controller.events.FireCollisionEvent;
 import ryleh.model.GameObject;
+import ryleh.model.Type;
 import ryleh.model.World;
 
 public class FireComponent extends Component {
-
-	public FireComponent(World world) {
+	
+	public FireComponent(final World world) {
 		super(world);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void onUpdate(double deltaTime) {
-		// TODO Auto-generated method stub
+	public void onUpdate(final double deltaTime) {
 		super.onUpdate(deltaTime);
+		isColliding();
 	}
 
 	@Override
-	public void onAdded(GameObject object) {
-		// TODO Auto-generated method stub
+	public void onAdded(final GameObject object) {
 		super.onAdded(object);
 	}
+	private void isColliding() {
+		Optional<GameObject> colliding = world.getGameObjects().stream()
+				.filter(obj -> obj.getType().equals(Type.PLAYER))
+				.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
+				.findFirst();
+		if (colliding.isPresent()) {
+			world.notifyWorldEvent(new FireCollisionEvent(colliding.get(), object));
+		}
 
+	}
+	
 }

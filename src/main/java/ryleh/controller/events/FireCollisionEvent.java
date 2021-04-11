@@ -6,7 +6,7 @@ import ryleh.model.components.HealthIntComponent;
 public class FireCollisionEvent extends AbstractEvent {
 
 	private GameObject fire;
-	protected FireCollisionEvent(final GameObject player, final GameObject fire) {
+	public FireCollisionEvent(final GameObject player, final GameObject fire) {
 		super(player);
 		this.fire = fire;
 	}

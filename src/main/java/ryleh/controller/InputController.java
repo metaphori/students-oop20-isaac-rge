@@ -5,7 +5,6 @@ import ryleh.common.V2d;
 import ryleh.controller.events.BulletSpawnEvent;
 import ryleh.controller.events.NewLevelEvent;
 import ryleh.core.GameState;
-import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
 import ryleh.model.physics.Direction;
@@ -18,6 +17,7 @@ public class InputController {
 	private boolean isMoveLeft;
 	private boolean isMoveRight;
 	private boolean isShooting;
+	private boolean newLevel;
 	private final PlayerGraphicComponent graphic;
 	private final PhysicsComponent physics; 
 	private final Scene scene;
@@ -46,6 +46,8 @@ public class InputController {
 				break;
 			case SPACE: isShooting = true;
 				break;
+			case L: newLevel = true;
+				break;
 			default:
 				break;
 			}
@@ -62,6 +64,8 @@ public class InputController {
 				break;
 			case SPACE: isShooting = false;
 				break;
+			case L: newLevel = false;
+				break;
 			default:
 				break;
 			}
@@ -71,6 +75,8 @@ public class InputController {
 		if (isShooting) {
 			world.notifyWorldEvent(new BulletSpawnEvent(this.player.getGameObject(), this.player.getGameObject().getPosition(), 
 					new V2d(0, 2)));
+		}
+		if (newLevel) {
 			world.notifyWorldEvent(new NewLevelEvent(this.player.getGameObject()));
 		}
 		if (isMoveUp) {

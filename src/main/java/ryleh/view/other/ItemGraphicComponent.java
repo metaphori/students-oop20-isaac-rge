@@ -46,20 +46,16 @@ public class ItemGraphicComponent implements GraphicComponent{
 	
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
-		//if (!fixed) {
-		rectangle.setX(position.getX()-rectangle.getWidth()/2);
-		rectangle.setY(position.getY()-rectangle.getHeight()/2);
-		//}
-			if (this.animPlayed) {
+		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
+		//TODO if the entity is removed this check shouldn't be done
+		if (this.animPlayed) {
+			if (this.isAnimFinished()) {
+				this.rectangle.setFill(Textures.ITEM3.getImagePattern());
+			} else {
 				this.playAnimation();
 			}
-		/*if (!fixed) {
 		}
-		if (animPlayed) {
-			timer++;
-		}
-		rectangle.setX(position.getX());
-		rectangle.setY(position.getY());*/
 	}
 
 	@Override
@@ -72,7 +68,7 @@ public class ItemGraphicComponent implements GraphicComponent{
 	public boolean isAnimFinished() { // questo metodo serve negli eventi, per sapere quando cancellare l'entit� dal mondo ( sia view che model, credo)
 		return animItem.isCycleFinished();
 	}
-  
+
   @Override
 	public Object getNode() {
 		return this.rectangle;

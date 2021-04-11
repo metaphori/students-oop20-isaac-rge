@@ -1,13 +1,18 @@
 package ryleh.model.components;
 
+import java.util.Optional;
+
 import ryleh.common.P2d;
 import ryleh.common.V2d;
+import ryleh.controller.events.BulletCollisionEvent;
+import ryleh.controller.events.FireCollisionEvent;
 import ryleh.controller.events.RemoveEntityEvent;
 import ryleh.model.GameObject;
+import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.view.ViewHandler;
 
-public class BulletComponent extends Component{
+public class BulletComponent extends Component {
 	private P2d position;
 	private int speed = 10;
 	private V2d velocity;
@@ -25,10 +30,29 @@ public class BulletComponent extends Component{
 	}
 	public void onUpdate(final double dt) {
 	    move(dt);
-	    //cheeckCollision();
+	    checkCollision();
 	 }
-	private void cheeckCollision() {
-		if (object.getHitBox().isOutOfBounds(world.getBounds())){
+	//TODO could extract an interface for this method
+	private void checkCollision() {
+		Optional<GameObject> colliding = Optional.empty();
+		System.out.println("tipo: " + object.getType().toString());
+		if (!object.getType().equals(Type.PLAYER)) {
+			colliding = world.getGameObjects().stream()
+					.filter(obj -> obj.getType().equals(Type.PLAYER))
+					.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
+					.findFirst();
+		} else {
+			colliding = world.getGameObjects().stream()
+					.filter(obj -> obj.getType().equals(Type.ENEMY_DRUNK) || obj.getType().equals(Type.ENEMY_DRUNKSPINNER) 
+							|| obj.getType().equals(Type.ENEMY_LURKER) || obj.getType().equals(Type.ENEMY_SHOOTER) 
+							|| obj.getType().equals(Type.ENEMY_SPINNER))
+					.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
+					.findFirst();
+		}
+		if (colliding.isPresent()) {
+			world.notifyWorldEvent(new BulletCollisionEvent(colliding.get(), object));
+		}
+		if (colliding.isPresent() || object.getHitBox().isOutOfBounds(world.getBounds())) {
 			world.notifyWorldEvent(new RemoveEntityEvent(object));
 		}
 	}

@@ -28,35 +28,23 @@ import ryleh.common.Config;
 import ryleh.core.GameEngine;
 
 public class RylehMainMenu {
-	private final double width = Config.STANDARD_WIDTH;
-	private final double height =Config.STANDARD_HEIGHT;
-	
-	//private final double width = Screen.getPrimary().getBounds().getWidth();
-	//private final double height = Screen.getPrimary().getBounds().getHeight();
-	private final int font = (int) (30);
+	private final int font = (int) (Config.SCALE_MODIFIER * 30);
 	private final Color startColor = Color.CORNFLOWERBLUE;
 	private final Color hoverColor = Color.CADETBLUE;
 	private Text description = new Text("");
 	private List<Node> nodes = new ArrayList<>();
-	private static FontFactory levelFont;
+	private static Font levelFont;
 	private VBox box = new VBox();
 	private Separator separator = new Separator();
 	private BorderPane pane = new BorderPane();
 	
 	public RylehMainMenu(final Stage primaryStage) {
-		//levelFont = FXGL.getAssetLoader().loadFont("manaspc.ttf");
+		levelFont = Font.loadFont("assets/fonts/manaspc.ttf", font);
 		this.box.getChildren().add(createCustomButton("Start Game", "Start a new adventure", () -> {
 			final GameEngine engine = new GameEngine();
-			
-			
-			primaryStage.setHeight(height);
-			primaryStage.setWidth(width);
-			 
-			 
 			engine.initGame(primaryStage);
 			engine.mainLoop();
 		}));
-		this.box.getChildren().add(createCustomButton("Options", "Change in game options", null));
 		this.box.getChildren().add(createCustomButton("Quit Game", "Exit to desktop", () -> {
 			createCustomAlert();
 		}));
@@ -69,7 +57,7 @@ public class RylehMainMenu {
 		this.box.setTranslateX(font);
 		this.box.getChildren().addAll(this.separator, this.description);
 		this.pane.setLeft(this.box);
-		primaryStage.setScene(new Scene(this.pane, width, height));
+		primaryStage.setScene(new Scene(this.pane, Config.STANDARD_WIDTH, Config.STANDARD_HEIGHT));
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("Incredibile Funziona");
 		primaryStage.show();
@@ -88,8 +76,8 @@ public class RylehMainMenu {
 		container.setAlignment(Pos.CENTER);
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle("Quit Game");
-		window.setWidth(this.width / 3);
-		window.setHeight(this.height / 3);
+		window.setWidth(Config.STANDARD_WIDTH / 3);
+		window.setHeight(Config.STANDARD_HEIGHT / 3);
 		window.setScene(new Scene(container));
 		window.setResizable(false);
 		window.showAndWait();

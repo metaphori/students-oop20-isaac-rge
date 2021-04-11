@@ -11,6 +11,7 @@ import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.BulletComponent;
 import ryleh.model.components.DrunkComponent;
+import ryleh.model.components.FireComponent;
 import ryleh.model.components.HealthIntComponent;
 import ryleh.model.components.ItemComponent;
 import ryleh.model.components.LurkerComponent;
@@ -95,18 +96,20 @@ public class GameFactory {
                  .with(new DrunkComponent(world))
                  .view(new EnemyDrunkGraphicComponent())
                  .bbox(new CircleHitBox(new Circle2d(50)))
+                 .with(new HealthIntComponent(world, 1))
                  .zIndex(0)
                  .build();
          world.addGameObject(e.getGameObject());
          view.addGraphicComponent(e.getView());
          return e;
      }
-     public Entity createBullet(final World world, final ViewHandler view, final P2d origin, final V2d direction) {
+     public Entity createBullet(final World world, final ViewHandler view, final P2d origin, final V2d direction, final Type type) {
     	 Entity e = GameEngine.entityBuilder()
-                 .type(Type.ENEMY_BULLET)
+                 .type(type)
                  .position(origin)
                  .with(new BulletComponent(world, origin, direction))
                  .view(new BulletGraphicComponent())
+                 .bbox(new CircleHitBox(new Circle2d(5)))
                  .zIndex(0)
                  .build();
          world.addGameObject(e.getGameObject());
@@ -170,6 +173,7 @@ public class GameFactory {
     	 Entity e = GameEngine.entityBuilder()
     			 .type(Type.FIRE)
     			 .position(position)
+    			 .with(new FireComponent(world))
     			 .view(new FireGraphicComponent())
     			 .bbox(new CircleHitBox(45))
     			 .zIndex(1)

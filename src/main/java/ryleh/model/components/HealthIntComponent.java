@@ -25,7 +25,7 @@ public class HealthIntComponent extends Component {
 		if (timer.isElapsed()) {
 			this.isImmortal = false;
 		}
-		//should treat GameOver not as an event
+		//TODO should treat GameOver not as an event
 		if (this.currentHp <= 0) {
 	          world.notifyWorldEvent(new GameOverEvent(object));
 	    }

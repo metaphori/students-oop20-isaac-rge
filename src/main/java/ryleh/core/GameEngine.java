@@ -19,7 +19,7 @@ public class GameEngine {
         rylehState = new GameState(stage);
     }
 
-    /*
+    /**
      * Uses a JavaFx class, called Timeline, to handle one keyframe (that corresponds to one gameloop's update). 
      * This operation is done once every "period"
      */
@@ -27,11 +27,13 @@ public class GameEngine {
         final Duration oneFrameAmt = Duration.millis(period);
         final KeyFrame oneFrame = new KeyFrame(oneFrameAmt,
            new EventHandler<>() {
-
-        @Override
-        public void handle(final ActionEvent event) {
-            rylehState.updateState(period);
-        }
+            @Override
+            public void handle(final ActionEvent event) {
+                if (rylehState.isGameOver()) {
+                    renderGameOver();
+                }
+                rylehState.updateState(period);
+            }
         }); // oneFrame
 
         // sets the game world's game loop (Timeline)
@@ -42,6 +44,9 @@ public class GameEngine {
 
     public static EntityBuilder entityBuilder() {
         return new EntityBuilder();
+    }
+    private void renderGameOver() {
+        // TODO Auto-generated method stub 
     }
 
 }

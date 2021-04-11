@@ -120,10 +120,6 @@ public class GameState {
     public World getWorld() {
         return this.world;
     }
-
-    public void updateInput() {
-	this.input.updateInput();
-    }
     public List<Entity> getEntities() {
 	return this.entities;
     }

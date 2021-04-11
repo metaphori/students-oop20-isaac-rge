@@ -1,21 +1,16 @@
 package ryleh.view;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import ryleh.common.Config;
-import ryleh.view.enemies.EnemyShooterGraphicComponent;
-import ryleh.view.other.ItemGraphicComponent;
 
 public class ViewHandler {
 
@@ -25,7 +20,7 @@ public class ViewHandler {
     private Parent root;
     private Rectangle rectangle;
 
-    public ViewHandler(final Stage stage) throws IOException {
+    public ViewHandler(final Stage stage) {
         this.stage = stage;
         rectangle = new Rectangle(Config.STANDARD_WIDTH, Config.STANDARD_HEIGHT);
         rectangle.setFill(Textures.BACKGROUND.getImagePattern());
@@ -34,10 +29,10 @@ public class ViewHandler {
         ((AnchorPane) root).getChildren().add(rectangle);
         scene = new Scene(root);
         this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			@Override
-			public void handle(final WindowEvent event) {
-				System.exit(0);
-			}
+                @Override
+                public void handle(final WindowEvent event) {
+                    Platform.exit();
+                }
         });
         this.stage.setScene(scene);
         this.stage.setFullScreen(false);
@@ -52,10 +47,11 @@ public class ViewHandler {
         this.graphicComponents.remove(graphic);
     }
 
-    public void setLevelScene() throws IOException {
-    	root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/SimpleGui.fxml"));
-    	scene.setRoot(root);
-//    	this.stage.setFullScreen(true);
+    public void setLevelScene() {
+        root = new AnchorPane();
+        root.setStyle("-fx-background-color: black;");
+        ((AnchorPane) root).getChildren().add(rectangle);
+        scene.setRoot(root);
     }
 
     public void addGraphicComponent(final GraphicComponent graphic) {

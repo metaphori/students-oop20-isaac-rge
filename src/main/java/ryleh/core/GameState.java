@@ -28,31 +28,26 @@ import ryleh.model.components.PhysicsComponent;
 import ryleh.view.ViewHandler;
 
 public class GameState {
-    private ViewHandler view;
-    private World world;
-    private List<Entity> entities;
-    private Map<String, String> gameVars;
+    private final ViewHandler view;
+    private final World world;
+    private final List<Entity> entities;
+    private final Map<String, String> gameVars;
     private boolean isGameOver = false;
-    private EventHandler eventHandler;
-    private InputController input;
-    private LevelHandler levelHandler;
-    private Entity player;
+    private final EventHandler eventHandler;
+    private final InputController input;
+    private final LevelHandler levelHandler;
+    private final Entity player;
 
     public GameState(final Stage mainStage) {
-        try {
-                view = new ViewHandler(mainStage);
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                    }
+        view = new ViewHandler(mainStage);
         this.eventHandler = new EventHandler(this);
         world = new World(eventHandler);
         entities = new ArrayList<>();
         gameVars = new HashMap<>();
         gameVars.put("Version", "0.1");
-
         this.levelHandler = new LevelHandler(this);
         this.player = BasicFactory.getInstance().createPlayer(this, levelHandler.getPosition(levelHandler.playerSpawn));
+        input = new InputController(this);
         this.generateNewLevel();
     }
     public Entity getPlayer() {
@@ -65,12 +60,7 @@ public class GameState {
 	world.getGameObjects().clear();
 	entities.clear();
 	view.getGraphicComponents().clear();
-	try {
-		view.setLevelScene();
-	} catch (IOException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
+	view.setLevelScene();
 	levelHandler.generateNewLevel();
 	view.addGraphicComponent(player.getView());
 	world.addGameObject(player.getGameObject());
@@ -86,7 +76,6 @@ public class GameState {
 			return o1.getGameObject().getzIndex() - o2.getGameObject().getzIndex();
 		}
 	});
-	input = new InputController(this);
 	input.initInput();
 	levelHandler.debug();
 

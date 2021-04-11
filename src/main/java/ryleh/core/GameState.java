@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
+import ryleh.common.Config;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
 import ryleh.controller.Entity;
@@ -52,22 +53,6 @@ public class GameState {
 
         this.levelHandler = new LevelHandler(this);
         this.player = GameFactory.getInstance().createPlayer(world, view, levelHandler.getPosition(levelHandler.playerSpawn));
-        //NEXT LINES SHOULD ALL BE DELEGATED TO LEVEL HANDLER
-       // entities.add(player);
-//        //objects.add(GameFactory.getInstance().createEnemyDrunk(world, view));
-//        entities.add(GameFactory.getInstance().createEnemyShooter(world, view));
-//        entities.add(GameFactory.getInstance().createEnemyDrunk(world, view));
-//        //objects.add(GameFactory.getInstance().createEnemyShooter(world, view));
-//        entities.add(GameFactory.getInstance().createEnemySpinner(world, view));
-//        entities.add(GameFactory.getInstance().createEnemyDrunkSpinner(world, view));
-//        //objects.add(GameFactory.getInstance().createBullet(world, view ,objects.get(2).getGameObject().getPosition(),new V2d(1,0)));
-//        entities.add(GameFactory.getInstance().createEnemyLurker(world, view));
-//        entities.add(GameFactory.getInstance().createItem(world, view));
-//        entities.add(GameFactory.getInstance().createRock(world, view));
-//        entities.add(GameFactory.getInstance().createFire(world, view));
-
-        //objects.add(GameFactory.getInstance().createBullet(world, view, new P2d(200, 200), new V2d(1,0)));
-        //objects.add(GameFactory.getInstance().createItem(world, view))
         generateNewLevel();
     }
     public Entity getPlayer() {
@@ -90,7 +75,8 @@ public class GameState {
 		view.addGraphicComponent(player.getView());
 		world.addGameObject(player.getGameObject());
 		entities.add(player);
-		((PhysicsComponent)player.getGameObject().getComponent(PhysicsComponent.class).get()).setPosition(levelHandler.getPosition(levelHandler.playerSpawn));
+		player.getGameObject().setPosition(levelHandler.getPosition(levelHandler.playerSpawn));
+		//((PhysicsComponent)player.getGameObject().getComponent(PhysicsComponent.class).get()).setPosition(levelHandler.getPosition(levelHandler.playerSpawn));
 		entities.addAll(levelHandler.getEntities());
 		Collections.sort(entities, new Comparator<Entity>() {
 			@Override
@@ -136,7 +122,7 @@ public class GameState {
     }
 	
     private Point2D toPoint2D (final P2d point) {
-        return new Point2D(point.x, point.y);
+        return new Point2D(point.x * Config.SCALE_MODIFIER, point.y * Config.SCALE_MODIFIER);
     }
 	
 

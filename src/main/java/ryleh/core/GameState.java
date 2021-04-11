@@ -100,6 +100,7 @@ public class GameState {
 	    });
 		input = new InputController(this);
 	    input.initInput();
+	    levelHandler.debug();
 
 	}
 

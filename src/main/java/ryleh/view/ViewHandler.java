@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import ryleh.common.Config;
@@ -22,6 +23,7 @@ public class ViewHandler {
     private List<GraphicComponent> graphicComponents;
     private Scene scene;
     private Parent root;
+    private Rectangle rectangle;
 
     public ViewHandler(final Stage stage) throws IOException {
         this.stage = stage;

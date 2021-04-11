@@ -75,8 +75,8 @@ public class GameState {
 		view.addGraphicComponent(player.getView());
 		world.addGameObject(player.getGameObject());
 		entities.add(player);
-		player.getGameObject().setPosition(levelHandler.getPosition(levelHandler.playerSpawn));
-		//((PhysicsComponent)player.getGameObject().getComponent(PhysicsComponent.class).get()).setPosition(levelHandler.getPosition(levelHandler.playerSpawn));
+		//player.getGameObject().setPosition(levelHandler.getPosition(levelHandler.playerSpawn));
+		((PhysicsComponent)player.getGameObject().getComponent(PhysicsComponent.class).get()).setPosition(levelHandler.getPosition(levelHandler.playerSpawn));
 		entities.addAll(levelHandler.getEntities());
 		Collections.sort(entities, new Comparator<Entity>() {
 			@Override

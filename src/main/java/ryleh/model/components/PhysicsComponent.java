@@ -88,7 +88,8 @@ public class PhysicsComponent extends Component {
     }
     //THIS IS A PRIMITIVE METHOD WITH NO WAY OF CHECKING BOUNDS OR HITBOXES
 	public void setPosition(P2d position) {
-		this.position=position;
+		this.lastPos = position;
+		this.position = position;
 		object.setPosition(this.position);
 	}
 }

@@ -1,5 +1,7 @@
 package ryleh.controller.events;
 
+import java.util.Optional;
+
 import ryleh.model.GameObject;
 import ryleh.model.components.HealthIntComponent;
 
@@ -12,8 +14,10 @@ public class BulletCollisionEvent extends AbstractEvent {
 
 	@Override
 	void handle() {
-		HealthIntComponent comp = (HealthIntComponent) this.getTarget().getComponent(HealthIntComponent.class).get();
-		comp.damage(1);
+		if (this.getTarget().getComponent(HealthIntComponent.class).isPresent()) {
+			HealthIntComponent comp = (HealthIntComponent) this.getTarget().getComponent(HealthIntComponent.class).get();
+			comp.damage(1);
+		}
 	}
 
 }

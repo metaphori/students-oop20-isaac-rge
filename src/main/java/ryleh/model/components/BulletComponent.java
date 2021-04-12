@@ -36,7 +36,7 @@ public class BulletComponent extends Component {
 	private void checkCollision() {
 		Optional<GameObject> colliding = Optional.empty();
 		System.out.println("tipo: " + object.getType().toString());
-		if (!object.getType().equals(Type.PLAYER)) {
+		if (!object.getType().equals(Type.PLAYER_BULLET)) {
 			colliding = world.getGameObjects().stream()
 					.filter(obj -> obj.getType().equals(Type.PLAYER))
 					.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))

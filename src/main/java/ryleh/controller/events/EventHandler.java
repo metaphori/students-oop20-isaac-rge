@@ -30,8 +30,7 @@ public class EventHandler implements EventListener {
 			} else if (e instanceof ItemPickUpEvent) {
 				final ItemPickUpEvent pickUpEvent = (ItemPickUpEvent) e;
 				pickUpEvent.handle();
-				final ItemGraphicComponent graphic = (
-				        ItemGraphicComponent) this.gameState.getEntityByType(Type.ITEM).get().getView();
+				final ItemGraphicComponent graphic = (ItemGraphicComponent) this.gameState.getEntityByType(Type.ITEM).get().getView();
 				graphic.setAnimPlayed();
 			} else if (e instanceof GameOverEvent) {
 				final GameOverEvent gameOver = (GameOverEvent) e;

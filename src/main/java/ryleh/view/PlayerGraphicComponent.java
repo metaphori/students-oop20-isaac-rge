@@ -14,29 +14,23 @@ import ryleh.model.physics.Direction;
 
 public class PlayerGraphicComponent implements GraphicComponent{
 
-private Rectangle rectangle;
-private Direction direction = Direction.IDLE;
-private FadeTransition playerFade;
-private Boolean invincible;
-private int width;
-private int height;
-
+	private Rectangle rectangle;
+	private Direction direction = Direction.IDLE;
+	private FadeTransition playerFade;
+	private Boolean invincible;
 	
-	public PlayerGraphicComponent() {
-		this.height = Textures.PLAYER_DOWN.getHeight();
-		this.width = Textures.PLAYER_DOWN.getWidth();
-
-		this.rectangle = new Rectangle(width, height);
-		this.rectangle.setFill(Textures.PLAYER_DOWN.getImagePattern());
-
-		this.playerFade = new FadeTransition(Duration.millis(200), rectangle);
-	    this.playerFade.setFromValue(1.0);
-	    this.playerFade.setToValue(0.0);
-	    this.playerFade.setCycleCount(4);
-	    this.playerFade.setAutoReverse(true);
-
-	    this.invincible = false;
-	}
+		public PlayerGraphicComponent() {
+			this.rectangle = new Rectangle(Textures.PLAYER_DOWN.getWidth(), Textures.PLAYER_DOWN.getHeight());
+			this.rectangle.setFill(Textures.PLAYER_DOWN.getImagePattern());
+	
+			this.playerFade = new FadeTransition(Duration.millis(200), rectangle);
+		    this.playerFade.setFromValue(1.0);
+		    this.playerFade.setToValue(0.0);
+		    this.playerFade.setCycleCount(4);
+		    this.playerFade.setAutoReverse(true);
+	
+		    this.invincible = false;
+		}
 	
 	private Direction lastDir = Direction.IDLE;
 	

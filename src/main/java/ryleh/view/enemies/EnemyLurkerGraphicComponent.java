@@ -35,23 +35,32 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent{
 		this.velocity=new V2d(0,0);
 	}
 
+	public EnemyLurkerGraphicComponent(final GameObject player, final Point2D position) {
+		this.rectangle = new Rectangle(Textures.ENEMY_LURKER.getWidth(), Textures.ENEMY_LURKER.getHeight());
+		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
+		this.rectangle.setFill(Textures.ENEMY_LURKER.getImagePattern());
+		this.player = player;
+		this.velocity = new V2d(0,0);
+	}
+
 	private void updateImage() {
 
 	}
 
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
-		rectangle.setX(position.getX()-rectangle.getWidth()/2);
-		rectangle.setY(position.getY()-rectangle.getHeight()/2);
+		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		if (System.currentTimeMillis() - adjustDirectionTimer >= adjustDelay) {
-			V2d directionToPlayer = new V2d(this.player.getPosition(),new P2d(position.getX()-rectangle.getWidth()/2,position.getY()-rectangle.getHeight()/2))
+			V2d directionToPlayer = new V2d(this.player.getPosition(), new P2d(position.getX() - rectangle.getWidth() / 2, position.getY() - rectangle.getHeight() / 2))
 					.getNormalized()
 					.mul(moveSpeed);
 //			rotation.setAngle(GameMath.toDegrees((Math.atan(directionToPlayer.y/ directionToPlayer.x))));
 //			rotation.setPivotX(position.getX());
 //	  		rotation.setPivotY(position.getY());
 //			rectangle.getTransforms().add(rotation);
-			rectangle.setRotate(GameMath.toDegrees((Math.atan(directionToPlayer.y/ directionToPlayer.x))));
+			rectangle.setRotate(GameMath.toDegrees((Math.atan(directionToPlayer.y / directionToPlayer.x))));
     		adjustDirectionTimer = System.currentTimeMillis();
     	}
 //		V2d directionToPlayer = new V2d(this.player.getPosition(),new P2d(position.getX()-rectangle.getWidth()/2,position.getY()-rectangle.getHeight()/2))

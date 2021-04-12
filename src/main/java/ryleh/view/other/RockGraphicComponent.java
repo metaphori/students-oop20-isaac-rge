@@ -18,14 +18,21 @@ public class RockGraphicComponent implements GraphicComponent{
 		rectangle.setFill(Textures.ROCK2.getImagePattern());
 	}
 
+	public RockGraphicComponent(final Point2D position) {
+		this.rectangle = new Rectangle(Textures.ROCK.getWidth(), Textures.ROCK.getHeight());
+		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
+		this.rectangle.setFill(Textures.ROCK2.getImagePattern());
+	}
+
 	private void updateImage() {
 
 	}
 
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
-		rectangle.setX(position.getX()-rectangle.getWidth()/2);
-		rectangle.setY(position.getY()-rectangle.getHeight()/2);
+		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 	}
 
 	@Override

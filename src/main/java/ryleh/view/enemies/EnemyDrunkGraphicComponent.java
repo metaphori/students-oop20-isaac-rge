@@ -20,6 +20,13 @@ public class EnemyDrunkGraphicComponent implements GraphicComponent{
 		this.rectangle.setFill(Textures.ENEMY_DRUNK.getImagePattern());
 	}
 
+	public EnemyDrunkGraphicComponent(final Point2D position) {
+		this.rectangle = new Rectangle(Textures.ENEMY_DRUNK.getWidth(), Textures.ENEMY_DRUNK.getHeight());
+		this.rectangle.setX(position.getX());
+		this.rectangle.setY(position.getY());
+		this.rectangle.setFill(Textures.ENEMY_DRUNK.getImagePattern());
+	}
+
 	private void updateImage() {
 		//TODO
 	}

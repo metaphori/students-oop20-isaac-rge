@@ -2,6 +2,8 @@ package ryleh.common;
 
 import java.util.Random;
 
+import javafx.geometry.Point2D;
+
 public class GameMath {
 	
     private static Random random = new Random();
@@ -71,5 +73,8 @@ public class GameMath {
 	public static double toRadians(final double degrees) {
 		return degreesToRadians * degrees;
 	}
+    public static Point2D toPoint2D (final P2d point) {
+        return new Point2D(point.x * Config.SCALE_MODIFIER, point.y * Config.SCALE_MODIFIER);
+    }
 }
 

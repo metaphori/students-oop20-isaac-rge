@@ -20,14 +20,21 @@ public class EnemyShooterGraphicComponent implements GraphicComponent{
 		rectangle.setFill(Textures.ENEMY_SHOOTER.getImagePattern());
 	}
 
+	public EnemyShooterGraphicComponent(final Point2D position) {
+		this.rectangle = new Rectangle(Textures.ENEMY_SHOOTER.getHeight(), Textures.ENEMY_SHOOTER.getHeight());
+		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
+		this.rectangle.setFill(Textures.ENEMY_SHOOTER.getImagePattern());
+	}
+
 	private void updateImage() {
 
 	}
 
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
-		rectangle.setX(position.getX()-rectangle.getWidth()/2);
-		rectangle.setY(position.getY()-rectangle.getHeight()/2);
+		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		this.updateImage();
 	}
 

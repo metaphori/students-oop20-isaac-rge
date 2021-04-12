@@ -1,6 +1,9 @@
 package ryleh.core.factories;
 
+import javafx.geometry.Point2D;
 import ryleh.common.Circle2d;
+import ryleh.common.Config;
+import ryleh.common.GameMath;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
 import ryleh.controller.Entity;
@@ -45,7 +48,7 @@ public class EnemyFactory {
                  .with(new ShooterComponent(state.getWorld(), state.getPlayer()))
                  .with(new HealthIntComponent(state.getWorld(),1))
                  .with(new CollisionComponent(state.getWorld()))
-                 .view(new EnemyShooterGraphicComponent())
+                 .view(new EnemyShooterGraphicComponent(GameMath.toPoint2D(position)))
                  .bbox(new CircleHitBox(new Circle2d(75)))
                  .zIndex(1)
                  .build();
@@ -60,7 +63,7 @@ public class EnemyFactory {
                  .with(new SpinnerComponent(state.getWorld()))
                  .with(new HealthIntComponent(state.getWorld(),1))
                  .with(new CollisionComponent(state.getWorld()))
-                 .view(new EnemySpinnerGraphicComponent())
+                 .view(new EnemySpinnerGraphicComponent(GameMath.toPoint2D(position)))
                  .bbox(new CircleHitBox(new Circle2d(75)))
                  .zIndex(10)
                  .build();
@@ -75,7 +78,7 @@ public class EnemyFactory {
                  .with(new DrunkComponent(state.getWorld()))
                  .with(new HealthIntComponent(state.getWorld(),1))
                  .with(new CollisionComponent(state.getWorld()))
-                 .view(new EnemyDrunkGraphicComponent())
+                 .view(new EnemyDrunkGraphicComponent(GameMath.toPoint2D(position)))
                  .bbox(new CircleHitBox(new Circle2d(75)))
                  .zIndex(0)
                  .build();
@@ -90,7 +93,7 @@ public class EnemyFactory {
                  .with(new LurkerComponent(state.getWorld(), state.getPlayer()))
                  .with(new HealthIntComponent(state.getWorld(),1))
                  .with(new CollisionComponent(state.getWorld()))
-                 .view(new EnemyLurkerGraphicComponent(state.getPlayer().getGameObject()))
+                 .view(new EnemyLurkerGraphicComponent(state.getPlayer().getGameObject(), GameMath.toPoint2D(position)))
                  .bbox(new CircleHitBox(new Circle2d(75)))
                  .zIndex(9)
                  .build();
@@ -106,7 +109,7 @@ public class EnemyFactory {
                  .with(new SpinnerComponent(state.getWorld()))
                  .with(new HealthIntComponent(state.getWorld(),1))
                  .with(new CollisionComponent(state.getWorld()))
-                 .view(new EnemyDrunkSpinnerGraphicComponent())
+                 .view(new EnemyDrunkSpinnerGraphicComponent(GameMath.toPoint2D(position)))
                  .bbox(new CircleHitBox(new Circle2d(75)))
                  .zIndex(8)
                  .build();

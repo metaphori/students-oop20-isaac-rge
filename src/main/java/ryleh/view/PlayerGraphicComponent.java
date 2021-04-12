@@ -32,6 +32,21 @@ public class PlayerGraphicComponent implements GraphicComponent{
 		    this.invincible = false;
 		}
 	
+	public PlayerGraphicComponent(final Point2D position) {
+		this.rectangle = new Rectangle(Textures.PLAYER_DOWN.getWidth(), Textures.PLAYER_DOWN.getHeight());
+		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
+		this.rectangle.setFill(Textures.PLAYER_DOWN.getImagePattern());
+
+		this.playerFade = new FadeTransition(Duration.millis(200), rectangle);
+	    this.playerFade.setFromValue(1.0);
+	    this.playerFade.setToValue(0.0);
+	    this.playerFade.setCycleCount(4);
+	    this.playerFade.setAutoReverse(true);
+
+	    this.invincible = false;
+	}
+
 	private Direction lastDir = Direction.IDLE;
 	
 	private AnimationLoop animRight = new AnimationLoop(

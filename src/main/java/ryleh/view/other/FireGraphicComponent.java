@@ -22,6 +22,13 @@ public class FireGraphicComponent implements GraphicComponent{
 		rectangle.setFill(Textures.FIRE1.getImagePattern());
 	}
 
+	public FireGraphicComponent(final Point2D position) {
+		this.rectangle = new Rectangle(Textures.FIRE1.getWidth(), Textures.FIRE1.getHeight());
+		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
+		this.rectangle.setFill(Textures.FIRE1.getImagePattern());
+	}
+
 	private void updateImage() {
 		rectangle = animFire.setFrame(rectangle);
 		animFire.incTimer();
@@ -29,8 +36,8 @@ public class FireGraphicComponent implements GraphicComponent{
 
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
-		rectangle.setX(position.getX()-rectangle.getWidth()/2);
-		rectangle.setY(position.getY()-rectangle.getHeight()/2);
+		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		this.updateImage();
 	}
 

@@ -27,6 +27,13 @@ public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent{
 		this.rectangle.setFill(Textures.ENEMY_DRUNKSPINNER.getImagePattern());
 	}
 
+	public EnemyDrunkSpinnerGraphicComponent(final Point2D position) {
+		this.rectangle = new Rectangle(Textures.ENEMY_DRUNKSPINNER.getWidth(), Textures.ENEMY_DRUNKSPINNER.getHeight());
+		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
+		this.rectangle.setFill(Textures.ENEMY_DRUNKSPINNER.getImagePattern());
+	}
+
 	private void updateImage() {
 		angle=angle + Math.PI/40;
 		if(angle>=Math.PI*2) {
@@ -36,8 +43,8 @@ public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent{
 
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
-		rectangle.setX(position.getX()-rectangle.getWidth()/2);
-		rectangle.setY(position.getY()-rectangle.getHeight()/2);
+		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		rectangle.setRotate(GameMath.toDegrees(angle));
 		this.updateImage();
 	}

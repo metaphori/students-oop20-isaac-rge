@@ -16,18 +16,27 @@ public class BulletGraphicComponent implements GraphicComponent{
 	
 	public BulletGraphicComponent() {
 		this.rectangle = new Rectangle(Textures.BULLET.getWidth(), Textures.BULLET.getHeight());
-		rectangle.setFill(Textures.BULLET.getImagePattern());
+		this.rectangle.setFill(Textures.BULLET.getImagePattern());
 	}
+	
+	public BulletGraphicComponent(final Point2D position) {
+		this.rectangle = new Rectangle(Textures.BULLET.getWidth(), Textures.BULLET.getHeight());
+		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
+		this.rectangle.setFill(Textures.BULLET.getImagePattern());
+	}
+	
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
-		rectangle.setX(position.getX());
-		rectangle.setY(position.getY());
+		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 	}
 
 	@Override
 	public void onAdded(final Scene scene) {
 		Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
+        
 	}
 	@Override
 	public Object getNode() {

@@ -1,6 +1,9 @@
 package ryleh.core.factories;
 
+import javafx.geometry.Point2D;
 import ryleh.common.Circle2d;
+import ryleh.common.Config;
+import ryleh.common.GameMath;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
 import ryleh.controller.Entity;
@@ -47,7 +50,7 @@ public final class BasicFactory {
                  .position(position)
                  .with(new PhysicsComponent(state.getWorld(), 1000))
                  .with(new HealthIntComponent(state.getWorld(), 3))
-                 .view(new PlayerGraphicComponent())
+                 .view(new PlayerGraphicComponent(GameMath.toPoint2D(position)))
                  .bbox(new CircleHitBox(new Circle2d(70)))
                  .zIndex(1)
                  .build();
@@ -62,7 +65,7 @@ public final class BasicFactory {
                  .type(bulletType)
                  .position(origin)
                  .with(new BulletComponent(state.getWorld(), origin, direction))
-                 .view(new BulletGraphicComponent())
+                 .view(new BulletGraphicComponent(GameMath.toPoint2D(origin)))
                  .bbox(new CircleHitBox(new Circle2d(5)))
                  .zIndex(0)
                  .build();
@@ -74,7 +77,7 @@ public final class BasicFactory {
          Entity e = GameEngine.entityBuilder()
                  .type(Type.ROCK)
                  .position(position)
-                 .view(new RockGraphicComponent())
+                 .view(new RockGraphicComponent(GameMath.toPoint2D(position)))
                  .bbox(new CircleHitBox(75))
                  .zIndex(1)
                  .build();
@@ -87,7 +90,7 @@ public final class BasicFactory {
                          .type(Type.ITEM)
                          .position(position)
                          .with(new ItemComponent(state.getWorld()))
-                         .view(new ItemGraphicComponent())
+                         .view(new ItemGraphicComponent(GameMath.toPoint2D(position)))
                          .bbox(new CircleHitBox(new Circle2d(30)))
                          .zIndex(0)
                          .build();
@@ -101,7 +104,7 @@ public final class BasicFactory {
                          .type(Type.FIRE)
                          .position(position)
                          .with(new CollisionComponent(state.getWorld()))
-                         .view(new FireGraphicComponent())
+                         .view(new FireGraphicComponent(GameMath.toPoint2D(position)))
                          .bbox(new CircleHitBox(new Circle2d(45)))
                          .zIndex(1)
                          .build();

@@ -25,6 +25,14 @@ public class EnemySpinnerGraphicComponent implements GraphicComponent{
 		rotation.setAngle(GameMath.toDegrees(Math.PI / 60));
 	}
 
+	public EnemySpinnerGraphicComponent(final Point2D position) {
+		this.rectangle = new Rectangle(Textures.ENEMY_SPINNER.getWidth(), Textures.ENEMY_SPINNER.getHeight());
+		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
+		this.rectangle.setFill(Textures.ENEMY_SPINNER.getImagePattern());
+		this.rotation.setAngle(GameMath.toDegrees(Math.PI / 60));
+	}
+
 	private void updateImage() {
 
 	}

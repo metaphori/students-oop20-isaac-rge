@@ -29,6 +29,14 @@ public class ItemGraphicComponent implements GraphicComponent{
 		this.animPlayed = false;
 	}
 	
+	public ItemGraphicComponent(final Point2D position) {
+		this.rectangle = new Rectangle(Textures.ITEM1.getWidth(), Textures.ITEM1.getHeight());
+		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
+		this.rectangle.setFill(Textures.ITEM1.getImagePattern());
+		this.animPlayed = false;
+	}
+
 	public void setAnimPlayed() {
 		this.animPlayed = true;
 	}

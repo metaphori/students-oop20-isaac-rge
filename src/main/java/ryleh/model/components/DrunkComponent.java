@@ -49,7 +49,6 @@ public class DrunkComponent extends Component {
 	       // tx += tpf;
 
 	       checkScreenBounds();
-//	       this.isCollidingWithPlayer();
 	    }
 
 	    private void adjustAngle() {
@@ -69,23 +68,19 @@ public class DrunkComponent extends Component {
 
 	    //TODO to rewrite
 	    private void checkScreenBounds() {
-	    	if (object.getHitBox().isOutOfBounds(world.getBounds())){
-	    		//System.out.println("Position of " + super.object + " is " + this.position);
-	            //P2d newDirectionVector = new P2d(world.getWidthBound()/2,world.getHeightBound()/2);//.subPoint(object.getPosition());
-	            //System.out.println("Position of " + super.object + " is " + newDirectionVector);
-	            //double angle = GameMath.toDegrees((Math.atan(newDirectionVector.y/ newDirectionVector.x)));
-	            //directionAngle = newDirectionVector.x> 0 ? angle : 180 - angle;
+	    	if (object.getHitBox().isOutOfBounds(world.getBounds()) || this.isCollidingWithRock()){
 	            this.velocity.x = -this.velocity.x;
 	            this.velocity.y = -this.velocity.y;
 	        }
 	    }
-//	    private void isCollidingWithPlayer() {
-//			Optional<GameObject> colliding = world.getGameObjects().stream()
-//					.filter(obj -> obj.getType().equals(Type.PLAYER))
-//					.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
-//					.findFirst();
-//			if (colliding.isPresent()) {
-//				world.notifyWorldEvent(new EnemyCollisionEvent(colliding.get(), object));
-//			}
-//		}
+	    private boolean isCollidingWithRock() {
+	    	Optional<GameObject> colliding = world.getGameObjects().stream()
+	    			.filter(obj -> obj.getType().equals(Type.ROCK))
+	    			.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
+	    			.findFirst();
+	    	if (colliding.isPresent()) {
+	    		return true;
+	    	}
+	    	return false;
+	    }
 }

@@ -41,7 +41,7 @@ public class EventHandler implements EventListener {
 				final BulletSpawnEvent spawn = (BulletSpawnEvent) e;
 				this.gameState.addEntity(
 				        BasicFactory.getInstance().createBullet(this.gameState, 
-				                spawn.getPosition(), spawn.getVelocity()));
+				                spawn.getPosition(), spawn.getVelocity(), spawn.getTarget().getType()));
 			} else if (e instanceof FireCollisionEvent) {
 				final FireCollisionEvent fire = (FireCollisionEvent) e;
 				fire.handle();

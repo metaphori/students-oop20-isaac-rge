@@ -22,8 +22,8 @@ public class ViewHandler {
 
     public ViewHandler(final Stage stage) {
         this.stage = stage;
-        rectangle = new Rectangle(Config.STANDARD_WIDTH, Config.STANDARD_HEIGHT);
-        rectangle.setFill(Textures.BACKGROUND.getImagePattern());
+        this.rectangle = new Rectangle(Textures.BACKGROUND.getWidth(), Textures.BACKGROUND.getHeight());
+        this.rectangle.setFill(Textures.BACKGROUND.getImagePattern());
         root = new AnchorPane();
         root.setStyle("-fx-background-color: black;");
         ((AnchorPane) root).getChildren().add(rectangle);

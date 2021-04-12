@@ -62,7 +62,7 @@ public class LevelHandler {
 	    boundsCoord = ((Rectangle2d) world.getBounds()).upperLeft;
 	    boundsWidth = world.getWidthBound();
 	    boundsHeight = world.getHeightBound();
-	    playerSpawn = new Pair<>(COLUMNS / 2, ROWS - 2);
+	    playerSpawn = new Pair<>(COLUMNS / 2, ROWS - 1);
 	    nEnemies = 0;
 	    hasItem = false;
 	    entityCounter = 0;

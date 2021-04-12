@@ -59,32 +59,6 @@ public class InputController {
 			} else {
 				this.shoot(this.physics.getDirection());
 			}
-			graphic.setDirection(Direction.UP);
-		} else if (isMoveDown) {
-			physics.setVelocity(Direction.DOWN.getPoint());
-			physics.setDirection(Direction.DOWN);
-			if (!physics.getBlocked().equals(Direction.DOWN)) {
-                            physics.resetBlocked();
-                        }
-			graphic.setDirection(Direction.DOWN);
-		} else if (isMoveLeft) {
-			physics.setVelocity(Direction.LEFT.getPoint());
-			physics.setDirection(Direction.LEFT);
-			if (!physics.getBlocked().equals(Direction.LEFT)) {
-                            physics.resetBlocked();
-                        }
-			graphic.setDirection(Direction.LEFT);
-		} else if (isMoveRight) {
-			physics.setVelocity(Direction.RIGHT.getPoint());
-			physics.setDirection(Direction.RIGHT);
-			if (!physics.getBlocked().equals(Direction.RIGHT)) {
-                            physics.resetBlocked();
-                        }
-			graphic.setDirection(Direction.RIGHT);	
-		} else {
-			physics.setVelocity(Direction.IDLE.getPoint());
-			//physics.setDirection(Direction.IDLE);
-			graphic.setDirection(Direction.IDLE);
 		}
 		this.move(isMoveDown, Direction.DOWN);
 		this.move(isMoveUp, Direction.UP);
@@ -102,9 +76,6 @@ public class InputController {
 	}
 
 	private void setMoving(final KeyCode key, final boolean isMoving) {
-		if (key.equals(KeyCode.SPACE)) {
-			this.isShooting = isMoving;
-		}
 		switch (key) {
 		case A: this.isMoveLeft = isMoving;
 			break;

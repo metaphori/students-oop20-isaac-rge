@@ -9,27 +9,25 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import ryleh.view.menu.RylehPauseMenu;
 
 public class GameEngine {
     private GameState rylehState;
     private double period = 1000/60;
     private static Timeline loop;
     private static boolean isPaused = false;
+    private RylehPauseMenu pauseMenu;
 
     /*
      * 
      */
     public void initGame(final Stage stage) {
         rylehState = new GameState(stage);
+        pauseMenu = new RylehPauseMenu(stage);
         stage.addEventHandler(KeyEvent.KEY_PRESSED, key -> {
             if (key.getCode().equals(KeyCode.P)) {
-                if (GameEngine.isPaused()) {
-                    GameEngine.resumeEngine();
-                    isPaused = false;
-                } else {
                     GameEngine.pauseEngine();
-                    isPaused = true;
-                }
+                    pauseMenu.renderPauseMenu();
             }
         });
     }

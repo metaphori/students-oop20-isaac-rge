@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import ryleh.core.GameEngine;
+import ryleh.view.menu.RylehMainMenu;
  
 public class Ryleh extends Application {
     public static void main(final String[] args) {

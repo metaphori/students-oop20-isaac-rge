@@ -26,8 +26,8 @@ public class InputController {
 	private final PhysicsComponent physics; 
 	private final Scene scene;
 	private final Entity player;
-	private World world;
-	private Timer timer;
+	private final World world;
+	private final Timer timer;
 	
 	public InputController(final GameState state) {
 		this.scene = state.getView().getScene();

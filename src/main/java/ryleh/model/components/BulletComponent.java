@@ -7,10 +7,8 @@ import ryleh.common.V2d;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
-import ryleh.model.events.BulletCollisionEvent;
-import ryleh.model.events.FireCollisionEvent;
+import ryleh.model.events.EnemyCollisionEvent;
 import ryleh.model.events.RemoveEntityEvent;
-import ryleh.view.ViewHandler;
 
 public class BulletComponent extends Component {
 	private P2d position;
@@ -49,7 +47,7 @@ public class BulletComponent extends Component {
 					.findFirst();
 		}
 		if (colliding.isPresent()) {
-			world.notifyWorldEvent(new BulletCollisionEvent(colliding.get(), object));
+			world.notifyWorldEvent(new EnemyCollisionEvent(colliding.get(), object));
 		}
 		if (colliding.isPresent() || object.getHitBox().isOutOfBounds(world.getBounds())) {
 			world.notifyWorldEvent(new RemoveEntityEvent(object));

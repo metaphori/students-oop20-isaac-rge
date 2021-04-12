@@ -10,8 +10,10 @@ public class EnemyCollisionEvent  extends AbstractEvent {
 	}
 	@Override
 	public void handle() {
-		HealthIntComponent comp = (HealthIntComponent) this.getTarget().getComponent(HealthIntComponent.class).get();
-		comp.damage(1);
+		if (this.getTarget().getComponent(HealthIntComponent.class).isPresent()) {
+			HealthIntComponent comp = (HealthIntComponent) this.getTarget().getComponent(HealthIntComponent.class).get();
+			comp.damage(1);
+		}
 	}
 
 }

@@ -1,10 +1,10 @@
 package ryleh.model.components;
 
 import ryleh.common.Timer;
-import ryleh.controller.events.GameOverEvent;
-import ryleh.controller.events.RemoveEntityEvent;
 import ryleh.model.Type;
 import ryleh.model.World;
+import ryleh.model.events.GameOverEvent;
+import ryleh.model.events.RemoveEntityEvent;
 
 public class HealthIntComponent extends Component {
 	
@@ -44,9 +44,8 @@ public class HealthIntComponent extends Component {
     public void damage(final int dmg) {
     	if (!this.isImmortal) {
             this.currentHp -= dmg;
+        	this.setImmortality();
     	} 
-    	timer.startTimer();
-    	this.isImmortal = true;
     }
     /**
      * Increases currentHp only if not exceeds maxHp.
@@ -85,6 +84,10 @@ public class HealthIntComponent extends Component {
 	}
 	public boolean isImmortal() {
 		return isImmortal;
+	}
+	public void setImmortality() {
+		timer.startTimer();
+    	this.isImmortal = true;
 	}
 
 }

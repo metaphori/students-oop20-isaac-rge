@@ -1,17 +1,15 @@
-package ryleh.controller.events;
+package ryleh.model.events;
 
 import ryleh.model.GameObject;
 import ryleh.model.components.HealthIntComponent;
 
-public class FireCollisionEvent extends AbstractEvent {
-
-	private GameObject fire;
-	public FireCollisionEvent(final GameObject player, final GameObject fire) {
+public class EnemyCollisionEvent  extends AbstractEvent {
+	
+	public EnemyCollisionEvent(final GameObject player, final GameObject enemy) {
 		super(player);
-		this.fire = fire;
 	}
-
-	void handle() {
+	@Override
+	public void handle() {
 		HealthIntComponent comp = (HealthIntComponent) this.getTarget().getComponent(HealthIntComponent.class).get();
 		comp.damage(1);
 	}

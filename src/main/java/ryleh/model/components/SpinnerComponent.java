@@ -8,12 +8,12 @@ import ryleh.common.GameMath;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
 import ryleh.controller.Entity;
-import ryleh.controller.events.BulletSpawnEvent;
-import ryleh.controller.events.EnemyCollisionEvent;
-import ryleh.controller.events.ItemPickUpEvent;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
+import ryleh.model.events.BulletSpawnEvent;
+import ryleh.model.events.EnemyCollisionEvent;
+import ryleh.model.events.ItemPickUpEvent;
 import ryleh.view.ViewHandler;
 
 public class SpinnerComponent extends Component {

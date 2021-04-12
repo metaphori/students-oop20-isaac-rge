@@ -2,10 +2,10 @@ package ryleh.model.components;
 
 import java.util.Optional;
 
-import ryleh.controller.events.FireCollisionEvent;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
+import ryleh.model.events.FireCollisionEvent;
 
 public class FireComponent extends Component {
 	

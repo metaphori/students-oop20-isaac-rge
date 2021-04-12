@@ -1,4 +1,4 @@
-package ryleh.controller.events;
+package ryleh.model.events;
 
 import java.util.Optional;
 
@@ -13,7 +13,7 @@ public class BulletCollisionEvent extends AbstractEvent {
 	}
 
 	@Override
-	void handle() {
+	public void handle() {
 		if (this.getTarget().getComponent(HealthIntComponent.class).isPresent()) {
 			HealthIntComponent comp = (HealthIntComponent) this.getTarget().getComponent(HealthIntComponent.class).get();
 			comp.damage(1);

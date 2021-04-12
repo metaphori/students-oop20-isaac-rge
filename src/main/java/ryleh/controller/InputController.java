@@ -3,11 +3,11 @@ package ryleh.controller;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import ryleh.common.Timer;
-import ryleh.controller.events.BulletSpawnEvent;
-import ryleh.controller.events.NewLevelEvent;
 import ryleh.core.GameState;
 import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
+import ryleh.model.events.BulletSpawnEvent;
+import ryleh.model.events.NewLevelEvent;
 import ryleh.model.physics.Direction;
 import ryleh.view.PlayerGraphicComponent;
 
@@ -87,6 +87,8 @@ public class InputController {
 			break;
 		case L: this.newLevel = isMoving;
 			break;
+		case SPACE: this.isShooting = isMoving;
+		break;
 		default:
 			break;
 		}

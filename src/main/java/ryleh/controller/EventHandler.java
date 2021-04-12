@@ -1,4 +1,4 @@
-package ryleh.controller.events;
+package ryleh.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,17 @@ import ryleh.core.factories.BasicFactory;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.components.HealthIntComponent;
+import ryleh.model.events.BulletCollisionEvent;
+import ryleh.model.events.BulletSpawnEvent;
+import ryleh.model.events.EnemiesDefeatedEvent;
+import ryleh.model.events.EnemyCollisionEvent;
+import ryleh.model.events.Event;
+import ryleh.model.events.EventListener;
+import ryleh.model.events.FireCollisionEvent;
+import ryleh.model.events.GameOverEvent;
+import ryleh.model.events.ItemPickUpEvent;
+import ryleh.model.events.NewLevelEvent;
+import ryleh.model.events.RemoveEntityEvent;
 import ryleh.view.PlayerGraphicComponent;
 import ryleh.view.other.ItemGraphicComponent;
 

@@ -4,12 +4,12 @@ import java.util.Optional;
 
 import ryleh.common.P2d;
 import ryleh.common.V2d;
-import ryleh.controller.events.BulletCollisionEvent;
-import ryleh.controller.events.FireCollisionEvent;
-import ryleh.controller.events.RemoveEntityEvent;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
+import ryleh.model.events.BulletCollisionEvent;
+import ryleh.model.events.FireCollisionEvent;
+import ryleh.model.events.RemoveEntityEvent;
 import ryleh.view.ViewHandler;
 
 public class BulletComponent extends Component {

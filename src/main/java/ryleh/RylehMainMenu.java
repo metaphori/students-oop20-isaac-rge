@@ -1,15 +1,10 @@
 package ryleh;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.sun.javafx.font.FontFactory;
 
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Separator;
@@ -22,7 +17,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import ryleh.common.Config;
 import ryleh.core.GameEngine;

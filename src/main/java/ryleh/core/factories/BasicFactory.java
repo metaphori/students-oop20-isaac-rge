@@ -9,6 +9,7 @@ import ryleh.core.GameState;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.BulletComponent;
+import ryleh.model.components.CollisionComponent;
 import ryleh.model.components.DrunkComponent;
 import ryleh.model.components.FireComponent;
 import ryleh.model.components.HealthIntComponent;
@@ -101,6 +102,7 @@ public class BasicFactory {
                          .type(Type.FIRE)
                          .position(position)
                          .with(new FireComponent(state.getWorld()))
+                         .with(new CollisionComponent(state.getWorld()))
                          .view(new FireGraphicComponent())
                          .bbox(new CircleHitBox(new Circle2d(45)))
                          .zIndex(1)

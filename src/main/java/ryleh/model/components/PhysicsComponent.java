@@ -12,6 +12,7 @@ public class PhysicsComponent extends Component {
     private P2d position;
     private int speed;
     private Direction direction;
+    private Direction lastDirection;
     private Direction blocked;
     private P2d lastPos;
 
@@ -22,6 +23,7 @@ public class PhysicsComponent extends Component {
         this.lastPos = new P2d(0, 0);
         this.speed = speed;
         this.direction = Direction.IDLE;
+        this.lastDirection = Direction.DOWN;
         this.blocked = Direction.IDLE;
     }
 
@@ -32,7 +34,7 @@ public class PhysicsComponent extends Component {
         this.move(0);
     }
 
-    @Override
+	@Override
     public void onUpdate(final double dt) {
         if (this.canMove() && !this.blocked.equals(this.direction)) {
             move(dt);
@@ -75,7 +77,13 @@ public class PhysicsComponent extends Component {
     }
 
     public void setDirection(final Direction direction) { 
+    	if(!this.direction.equals(Direction.IDLE)) {
+    		this.lastDirection = this.direction;
+    	}
         this.direction = direction;
+    }
+    public Direction getLastDirection() {
+        return this.lastDirection;
     }
     public Direction getDirection() {
         return this.direction;

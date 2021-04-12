@@ -35,7 +35,6 @@ public class BulletComponent extends Component {
 	//TODO could extract an interface for this method
 	private void checkCollision() {
 		Optional<GameObject> colliding = Optional.empty();
-		System.out.println("tipo: " + object.getType().toString());
 		if (!object.getType().equals(Type.PLAYER_BULLET)) {
 			colliding = world.getGameObjects().stream()
 					.filter(obj -> obj.getType().equals(Type.PLAYER))
@@ -45,7 +44,7 @@ public class BulletComponent extends Component {
 			colliding = world.getGameObjects().stream()
 					.filter(obj -> obj.getType().equals(Type.ENEMY_DRUNK) || obj.getType().equals(Type.ENEMY_DRUNKSPINNER) 
 							|| obj.getType().equals(Type.ENEMY_LURKER) || obj.getType().equals(Type.ENEMY_SHOOTER) 
-							|| obj.getType().equals(Type.ENEMY_SPINNER))
+							|| obj.getType().equals(Type.ENEMY_SPINNER) || obj.getType().equals(Type.ROCK) || obj.getType().equals(Type.ITEM))
 					.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
 					.findFirst();
 		}

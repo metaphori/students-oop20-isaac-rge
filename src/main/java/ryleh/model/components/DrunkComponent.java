@@ -42,14 +42,14 @@ public class DrunkComponent extends Component {
 	@Override
 	 public void onUpdate(final double deltaTime) {
 	        adjustAngle();
-	        //move(deltaTime);
+	        move(deltaTime);
 
 	       // entity.setRotation(entity.getRotation() * 0.9 + directionAngle * 0.1);
 
 	       // tx += tpf;
 
 	       checkScreenBounds();
-	       this.isCollidingWithPlayer();
+//	       this.isCollidingWithPlayer();
 	    }
 
 	    private void adjustAngle() {
@@ -79,13 +79,13 @@ public class DrunkComponent extends Component {
 	            this.velocity.y = -this.velocity.y;
 	        }
 	    }
-	    private void isCollidingWithPlayer() {
-			Optional<GameObject> colliding = world.getGameObjects().stream()
-					.filter(obj -> obj.getType().equals(Type.PLAYER))
-					.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
-					.findFirst();
-			if (colliding.isPresent()) {
-				world.notifyWorldEvent(new EnemyCollisionEvent(colliding.get(), object));
-			}
-		}
+//	    private void isCollidingWithPlayer() {
+//			Optional<GameObject> colliding = world.getGameObjects().stream()
+//					.filter(obj -> obj.getType().equals(Type.PLAYER))
+//					.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
+//					.findFirst();
+//			if (colliding.isPresent()) {
+//				world.notifyWorldEvent(new EnemyCollisionEvent(colliding.get(), object));
+//			}
+//		}
 }

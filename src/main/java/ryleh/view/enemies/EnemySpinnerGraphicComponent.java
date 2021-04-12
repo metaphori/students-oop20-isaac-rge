@@ -18,13 +18,9 @@ import ryleh.view.Textures;
 public class EnemySpinnerGraphicComponent implements GraphicComponent{
 	private Rotate rotation = new Rotate();
 	private Rectangle rectangle;
-	private int width;
-	private int height;
 	
 	public EnemySpinnerGraphicComponent() {
-		this.height = Textures.ENEMY_SPINNER.getHeight();
-		this.width = Textures.ENEMY_SPINNER.getWidth();
-		this.rectangle = new Rectangle(width, height);
+		this.rectangle = new Rectangle(Textures.ENEMY_SPINNER.getWidth(), Textures.ENEMY_SPINNER.getHeight());
 		rectangle.setFill(Textures.ENEMY_SPINNER.getImagePattern());
 		rotation.setAngle(GameMath.toDegrees(Math.PI / 60));
 	}

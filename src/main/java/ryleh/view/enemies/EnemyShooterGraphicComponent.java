@@ -14,13 +14,9 @@ import ryleh.view.Textures;
 public class EnemyShooterGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
-	private int width;
-	private int height;
 	
 	public EnemyShooterGraphicComponent() {
-		this.height = Textures.ENEMY_SHOOTER.getHeight();
-		this.width = Textures.ENEMY_SHOOTER.getHeight();
-		this.rectangle = new Rectangle(width, height);
+		this.rectangle = new Rectangle(Textures.ENEMY_SHOOTER.getHeight(), Textures.ENEMY_SHOOTER.getHeight());
 		rectangle.setFill(Textures.ENEMY_SHOOTER.getImagePattern());
 	}
 

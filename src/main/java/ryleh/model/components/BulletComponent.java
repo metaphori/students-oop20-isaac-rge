@@ -37,7 +37,7 @@ public class BulletComponent extends Component {
 		Optional<GameObject> colliding = Optional.empty();
 		if (!object.getType().equals(Type.PLAYER_BULLET)) {
 			colliding = world.getGameObjects().stream()
-					.filter(obj -> obj.getType().equals(Type.PLAYER))
+					.filter(obj -> obj.getType().equals(Type.PLAYER) || obj.getType().equals(Type.ROCK) )
 					.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
 					.findFirst();
 		} else {

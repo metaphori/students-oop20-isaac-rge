@@ -15,14 +15,10 @@ import ryleh.view.Textures;
 public class FireGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
-	private int width;
-	private int height;
 	private AnimationLoop animFire = new AnimationLoop(List.of(Textures.FIRE1.getImagePattern(), Textures.FIRE2.getImagePattern()), 10);
 	
 	public FireGraphicComponent() {
-		this.height = Textures.FIRE1.getHeight();
-		this.width = Textures.FIRE1.getWidth();
-		this.rectangle = new Rectangle(width, height);
+		this.rectangle = new Rectangle(Textures.FIRE1.getWidth(), Textures.FIRE1.getHeight());
 		rectangle.setFill(Textures.FIRE1.getImagePattern());
 	}
 

@@ -17,8 +17,6 @@ import ryleh.view.Textures;
 public class DoorGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
-	private int width;
-	private int height;
 	private boolean animPlayed;
 	private AnimationLoop animDoor = new AnimationLoop(List.of(Textures.DOOR1.getImagePattern(), 
 															   Textures.DOOR2.getImagePattern(), 
@@ -28,9 +26,7 @@ public class DoorGraphicComponent implements GraphicComponent{
 														8);
 	
 	public DoorGraphicComponent() {
-		this.height = Textures.DOOR1.getHeight();
-		this.width = Textures.DOOR1.getWidth();
-		this.rectangle = new Rectangle(width, height);
+		this.rectangle = new Rectangle(Textures.DOOR1.getWidth(), Textures.DOOR1.getHeight());
 		this.rectangle.setFill(Textures.DOOR1.getImagePattern());
 		this.animPlayed = false;
 	}

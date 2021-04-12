@@ -3,11 +3,11 @@ package ryleh.model.components;
 import java.util.Optional;
 
 import ryleh.controller.Entity;
-import ryleh.controller.events.EnemyCollisionEvent;
-import ryleh.controller.events.GameOverEvent;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
+import ryleh.model.events.EnemyCollisionEvent;
+import ryleh.model.events.GameOverEvent;
 
 public class CollisionComponent extends Component{
 	

@@ -1,4 +1,4 @@
-package ryleh.controller.events;
+package ryleh.model.events;
 
 import ryleh.common.P2d;
 import ryleh.common.V2d;

@@ -3,11 +3,11 @@ package ryleh.controller;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import ryleh.common.Timer;
-import ryleh.controller.events.BulletSpawnEvent;
-import ryleh.controller.events.NewLevelEvent;
 import ryleh.core.GameState;
 import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
+import ryleh.model.events.BulletSpawnEvent;
+import ryleh.model.events.NewLevelEvent;
 import ryleh.model.physics.Direction;
 import ryleh.view.PlayerGraphicComponent;
 
@@ -26,8 +26,8 @@ public class InputController {
 	private final PhysicsComponent physics; 
 	private final Scene scene;
 	private final Entity player;
-	private World world;
-	private Timer timer;
+	private final World world;
+	private final Timer timer;
 	
 	public InputController(final GameState state) {
 		this.scene = state.getView().getScene();
@@ -59,32 +59,6 @@ public class InputController {
 			} else {
 				this.shoot(this.physics.getDirection());
 			}
-			graphic.setDirection(Direction.UP);
-		} else if (isMoveDown) {
-			physics.setVelocity(Direction.DOWN.getPoint());
-			physics.setDirection(Direction.DOWN);
-			if (!physics.getBlocked().equals(Direction.DOWN)) {
-                            physics.resetBlocked();
-                        }
-			graphic.setDirection(Direction.DOWN);
-		} else if (isMoveLeft) {
-			physics.setVelocity(Direction.LEFT.getPoint());
-			physics.setDirection(Direction.LEFT);
-			if (!physics.getBlocked().equals(Direction.LEFT)) {
-                            physics.resetBlocked();
-                        }
-			graphic.setDirection(Direction.LEFT);
-		} else if (isMoveRight) {
-			physics.setVelocity(Direction.RIGHT.getPoint());
-			physics.setDirection(Direction.RIGHT);
-			if (!physics.getBlocked().equals(Direction.RIGHT)) {
-                            physics.resetBlocked();
-                        }
-			graphic.setDirection(Direction.RIGHT);	
-		} else {
-			physics.setVelocity(Direction.IDLE.getPoint());
-			//physics.setDirection(Direction.IDLE);
-			graphic.setDirection(Direction.IDLE);
 		}
 		this.move(isMoveDown, Direction.DOWN);
 		this.move(isMoveUp, Direction.UP);
@@ -102,9 +76,6 @@ public class InputController {
 	}
 
 	private void setMoving(final KeyCode key, final boolean isMoving) {
-		if (key.equals(KeyCode.SPACE)) {
-			this.isShooting = isMoving;
-		}
 		switch (key) {
 		case A: this.isMoveLeft = isMoving;
 			break;
@@ -116,6 +87,8 @@ public class InputController {
 			break;
 		case L: this.newLevel = isMoving;
 			break;
+		case SPACE: this.isShooting = isMoving;
+		break;
 		default:
 			break;
 		}

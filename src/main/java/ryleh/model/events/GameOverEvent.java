@@ -1,4 +1,4 @@
-package ryleh.controller.events;
+package ryleh.model.events;
 
 import ryleh.model.GameObject;
 
@@ -9,7 +9,7 @@ public class GameOverEvent extends AbstractEvent {
 	}
 
 	@Override
-	void handle() {
+	public void handle() {
 		//cambio di scena e arrivo della scritta gameOver
 		//System.exit(0);
 	}

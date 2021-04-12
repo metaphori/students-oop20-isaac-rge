@@ -12,7 +12,6 @@ import ryleh.model.World;
 import ryleh.model.components.BulletComponent;
 import ryleh.model.components.CollisionComponent;
 import ryleh.model.components.DrunkComponent;
-import ryleh.model.components.FireComponent;
 import ryleh.model.components.HealthIntComponent;
 import ryleh.model.components.ItemComponent;
 import ryleh.model.components.LurkerComponent;
@@ -185,7 +184,6 @@ public class GameFactory {
     	 Entity e = GameEngine.entityBuilder()
     			 .type(Type.FIRE)
     			 .position(position)
-    			 .with(new FireComponent(world))
     			 .with(new CollisionComponent(world))
     			 .view(new FireGraphicComponent())
     			 .bbox(new CircleHitBox(45))

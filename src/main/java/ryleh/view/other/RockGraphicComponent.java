@@ -12,13 +12,9 @@ import ryleh.view.Textures;
 public class RockGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
-	private int width;
-	private int height;
 	
 	public RockGraphicComponent() {
-		this.height = Textures.ROCK.getHeight();
-		this.width = Textures.ROCK.getWidth();
-		this.rectangle = new Rectangle(width, height);
+		this.rectangle = new Rectangle(Textures.ROCK.getWidth(), Textures.ROCK.getHeight());
 		rectangle.setFill(Textures.ROCK2.getImagePattern());
 	}
 

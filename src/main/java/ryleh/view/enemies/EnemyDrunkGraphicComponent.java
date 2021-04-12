@@ -14,13 +14,9 @@ import ryleh.view.Textures;
 public class EnemyDrunkGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
-	private int width;
-	private int height;
 
 	public EnemyDrunkGraphicComponent() {
-		this.height = Textures.ENEMY_DRUNK.getHeight();
-		this.width = Textures.ENEMY_DRUNK.getWidth();
-		this.rectangle = new Rectangle(width, height);
+		this.rectangle = new Rectangle(Textures.ENEMY_DRUNK.getWidth(), Textures.ENEMY_DRUNK.getHeight());
 		this.rectangle.setFill(Textures.ENEMY_DRUNK.getImagePattern());
 	}
 

@@ -19,7 +19,7 @@ public class DrunkComponent extends Component {
 
     private double directionAngle = GameMath.toDegrees(GameMath.randomInRange(-1, 1) * Math.PI*2);
 
-    private double moveSpeed = 0.15;
+    private double moveSpeed = 0.05;
     private int rotationSpeed = GameMath.randomInt(-100, 100);
 
     private double tx = GameMath.randomInRange(1000, 10000);
@@ -59,10 +59,10 @@ public class DrunkComponent extends Component {
 	    }
 	    private void move(double deltaTime) {
 	        V2d directionVector = V2d.fromAngle(directionAngle).mulLocal(moveSpeed);
-	        this.velocity.addLocal(directionVector).mulLocal(deltaTime * 0.001); //add time per frame value to mulLocal
+	        this.velocity.addLocal(directionVector).getNormalized().mulLocal(deltaTime * 0.01); //add time per frame value to mulLocal
 	        this.position = this.position.sum(this.velocity);
 	        object.setPosition(this.position);
-	        //System.out.println("VELOCITY : \t " + this.velocity.toString());
+	        System.out.println("VELOCITY : \t " + this.velocity.toString());
 	        //System.out.println("Position of " + super.object + " is " + this.position);
 	    }
 

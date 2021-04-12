@@ -76,7 +76,7 @@ public class BasicFactory {
                  .type(Type.ROCK)
                  .position(position)
                  .view(new RockGraphicComponent())
-                 .bbox(new CircleHitBox(45))
+                 .bbox(new CircleHitBox(75))
                  .zIndex(1)
                  .build();
          state.getWorld().addGameObject(e.getGameObject());

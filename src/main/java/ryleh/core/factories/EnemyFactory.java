@@ -9,6 +9,7 @@ import ryleh.core.GameState;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.BulletComponent;
+import ryleh.model.components.CollisionComponent;
 import ryleh.model.components.DrunkComponent;
 import ryleh.model.components.HealthIntComponent;
 import ryleh.model.components.LurkerComponent;
@@ -42,8 +43,10 @@ public class EnemyFactory {
                  .type(Type.ENEMY_SHOOTER)
                  .position(position)
                  .with(new ShooterComponent(state.getWorld(), state.getPlayer()))
+                 .with(new HealthIntComponent(state.getWorld(),1))
+                 .with(new CollisionComponent(state.getWorld()))
                  .view(new EnemyShooterGraphicComponent())
-                 .bbox(new CircleHitBox(new Circle2d(50)))
+                 .bbox(new CircleHitBox(new Circle2d(75)))
                  .zIndex(1)
                  .build();
          state.getWorld().addGameObject(e.getGameObject());
@@ -55,8 +58,10 @@ public class EnemyFactory {
                  .type(Type.ENEMY_SPINNER)
                  .position(position)
                  .with(new SpinnerComponent(state.getWorld(), state.getPlayer()))
+                 .with(new HealthIntComponent(state.getWorld(),1))
+                 .with(new CollisionComponent(state.getWorld()))
                  .view(new EnemySpinnerGraphicComponent())
-                 .bbox(new CircleHitBox(new Circle2d(50)))
+                 .bbox(new CircleHitBox(new Circle2d(75)))
                  .zIndex(10)
                  .build();
          state.getWorld().addGameObject(e.getGameObject());
@@ -68,8 +73,10 @@ public class EnemyFactory {
                  .type(Type.ENEMY_DRUNK)
                  .position(position)
                  .with(new DrunkComponent(state.getWorld()))
+                 .with(new HealthIntComponent(state.getWorld(),1))
+                 .with(new CollisionComponent(state.getWorld()))
                  .view(new EnemyDrunkGraphicComponent())
-                 .bbox(new CircleHitBox(new Circle2d(50)))
+                 .bbox(new CircleHitBox(new Circle2d(75)))
                  .zIndex(0)
                  .build();
          state.getWorld().addGameObject(e.getGameObject());
@@ -81,8 +88,10 @@ public class EnemyFactory {
                  .type(Type.ENEMY_LURKER)
                  .position(position)
                  .with(new LurkerComponent(state.getWorld(), state.getPlayer()))
+                 .with(new HealthIntComponent(state.getWorld(),1))
+                 .with(new CollisionComponent(state.getWorld()))
                  .view(new EnemyLurkerGraphicComponent(state.getPlayer().getGameObject()))
-                 .bbox(new CircleHitBox(new Circle2d(50)))
+                 .bbox(new CircleHitBox(new Circle2d(75)))
                  .zIndex(9)
                  .build();
          state.getWorld().addGameObject(e.getGameObject());
@@ -94,8 +103,10 @@ public class EnemyFactory {
                  .type(Type.ENEMY_DRUNKSPINNER)
                  .position(position)
                  .with(new DrunkComponent(state.getWorld()))
+                 .with(new HealthIntComponent(state.getWorld(),1))
+                 .with(new CollisionComponent(state.getWorld()))
                  .view(new EnemyDrunkSpinnerGraphicComponent())
-                 .bbox(new CircleHitBox(new Circle2d(50)))
+                 .bbox(new CircleHitBox(new Circle2d(75)))
                  .zIndex(8)
                  .build();
          state.getWorld().addGameObject(e.getGameObject());

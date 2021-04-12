@@ -9,7 +9,9 @@ import ryleh.core.GameState;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.BulletComponent;
+import ryleh.model.components.CollisionComponent;
 import ryleh.model.components.DrunkComponent;
+import ryleh.model.components.FireComponent;
 import ryleh.model.components.HealthIntComponent;
 import ryleh.model.components.ItemComponent;
 import ryleh.model.components.LurkerComponent;
@@ -47,7 +49,7 @@ public class BasicFactory {
                  .with(new PhysicsComponent(state.getWorld(), 1000))
                  .with(new HealthIntComponent(state.getWorld(), 3))
                  .view(new PlayerGraphicComponent())
-                 .bbox(new CircleHitBox(new Circle2d(100)))
+                 .bbox(new CircleHitBox(new Circle2d(85)))
                  .zIndex(1)
                  .build();
          state.getWorld().addGameObject(e.getGameObject());
@@ -55,12 +57,14 @@ public class BasicFactory {
          ((PlayerGraphicComponent) e.getView()).setDirection(((PhysicsComponent) e.getGameObject().getComponent(PhysicsComponent.class).get()).getDirection());
          return e;
      }
-     public Entity createBullet(final GameState state, final P2d origin, final V2d direction) {
+     public Entity createBullet(final GameState state, final P2d origin, final V2d direction, final Type type) {
+    	 Type bulletType = type.equals(Type.PLAYER) ? Type.PLAYER_BULLET : Type.ENEMY_BULLET;
          Entity e = GameEngine.entityBuilder()
-                 .type(Type.ENEMY_BULLET)
+                 .type(bulletType)
                  .position(origin)
                  .with(new BulletComponent(state.getWorld(), origin, direction))
                  .view(new BulletGraphicComponent())
+                 .bbox(new CircleHitBox(new Circle2d(5)))
                  .zIndex(0)
                  .build();
          state.getWorld().addGameObject(e.getGameObject());
@@ -97,8 +101,10 @@ public class BasicFactory {
          Entity e = GameEngine.entityBuilder()
                          .type(Type.FIRE)
                          .position(position)
+                         .with(new FireComponent(state.getWorld()))
+                         .with(new CollisionComponent(state.getWorld()))
                          .view(new FireGraphicComponent())
-                         .bbox(new CircleHitBox(45))
+                         .bbox(new CircleHitBox(new Circle2d(45)))
                          .zIndex(1)
                          .build();
          state.getWorld().addGameObject(e.getGameObject());

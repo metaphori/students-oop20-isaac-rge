@@ -3,13 +3,10 @@ package ryleh.controller.events;
 import ryleh.model.GameObject;
 import ryleh.model.components.HealthIntComponent;
 
-public class EnemyCollisionEvent extends AbstractEvent {
-	
-	private GameObject enemy;
+public class EnemyCollisionEvent  extends AbstractEvent {
 	
 	public EnemyCollisionEvent(final GameObject player, final GameObject enemy) {
 		super(player);
-		this.enemy = enemy;
 	}
 	@Override
 	public void handle() {

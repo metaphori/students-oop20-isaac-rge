@@ -13,13 +13,9 @@ import ryleh.view.Textures;
 public class BulletGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
-	private int width;
-	private int height;
 	
 	public BulletGraphicComponent() {
-		this.height = (int) (Config.SCALE_MODIFIER * 20);
-		this.width = (int) (Config.SCALE_MODIFIER * 20);
-		this.rectangle = new Rectangle(width, height);
+		this.rectangle = new Rectangle(Textures.BULLET.getWidth(), Textures.BULLET.getHeight());
 		rectangle.setFill(Textures.BULLET.getImagePattern());
 	}
 	@Override

@@ -18,19 +18,13 @@ public class ItemGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
 	private boolean animPlayed;
-	private int width;
-	private int height;
 	private AnimationLoop animItem = new AnimationLoop(List.of(Textures.ITEM1.getImagePattern(), 
 															   Textures.ITEM2.getImagePattern(), 
 															   Textures.ITEM3.getImagePattern()), 
-													   10);
-	//private boolean fixed = false;
-	
+													   10);	
 	
 	public ItemGraphicComponent() {
-		this.height = Textures.ITEM1.getHeight();
-		this.width = Textures.ITEM1.getWidth();
-		this.rectangle = new Rectangle(width, height);
+		this.rectangle = new Rectangle(Textures.ITEM1.getWidth(), Textures.ITEM1.getHeight());
 		this.rectangle.setFill(Textures.ITEM1.getImagePattern());
 		this.animPlayed = false;
 	}

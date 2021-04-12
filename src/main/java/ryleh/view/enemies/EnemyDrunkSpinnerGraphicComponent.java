@@ -21,13 +21,9 @@ public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent{
     private long adjustDelay = 100;
     private double moveSpeed = 50;
     private double angle=0;
-	private int width;
-	private int height;
 	
 	public EnemyDrunkSpinnerGraphicComponent() {
-		this.height = Textures.ENEMY_DRUNKSPINNER.getHeight();
-		this.width = Textures.ENEMY_DRUNKSPINNER.getWidth();
-		this.rectangle = new Rectangle(width, height);
+		this.rectangle = new Rectangle(Textures.ENEMY_DRUNKSPINNER.getWidth(), Textures.ENEMY_DRUNKSPINNER.getHeight());
 		this.rectangle.setFill(Textures.ENEMY_DRUNKSPINNER.getImagePattern());
 	}
 

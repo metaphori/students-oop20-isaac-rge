@@ -27,13 +27,9 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent{
 	private V2d velocity;
 	private int moveSpeed=50;
 	private GameObject player;
-	private int width;
-	private int height;
 	
 	public EnemyLurkerGraphicComponent(final GameObject player) {
-		this.height = Textures.ENEMY_LURKER.getHeight();
-		this.width = Textures.ENEMY_LURKER.getWidth();
-		this.rectangle = new Rectangle(width, height);
+		this.rectangle = new Rectangle(Textures.ENEMY_LURKER.getWidth(), Textures.ENEMY_LURKER.getHeight());
 		this.rectangle.setFill(Textures.ENEMY_LURKER.getImagePattern());
 		this.player=player;
 		this.velocity=new V2d(0,0);

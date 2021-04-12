@@ -28,18 +28,17 @@ import ryleh.common.Config;
 import ryleh.core.GameEngine;
 
 public class RylehMainMenu {
-	private final int font = (int) (Config.SCALE_MODIFIER * 30);
+	private final int scaledSize = (int) (Config.SCALE_MODIFIER * 30);
 	private final Color startColor = Color.CORNFLOWERBLUE;
 	private final Color hoverColor = Color.CADETBLUE;
 	private Text description = new Text("");
-	private List<Node> nodes = new ArrayList<>();
 	private static Font levelFont;
 	private VBox box = new VBox();
 	private Separator separator = new Separator();
 	private BorderPane pane = new BorderPane();
 	
 	public RylehMainMenu(final Stage primaryStage) {
-		levelFont = Font.loadFont("assets/fonts/manaspc.ttf", font);
+		levelFont = Font.loadFont(Ryleh.class.getResource("/assets/fonts/saturno.ttf").toExternalForm(), this.scaledSize);
 		this.box.getChildren().add(createCustomButton("Start Game", "Start a new adventure", () -> {
 			final GameEngine engine = new GameEngine();
 			engine.initGame(primaryStage);
@@ -49,12 +48,12 @@ public class RylehMainMenu {
 			createCustomAlert();
 		}));
 		this.separator.setOrientation(Orientation.HORIZONTAL);
-		this.separator.setTranslateX(font / 2);
-		this.description.setFont(new Font(font));
+		this.separator.setTranslateX(this.scaledSize / 2);
+		this.description.setFont(new Font(this.scaledSize));
 		this.description.setFill(startColor);
 		this.description.setTranslateY(separator.getTranslateY() + 10);
 		this.box.setAlignment(Pos.CENTER_LEFT);
-		this.box.setTranslateX(font);
+		this.box.setTranslateX(this.scaledSize);
 		this.box.getChildren().addAll(this.separator, this.description);
 		this.pane.setLeft(this.box);
 		primaryStage.setScene(new Scene(this.pane, Config.STANDARD_WIDTH, Config.STANDARD_HEIGHT));
@@ -64,10 +63,10 @@ public class RylehMainMenu {
 	}
 	private void createCustomAlert() {
 		Stage window = new Stage();
-		HBox confirm = new HBox(font);
+		HBox confirm = new HBox(this.scaledSize);
 		VBox container = new VBox();
-		Text question = new Text("Do you really want to quit this beatiful game?");
-		question.setFont(new Font(font));
+		Text question = new Text("Do you really want to quit?");
+		question.setFont(new Font(this.scaledSize));
 		confirm.getChildren().add(createCustomButton("YES", "", () -> System.exit(0)));
 		confirm.getChildren().add(createCustomButton("NO", "", () -> window.close()));
 		confirm.setAlignment(Pos.CENTER);
@@ -84,7 +83,7 @@ public class RylehMainMenu {
 	}
 	private Node createCustomButton(final String name, final String description, final Runnable action) {
 		HBox hbox = new HBox(name.length());
-		Rectangle side = new Rectangle(font / 4, font);
+		Rectangle side = new Rectangle(this.scaledSize / 4, this.scaledSize);
 		Text btnText = new Text(name);
 		createCustomText(btnText, description, action);
 		createSideRectangle(side, btnText);
@@ -93,12 +92,12 @@ public class RylehMainMenu {
 		return hbox;
 	}
 	private void createCustomText(final Text text, final String description, final Runnable action) {
-		text.setFont(Font.font(font));
+		text.setFont(levelFont);
 		text.setTextAlignment(TextAlignment.LEFT);
-		text.setFill(startColor);
-		text.setSelectionFill(hoverColor);
+		text.setFill(this.startColor);
+		text.setSelectionFill(this.hoverColor);
 		text.setOnMouseEntered(event -> {
-			text.setFill(hoverColor);
+			text.setFill(this.hoverColor);
 			this.description.setText(description);
 		});
 		text.setOnMouseExited(event -> {
@@ -110,7 +109,7 @@ public class RylehMainMenu {
 		});
 	}
 	private void createSideRectangle(final Rectangle rectangle, final Text text) {
-		rectangle.setFill(hoverColor);
+		rectangle.setFill(this.hoverColor);
 		rectangle.setVisible(false);
 		rectangle.visibleProperty().bind(
 				Bindings.when(text.hoverProperty()).then(true).otherwise(false));

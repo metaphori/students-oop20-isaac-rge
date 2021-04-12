@@ -75,7 +75,7 @@ public class DrunkComponent extends Component {
 	    }
 	    private boolean isCollidingWithRock() {
 	    	Optional<GameObject> colliding = world.getGameObjects().stream()
-	    			.filter(obj -> obj.getType().equals(Type.PLAYER))
+	    			.filter(obj -> obj.getType().equals(Type.ROCK))
 	    			.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
 	    			.findFirst();
 	    	if (colliding.isPresent()) {

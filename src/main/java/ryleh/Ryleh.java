@@ -18,7 +18,6 @@ public class Ryleh extends Application {
     }
     @Override
     public void start(final Stage primaryStage) throws Exception {
-        RylehMainMenu menu = new RylehMainMenu(primaryStage);
-      
+        final RylehMainMenu menu = new RylehMainMenu(primaryStage);
     }
 }

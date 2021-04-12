@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import ryleh.Ryleh;
 import ryleh.common.Config;
 import ryleh.core.GameEngine;
 
@@ -24,7 +25,8 @@ public class RylehPauseMenu {
     public RylehPauseMenu(final Stage primaryStage) {
         factory = new MenuFactory();
         this.primaryStage = primaryStage;
-        factory.levelFont = Font.loadFont("assets/fonts/manaspc.ttf", factory.scaledSize);
+        factory.levelFont = Font.loadFont(Ryleh.class.getResource("/assets/fonts/manaspc.ttf")
+                .toExternalForm(), factory.scaledSize);
         final Runnable resume = new Runnable() {
             @Override
             public void run() {

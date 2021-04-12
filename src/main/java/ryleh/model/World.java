@@ -5,8 +5,8 @@ import java.util.List;
 import ryleh.common.P2d;
 import ryleh.common.Rectangle2d;
 import ryleh.common.Shape2d;
-import ryleh.controller.events.Event;
-import ryleh.controller.events.EventListener;
+import ryleh.model.events.Event;
+import ryleh.model.events.EventListener;
 
 public class World {
 

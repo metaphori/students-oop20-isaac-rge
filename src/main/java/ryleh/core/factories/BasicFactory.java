@@ -14,7 +14,6 @@ import ryleh.model.World;
 import ryleh.model.components.BulletComponent;
 import ryleh.model.components.CollisionComponent;
 import ryleh.model.components.DrunkComponent;
-import ryleh.model.components.FireComponent;
 import ryleh.model.components.HealthIntComponent;
 import ryleh.model.components.ItemComponent;
 import ryleh.model.components.LurkerComponent;
@@ -33,12 +32,12 @@ import ryleh.view.other.FireGraphicComponent;
 import ryleh.view.other.ItemGraphicComponent;
 import ryleh.view.other.RockGraphicComponent;
 
-public class BasicFactory {
+public final class BasicFactory {
      private static BasicFactory instance;
 
      private BasicFactory() { }
 
-     public static BasicFactory getInstance(){
+     public static BasicFactory getInstance() {
             if (instance == null) {
                     instance = new BasicFactory();
             }
@@ -52,7 +51,7 @@ public class BasicFactory {
                  .with(new PhysicsComponent(state.getWorld(), 1000))
                  .with(new HealthIntComponent(state.getWorld(), 3))
                  .view(new PlayerGraphicComponent(GameMath.toPoint2D(position)))
-                 .bbox(new CircleHitBox(new Circle2d(85)))
+                 .bbox(new CircleHitBox(new Circle2d(70)))
                  .zIndex(1)
                  .build();
          state.getWorld().addGameObject(e.getGameObject());
@@ -61,7 +60,7 @@ public class BasicFactory {
          return e;
      }
      public Entity createBullet(final GameState state, final P2d origin, final V2d direction, final Type type) {
-    	 Type bulletType = type.equals(Type.PLAYER) ? Type.PLAYER_BULLET : Type.ENEMY_BULLET;
+         final Type bulletType = type.equals(Type.PLAYER) ? Type.PLAYER_BULLET : Type.ENEMY_BULLET;
          Entity e = GameEngine.entityBuilder()
                  .type(bulletType)
                  .position(origin)
@@ -104,7 +103,6 @@ public class BasicFactory {
          Entity e = GameEngine.entityBuilder()
                          .type(Type.FIRE)
                          .position(position)
-                         .with(new FireComponent(state.getWorld()))
                          .with(new CollisionComponent(state.getWorld()))
                          .view(new FireGraphicComponent(GameMath.toPoint2D(position)))
                          .bbox(new CircleHitBox(new Circle2d(45)))

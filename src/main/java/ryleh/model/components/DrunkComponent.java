@@ -42,7 +42,7 @@ public class DrunkComponent extends Component {
 	@Override
 	 public void onUpdate(final double deltaTime) {
 	        adjustAngle();
-	        //move(deltaTime);
+	        move(deltaTime);
 
 	       // entity.setRotation(entity.getRotation() * 0.9 + directionAngle * 0.1);
 

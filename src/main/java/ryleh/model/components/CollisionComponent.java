@@ -23,8 +23,6 @@ public class CollisionComponent extends Component{
 				.findFirst();
 		if (colliding.isPresent()) {
 			world.notifyWorldEvent(new EnemyCollisionEvent(colliding.get(), object));
-			System.out.println("Sto collidendo \t");
-			System.out.println(object.toString());
 	    }
 	}
 

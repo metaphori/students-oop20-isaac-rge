@@ -7,7 +7,6 @@ public class RemoveEntityEvent extends AbstractEvent {
 	public RemoveEntityEvent(GameObject target) {
 		super(target);
 	}
-
 	@Override
 	void handle() {
 

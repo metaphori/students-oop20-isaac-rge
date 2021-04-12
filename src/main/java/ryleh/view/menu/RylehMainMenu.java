@@ -1,4 +1,4 @@
-package ryleh;
+package ryleh.view.menu;
 
 
 import java.util.ArrayList;
@@ -28,15 +28,18 @@ import ryleh.common.Config;
 import ryleh.core.GameEngine;
 
 public class RylehMainMenu {
-	private final int font = (int) (Config.SCALE_MODIFIER * 30);
-	private final Color startColor = Color.CORNFLOWERBLUE;
-	private final Color hoverColor = Color.CADETBLUE;
-	private Text description = new Text("");
-	private List<Node> nodes = new ArrayList<>();
-	private static Font levelFont;
-	private VBox box = new VBox();
-	private Separator separator = new Separator();
-	private BorderPane pane = new BorderPane();
+	protected final int font = (int) (Config.SCALE_MODIFIER * 30);
+	protected final Color startColor = Color.CORNFLOWERBLUE;
+	protected final Color hoverColor = Color.CADETBLUE;
+	protected Text description = new Text("");
+	protected List<Node> nodes = new ArrayList<>();
+	protected static Font levelFont;
+	protected VBox box = new VBox();
+	protected Separator separator = new Separator();
+	protected BorderPane pane = new BorderPane();
+	
+	protected RylehMainMenu() {
+	}
 	
 	public RylehMainMenu(final Stage primaryStage) {
 		levelFont = Font.loadFont("assets/fonts/manaspc.ttf", font);
@@ -62,7 +65,7 @@ public class RylehMainMenu {
 		primaryStage.setTitle("Incredibile Funziona");
 		primaryStage.show();
 	}
-	private void createCustomAlert() {
+	protected void createCustomAlert() {
 		Stage window = new Stage();
 		HBox confirm = new HBox(font);
 		VBox container = new VBox();
@@ -82,7 +85,7 @@ public class RylehMainMenu {
 		window.setResizable(false);
 		window.showAndWait();
 	}
-	private Node createCustomButton(final String name, final String description, final Runnable action) {
+	protected Node createCustomButton(final String name, final String description, final Runnable action) {
 		HBox hbox = new HBox(name.length());
 		Rectangle side = new Rectangle(font / 4, font);
 		Text btnText = new Text(name);

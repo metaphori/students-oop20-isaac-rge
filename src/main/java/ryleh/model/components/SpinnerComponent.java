@@ -22,13 +22,12 @@ public class SpinnerComponent extends Component {
 	   private P2d position;
 	   private V2d velocity;
 	   private double bulletSpeed = 0.15;
-	   private Entity player;
+	   private double angle = 0;
 
-	   public SpinnerComponent(final World world,final Entity player) {
+	   public SpinnerComponent(final World world) {
 		   super(world);
 		   this.position = new P2d(0, 0);
 		   this.velocity = new V2d(0, 0);
-		   this.player = player;
 		}
 		@Override
 		public void onAdded(final GameObject object) {
@@ -38,20 +37,23 @@ public class SpinnerComponent extends Component {
 		@Override
 	    public void onUpdate(final double dt) {
 	    	shoot();
+	    	angle=angle + Math.PI/40;
+			if(angle>=Math.PI*2) {
+				angle=0;
+			}
 	    	this.isCollidingWithPlayer();
 	    }
 		public void shoot() {
-			if (System.currentTimeMillis()-weaponTimer >= 2000) {
-				V2d directionToPlayer = new V2d(player.getGameObject().getPosition().x, player.getGameObject().getPosition().y)
-	            		.sub(new V2d(this.position.x, this.position.y))
+			if (System.currentTimeMillis()-weaponTimer >= 500) {
+				V2d direction = new V2d(this.position.x * Math.cos(this.angle)-position.y * Math.sin(this.angle)
+						,position.x * Math.sin(this.angle)+position.y * Math.cos(this.angle))
+						//.sub(new V2d(this.position.x, this.position.y))
 	            		.getNormalized()
-	            		.mulLocal(bulletSpeed);
-		            //GameFactory.getInstance().createBullet(world, view, position, directionToPlayer);
-				world.notifyWorldEvent(new BulletSpawnEvent(object, object.getHitBox().getForm().getCenter(), directionToPlayer));
+	            		.mulLocal(bulletSpeed);;
+				world.notifyWorldEvent(new BulletSpawnEvent(object, object.getHitBox().getForm().getCenter(), direction));
 		        weaponTimer = System.currentTimeMillis();
 		    }
 		}
-		//TODO this method repeats in every enemy component
 		private void isCollidingWithPlayer() {
 			Optional<GameObject> colliding = world.getGameObjects().stream()
 					.filter(obj -> obj.getType().equals(Type.PLAYER))

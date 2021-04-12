@@ -42,10 +42,14 @@ public class HealthIntComponent extends Component {
      * Decreases currentHp. If it's below zero, it will call a death event.
      */
     public void damage(final int dmg) {
-    	if (!this.isImmortal) {
-            this.currentHp -= dmg;
-        	this.setImmortality();
-    	} 
+    	if (object.getType().equals(Type.PLAYER) ) {
+    		if (!this.isImmortal) {
+                this.currentHp -= dmg;
+            	this.setImmortality();
+    		}
+    	} else {
+    		this.currentHp -= dmg;
+    	}
     }
     /**
      * Increases currentHp only if not exceeds maxHp.

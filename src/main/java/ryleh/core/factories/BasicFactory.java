@@ -57,8 +57,9 @@ public class BasicFactory {
          return e;
      }
      public Entity createBullet(final GameState state, final P2d origin, final V2d direction, final Type type) {
+    	 Type bulletType = type.equals(Type.PLAYER) ? Type.PLAYER_BULLET : Type.ENEMY_BULLET;
          Entity e = GameEngine.entityBuilder()
-                 .type(type)
+                 .type(bulletType)
                  .position(origin)
                  .with(new BulletComponent(state.getWorld(), origin, direction))
                  .view(new BulletGraphicComponent())

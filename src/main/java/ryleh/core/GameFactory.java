@@ -83,7 +83,7 @@ public class GameFactory {
     	 Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_SPINNER)
                  .position(position)
-                 .with(new SpinnerComponent(world, player))
+                 .with(new SpinnerComponent(world))
                  .with(new HealthIntComponent(world,1))
                  .with(new CollisionComponent(world))
                  .view(new EnemySpinnerGraphicComponent())

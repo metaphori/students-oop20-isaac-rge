@@ -59,6 +59,7 @@ public class EnemyDrunkGraphicComponent implements GraphicComponent{
         ((AnchorPane) root).getChildren().add(rectangle);
 	}
 	
+	@Override
 	public void onRemoved(final EventHandler<ActionEvent> event) {
 		enemyFade.setOnFinished(event);
 		enemyFade.play();

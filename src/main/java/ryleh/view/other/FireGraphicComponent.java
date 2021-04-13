@@ -1,7 +1,6 @@
 package ryleh.view.other;
 
 import java.util.List;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
@@ -9,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
-import ryleh.common.Config;
 import ryleh.view.AnimationLoop;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
@@ -21,7 +19,7 @@ public class FireGraphicComponent implements GraphicComponent{
 	
 	public FireGraphicComponent() {
 		this.rectangle = new Rectangle(Textures.FIRE1.getWidth(), Textures.FIRE1.getHeight());
-		rectangle.setFill(Textures.FIRE1.getImagePattern());
+		this.rectangle.setFill(Textures.FIRE1.getImagePattern());
 	}
 
 	public FireGraphicComponent(final Point2D position) {

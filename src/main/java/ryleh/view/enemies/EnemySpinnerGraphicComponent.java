@@ -20,14 +20,15 @@ import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
 
 public class EnemySpinnerGraphicComponent implements GraphicComponent{
-	private Rotate rotation = new Rotate();
+	private Rotate rotation;
 	private Rectangle rectangle;
 	private FadeTransition enemyFade;
 	
 	public EnemySpinnerGraphicComponent() {
 		this.rectangle = new Rectangle(Textures.ENEMY_SPINNER.getWidth(), Textures.ENEMY_SPINNER.getHeight());
-		rectangle.setFill(Textures.ENEMY_SPINNER.getImagePattern());
-		rotation.setAngle(GameMath.toDegrees(Math.PI / 60));
+		this.rectangle.setFill(Textures.ENEMY_SPINNER.getImagePattern());
+		this.rotation = new Rotate();
+		this.rotation.setAngle(GameMath.toDegrees(Math.PI / 60));
 		this.enemyFade = new FadeTransition(Duration.millis(2000), rectangle);
 	    this.enemyFade.setFromValue(1.0);
 	    this.enemyFade.setToValue(0.0);
@@ -40,6 +41,7 @@ public class EnemySpinnerGraphicComponent implements GraphicComponent{
 		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
 		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		this.rectangle.setFill(Textures.ENEMY_SPINNER.getImagePattern());
+		this.rotation = new Rotate();
 		this.rotation.setAngle(GameMath.toDegrees(Math.PI / 60));
 		this.enemyFade = new FadeTransition(Duration.millis(2000), rectangle);
 	    this.enemyFade.setFromValue(1.0);

@@ -1,17 +1,13 @@
 package ryleh.view.other;
 
 import java.util.List;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import ryleh.common.Config;
 import ryleh.view.AnimationLoop;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
@@ -40,7 +36,7 @@ public class ItemGraphicComponent implements GraphicComponent{
 	}
 
 	public void setAnimPlayed() {
-		this.animPlayed = true;
+		animPlayed = true;
 	}
 	
 	public void playAnimation() {
@@ -52,8 +48,7 @@ public class ItemGraphicComponent implements GraphicComponent{
 	public void render(final Point2D position, final double deltaTime) {
 		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
 		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
-		//TODO if the entity is removed this check shouldn't be done
-		if (this.animPlayed) {
+		if (animPlayed) {
 			this.playAnimation();
 		}
 	}
@@ -62,23 +57,22 @@ public class ItemGraphicComponent implements GraphicComponent{
 	public void onAdded(final Scene scene) {
 		Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
-        //this.fixed = true;
 	}
 	
-	public boolean isAnimFinished() { // questo metodo serve negli eventi, per sapere quando cancellare l'entit� dal mondo ( sia view che model, credo)
+	public boolean isAnimFinished() {
 		return animItem.isCycleFinished();
 	}
 
-  @Override
+	@Override
 	public Object getNode() {
-		return this.rectangle;
+		return rectangle;
 	}
 
-  @Override
-  public void onRemoved(EventHandler<ActionEvent> event) {
-	  if (this.isAnimFinished()) {
-		  event.handle(null);
-	  }
-	  this.playAnimation();
-  }	
+	@Override
+	public void onRemoved(final EventHandler<ActionEvent> event) {
+		if (isAnimFinished()) {
+			event.handle(null);
+		}
+		this.playAnimation();
+	}	
 }

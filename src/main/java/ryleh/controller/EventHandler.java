@@ -34,11 +34,13 @@ public class EventHandler implements EventListener {
 	 * This method is called once every game loop. It checks all events inside the Event Queue and handles their behavior.
 	 */
 	public void checkEvents() {
+		HealthIntComponent comp = (HealthIntComponent) this.gameState.getPlayer().getGameObject().getComponent(HealthIntComponent.class).get();
 		this.checkPlayerState();
 		this.eventQueue.forEach(e -> {
 			if (e instanceof EnemyCollisionEvent) {
 				final EnemyCollisionEvent enemyEvent = (EnemyCollisionEvent) e;
 				enemyEvent.handle();
+				this.gameState.getView().getLives().setText("Lives: " + comp.getCurrentHp());
 			} else if (e instanceof ItemPickUpEvent) {
 				final ItemPickUpEvent pickUpEvent = (ItemPickUpEvent) e;
 				pickUpEvent.handle();
@@ -61,7 +63,8 @@ public class EventHandler implements EventListener {
 			    this.gameState.getLevelHandler().spawnDoor();
 			} else if(e instanceof NewLevelEvent) {
 				this.gameState.generateNewLevel();
-			}
+				this.gameState.getView().getLevel().setText("Level: " + this.gameState.getLevelHandler().getnRooms());
+			} 
 		});
 		this.eventQueue.clear();
 	}

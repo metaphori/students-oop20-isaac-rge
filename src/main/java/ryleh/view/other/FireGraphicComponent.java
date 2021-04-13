@@ -2,6 +2,8 @@ package ryleh.view.other;
 
 import java.util.List;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -50,5 +52,10 @@ public class FireGraphicComponent implements GraphicComponent{
 	@Override
 	public Object getNode() {
 		return rectangle;
+	}
+
+	@Override
+	public void onRemoved(final EventHandler<ActionEvent> event) {
+		event.handle(null);
 	}
 }

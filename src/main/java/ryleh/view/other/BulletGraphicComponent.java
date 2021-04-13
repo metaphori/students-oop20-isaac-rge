@@ -1,11 +1,15 @@
 package ryleh.view.other;
 
+import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import ryleh.common.Config;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
@@ -36,8 +40,12 @@ public class BulletGraphicComponent implements GraphicComponent{
 	public void onAdded(final Scene scene) {
 		Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
-        
 	}
+	
+	public void onRemoved(final EventHandler<ActionEvent> event) {
+		event.handle(null);
+	}
+	
 	@Override
 	public Object getNode() {
 		return rectangle;

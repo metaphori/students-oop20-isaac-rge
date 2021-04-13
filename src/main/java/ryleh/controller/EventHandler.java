@@ -47,6 +47,7 @@ public class EventHandler implements EventListener {
 				this.gameState.getView().getLives().setText("Lives: " + comp.getCurrentHp());
 				final ItemGraphicComponent graphic = (ItemGraphicComponent) this.gameState.getEntityByType(Type.ITEM).get().getView();
 				graphic.setAnimPlayed();
+				this.removeEntity(pickUpEvent.getItem());
 			} else if (e instanceof GameOverEvent) {
 				final GameOverEvent gameOver = (GameOverEvent) e;
 				gameOver.handle();

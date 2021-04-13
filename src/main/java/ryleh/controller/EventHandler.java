@@ -62,7 +62,7 @@ public class EventHandler implements EventListener {
 			} else if (e instanceof EnemiesDefeatedEvent) {
 			    this.gameState.getLevelHandler().spawnItem();
 			    this.gameState.getLevelHandler().spawnDoor();
-			} else if(e instanceof NewLevelEvent) {
+			} else if (e instanceof NewLevelEvent) {
 				this.gameState.generateNewLevel();
 				this.gameState.getView().getLevel().setText("Level: " + this.gameState.getLevelHandler().getnRooms());
 			} 

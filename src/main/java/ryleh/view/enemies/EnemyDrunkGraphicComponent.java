@@ -48,11 +48,8 @@ public class EnemyDrunkGraphicComponent implements GraphicComponent{
 	
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
-		this.rectangle.setX(position.getX());
-		this.rectangle.setY(position.getY());
-		/*if (this.isDying) {
-			this.enemyFade.play();;
-		}*/
+		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		this.updateImage();
 	}
 

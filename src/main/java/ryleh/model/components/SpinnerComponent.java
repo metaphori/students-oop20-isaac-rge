@@ -41,7 +41,6 @@ public class SpinnerComponent extends Component {
 			if(angle>=Math.PI*2) {
 				angle=0;
 			}
-	    	this.isCollidingWithPlayer();
 	    }
 		public void shoot() {
 			if (System.currentTimeMillis()-weaponTimer >= 500) {
@@ -53,14 +52,5 @@ public class SpinnerComponent extends Component {
 				world.notifyWorldEvent(new BulletSpawnEvent(object, object.getHitBox().getForm().getCenter(), direction));
 		        weaponTimer = System.currentTimeMillis();
 		    }
-		}
-		private void isCollidingWithPlayer() {
-			Optional<GameObject> colliding = world.getGameObjects().stream()
-					.filter(obj -> obj.getType().equals(Type.PLAYER))
-					.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
-					.findFirst();
-			if (colliding.isPresent()) {
-				world.notifyWorldEvent(new EnemyCollisionEvent(colliding.get(), object));
-			}
 		}
 }

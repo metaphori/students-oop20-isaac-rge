@@ -2,6 +2,9 @@ package ryleh.view.other;
 
 import java.util.List;
 
+import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,13 +21,14 @@ public class DoorGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
 	private boolean animPlayed;
+	private FadeTransition fade;
 	private AnimationLoop animDoor = new AnimationLoop(List.of(Textures.DOOR1.getImagePattern(), 
 															   Textures.DOOR2.getImagePattern(), 
 															   Textures.DOOR3.getImagePattern(), 
 															   Textures.DOOR4.getImagePattern(), 
 															   Textures.DOOR5.getImagePattern()), 
 														8);
-	
+	//COSTRUTTORE DA RIFARE
 	public DoorGraphicComponent() {
 		this.rectangle = new Rectangle(Textures.DOOR1.getWidth(), Textures.DOOR1.getHeight());
 		this.rectangle.setFill(Textures.DOOR1.getImagePattern());
@@ -61,5 +65,11 @@ public class DoorGraphicComponent implements GraphicComponent{
 	@Override
 	public Object getNode() {
 		return rectangle;
+	}
+
+	@Override
+	public void onRemoved(EventHandler<ActionEvent> event) {
+		// TODO Auto-generated method stub
+		
 	}
 }

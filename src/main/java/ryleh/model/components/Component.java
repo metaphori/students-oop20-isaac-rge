@@ -9,7 +9,11 @@ public abstract class Component {
     protected GameObject object;
     protected World world;
 
-    public Component(World world) {
+    /**
+     * 
+     * @param world The world where the possessor of this component is added.
+     */
+    public Component(final World world) {
         super();
         this.world = world;
         id = world.generateId("component");

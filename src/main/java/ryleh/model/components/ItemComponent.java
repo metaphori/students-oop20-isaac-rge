@@ -27,19 +27,6 @@ public class ItemComponent extends Component {
 	@Override
 	public void onUpdate(final double dt) {
 		super.onUpdate(dt);
-		isCollidingWithPlayer();
 	}
 
-	private void isCollidingWithPlayer() {
-		if (!this.isOpen) {
-			Optional<GameObject> colliding = world.getGameObjects().stream()
-					.filter(obj -> obj.getType().equals(Type.PLAYER))
-					.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
-					.findFirst();
-			if (colliding.isPresent()) {
-				world.notifyWorldEvent(new ItemPickUpEvent(colliding.get(), object));
-				this.isOpen = true;
-			}
-		}
-	}
 }

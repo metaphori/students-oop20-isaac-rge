@@ -62,8 +62,6 @@ public class DrunkComponent extends Component {
 	        this.velocity.addLocal(directionVector).getNormalized().mulLocal(deltaTime * 0.01); //add time per frame value to mulLocal
 	        this.position = this.position.sum(this.velocity);
 	        object.setPosition(this.position);
-	        System.out.println("VELOCITY : \t " + this.velocity.toString());
-	        //System.out.println("Position of " + super.object + " is " + this.position);
 	    }
 
 	    //TODO to rewrite

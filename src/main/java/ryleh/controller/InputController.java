@@ -38,7 +38,7 @@ public class InputController {
 		        .getComponent(PhysicsComponent.class).get();
 		this.timer = new Timer(shootingDelay);
 		this.timer.startTimer();
-		this.lastDir = Direction.IDLE;
+		this.lastDir = Direction.UP;
 	}
 	
 	public void initInput(){

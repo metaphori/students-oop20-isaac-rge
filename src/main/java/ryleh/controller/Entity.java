@@ -15,6 +15,9 @@ public class Entity {
         this.gameObject = gameObject;
     }
 
+    public Entity() {
+    }
+
     public GraphicComponent getView() {
         return view;
     }

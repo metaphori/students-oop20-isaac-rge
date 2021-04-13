@@ -2,6 +2,7 @@ package ryleh.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import ryleh.Ryleh;
 import ryleh.common.Config;
+import ryleh.view.enemies.EnemyDrunkGraphicComponent;
 
 public class ViewHandler {
 
@@ -62,6 +64,13 @@ public class ViewHandler {
         this.graphicComponents = new ArrayList<>();
     }
 
+    public void removeGraphicComponent(final GraphicComponent graphic) {
+    	graphic.onRemoved(e -> {
+    		((AnchorPane) scene.getRoot()).getChildren().filtered(i ->
+            (graphic).getNode().equals(i)).get(0).setVisible(false);
+    		this.graphicComponents.remove(graphic);
+    	});
+    }
     public Text getLives() {
 		return this.lives;
 	}
@@ -69,29 +78,22 @@ public class ViewHandler {
 	public Text getLevel() {
 		return this.level;
 	}
+	
+	public void setLevelScene() {
+      root = new AnchorPane();
+      root.setStyle("-fx-background-color: black;");
+      ((AnchorPane) root).getChildren().add(rectangle);
+      ((AnchorPane) root).getChildren().add(this.lives);
+      ((AnchorPane) root).getChildren().add(this.level);
+      scene.setRoot(root);
+ 	}
 
-	public void removeGraphicComponent(final GraphicComponent graphic) {
-        ((AnchorPane) scene.getRoot()).getChildren().filtered(i ->
-        (graphic).getNode().equals(i)).get(0).setVisible(false);
-        //remove(((EnemyShooterGraphicComponent) graphic).getNode());
-        this.graphicComponents.remove(graphic);
-    }
-
-    public void setLevelScene() {
-        root = new AnchorPane();
-        root.setStyle("-fx-background-color: black;");
-        ((AnchorPane) root).getChildren().add(rectangle);
-        ((AnchorPane) root).getChildren().add(this.lives);
-        ((AnchorPane) root).getChildren().add(this.level);
-        scene.setRoot(root);
-    }
-
-    public void addGraphicComponent(final GraphicComponent graphic) {
+	public void addGraphicComponent(final GraphicComponent graphic) {
     	this.graphicComponents.add(graphic);
     	graphic.onAdded(scene);
-    }
+	}
 
-    public List<GraphicComponent> getGraphicComponents() {
+	public List<GraphicComponent> getGraphicComponents() {
 		return graphicComponents;
 	}
 
@@ -102,5 +104,4 @@ public class ViewHandler {
 	public Scene getScene() {
 		return scene;
 	}
-
 }

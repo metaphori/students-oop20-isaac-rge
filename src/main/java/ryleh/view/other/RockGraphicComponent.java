@@ -1,11 +1,12 @@
 package ryleh.view.other;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
-import ryleh.common.Config;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
 
@@ -15,7 +16,7 @@ public class RockGraphicComponent implements GraphicComponent{
 	
 	public RockGraphicComponent() {
 		this.rectangle = new Rectangle(Textures.ROCK.getWidth(), Textures.ROCK.getHeight());
-		rectangle.setFill(Textures.ROCK2.getImagePattern());
+		this.rectangle.setFill(Textures.ROCK2.getImagePattern());
 	}
 
 	public RockGraphicComponent(final Point2D position) {
@@ -44,5 +45,10 @@ public class RockGraphicComponent implements GraphicComponent{
 	@Override
 	public Object getNode() {
 		return rectangle;
+	}
+
+	@Override
+	public void onRemoved(EventHandler<ActionEvent> event) {
+		event.handle(null);
 	}
 }

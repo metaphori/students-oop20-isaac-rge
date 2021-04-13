@@ -68,6 +68,7 @@ public class InputController {
 			this.physics.setVelocity(Direction.IDLE.getPoint());
 			this.physics.setDirection(Direction.IDLE);
 			this.graphic.setDirection(Direction.IDLE);
+			this.physics.resetBlocked();
 		}
 	}
 
@@ -94,8 +95,8 @@ public class InputController {
 		}
 	}
 	private void shoot(final Direction direction) {
-		world.notifyWorldEvent(new BulletSpawnEvent(this.player.getGameObject(), this.player.getGameObject().getPosition(), 
-				direction.getPoint()));
+		world.notifyWorldEvent(new BulletSpawnEvent(this.player.getGameObject(), 
+		        this.player.getGameObject().getPosition(), direction.getPoint()));
 		this.timer.startTimer();
 	}
 	
@@ -109,8 +110,8 @@ public class InputController {
 			this.physics.setVelocity(direction.getPoint());
 			this.physics.setDirection(direction);
 			if (!this.physics.getBlocked().equals(direction)) {
-                this.physics.resetBlocked();
-            }
+                            this.physics.resetBlocked();
+                        }
 			this.graphic.setDirection(direction);
 		} 
 	}

@@ -70,6 +70,11 @@ public class LevelHandler {
 	}
 	
 
+	public int getnRooms() {
+		return nRooms;
+	}
+
+
 	public void generateNewLevel() {
 		spawnPoints.clear();
 		nEnemies = 1;

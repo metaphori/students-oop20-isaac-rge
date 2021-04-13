@@ -40,7 +40,6 @@ public class ShooterComponent extends Component {
 		@Override
 	    public void onUpdate(final double dt) {
 	    	shoot();
-	    	this.isCollidingWithPlayer();
 	    }
 	    public void shoot() {
 	        if (System.currentTimeMillis() - weaponTimer >= 2000) {
@@ -59,9 +58,4 @@ public class ShooterComponent extends Component {
             		.mulLocal(bulletSpeed);
 	    	return directionToPlayer;
 	    }
-	    private void isCollidingWithPlayer() {
-	    	if(object.getHitBox().isCollidingWith(this.player.getGameObject().getHitBox())) {
-	    		world.notifyWorldEvent(new EnemyCollisionEvent(this.player.getGameObject(), object));
-	    	}
-		}
 }

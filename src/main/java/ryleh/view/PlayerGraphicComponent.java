@@ -3,6 +3,8 @@ package ryleh.view;
 import java.util.List;
 
 import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,7 +21,7 @@ public class PlayerGraphicComponent implements GraphicComponent{
 	private FadeTransition playerFade;
 	private Boolean invincible;
 	
-		public PlayerGraphicComponent() {
+	public PlayerGraphicComponent() {
 			this.rectangle = new Rectangle(Textures.PLAYER_DOWN.getWidth(), Textures.PLAYER_DOWN.getHeight());
 			this.rectangle.setFill(Textures.PLAYER_DOWN.getImagePattern());
 	
@@ -146,7 +148,7 @@ public class PlayerGraphicComponent implements GraphicComponent{
 		} 
 	}
 
-	public void setInvincible(Boolean invincible) {
+	public void setInvincible(final Boolean invincible) {
 		this.invincible = invincible;
 	}
 
@@ -157,5 +159,10 @@ public class PlayerGraphicComponent implements GraphicComponent{
 	@Override
 	public Object getNode() {
 		return rectangle;
+	}
+
+	@Override
+	public void onRemoved(final EventHandler<ActionEvent> event) {
+		event.handle(null);
 	}
 }

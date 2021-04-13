@@ -44,6 +44,7 @@ public class EventHandler implements EventListener {
 				pickUpEvent.handle();
 				final ItemGraphicComponent graphic = (ItemGraphicComponent) this.gameState.getEntityByType(Type.ITEM).get().getView();
 				graphic.setAnimPlayed();
+				this.removeEntity(pickUpEvent.getItem());
 			} else if (e instanceof GameOverEvent) {
 				final GameOverEvent gameOver = (GameOverEvent) e;
 				gameOver.handle();

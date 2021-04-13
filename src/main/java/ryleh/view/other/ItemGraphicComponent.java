@@ -2,6 +2,8 @@ package ryleh.view.other;
 
 import java.util.List;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -52,11 +54,7 @@ public class ItemGraphicComponent implements GraphicComponent{
 		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		//TODO if the entity is removed this check shouldn't be done
 		if (this.animPlayed) {
-			if (this.isAnimFinished()) {
-				this.rectangle.setFill(Textures.ITEM3.getImagePattern());
-			} else {
-				this.playAnimation();
-			}
+			this.playAnimation();
 		}
 	}
 
@@ -74,5 +72,13 @@ public class ItemGraphicComponent implements GraphicComponent{
   @Override
 	public Object getNode() {
 		return this.rectangle;
-	}	
+	}
+
+  @Override
+  public void onRemoved(EventHandler<ActionEvent> event) {
+	  if (this.isAnimFinished()) {
+		  event.handle(null);
+	  }
+	  this.playAnimation();
+  }	
 }

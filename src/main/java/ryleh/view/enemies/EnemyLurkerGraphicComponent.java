@@ -50,6 +50,8 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent{
 		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
 		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		this.rectangle.setFill(Textures.ENEMY_LURKER.getImagePattern());
+		this.moveSpeed = 50;
+		this.adjustDelay = 500;
 		this.player = player;
 		this.velocity = new V2d(0, 0);
 		this.enemyFade = new FadeTransition(Duration.millis(200), rectangle);

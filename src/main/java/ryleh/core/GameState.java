@@ -100,6 +100,9 @@ public class GameState {
     public boolean isGameOver() {
         return isGameOver;
     }
+    public void callGameOver() {
+        this.isGameOver = true;
+    }
 
     public ViewHandler getView() {
 	return view;

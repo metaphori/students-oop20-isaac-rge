@@ -8,16 +8,17 @@ import ryleh.model.events.BulletSpawnEvent;
 
 public class ShootingComponent extends Component {
 
-    private int attackSpeed;
+    private double attackSpeed;
     private Timer timer;
     /**
      * @param world 
      * @param attackSpeed Number of shoots per second
      */
-    public ShootingComponent(final World world, final int attackSpeed) {
+    public ShootingComponent(final World world, final double attackSpeed) {
         super(world);
         this.attackSpeed = attackSpeed;
         timer = new Timer(1.0 / this.attackSpeed);
+        timer.startTimer();
     }
     /**
      * Shoots a bullet at given origin and with the given velocity only if attack speed's timer is elapsed.
@@ -44,7 +45,7 @@ public class ShootingComponent extends Component {
      * Multiplies attack speed by a factor, scaling it. 
      * @param factor multiplies old attack speed.
      */
-    public void increaseAtkSpeed(final double factor) {
+    public void multiplyAtkSpeed(final double factor) {
         this.attackSpeed *= factor;
         this.timer = new Timer(1.0 / this.attackSpeed);
     }
@@ -52,7 +53,7 @@ public class ShootingComponent extends Component {
      * Increases attack speed linearly, adding an amount to the number of shoots per second.
      * @param amount number of shoots per second added to the current attack speed.
      */
-    public void increaseAtkSpeed(final int amount) {
+    public void increaseAtkSpeed(final double amount) {
         this.attackSpeed += amount;
         this.timer = new Timer(1.0 / this.attackSpeed);
     }

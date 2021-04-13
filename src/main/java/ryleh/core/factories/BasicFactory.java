@@ -12,6 +12,7 @@ import ryleh.model.components.BulletComponent;
 import ryleh.model.components.CollisionComponent;
 import ryleh.model.components.HealthIntComponent;
 import ryleh.model.components.PhysicsComponent;
+import ryleh.model.components.ShootingComponent;
 import ryleh.view.PlayerGraphicComponent;
 import ryleh.model.physics.CircleHitBox;
 import ryleh.view.other.BulletGraphicComponent;
@@ -37,6 +38,7 @@ public final class BasicFactory {
                  .position(position)
                  .with(new PhysicsComponent(state.getWorld(), 1000))
                  .with(new HealthIntComponent(state.getWorld(), 3))
+                 .with(new ShootingComponent(state.getWorld(), 0.003))
                  .view(new PlayerGraphicComponent(GameMath.toPoint2D(position)))
                  .bbox(new CircleHitBox(new Circle2d(70)))
                  .zIndex(1)

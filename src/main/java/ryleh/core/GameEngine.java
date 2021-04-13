@@ -9,23 +9,28 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import ryleh.view.menu.RylehGameOverMenu;
 import ryleh.view.menu.RylehPauseMenu;
 
-public class GameEngine {
+public final class GameEngine {
     private GameState rylehState;
-    private double period = 1000/60;
+    private double period;
     private static Timeline loop;
-    private static boolean isPaused = false;
     private RylehPauseMenu pauseMenu;
+    private Stage primaryStage;
 
-    /*
-     * 
+    /**
+     * Initializes engine's game state and the frequency (period) of game loop.
+     * Key code "P" is set to pause engine.
+     * @param stage that will contain game scene.
      */
     public void initGame(final Stage stage) {
-        rylehState = new GameState(stage);
-        pauseMenu = new RylehPauseMenu(stage);
-        stage.addEventHandler(KeyEvent.KEY_PRESSED, key -> {
-            if (key.getCode().equals(KeyCode.P)) {
+        this.primaryStage = stage;
+        this.period = 1000 / 60;
+        this.rylehState = new GameState(stage);
+        this.pauseMenu = new RylehPauseMenu(stage);
+        this.primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, key -> {
+            if (key.getCode().equals(KeyCode.P) && !rylehState.isGameOver()) {
                     GameEngine.pauseEngine();
                     pauseMenu.renderPauseMenu();
             }
@@ -54,21 +59,31 @@ public class GameEngine {
         loop.setCycleCount(Animation.INDEFINITE);
         loop.play(); 
     }
-
+    /**
+     * Call by factories. An Entity builder is used to create both GameObject and View of each entity. 
+     * @return an entity builder
+     */
     public static EntityBuilder entityBuilder() {
         return new EntityBuilder();
     }
+    /**
+     * Pauses GameEngine.
+     */
     public static void pauseEngine() {
         loop.pause();
     }
+    /**
+     * Resumes engine.
+     */
     public static void resumeEngine() {
         loop.playFromStart();
     }
-    public static boolean isPaused() {
-        return isPaused;
-    }
+    /**
+     * This method is called when the game is over. Stops game loop and render the game over scene.
+     */
     private void renderGameOver() {
-        // TODO Auto-generated method stub 
+        loop.stop();
+        new RylehGameOverMenu(this.primaryStage).show();
     }
 
 }

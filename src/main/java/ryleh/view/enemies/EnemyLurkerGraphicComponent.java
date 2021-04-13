@@ -26,10 +26,8 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent{
 	private Rectangle rectangle;
 	private long adjustDirectionTimer = System.currentTimeMillis();
     private long adjustDelay = 500;
-	private P2d playerDirection;
-	private Rotate rotation = new Rotate();
 	private V2d velocity;
-	private int moveSpeed=50;
+	private int moveSpeed;
 	private GameObject player;
 	private FadeTransition enemyFade;
 	
@@ -37,6 +35,8 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent{
 		this.rectangle = new Rectangle(Textures.ENEMY_LURKER.getWidth(), Textures.ENEMY_LURKER.getHeight());
 		this.rectangle.setFill(Textures.ENEMY_LURKER.getImagePattern());
 		this.player = player;
+		this.moveSpeed = 50;
+		this.adjustDelay = 500;
 		this.velocity = new V2d(0,0);
 		this.enemyFade = new FadeTransition(Duration.millis(200), rectangle);
 	    this.enemyFade.setFromValue(1.0);
@@ -51,7 +51,7 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent{
 		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		this.rectangle.setFill(Textures.ENEMY_LURKER.getImagePattern());
 		this.player = player;
-		this.velocity = new V2d(0,0);
+		this.velocity = new V2d(0, 0);
 		this.enemyFade = new FadeTransition(Duration.millis(200), rectangle);
 	    this.enemyFade.setFromValue(1.0);
 	    this.enemyFade.setToValue(0.0);
@@ -71,21 +71,9 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent{
 			V2d directionToPlayer = new V2d(this.player.getPosition(), new P2d(position.getX() - rectangle.getWidth() / 2, position.getY() - rectangle.getHeight() / 2))
 					.getNormalized()
 					.mul(moveSpeed);
-//			rotation.setAngle(GameMath.toDegrees((Math.atan(directionToPlayer.y/ directionToPlayer.x))));
-//			rotation.setPivotX(position.getX());
-//	  		rotation.setPivotY(position.getY());
-//			rectangle.getTransforms().add(rotation);
 			rectangle.setRotate(GameMath.toDegrees((Math.atan(directionToPlayer.y / directionToPlayer.x))));
     		adjustDirectionTimer = System.currentTimeMillis();
     	}
-//		V2d directionToPlayer = new V2d(this.player.getPosition(),new P2d(position.getX()-rectangle.getWidth()/2,position.getY()-rectangle.getHeight()/2))
-//					.getNormalized()
-//					.mul(moveSpeed);
-//		System.out.println(directionToPlayer.toString());
-//		rotation.setAngle(GameMath.toDegrees((Math.atan(directionToPlayer.y/ directionToPlayer.x))));
-//        rotation.setPivotX(position.getX());
-//  		rotation.setPivotY(position.getY());
-//     	rectangle.getTransforms().add(rotation);
 		this.updateImage();
 	}
 
@@ -103,6 +91,6 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent{
 	@Override
 	public void onRemoved(EventHandler<ActionEvent> event) {
 		enemyFade.setOnFinished(event);
-		this.enemyFade.play();
+		enemyFade.play();
 	}
 }

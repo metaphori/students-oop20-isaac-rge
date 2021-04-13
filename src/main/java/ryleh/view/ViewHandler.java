@@ -64,50 +64,36 @@ public class ViewHandler {
         this.graphicComponents = new ArrayList<>();
     }
 
-
     public void removeGraphicComponent(final GraphicComponent graphic) {
     	graphic.onRemoved(e -> {
     		((AnchorPane) scene.getRoot()).getChildren().filtered(i ->
             (graphic).getNode().equals(i)).get(0).setVisible(false);
     		this.graphicComponents.remove(graphic);
     	});
-
-    	/*if (FadeProv.class.isInstance(graphic)){
-        	FadeTransition trans = ((FadeProv) graphic).getTransition();
-        	trans.setOnFinished(e -> {
-        		((AnchorPane) scene.getRoot()).getChildren().filtered(i ->
-                (graphic).getNode().equals(i)).get(0).setVisible(false);
-        		this.graphicComponents.remove(graphic);
-        	});
-        	trans.play();
-        } else {
-        	((AnchorPane) scene.getRoot()).getChildren().filtered(i ->
-            (graphic).getNode().equals(i)).get(0).setVisible(false);
-        	this.graphicComponents.remove(graphic);
-        }*/
     }
-  public Text getLives() {
+    public Text getLives() {
 		return this.lives;
 	}
 
 	public Text getLevel() {
 		return this.level;
 	}
-  public void setLevelScene() {
+	
+	public void setLevelScene() {
       root = new AnchorPane();
       root.setStyle("-fx-background-color: black;");
       ((AnchorPane) root).getChildren().add(rectangle);
       ((AnchorPane) root).getChildren().add(this.lives);
       ((AnchorPane) root).getChildren().add(this.level);
       scene.setRoot(root);
-  }
+ 	}
 
-  public void addGraphicComponent(final GraphicComponent graphic) {
+	public void addGraphicComponent(final GraphicComponent graphic) {
     	this.graphicComponents.add(graphic);
     	graphic.onAdded(scene);
-  }
+	}
 
-  public List<GraphicComponent> getGraphicComponents() {
+	public List<GraphicComponent> getGraphicComponents() {
 		return graphicComponents;
 	}
 
@@ -118,5 +104,4 @@ public class ViewHandler {
 	public Scene getScene() {
 		return scene;
 	}
-
 }

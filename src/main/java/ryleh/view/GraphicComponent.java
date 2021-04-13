@@ -11,6 +11,6 @@ public interface GraphicComponent {
     public void onAdded(Scene scene);
 
     public Object getNode();
-    
+
     public void onRemoved(final EventHandler<ActionEvent> event);
 }

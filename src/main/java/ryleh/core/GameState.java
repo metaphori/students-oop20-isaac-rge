@@ -20,6 +20,7 @@ import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
 import ryleh.view.ViewHandler;
+import ryleh.view.media.AudioPlayer;
 
 public class GameState {
     private final ViewHandler view;
@@ -42,6 +43,7 @@ public class GameState {
         this.levelHandler = new LevelHandler(this);
         this.player = BasicFactory.getInstance().createPlayer(this, levelHandler.getPosition(levelHandler.getPlayerSpawn()));
         input = new InputController(this);
+        //AudioPlayer.playBackGround();
         this.generateNewLevel();
     }
     /**

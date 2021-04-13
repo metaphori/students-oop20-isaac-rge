@@ -2,28 +2,48 @@ package ryleh.controller.levels;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
+
 import ryleh.model.Type;
 //to determine WHICH entities are going to be spawned
 
 public final class LevelDesigner {
 	
-	private final int TROUBLE_INCREASER = 4;
-	private final int TROUBLE_DECREASER = 7;
-	private int levelNum = 0;
-	private List<Type> entities = new ArrayList<>();
-	private Random random = new Random();
+	private static final int TROUBLE_INCREASER = 4;
+	private static final int TROUBLE_DECREASER = 7;
+	private int levelNum;
+	private final List<Type> entities;
+	private final Random random;
+	private final Function<Integer, Integer> difficultyFunction;
+	
+	public LevelDesigner() {
+	    levelNum = 0;
+	    entities = new ArrayList<>();
+	    random = new Random();
+	    difficultyFunction = (x) -> (int) (200 * Math.pow(Math.E,  - (double) (x) / 7) - 80);
+	}
 	
 	public List<Type> generateLevelEntities() {
-		//generatePlayer();
 		levelNum++; 
 		this.generateObstacles();
 		this.generateItems();
 		this.generateEnemies();
 		return entities;
 	}
+	/**
+	 * This method is used to determine a range that represents the difficulty of the current level.
+	 * @param enemyNumber
+	 * @return the value of a function with enemy number as input.
+	 */
+	private int getDifficultyRange(final int enemyNumber) {
+	    return difficultyFunction.apply(enemyNumber);
+	}
+	/**
+	 * This method generates a list of Entity type, that represents the entities inside current level.
+	 */
 	private void generateEnemies() {	
 		final int enemyNumber = (int) (random.nextGaussian() + 3);
-		int difficultyRange = (int) (200 * Math.pow(Math.E,  -(double) (enemyNumber) / 7) - 80);
+		int difficultyRange = this.getDifficultyRange(enemyNumber);
 		difficultyRange = difficultyRange / TROUBLE_DECREASER + levelNum * TROUBLE_INCREASER;
 		final int difficulty = (int) (random.nextGaussian() + difficultyRange);
 		//int difficultyLevel = 0;
@@ -51,20 +71,19 @@ public final class LevelDesigner {
 				}
 			}
 		}
-//		System.out.println("questa � la lista dei nemici");
-//		System.out.print(entities + "\n");
-//		System.out.println("questo � il numero dei nemici");
-//		System.out.print(enemyNumber + "\n");
-//		System.out.println("questo � il range di difficolt�");
-//		System.out.print(difficultyRange + "\n");
-//		System.out.println("questo � il livello definitivo di difficolt�");
-//		System.out.print(difficulty + "\n");
+		System.out.println(entities);
 	}
+	/**
+	 * This method add "ITEM" to the entity list of the current level. It does so only every three levels.
+	 */
 	private void generateItems() {
 		if (levelNum % 3 == 0) {
 			entities.add(Type.ITEM);
 		}
 	}
+	/**
+	 * Generates random obstacles choosing between "ROCK" type and "FIRE" type.
+	 */
 	private void generateObstacles() {
 		final int obstacleNum = (int) random.nextGaussian() + 2;
 		for (int i = 0; i < obstacleNum; i++) {
@@ -76,6 +95,9 @@ public final class LevelDesigner {
 		}
 	}
 
+	/**
+	 * Clears the entity list of the current level.
+	 */
 	public void clearLevel() {
 		this.entities.clear();
 	}

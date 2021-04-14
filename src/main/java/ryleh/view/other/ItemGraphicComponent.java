@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import ryleh.common.Timer;
 import ryleh.view.AnimationLoop;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
@@ -19,7 +20,7 @@ public class ItemGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
 	private boolean animPlayed;
-	private static final int ANIM_DURATION = 10;
+	private static final int ANIM_DURATION = 20;
 	private AnimationLoop animItem = new AnimationLoop(List.of(Textures.ITEM1.getImagePattern(), 
 															   Textures.ITEM2.getImagePattern(), 
 															   Textures.ITEM3.getImagePattern()), 
@@ -58,7 +59,9 @@ public class ItemGraphicComponent implements GraphicComponent{
 	 * A method to play the animation when needed.
 	 */
 	public void playAnimation() {
-		rectangle = animItem.setFrame(rectangle);
+		if(!rectangle.getFill().equals(Textures.ITEM1.getImagePattern())) {
+			rectangle = animItem.setFrame(rectangle);
+		}
 		animItem.incTimer();
 	}
 	
@@ -70,7 +73,11 @@ public class ItemGraphicComponent implements GraphicComponent{
 		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
 		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		if (animPlayed) {
-			this.playAnimation();
+			if (isAnimFinished()) {
+				rectangle.setVisible(false);
+			} else {
+				this.playAnimation();
+			}
 		}
 	}
 
@@ -103,9 +110,5 @@ public class ItemGraphicComponent implements GraphicComponent{
 	 */
 	@Override
 	public void onRemoved(final EventHandler<ActionEvent> event) {
-		if (isAnimFinished()) {
-			event.handle(null);
-		}
-		this.playAnimation();
 	}	
 }

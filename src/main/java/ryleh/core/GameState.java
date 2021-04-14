@@ -94,7 +94,7 @@ public class GameState {
             object.getView().render(toPoint2D(new P2d(
                     object.getGameObject().getPosition().x, object.getGameObject().getPosition().y)), dt);
         }
-        eventHandler.checkEvents();
+        eventHandler.checkEvents();      	
     }
 
     public boolean isGameOver() {

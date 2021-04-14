@@ -9,6 +9,7 @@ import ryleh.model.World;
 import ryleh.model.events.EnemyCollisionEvent;
 import ryleh.model.events.GameOverEvent;
 import ryleh.model.events.ItemPickUpEvent;
+import ryleh.model.events.NewLevelEvent;
 
 public class CollisionComponent extends Component{
 	private Type type;
@@ -30,6 +31,9 @@ public class CollisionComponent extends Component{
 			if (colliding.isPresent()) {
 				if(type.equals(Type.ITEM)) {
 					world.notifyWorldEvent(new ItemPickUpEvent(colliding.get(), object));
+					this.hasAlreadyColided = true;
+				} else if (type.equals(Type.DOOR)) {
+					world.notifyWorldEvent(new NewLevelEvent(colliding.get()));
 					this.hasAlreadyColided = true;
 				}
 				else {

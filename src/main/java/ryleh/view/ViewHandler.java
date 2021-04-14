@@ -2,6 +2,7 @@ package ryleh.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
@@ -16,7 +17,11 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import ryleh.Ryleh;
 import ryleh.common.Config;
+import ryleh.view.enemies.EnemyDrunkGraphicComponent;
 
+/**
+ * A class to Completely handle the view.
+ */
 public class ViewHandler {
 
     private Stage stage;
@@ -28,22 +33,18 @@ public class ViewHandler {
     private Text level;
     private Font font;
 
+    /**
+     * Creates a new Instance of ViewHandler with the given stage.
+     * @param stage the stage that needs to be set.
+     */
     public ViewHandler(final Stage stage) {
         this.stage = stage;
         this.rectangle = new Rectangle(Textures.BACKGROUND.getWidth(), Textures.BACKGROUND.getHeight());
         this.rectangle.setFill(Textures.BACKGROUND.getImagePattern());
         this.font = Font.loadFont(Ryleh.class.getResource("/assets/fonts/manaspc.ttf")
-                .toExternalForm(), 37 * Config.SCALE_MODIFIER);
-        this.lives = new Text("Lives: 3");
-        this.lives.setFont(this.font);
-        this.lives.setX((Config.STANDARD_WIDTH / 16) * 11 + (50 * Config.SCALE_MODIFIER));
-        this.lives.setY((Config.STANDARD_HEIGHT / 9) * 1);
-        this.lives.setFill(Color.WHITE);
-        this.level = new Text("Level: 1");
-        this.level.setFont(this.font);
-        this.level.setX((Config.STANDARD_WIDTH / 16) * 2 + (75 * Config.SCALE_MODIFIER));
-        this.level.setY((Config.STANDARD_HEIGHT / 9) * 1);
-        this.level.setFill(Color.WHITE);
+                		.toExternalForm(), 37 * Config.SCALE_MODIFIER);
+        this.setLives();
+        this.setLevel();
         root = new AnchorPane();
         root.setStyle("-fx-background-color: black;");
         ((AnchorPane) root).getChildren().add(rectangle); 
@@ -62,45 +63,98 @@ public class ViewHandler {
         this.graphicComponents = new ArrayList<>();
     }
 
+    /**
+     * A method to set the text that represents the current level.
+     */
+    private void setLevel() {
+    	this.level = new Text("Level: 1");
+        this.level.setFont(this.font);
+        this.level.setX((Config.STANDARD_WIDTH / 16) * 2 + (75 * Config.SCALE_MODIFIER));
+        this.level.setY((Config.STANDARD_HEIGHT / 9) * 1);
+        this.level.setFill(Color.WHITE);
+	}
+
+    /**
+     * A method to set the text that represents the remaining lives.
+     */
+	private void setLives() {
+    	this.lives = new Text("Lives: 3");
+        this.lives.setFont(this.font);
+        this.lives.setX((Config.STANDARD_WIDTH / 16) * 11 + (50 * Config.SCALE_MODIFIER));
+        this.lives.setY((Config.STANDARD_HEIGHT / 9) * 1);
+        this.lives.setFill(Color.WHITE);
+    }
+
+    /**
+     * A method to remove a GraphicComponent from the list of GraphicComponents and removes it from the scene..
+     * @param graphic The GraphicComponents that needs to be removed from the list of GraphicComponents and from the scene.
+     */
+    public void removeGraphicComponent(final GraphicComponent graphic) {
+    	graphic.onRemoved(e -> {
+    		((AnchorPane) scene.getRoot()).getChildren().filtered(i ->
+            (graphic).getNode().equals(i)).get(0).setVisible(false);
+    		this.graphicComponents.remove(graphic);
+    	});
+    }
+
+    /**
+     * A method that returns the number of remaining lives.
+     * @return the number of remaining lives.
+     */
     public Text getLives() {
 		return this.lives;
 	}
 
+    /**
+     * A method that returns the current level number.
+     * @return the current level number.
+     */
 	public Text getLevel() {
 		return this.level;
 	}
+	
+	/**
+	 * A method to set scene of the current level.
+	 */
+	public void setLevelScene() {
+      root = new AnchorPane();
+      root.setStyle("-fx-background-color: black;");
+      ((AnchorPane) root).getChildren().add(rectangle);
+      ((AnchorPane) root).getChildren().add(this.lives);
+      ((AnchorPane) root).getChildren().add(this.level);
+      scene.setRoot(root);
+ 	}
 
-	public void removeGraphicComponent(final GraphicComponent graphic) {
-        ((AnchorPane) scene.getRoot()).getChildren().filtered(i ->
-        (graphic).getNode().equals(i)).get(0).setVisible(false);
-        //remove(((EnemyShooterGraphicComponent) graphic).getNode());
-        this.graphicComponents.remove(graphic);
-    }
-
-    public void setLevelScene() {
-        root = new AnchorPane();
-        root.setStyle("-fx-background-color: black;");
-        ((AnchorPane) root).getChildren().add(rectangle);
-        ((AnchorPane) root).getChildren().add(this.lives);
-        ((AnchorPane) root).getChildren().add(this.level);
-        scene.setRoot(root);
-    }
-
-    public void addGraphicComponent(final GraphicComponent graphic) {
+	/**
+	 * A method that adds a GraphicCimponent to the list of GraphicComponents and adds it on the scene.
+	 * @param graphic The GraphicComponent to be added to the list of GraphicComponents and to the scene.
+	 */
+	public void addGraphicComponent(final GraphicComponent graphic) {
     	this.graphicComponents.add(graphic);
     	graphic.onAdded(scene);
-    }
+	}
 
-    public List<GraphicComponent> getGraphicComponents() {
+	/**
+	 * A method that returns the list of GraphicComponents.
+	 * @return The list of GraphicComponents.
+	 */
+	public List<GraphicComponent> getGraphicComponents() {
 		return graphicComponents;
 	}
 
+	/**
+	 * A method that returns the current stage.
+	 * @return The current stage.
+	 */
 	public Stage getStage() {
 		return stage;
 	}
 
+	/**
+	 * A method that returns the current scene.
+	 * @return The current scene.
+	 */
 	public Scene getScene() {
 		return scene;
 	}
-
 }

@@ -1,6 +1,5 @@
 package ryleh.core;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,24 +7,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 import javafx.geometry.Point2D;
-import javafx.scene.Parent;
 import javafx.stage.Stage;
 import ryleh.common.Config;
 import ryleh.common.P2d;
-import ryleh.common.V2d;
 import ryleh.controller.Entity;
 import ryleh.controller.EventHandler;
 import ryleh.controller.InputController;
 import ryleh.controller.levels.LevelHandler;
 import ryleh.core.factories.BasicFactory;
-import ryleh.core.factories.EnemyFactory;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
 import ryleh.view.ViewHandler;
+import ryleh.view.media.AudioPlayer;
 
 public class GameState {
     private final ViewHandler view;
@@ -46,10 +41,15 @@ public class GameState {
         gameVars = new HashMap<>();
         gameVars.put("Version", "0.1");
         this.levelHandler = new LevelHandler(this);
-        this.player = BasicFactory.getInstance().createPlayer(this, levelHandler.getPosition(levelHandler.playerSpawn));
+        this.player = BasicFactory.getInstance().createPlayer(this, levelHandler.getPosition(levelHandler.getPlayerSpawn()));
         input = new InputController(this);
+        //AudioPlayer.playBackGround();
         this.generateNewLevel();
     }
+    /**
+     * 
+     * @return a reference to current player.
+     */
     public Entity getPlayer() {
 	return this.player;
     }
@@ -67,7 +67,7 @@ public class GameState {
 	entities.add(player);
 	//player.getGameObject().setPosition(levelHandler.getPosition(levelHandler.playerSpawn));
 	((PhysicsComponent) player.getGameObject().getComponent(PhysicsComponent.class).get())
-	    .setPosition(levelHandler.getPosition(levelHandler.playerSpawn));
+	    .setPosition(levelHandler.getPosition(levelHandler.getPlayerSpawn()));
 
 	entities.addAll(levelHandler.getEntities());
 	Collections.sort(entities, new Comparator<Entity>() {
@@ -99,6 +99,9 @@ public class GameState {
 
     public boolean isGameOver() {
         return isGameOver;
+    }
+    public void callGameOver() {
+        this.isGameOver = true;
     }
 
     public ViewHandler getView() {

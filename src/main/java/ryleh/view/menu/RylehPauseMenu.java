@@ -20,13 +20,13 @@ public class RylehPauseMenu {
     private final Stage popupStage;
     private final Scene pauseScene;
     private final Stage primaryStage;
-    private final MenuFactory factory;
+    private final MenuFacotry factory;
 
     public RylehPauseMenu(final Stage primaryStage) {
-        factory = new MenuFactory();
+        factory = new MenuFactoryImpl();
         this.primaryStage = primaryStage;
-        factory.levelFont = Font.loadFont(Ryleh.class.getResource("/assets/fonts/manaspc.ttf")
-                .toExternalForm(), factory.scaledSize);
+        factory.setLevelFont(Font.loadFont(Ryleh.class.getResource("/assets/fonts/manaspc.ttf")
+                .toExternalForm(), factory.getScaledSize()));
         final Runnable resume = new Runnable() {
             @Override
             public void run() {
@@ -35,19 +35,19 @@ public class RylehPauseMenu {
                 GameEngine.resumeEngine();
             } 
         };
-        factory.box.getChildren().add(factory.createCustomButton("Resume", "Resume the game", resume));
-        factory.box.getChildren().add(factory.createCustomButton("Quit Game", "Exit to desktop", () -> {
-            factory.createCustomAlert();
+        factory.getBox().getChildren().add(factory.createCustomButton("Resume", "Resume the game", resume));
+        factory.getBox().getChildren().add(factory.createCustomButton("Quit Game", "Exit to desktop", () -> {
+            factory.createCustomAlert("Do you really want to quit?");
         }));
-        factory.separator.setOrientation(Orientation.HORIZONTAL);
-        factory.separator.setTranslateX(factory.scaledSize / 2);
-        factory.description.setFont(new Font(factory.scaledSize));
-        factory.description.setFill(factory.startColor);
-        factory.description.setTranslateY(factory.separator.getTranslateY() + 10);
-        factory.box.setAlignment(Pos.CENTER_LEFT);
-        factory.box.setTranslateX(factory.scaledSize);
-        factory.box.getChildren().addAll(factory.separator, factory.description);
-        factory.pane.setLeft(factory.box);
+        factory.getSeparator().setOrientation(Orientation.HORIZONTAL);
+        factory.getSeparator().setTranslateX(factory.getScaledSize() / 2);
+        factory.getDescription().setFont(new Font(factory.getScaledSize()));
+        factory.getDescription().setFill(factory.getStartColor());
+        factory.getDescription().setTranslateY(factory.getSeparator().getTranslateY() + 10);
+        factory.getBox().setAlignment(Pos.CENTER_LEFT);
+        factory.getBox().setTranslateX(factory.getScaledSize());
+        factory.getBox().getChildren().addAll(factory.getSeparator(), factory.getDescription());
+        factory.getPane().setLeft(factory.getBox());
 
         popupStage = new Stage(StageStyle.TRANSPARENT);
         popupStage.initOwner(primaryStage);
@@ -57,7 +57,7 @@ public class RylehPauseMenu {
                    resume.run();
             }
         });
-        pauseScene = new Scene(factory.pane, Config.STANDARD_WIDTH, Config.STANDARD_HEIGHT);
+        pauseScene = new Scene(factory.getPane(), Config.STANDARD_WIDTH, Config.STANDARD_HEIGHT);
     }
 
     /**
@@ -66,7 +66,7 @@ public class RylehPauseMenu {
     */
     public void renderPauseMenu() {
         this.primaryStage.getScene().getRoot().setEffect(new GaussianBlur());
-        factory.pane.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1);");
+        factory.getPane().setStyle("-fx-background-color: rgba(255, 255, 255, 0.1);");
         pauseScene.setFill(Color.TRANSPARENT);
         popupStage.setScene(pauseScene);
         popupStage.show();

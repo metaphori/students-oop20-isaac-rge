@@ -18,7 +18,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ryleh.common.Config;
 
-public class MenuFactoryImpl implements MenuFacotry {
+public class MenuFactoryImpl implements MenuFactory {
 	
 	private static final int SIZE = 40;
     private int scaledSize = (int) (Config.SCALE_MODIFIER * SIZE);

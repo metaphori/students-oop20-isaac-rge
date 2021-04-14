@@ -20,7 +20,7 @@ public class RylehPauseMenu {
     private final Stage popupStage;
     private final Scene pauseScene;
     private final Stage primaryStage;
-    private final MenuFacotry factory;
+    private final MenuFactory factory;
 
     public RylehPauseMenu(final Stage primaryStage) {
         factory = new MenuFactoryImpl();

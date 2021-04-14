@@ -2,15 +2,15 @@ package ryleh.common;
 
 public class Timer {
 	
-	private double startTime;
-	private double waitTime;
+	private double startMills;
+	private double elapsedMills;
 	
 	public Timer(final double waitTime) {
 		this.reset();
-		this.waitTime = waitTime;
+		this.elapsedMills = waitTime;
 	}
 	public boolean isElapsed() {
-		if (this.isStarted() && System.currentTimeMillis() - this.startTime >  this.waitTime) {
+		if (this.isStarted() && System.currentTimeMillis() - this.startMills >  this.elapsedMills) {
 			reset();
 			return true;
 		}
@@ -18,13 +18,13 @@ public class Timer {
 	}
 	public void startTimer()  {
 		if (!isStarted()) {
-			this.startTime = System.currentTimeMillis();
+			this.startMills = System.currentTimeMillis();
 		}
 	}
 	private boolean isStarted() {
-		return this.startTime != 0;
+		return this.startMills != 0;
 	}
 	private void reset() {
-		this.startTime = 0;
+		this.startMills = 0;
 	}
 }

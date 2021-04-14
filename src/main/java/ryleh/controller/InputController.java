@@ -6,14 +6,13 @@ import ryleh.common.Timer;
 import ryleh.core.GameState;
 import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
+import ryleh.model.components.ShootingComponent;
 import ryleh.model.events.BulletSpawnEvent;
 import ryleh.model.events.NewLevelEvent;
 import ryleh.model.physics.Direction;
 import ryleh.view.PlayerGraphicComponent;
 
 public class InputController {
-
-	private static int shootingDelay = 500;
 	
 	private boolean isMoveUp;
 	private boolean isMoveDown;
@@ -27,7 +26,6 @@ public class InputController {
 	private final Scene scene;
 	private final Entity player;
 	private final World world;
-	private final Timer timer;
 	
 	public InputController(final GameState state) {
 		this.scene = state.getView().getScene();
@@ -36,8 +34,6 @@ public class InputController {
 		this.graphic = (PlayerGraphicComponent) this.player.getView();
 		this.physics = (PhysicsComponent) this.player.getGameObject()
 		        .getComponent(PhysicsComponent.class).get();
-		this.timer = new Timer(shootingDelay);
-		this.timer.startTimer();
 		this.lastDir = Direction.UP;
 	}
 	
@@ -53,7 +49,7 @@ public class InputController {
 		if (newLevel) {
 			world.notifyWorldEvent(new NewLevelEvent(this.player.getGameObject()));
 		}
-		if (this.canShoot()) {
+		if (isShooting) {
 			if (this.physics.getDirection().equals(Direction.IDLE)) {
 				this.shoot(this.lastDir);
 			} else {
@@ -70,10 +66,6 @@ public class InputController {
 			this.graphic.setDirection(Direction.IDLE);
 			this.physics.resetBlocked();
 		}
-	}
-
-	public void setShootingDelay(final int shootingDelay) {
-		InputController.shootingDelay = shootingDelay;
 	}
 
 	private void setMoving(final KeyCode key, final boolean isMoving) {
@@ -95,13 +87,8 @@ public class InputController {
 		}
 	}
 	private void shoot(final Direction direction) {
-		world.notifyWorldEvent(new BulletSpawnEvent(this.player.getGameObject(), 
-		        this.player.getGameObject().getPosition(), direction.getPoint()));
-		this.timer.startTimer();
-	}
-	
-	private boolean canShoot() {
-		return isShooting && timer.isElapsed();
+		((ShootingComponent) player.getGameObject().getComponent(ShootingComponent.class).get())
+		    .shoot(direction.getPoint());
 	}
 	
 	private void move(final boolean isMoving, final Direction direction) {

@@ -34,7 +34,8 @@ public class EventHandler implements EventListener {
      * This method is called once every game loop. It checks all events inside the Event Queue and handles their behavior.
      */
     public void checkEvents() {
-        HealthIntComponent comp = (HealthIntComponent) this.gameState.getPlayer().getGameObject().getComponent(HealthIntComponent.class).get();
+        final HealthIntComponent comp = (HealthIntComponent) this.gameState.getPlayer().getGameObject()
+                .getComponent(HealthIntComponent.class).get();
         this.checkPlayerState();
         this.eventQueue.forEach(e -> {
             if (e instanceof EnemyCollisionEvent) {
@@ -45,12 +46,12 @@ public class EventHandler implements EventListener {
                 final ItemPickUpEvent pickUpEvent = (ItemPickUpEvent) e;
                 pickUpEvent.handle();
                 this.gameState.getView().getLives().setText("Lives: " + comp.getCurrentHp());
-                final ItemGraphicComponent graphic = (ItemGraphicComponent) this.gameState.getEntityByType(Type.ITEM).get().getView();
+                final ItemGraphicComponent graphic = (ItemGraphicComponent) this.gameState
+                        .getEntityByType(Type.ITEM).get().getView();
                 graphic.setAnimPlayed();
                 this.removeEntity(pickUpEvent.getItem());
             } else if (e instanceof GameOverEvent) {
-                final GameOverEvent gameOver = (GameOverEvent) e;
-                gameOver.handle();
+                gameState.callGameOver();
             } else if (e instanceof BulletSpawnEvent) {
                 final BulletSpawnEvent spawn = (BulletSpawnEvent) e;
                 this.gameState.addEntity(
@@ -79,10 +80,6 @@ public class EventHandler implements EventListener {
                 || type.equals(Type.ENEMY_SHOOTER) || type.equals(Type.ENEMY_SPINNER);
     }
 
-    @Override
-  	public void notifyEvent(final Event e) {
-	  	this.eventQueue.add(e);
-	}
 	private void removeEntity(final GameObject target) {
 		final Optional<Entity> removable = this.gameState.getEntities().stream().filter(e -> e.getGameObject()
 		        .equals(target)).findAny();
@@ -97,5 +94,4 @@ public class EventHandler implements EventListener {
 		        .getEntityByType(Type.PLAYER).get().getView();
 		playerGraphic.setInvincible(comp.isImmortal());
 	}
-	
 }

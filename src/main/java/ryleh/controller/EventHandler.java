@@ -79,9 +79,9 @@ public class EventHandler implements EventListener {
         return type.equals(Type.ENEMY_DRUNK) || type.equals(Type.ENEMY_DRUNKSPINNER) || type.equals(Type.ENEMY_LURKER) 
                 || type.equals(Type.ENEMY_SHOOTER) || type.equals(Type.ENEMY_SPINNER);
     }
-	private void removeEntity(final GameObject target) {
-		final Optional<Entity> removable = this.gameState.getEntities().stream().filter(e -> e.getGameObject()
-		        .equals(target)).findAny();
+    private void removeEntity(final GameObject target) {
+    	final Optional<Entity> removable = this.gameState.getEntities().stream().filter(e -> e.getGameObject()
+    			.equals(target)).findAny();
 		if (removable.isPresent()) {
 			this.gameState.removeEntity(removable.get());
 		}
@@ -92,5 +92,9 @@ public class EventHandler implements EventListener {
 		final PlayerGraphicComponent playerGraphic = (PlayerGraphicComponent) this.gameState
 		        .getEntityByType(Type.PLAYER).get().getView();
 		playerGraphic.setInvincible(comp.isImmortal());
+	}
+	@Override
+	public void notifyEvent(final Event e) {
+		this.eventQueue.add(e);
 	}
 }

@@ -130,7 +130,6 @@ public class LevelHandler {
 			}
 		}
 		decreaseEnemies(); //this calls is necessary to check if enemies have spawned in current level
-		
 	}
 	
 	/**

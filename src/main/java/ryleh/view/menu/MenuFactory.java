@@ -9,7 +9,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public interface MenuFacotry {
+public interface MenuFactory {
 	
     /**
      * Creates a new yes or no alert window .

@@ -16,7 +16,7 @@ public class RylehMainMenu extends MenuFactoryImpl {
 	 * @param primaryStage The stage that contains the Menu
 	 */
     public RylehMainMenu(final Stage primaryStage) {
-        final MenuFacotry factory = new MenuFactoryImpl();
+        final MenuFactory factory = new MenuFactoryImpl();
         factory.setLevelFont(Font.loadFont(Ryleh.class.getResource("/assets/fonts/saturno.ttf")
                 .toExternalForm(), factory.getScaledSize()));
         factory.getBox().getChildren().add(factory.createCustomButton("Start Game", "Start a new adventure", () -> {

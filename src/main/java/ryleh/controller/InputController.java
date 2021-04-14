@@ -2,12 +2,10 @@ package ryleh.controller;
 
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import ryleh.common.Timer;
 import ryleh.core.GameState;
 import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
 import ryleh.model.components.ShootingComponent;
-import ryleh.model.events.BulletSpawnEvent;
 import ryleh.model.events.NewLevelEvent;
 import ryleh.model.physics.Direction;
 import ryleh.view.PlayerGraphicComponent;

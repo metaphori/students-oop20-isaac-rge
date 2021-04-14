@@ -18,17 +18,19 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ryleh.common.Config;
 
-public class MenuFactory {
-    public int scaledSize = (int) (Config.SCALE_MODIFIER * 30);
-    public Font levelFont;
-    public Color startColor;
-    public Color hoverColor;
-    public Text description;
-    public VBox box;
-    public Separator separator;
-    public BorderPane pane;
+public class MenuFactoryImpl implements MenuFacotry {
+	
+	private static final int SIZE = 40;
+    private int scaledSize = (int) (Config.SCALE_MODIFIER * SIZE);
+    private Font levelFont;
+    private Color startColor;
+    private Color hoverColor;
+    private Text description;
+    private VBox box;
+    private Separator separator;
+    private BorderPane pane;
 
-    public MenuFactory() {
+    public MenuFactoryImpl() {
         separator = new Separator();
         pane = new BorderPane();
         box = new VBox();
@@ -37,16 +39,19 @@ public class MenuFactory {
         startColor = Color.CORNFLOWERBLUE;
     }
 
-    public MenuFactory(final int scale) {
+    public MenuFactoryImpl(final int scale) {
         this();
         this.scaledSize = (int) (Config.SCALE_MODIFIER * scale);
     }
-
-    public void createCustomAlert() {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+	public void createCustomAlert(final String text) {
         final Stage window = new Stage();
         final HBox confirm = new HBox(scaledSize);
         final VBox container = new VBox();
-        final Text question = new Text("Do you really want to quit?");
+        final Text question = new Text(text);
         question.setFont(new Font(scaledSize));
         confirm.getChildren().add(createCustomButton("YES", "", () -> Platform.exit()));
         confirm.getChildren().add(createCustomButton("NO", "", () -> window.close()));
@@ -62,7 +67,11 @@ public class MenuFactory {
         window.setResizable(false);
         window.showAndWait();
     }
-    public Node createCustomButton(final String name, final String description, final Runnable action) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+	public Node createCustomButton(final String name, final String description, final Runnable action) {
         final HBox hbox = new HBox(name.length());
         final Rectangle side = new Rectangle(scaledSize / 4, scaledSize);
         final Text btnText = new Text(name);
@@ -72,7 +81,13 @@ public class MenuFactory {
         hbox.getChildren().addAll(side, btnText);
         return hbox;
     }
-    public void createCustomText(final Text text, final String description, final Runnable action) {
+    /**
+     * Sets some properties and mouse events of the given text.
+     * @param text The text that has to be initialized
+     * @param description The description to bind to the text
+     * @param action The action to run when the mouse is clicked
+     */
+	private void createCustomText(final Text text, final String description, final Runnable action) {
         text.setFont(levelFont);
         text.setTextAlignment(TextAlignment.LEFT);
         text.setFill(startColor);
@@ -89,10 +104,71 @@ public class MenuFactory {
                 action.run();
         });
     }
-    public void createSideRectangle(final Rectangle rectangle, final Text text) {
+	/**
+	 * Sets some properties of the given rectangle.
+	 * @param Rectangle is the side rectangle 
+	 * @param text The text at which the rectangle has to be binded
+	 */
+	private void createSideRectangle(final Rectangle rectangle, final Text text) {
         rectangle.setFill(hoverColor);
         rectangle.setVisible(false);
         rectangle.visibleProperty().bind(
                         Bindings.when(text.hoverProperty()).then(true).otherwise(false));
     }
+	/**
+     * {@inheritDoc}
+     */
+	@Override
+	public int getScaledSize() {
+		return scaledSize;
+	}
+	/**
+     * {@inheritDoc}
+     */
+	@Override
+	public Color getStartColor() {
+		return startColor;
+	}
+	/**
+     * {@inheritDoc}
+     */
+	@Override
+	public Color getHoverColor() {
+		return hoverColor;
+	}
+	/**
+     * {@inheritDoc}
+     */
+	@Override
+	public Text getDescription() {
+		return description;
+	}
+	/**
+     * {@inheritDoc}
+     */
+	@Override
+	public VBox getBox() {
+		return box;
+	}
+	/**
+     * {@inheritDoc}
+     */
+	@Override
+	public void setLevelFont(final Font levelFont) {
+		this.levelFont = levelFont;
+	}
+	/**
+     * {@inheritDoc}
+     */
+	@Override
+	public Separator getSeparator() {
+		return separator;
+	}
+	/**
+     * {@inheritDoc}
+     */
+	@Override
+	public BorderPane getPane() {
+		return pane;
+	}
 }

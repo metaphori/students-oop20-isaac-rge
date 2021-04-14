@@ -9,30 +9,34 @@ import ryleh.Ryleh;
 import ryleh.common.Config;
 import ryleh.core.GameEngine;
 
-public class RylehMainMenu {
-
+public class RylehMainMenu extends MenuFactoryImpl {
+	
+	/**
+	 * Creates a new Main Menu with custom buttons and a description for every of them.
+	 * @param primaryStage The stage that contains the Menu
+	 */
     public RylehMainMenu(final Stage primaryStage) {
-        final MenuFactory factory = new MenuFactory();
-        factory.levelFont = Font.loadFont(Ryleh.class.getResource("/assets/fonts/saturno.ttf")
-                .toExternalForm(), factory.scaledSize);
-        factory.box.getChildren().add(factory.createCustomButton("Start Game", "Start a new adventure", () -> {
+        final MenuFacotry factory = new MenuFactoryImpl();
+        factory.setLevelFont(Font.loadFont(Ryleh.class.getResource("/assets/fonts/saturno.ttf")
+                .toExternalForm(), factory.getScaledSize()));
+        factory.getBox().getChildren().add(factory.createCustomButton("Start Game", "Start a new adventure", () -> {
         final GameEngine engine = new GameEngine();
             engine.initGame(primaryStage);
             engine.mainLoop();
         }));
-        factory.box.getChildren().add(factory.createCustomButton("Quit Game", "Exit to desktop", () -> {
-            factory.createCustomAlert();
+        factory.getBox().getChildren().add(factory.createCustomButton("Quit Game", "Exit to desktop", () -> {
+            factory.createCustomAlert("Do you really want to quit?");
         }));
-        factory.separator.setOrientation(Orientation.HORIZONTAL);
-        factory.separator.setTranslateX(factory.scaledSize / 2);
-        factory.description.setFont(new Font(factory.scaledSize));
-        factory.description.setFill(factory.startColor);
-        factory.description.setTranslateY(factory.separator.getTranslateY() + 10);
-        factory.box.setAlignment(Pos.CENTER_LEFT);
-        factory.box.setTranslateX(factory.scaledSize);
-        factory.box.getChildren().addAll(factory.separator, factory.description);
-        factory.pane.setLeft(factory.box);
-        primaryStage.setScene(new Scene(factory.pane, Config.STANDARD_WIDTH, Config.STANDARD_HEIGHT));
+        factory.getSeparator().setOrientation(Orientation.HORIZONTAL);
+        factory.getSeparator().setTranslateX(factory.getScaledSize() / 2);
+        factory.getDescription().setFont(new Font(factory.getScaledSize()));
+        factory.getDescription().setFill(factory.getStartColor());
+        factory.getDescription().setTranslateY(factory.getSeparator().getTranslateY() + factory.getScaledSize() / 2);
+        factory.getBox().setAlignment(Pos.CENTER_LEFT);
+        factory.getBox().setTranslateX(factory.getScaledSize());
+        factory.getBox().getChildren().addAll(factory.getSeparator(), factory.getDescription());
+        factory.getPane().setLeft(factory.getBox());
+        primaryStage.setScene(new Scene(factory.getPane(), Config.STANDARD_WIDTH, Config.STANDARD_HEIGHT));
         primaryStage.setResizable(false);
         primaryStage.setTitle("Ryleh's Call");
         primaryStage.show();

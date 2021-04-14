@@ -26,9 +26,9 @@ public class ItemPickUpEvent extends AbstractEvent {
 		Random item = new Random();
 		int nextItem = item.nextInt(3);
 		switch (nextItem) {
-		case 0: healthUp();
+		case 0: this.healthUp();
 			break;
-		case 1: healthUp();
+		case 1: this.maxHealthUp();
 			break;
 		case 2: healthUp();
 			break;
@@ -39,5 +39,9 @@ public class ItemPickUpEvent extends AbstractEvent {
 	private void healthUp() {
 		HealthIntComponent health = (HealthIntComponent) this.getTarget().getComponent(HealthIntComponent.class).get();
 		health.heal(1);
+	}
+	private void maxHealthUp() {
+		HealthIntComponent health = (HealthIntComponent) this.getTarget().getComponent(HealthIntComponent.class).get();
+		health.setMaxHp(health.getMaxHp() + 1);
 	}
 }

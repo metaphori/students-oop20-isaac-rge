@@ -12,6 +12,9 @@ import ryleh.view.AnimationLoop;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
 
+/**
+ * A class that provides the GraphicComponent of the view related to the Item Entity.
+ */
 public class ItemGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
@@ -21,12 +24,20 @@ public class ItemGraphicComponent implements GraphicComponent{
 															   Textures.ITEM3.getImagePattern()), 
 													   10);	
 	
+	
+	/**
+	 * Creates a new Instance of ItemGraphicComponent.
+	 */
 	public ItemGraphicComponent() {
 		this.rectangle = new Rectangle(Textures.ITEM1.getWidth(), Textures.ITEM1.getHeight());
 		this.rectangle.setFill(Textures.ITEM1.getImagePattern());
 		this.animPlayed = false;
 	}
 	
+	/**
+	 * Creates a new Instance of ItemGraphicComponent with the given initial position.
+	 * @param position The position at which the ItemGraphicCOmponent needs to be initialized.
+	 */
 	public ItemGraphicComponent(final Point2D position) {
 		this.rectangle = new Rectangle(Textures.ITEM1.getWidth(), Textures.ITEM1.getHeight());
 		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
@@ -35,15 +46,24 @@ public class ItemGraphicComponent implements GraphicComponent{
 		this.animPlayed = false;
 	}
 
+	/**
+	 * A method to set the animation as played.
+	 */
 	public void setAnimPlayed() {
 		animPlayed = true;
 	}
 	
+	/**
+	 * A method to play the animation when needed.
+	 */
 	public void playAnimation() {
 		rectangle = animItem.setFrame(rectangle);
 		animItem.incTimer();
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
 		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
@@ -53,21 +73,33 @@ public class ItemGraphicComponent implements GraphicComponent{
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onAdded(final Scene scene) {
 		Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public boolean isAnimFinished() {
 		return animItem.isCycleFinished();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Object getNode() {
 		return rectangle;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onRemoved(final EventHandler<ActionEvent> event) {
 		if (isAnimFinished()) {

@@ -4,6 +4,9 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import ryleh.common.Config;
 
+/**
+ * An enumeration class that contains all the textures needed, with their path, width and height.
+ */
 public enum Textures {
 	PLAYER_DOWN("assets/texture/player/PlayerDown.png", 120, 120),
 	PLAYER_DOWN2("assets/texture/player/PlayerDown2.png", 120, 120),
@@ -51,20 +54,38 @@ public enum Textures {
 	private int width;
 	private int height;
 	
-	Textures(String string, int width, int height) {
+	/**
+	 * 
+	 * @param string
+	 * @param width
+	 * @param height
+	 */
+	Textures(final String string, final int width, final int height) {
 		this.texture = string;
 		this.width = width;
 		this.height = height;
 	}
 	
+	/**
+	 * A method that returns the ImagePattern.
+	 * @return the ImagePattern of the associated Texture.
+	 */
 	public ImagePattern getImagePattern() {
 		return new ImagePattern(new Image(this.texture));
 	}
 
+	/**
+	 * A method to get the scaled width of a texture.
+	 * @return The scaled width of a Texture.
+	 */
 	public int getWidth() {
 		return (int) (this.width * Config.SCALE_MODIFIER);
 	}
 	
+	/**
+	 * A method to get the scaled height of a texture.
+	 * @return The scaled height of a Texture.
+	 */
 	public int getHeight() {
 		return (int) (this.height * Config.SCALE_MODIFIER);
 	}

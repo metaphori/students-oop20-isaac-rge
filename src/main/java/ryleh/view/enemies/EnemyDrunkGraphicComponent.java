@@ -15,11 +15,17 @@ import ryleh.common.Config;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
 
-public class EnemyDrunkGraphicComponent implements GraphicComponent{
+/**
+ * A class that provides the GraphicComponent of the view related to the EnemyDrunk Entity.
+ */
+public class EnemyDrunkGraphicComponent implements GraphicComponent {
 
 	private Rectangle rectangle;
 	private FadeTransition enemyFade;
 
+	/**
+	 * Creates a new Instance of EnemyDrunkGraphicComponent.
+	 */
 	public EnemyDrunkGraphicComponent() {
 		this.rectangle = new Rectangle(Textures.ENEMY_DRUNK.getWidth(), Textures.ENEMY_DRUNK.getHeight());
 		this.rectangle.setFill(Textures.ENEMY_DRUNK.getImagePattern());
@@ -30,6 +36,10 @@ public class EnemyDrunkGraphicComponent implements GraphicComponent{
 	    this.enemyFade.setAutoReverse(true);
 	}
 
+	/**
+	 * Creates a new Instance of EnemyDrunkGraphicComponent with the given initial position.
+	 * @param position
+	 */
 	public EnemyDrunkGraphicComponent(final Point2D position) {
 		this.rectangle = new Rectangle(Textures.ENEMY_DRUNK.getWidth(), Textures.ENEMY_DRUNK.getHeight());
 		this.rectangle.setX(position.getX());
@@ -41,30 +51,37 @@ public class EnemyDrunkGraphicComponent implements GraphicComponent{
 	    this.enemyFade.setCycleCount(4);
 	    this.enemyFade.setAutoReverse(true);
 	}
-
-	private void updateImage() {
-		//TODO
-	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
 		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
 		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
-		this.updateImage();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onAdded(final Scene scene) {
 		Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onRemoved(final EventHandler<ActionEvent> event) {
 		enemyFade.setOnFinished(event);
 		enemyFade.play();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Object getNode() {
 		return rectangle;

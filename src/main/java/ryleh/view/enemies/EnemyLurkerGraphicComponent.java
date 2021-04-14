@@ -6,22 +6,20 @@ import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-import ryleh.common.Config;
 import ryleh.common.GameMath;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
-import ryleh.controller.Entity;
 import ryleh.model.GameObject;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
 
-public class EnemyLurkerGraphicComponent implements GraphicComponent{
+/**
+ * A class that provides a GraphicComponent of the view related to the EnemyLurker Entity.
+ */
+public class EnemyLurkerGraphicComponent implements GraphicComponent {
 
 	private Rectangle rectangle;
 	private long adjustDirectionTimer = System.currentTimeMillis();
@@ -31,6 +29,10 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent{
 	private GameObject player;
 	private FadeTransition enemyFade;
 	
+	/**
+	 * Creates a new Instance of EnemyLurkerGraphicComponent with the given player to be followed.
+	 * @param player the player GameObjet that needs to be followed by the EnemyLurker.
+	 */
 	public EnemyLurkerGraphicComponent(final GameObject player) {
 		this.rectangle = new Rectangle(Textures.ENEMY_LURKER.getWidth(), Textures.ENEMY_LURKER.getHeight());
 		this.rectangle.setFill(Textures.ENEMY_LURKER.getImagePattern());
@@ -45,6 +47,11 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent{
 	    this.enemyFade.setAutoReverse(true);
 	}
 
+	/**
+	 * Creates a new Instance of EnemyLurkerGraphicComponent, with the given player to be followed and the initial positon.
+	 * @param player the player GameObject thaat needs to be followed by the EnemyLurker
+	 * @param position the postion at which this GraphicComponent needs to be initialized in the view.
+	 */
 	public EnemyLurkerGraphicComponent(final GameObject player, final Point2D position) {
 		this.rectangle = new Rectangle(Textures.ENEMY_LURKER.getWidth(), Textures.ENEMY_LURKER.getHeight());
 		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
@@ -61,12 +68,11 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent{
 	    this.enemyFade.setAutoReverse(true);
 	}
 
-	private void updateImage() {
-
-	}
-
-	@Override
-	public void render(final Point2D position, final double deltaTime) {
+	/**
+	 * A method to update the state of this GraphicComponent in the view.
+	 * @param position The position at which the GraphicComponent needs to be moved.
+	 */
+	private void updateImage(final Point2D position) {
 		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
 		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		if (System.currentTimeMillis() - adjustDirectionTimer >= adjustDelay) {
@@ -76,20 +82,36 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent{
 			rectangle.setRotate(GameMath.toDegrees((Math.atan(directionToPlayer.y / directionToPlayer.x))));
     		adjustDirectionTimer = System.currentTimeMillis();
     	}
-		this.updateImage();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void render(final Point2D position, final double deltaTime) {
+		this.updateImage(position);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onAdded(final Scene scene) {
 		Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Object getNode() {
 		return rectangle;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onRemoved(EventHandler<ActionEvent> event) {
 		enemyFade.setOnFinished(event);

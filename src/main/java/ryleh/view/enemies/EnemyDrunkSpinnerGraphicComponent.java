@@ -13,34 +13,47 @@ import ryleh.common.GameMath;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
 
-public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent{
+/**
+ * A class that provides the GraphicComponent of the view related to the EnemyDrunkSpinner Entity.
+ */
+public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent {
 
 	private Rectangle rectangle;
     private double angle = 0;
 	private FadeTransition enemyFade;
 	
+	/**
+	 * Creates a new Instance of EnemyDrunkSpinnerGraphicComponent.
+	 */
 	public EnemyDrunkSpinnerGraphicComponent() {
 		this.rectangle = new Rectangle(Textures.ENEMY_DRUNKSPINNER.getWidth(), Textures.ENEMY_DRUNKSPINNER.getHeight());
 		this.rectangle.setFill(Textures.ENEMY_DRUNKSPINNER.getImagePattern());
-		this.enemyFade = new FadeTransition(Duration.millis(2000), rectangle);
+		this.enemyFade = new FadeTransition(Duration.millis(200), rectangle);
 	    this.enemyFade.setFromValue(1.0);
 	    this.enemyFade.setToValue(0.0);
 	    this.enemyFade.setCycleCount(4);
 	    this.enemyFade.setAutoReverse(true);
 	}
 
+	/**
+	 * Creates a new Instance of EnemyDrunkSpinnerGraphicComponent with the given initial position.
+	 * @param position the position at which this GraphicComponent needs to be initialized.
+	 */
 	public EnemyDrunkSpinnerGraphicComponent(final Point2D position) {
 		this.rectangle = new Rectangle(Textures.ENEMY_DRUNKSPINNER.getWidth(), Textures.ENEMY_DRUNKSPINNER.getHeight());
 		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
 		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		this.rectangle.setFill(Textures.ENEMY_DRUNKSPINNER.getImagePattern());
-		this.enemyFade = new FadeTransition(Duration.millis(2000), rectangle);
+		this.enemyFade = new FadeTransition(Duration.millis(200), rectangle);
 	    this.enemyFade.setFromValue(1.0);
 	    this.enemyFade.setToValue(0.0);
 	    this.enemyFade.setCycleCount(4);
 	    this.enemyFade.setAutoReverse(true);
 	}
 
+	/**
+	 * A method to update the state of the graphicComponent in the view.
+	 */
 	private void updateImage() {
 		angle = angle + Math.PI / 40;
 		if (angle >= Math.PI * 2) {
@@ -48,6 +61,9 @@ public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent{
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
 		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
@@ -56,17 +72,26 @@ public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent{
 		this.updateImage();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onAdded(final Scene scene) {
 		Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Object getNode() {
 		return rectangle;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onRemoved(EventHandler<ActionEvent> event) {
 		enemyFade.setOnFinished(event);

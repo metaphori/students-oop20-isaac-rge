@@ -41,13 +41,17 @@ public class InputController {
 		this.scene.setOnKeyPressed(key -> {
 			switch (key.getCode()) {
 			case A: this.currentDir = Direction.LEFT;
+			        isMoveLeft = true;
 				break;
 			case D: this.currentDir = Direction.RIGHT;
-				break;
+				isMoveRight = true;
+			        break;
 			case W: this.currentDir = Direction.UP;
-				break;
+				isMoveUp = true;
+			        break;
 			case S: this.currentDir = Direction.DOWN;
-				break;
+				isMoveDown = true;
+			        break;
 			case L: this.newLevel = true;
 				break;
 			case SPACE: this.isShooting = true;;
@@ -58,13 +62,17 @@ public class InputController {
 		});
 		scene.setOnKeyReleased(key -> {
 			switch (key.getCode()) {
-			case A: this.currentDir = Direction.IDLE;
+			case A: isMoveLeft = false; 
+			        this.currentDir = isMoving() ? this.currentDir : Direction.IDLE;
 				break;
-			case D: this.currentDir = Direction.IDLE;
+			case D: isMoveRight = false; 
+				this.currentDir = isMoving() ? this.currentDir : Direction.IDLE;
+			        break;
+			case W: isMoveUp = false;
+					this.currentDir = isMoving() ? this.currentDir : Direction.IDLE;
 				break;
-			case W: this.currentDir = Direction.IDLE;
-				break;
-			case S: this.currentDir = Direction.IDLE;
+			case S: isMoveDown = false;
+					this.currentDir = isMoving() ? this.currentDir : Direction.IDLE;
 				break;
 			case L: this.newLevel = false;
 				break;
@@ -130,5 +138,8 @@ public class InputController {
 	
 	private boolean notMoving() {
 		return !this.isMoveDown && !this.isMoveUp && !this.isMoveLeft && !this.isMoveRight;
+	}
+	private boolean isMoving() {
+	    return this.isMoveDown || this.isMoveLeft || this.isMoveRight || this.isMoveUp;
 	}
 }

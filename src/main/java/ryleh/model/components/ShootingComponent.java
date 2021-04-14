@@ -3,6 +3,7 @@ package ryleh.model.components;
 import ryleh.common.P2d;
 import ryleh.common.Timer;
 import ryleh.common.V2d;
+import ryleh.model.GameObject;
 import ryleh.model.World;
 import ryleh.model.events.BulletSpawnEvent;
 
@@ -17,7 +18,7 @@ public class ShootingComponent extends Component {
     public ShootingComponent(final World world, final double attackSpeed) {
         super(world);
         this.attackSpeed = attackSpeed;
-        timer = new Timer(1.0 / this.attackSpeed);
+        timer = new Timer(1000.0 / this.attackSpeed); //Timer class uses milliseconds
         timer.startTimer();
     }
     /**
@@ -37,7 +38,7 @@ public class ShootingComponent extends Component {
      */
     public void shoot(final V2d velocity) {
         if (timer.isElapsed()) {
-            world.notifyWorldEvent(new BulletSpawnEvent(object, object.getPosition(), velocity));
+            world.notifyWorldEvent(new BulletSpawnEvent(object, object.getHitBox().getForm().getCenter(), velocity));
             this.timer.startTimer();
         }
     }
@@ -56,6 +57,13 @@ public class ShootingComponent extends Component {
     public void increaseAtkSpeed(final double amount) {
         this.attackSpeed += amount;
         this.timer = new Timer(1.0 / this.attackSpeed);
+    }
+    /**
+     * Check whether object can shoot or not.
+     * @return true if object can shoot.
+     */
+    public boolean canShoot() {
+        return this.timer.isElapsed();
     }
 
 }

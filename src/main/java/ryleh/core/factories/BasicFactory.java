@@ -38,7 +38,7 @@ public final class BasicFactory {
                  .position(position)
                  .with(new PhysicsComponent(state.getWorld(), 1000))
                  .with(new HealthIntComponent(state.getWorld(), 3))
-                 .with(new ShootingComponent(state.getWorld(), 0.003))
+                 .with(new ShootingComponent(state.getWorld(), 1.0))
                  .view(new PlayerGraphicComponent(GameMath.toPoint2D(position)))
                  .bbox(new CircleHitBox(new Circle2d(70)))
                  .zIndex(1)

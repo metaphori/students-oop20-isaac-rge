@@ -51,27 +51,9 @@ public interface MenuFactory {
 	Text getDescription();
 
 	/**
-	 * 
-	 * @return A VBox 
-	 */
-	VBox getBox();
-
-	/**
 	 * Initialize the font used by a Menu. 
 	 * @param font The Font used by the current Menu
 	 */
 	void setLevelFont(Font font);
-
-	/**
-	 * 
-	 * @return A separator
-	 */
-	Separator getSeparator();
-
-	/**
-	 * 
-	 * @return A BorderPane
-	 */
-	BorderPane getPane();
 
 }

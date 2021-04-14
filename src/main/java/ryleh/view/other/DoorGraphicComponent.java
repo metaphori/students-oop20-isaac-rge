@@ -12,36 +12,64 @@ import ryleh.view.AnimationLoop;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
 
-public class DoorGraphicComponent implements GraphicComponent{
+/**
+ * A class that provides the GraphicComponent of the view related to the Door Entity.
+ */
+public class DoorGraphicComponent implements GraphicComponent {
 
 	private Rectangle rectangle;
 	private boolean animPlayed;
+	private static final int ANIM_DURATION = 5;
 	private AnimationLoop animDoor = new AnimationLoop(List.of(Textures.DOOR1.getImagePattern(), 
 															   Textures.DOOR2.getImagePattern(), 
 															   Textures.DOOR3.getImagePattern(), 
 															   Textures.DOOR4.getImagePattern(), 
 															   Textures.DOOR5.getImagePattern()), 
-														8);
-	//COSTRUTTORE DA RIFARE
+														ANIM_DURATION);
+	
+	/**
+	 * Creates a new Instance of BulletGraphicComponent.
+	 */
 	public DoorGraphicComponent() {
 		this.rectangle = new Rectangle(Textures.DOOR1.getWidth(), Textures.DOOR1.getHeight());
 		this.rectangle.setFill(Textures.DOOR1.getImagePattern());
 		this.animPlayed = false;
 	}
 	
+	/**
+	 * Creates a new Instance of DoorGraphicComponent with the given initial position.
+	 * @param position The position at which the DoorGraphicComponent needs to be initialized.
+	 */
+	public DoorGraphicComponent(final Point2D position) {
+
+	}
+	
+	/**
+	 * A method to set the animation to played.
+	 */
 	public void setAnimPlayed() {
 		animPlayed = true;
 	}
 
+	/**
+	 * A method to play the animation when needed.
+	 */
 	public void playAnimation() {
 		rectangle = animDoor.setFrame(rectangle);
 		animDoor.incTimer();
 	}
 	
+	/**
+	 * A method that tells if the current animation is finished.
+	 * @return True if the current animation is finished.
+	 */
 	public boolean isAnimFinished() {
 		return animDoor.isCycleFinished();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void render(final Point2D position, final double deltaTime) {
 		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
@@ -51,16 +79,26 @@ public class DoorGraphicComponent implements GraphicComponent{
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onAdded(final Scene scene) {
 		Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public Object getNode() {
+	public Rectangle getNode() {
 		return rectangle;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onRemoved(final EventHandler<ActionEvent> event) {
 		// TODO Auto-generated method stub

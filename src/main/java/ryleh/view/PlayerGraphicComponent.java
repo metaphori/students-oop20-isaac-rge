@@ -21,15 +21,17 @@ public class PlayerGraphicComponent implements GraphicComponent {
 	private Direction lastDir;
 	private FadeTransition playerFade;
 	private Boolean invincible;
+	private static final int ANIM_DURATION = 5;
+	private static final int FADE_DURATION = 200;
 	
 	private AnimationLoop animRight = new AnimationLoop(
-			List.of(Textures.PLAYER_RIGHT.getImagePattern(), Textures.PLAYER_RIGHT2.getImagePattern(), Textures.PLAYER_RIGHT.getImagePattern(), Textures.PLAYER_RIGHT4.getImagePattern()), 5);
+			List.of(Textures.PLAYER_RIGHT.getImagePattern(), Textures.PLAYER_RIGHT2.getImagePattern(), Textures.PLAYER_RIGHT.getImagePattern(), Textures.PLAYER_RIGHT4.getImagePattern()), ANIM_DURATION);
 	private AnimationLoop animLeft = new AnimationLoop(
-			List.of(Textures.PLAYER_LEFT.getImagePattern(), Textures.PLAYER_LEFT2.getImagePattern(), Textures.PLAYER_LEFT.getImagePattern(), Textures.PLAYER_LEFT4.getImagePattern()), 5);
+			List.of(Textures.PLAYER_LEFT.getImagePattern(), Textures.PLAYER_LEFT2.getImagePattern(), Textures.PLAYER_LEFT.getImagePattern(), Textures.PLAYER_LEFT4.getImagePattern()), ANIM_DURATION);
 	private AnimationLoop animUp = new AnimationLoop(
-			List.of(Textures.PLAYER_UP.getImagePattern(), Textures.PLAYER_UP2.getImagePattern(), Textures.PLAYER_UP.getImagePattern(), Textures.PLAYER_UP4.getImagePattern()), 5);
+			List.of(Textures.PLAYER_UP.getImagePattern(), Textures.PLAYER_UP2.getImagePattern(), Textures.PLAYER_UP.getImagePattern(), Textures.PLAYER_UP4.getImagePattern()), ANIM_DURATION);
 	private AnimationLoop animDown = new AnimationLoop(
-			List.of(Textures.PLAYER_DOWN.getImagePattern(), Textures.PLAYER_DOWN2.getImagePattern(), Textures.PLAYER_DOWN.getImagePattern(), Textures.PLAYER_DOWN4.getImagePattern()), 5);
+			List.of(Textures.PLAYER_DOWN.getImagePattern(), Textures.PLAYER_DOWN2.getImagePattern(), Textures.PLAYER_DOWN.getImagePattern(), Textures.PLAYER_DOWN4.getImagePattern()), ANIM_DURATION);
 	
 	/**
 	 * Creates a new Instance of PlayerGraphicComponent.
@@ -38,7 +40,7 @@ public class PlayerGraphicComponent implements GraphicComponent {
 		this.rectangle = new Rectangle(Textures.PLAYER_DOWN.getWidth(), Textures.PLAYER_DOWN.getHeight());
 		this.rectangle.setFill(Textures.PLAYER_DOWN.getImagePattern());
 	
-		this.playerFade = new FadeTransition(Duration.millis(200), rectangle);
+		this.playerFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
 		this.playerFade.setFromValue(1.0);
 		this.playerFade.setToValue(0.0);
 		this.playerFade.setCycleCount(4);
@@ -59,7 +61,7 @@ public class PlayerGraphicComponent implements GraphicComponent {
 		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		this.rectangle.setFill(Textures.PLAYER_DOWN.getImagePattern());
 
-		this.playerFade = new FadeTransition(Duration.millis(200), rectangle);
+		this.playerFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
 	    this.playerFade.setFromValue(1.0);
 	    this.playerFade.setToValue(0.0);
 	    this.playerFade.setCycleCount(4);
@@ -163,7 +165,7 @@ public class PlayerGraphicComponent implements GraphicComponent {
 	}
 	
 	/**
-	 * A method to check if the Invincible animations needs to be played
+	 * A method to check if the Invincible animations needs to be played.
 	 */
 	private void checkInvincible() {
 		if (invincible) {
@@ -191,7 +193,7 @@ public class PlayerGraphicComponent implements GraphicComponent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Object getNode() {
+	public Rectangle getNode() {
 		return rectangle;
 	}
 	

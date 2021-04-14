@@ -19,12 +19,13 @@ public class DoorGraphicComponent implements GraphicComponent {
 
 	private Rectangle rectangle;
 	private boolean animPlayed;
+	private static final int ANIM_DURATION = 5;
 	private AnimationLoop animDoor = new AnimationLoop(List.of(Textures.DOOR1.getImagePattern(), 
 															   Textures.DOOR2.getImagePattern(), 
 															   Textures.DOOR3.getImagePattern(), 
 															   Textures.DOOR4.getImagePattern(), 
 															   Textures.DOOR5.getImagePattern()), 
-														8);
+														ANIM_DURATION);
 	
 	/**
 	 * Creates a new Instance of BulletGraphicComponent.
@@ -91,7 +92,7 @@ public class DoorGraphicComponent implements GraphicComponent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Object getNode() {
+	public Rectangle getNode() {
 		return rectangle;
 	}
 

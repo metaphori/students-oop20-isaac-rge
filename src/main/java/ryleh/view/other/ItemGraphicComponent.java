@@ -19,10 +19,11 @@ public class ItemGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
 	private boolean animPlayed;
+	private static final int ANIM_DURATION = 10;
 	private AnimationLoop animItem = new AnimationLoop(List.of(Textures.ITEM1.getImagePattern(), 
 															   Textures.ITEM2.getImagePattern(), 
 															   Textures.ITEM3.getImagePattern()), 
-													   10);	
+													   ANIM_DURATION);	
 	
 	
 	/**
@@ -93,7 +94,7 @@ public class ItemGraphicComponent implements GraphicComponent{
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Object getNode() {
+	public Rectangle getNode() {
 		return rectangle;
 	}
 

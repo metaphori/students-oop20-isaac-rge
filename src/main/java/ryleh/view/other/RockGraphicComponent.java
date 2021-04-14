@@ -13,7 +13,7 @@ import ryleh.view.Textures;
 /**
  * A class that provides the GraphicComponent of the view related to the Rock Entity.
  */
-public class RockGraphicComponent implements GraphicComponent{
+public class RockGraphicComponent implements GraphicComponent {
 
 	private Rectangle rectangle;
 	
@@ -58,7 +58,7 @@ public class RockGraphicComponent implements GraphicComponent{
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Object getNode() {
+	public Rectangle getNode() {
 		return rectangle;
 	}
 
@@ -66,7 +66,7 @@ public class RockGraphicComponent implements GraphicComponent{
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void onRemoved(EventHandler<ActionEvent> event) {
+	public void onRemoved(final EventHandler<ActionEvent> event) {
 		event.handle(null);
 	}
 }

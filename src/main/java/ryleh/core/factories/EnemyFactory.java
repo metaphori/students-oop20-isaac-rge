@@ -93,7 +93,7 @@ public class EnemyFactory {
                  .with(new LurkerComponent(state.getWorld(), state.getPlayer()))
                  .with(new HealthIntComponent(state.getWorld(),1))
                  .with(new CollisionComponent(state.getWorld(), Type.ENEMY_LURKER))
-                 .view(new EnemyLurkerGraphicComponent(state.getPlayer().getGameObject(), GameMath.toPoint2D(position)))
+                 .view(new EnemyLurkerGraphicComponent((PlayerGraphicComponent) state.getPlayer().getView(), GameMath.toPoint2D(position)))
                  .bbox(new CircleHitBox(new Circle2d(75)))
                  .zIndex(9)
                  .build();

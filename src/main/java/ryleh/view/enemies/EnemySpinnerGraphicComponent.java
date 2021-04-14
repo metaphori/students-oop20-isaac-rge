@@ -26,6 +26,7 @@ public class EnemySpinnerGraphicComponent implements GraphicComponent {
 	private Rotate rotation;
 	private Rectangle rectangle;
 	private FadeTransition enemyFade;
+	private static final int FADE_DURATION = 200;
 	
 	/**
 	 * Creates a new Instance of EnemySpinnerGraphicComponent.
@@ -35,7 +36,7 @@ public class EnemySpinnerGraphicComponent implements GraphicComponent {
 		this.rectangle.setFill(Textures.ENEMY_SPINNER.getImagePattern());
 		this.rotation = new Rotate();
 		this.rotation.setAngle(GameMath.toDegrees(Math.PI / 60));
-		this.enemyFade = new FadeTransition(Duration.millis(200), rectangle);
+		this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
 	    this.enemyFade.setFromValue(1.0);
 	    this.enemyFade.setToValue(0.0);
 	    this.enemyFade.setCycleCount(4);
@@ -53,7 +54,7 @@ public class EnemySpinnerGraphicComponent implements GraphicComponent {
 		this.rectangle.setFill(Textures.ENEMY_SPINNER.getImagePattern());
 		this.rotation = new Rotate();
 		this.rotation.setAngle(GameMath.toDegrees(Math.PI / 60));
-		this.enemyFade = new FadeTransition(Duration.millis(200), rectangle);
+		this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
 	    this.enemyFade.setFromValue(1.0);
 	    this.enemyFade.setToValue(0.0);
 	    this.enemyFade.setCycleCount(4);
@@ -85,7 +86,7 @@ public class EnemySpinnerGraphicComponent implements GraphicComponent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Object getNode() {
+	public Rectangle getNode() {
 		return rectangle;
 	}
 

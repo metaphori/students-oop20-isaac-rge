@@ -22,6 +22,7 @@ public class EnemyDrunkGraphicComponent implements GraphicComponent {
 
 	private Rectangle rectangle;
 	private FadeTransition enemyFade;
+	private static final int FADE_DURATION = 200;
 
 	/**
 	 * Creates a new Instance of EnemyDrunkGraphicComponent.
@@ -29,7 +30,7 @@ public class EnemyDrunkGraphicComponent implements GraphicComponent {
 	public EnemyDrunkGraphicComponent() {
 		this.rectangle = new Rectangle(Textures.ENEMY_DRUNK.getWidth(), Textures.ENEMY_DRUNK.getHeight());
 		this.rectangle.setFill(Textures.ENEMY_DRUNK.getImagePattern());
-		this.enemyFade = new FadeTransition(Duration.millis(2000), rectangle);
+		this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
 	    this.enemyFade.setFromValue(1.0);
 	    this.enemyFade.setToValue(0.0);
 	    this.enemyFade.setCycleCount(4);
@@ -45,7 +46,7 @@ public class EnemyDrunkGraphicComponent implements GraphicComponent {
 		this.rectangle.setX(position.getX());
 		this.rectangle.setY(position.getY());
 		this.rectangle.setFill(Textures.ENEMY_DRUNK.getImagePattern());
-		this.enemyFade = new FadeTransition(Duration.millis(200), rectangle);
+		this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
 	    this.enemyFade.setFromValue(1.0);
 	    this.enemyFade.setToValue(0.0);
 	    this.enemyFade.setCycleCount(4);
@@ -83,7 +84,7 @@ public class EnemyDrunkGraphicComponent implements GraphicComponent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Object getNode() {
+	public Rectangle getNode() {
 		return rectangle;
 	}
 }

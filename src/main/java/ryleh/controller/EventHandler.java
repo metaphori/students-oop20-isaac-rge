@@ -43,11 +43,11 @@ public class EventHandler implements EventListener {
                 this.gameState.getView().getLives().setText("Lives: " + comp.getCurrentHp());
             } else if (e instanceof ItemPickUpEvent) {
                 final ItemPickUpEvent pickUpEvent = (ItemPickUpEvent) e;
-				        pickUpEvent.handle();
-				        this.gameState.getView().getLives().setText("Lives: " + comp.getCurrentHp());
-				        final ItemGraphicComponent graphic = (ItemGraphicComponent) this.gameState.getEntityByType(Type.ITEM).get().getView();
-				        graphic.setAnimPlayed();
-				        this.removeEntity(pickUpEvent.getItem());
+                pickUpEvent.handle();
+                this.gameState.getView().getLives().setText("Lives: " + comp.getCurrentHp());
+                final ItemGraphicComponent graphic = (ItemGraphicComponent) this.gameState.getEntityByType(Type.ITEM).get().getView();
+                graphic.setAnimPlayed();
+                this.removeEntity(pickUpEvent.getItem());
             } else if (e instanceof GameOverEvent) {
                 final GameOverEvent gameOver = (GameOverEvent) e;
                 gameOver.handle();
@@ -78,9 +78,10 @@ public class EventHandler implements EventListener {
         return type.equals(Type.ENEMY_DRUNK) || type.equals(Type.ENEMY_DRUNKSPINNER) || type.equals(Type.ENEMY_LURKER) 
                 || type.equals(Type.ENEMY_SHOOTER) || type.equals(Type.ENEMY_SPINNER);
     }
-  @Override
-	public void notifyEvent(final Event e) {
-		this.eventQueue.add(e);
+
+    @Override
+  	public void notifyEvent(final Event e) {
+	  	this.eventQueue.add(e);
 	}
 	private void removeEntity(final GameObject target) {
 		final Optional<Entity> removable = this.gameState.getEntities().stream().filter(e -> e.getGameObject()

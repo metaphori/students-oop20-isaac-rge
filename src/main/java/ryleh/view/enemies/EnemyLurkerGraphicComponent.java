@@ -14,6 +14,7 @@ import ryleh.common.P2d;
 import ryleh.common.V2d;
 import ryleh.model.GameObject;
 import ryleh.view.GraphicComponent;
+import ryleh.view.PlayerGraphicComponent;
 import ryleh.view.Textures;
 
 /**
@@ -23,24 +24,22 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent {
 
 	private Rectangle rectangle;
 	private long adjustDirectionTimer = System.currentTimeMillis();
-    private long adjustDelay = 500;
-	private V2d velocity;
-	private int moveSpeed;
-	private GameObject player;
+    private static final long ADJUST_DELAY = 500;
+    private static final int FADE_DURATION = 200;
+	private static final int MOVE_SPEED = 50;
+	private PlayerGraphicComponent player;
 	private FadeTransition enemyFade;
+	
 	
 	/**
 	 * Creates a new Instance of EnemyLurkerGraphicComponent with the given player to be followed.
-	 * @param player the player GameObjet that needs to be followed by the EnemyLurker.
+	 * @param graphicComponent The PlayerGraphicComponent that needs to be followed by the EnemyLurker.
 	 */
-	public EnemyLurkerGraphicComponent(final GameObject player) {
+	public EnemyLurkerGraphicComponent(final PlayerGraphicComponent graphicComponent) {
 		this.rectangle = new Rectangle(Textures.ENEMY_LURKER.getWidth(), Textures.ENEMY_LURKER.getHeight());
 		this.rectangle.setFill(Textures.ENEMY_LURKER.getImagePattern());
-		this.player = player;
-		this.moveSpeed = 50;
-		this.adjustDelay = 500;
-		this.velocity = new V2d(0,0);
-		this.enemyFade = new FadeTransition(Duration.millis(200), rectangle);
+		this.player = graphicComponent;
+		this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
 	    this.enemyFade.setFromValue(1.0);
 	    this.enemyFade.setToValue(0.0);
 	    this.enemyFade.setCycleCount(4);
@@ -48,20 +47,17 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent {
 	}
 
 	/**
-	 * Creates a new Instance of EnemyLurkerGraphicComponent, with the given player to be followed and the initial positon.
-	 * @param player the player GameObject thaat needs to be followed by the EnemyLurker
-	 * @param position the postion at which this GraphicComponent needs to be initialized in the view.
+	 * Creates a new Instance of EnemyLurkerGraphicComponent, with the given player to be followed and the initial position.
+	 * @param graphicComponent The PlayerGraphicComponent that needs to be followed by the EnemyLurker
+	 * @param position The position at which this GraphicComponent needs to be initialized in the view.
 	 */
-	public EnemyLurkerGraphicComponent(final GameObject player, final Point2D position) {
+	public EnemyLurkerGraphicComponent(final PlayerGraphicComponent graphicComponent, final Point2D position) {
 		this.rectangle = new Rectangle(Textures.ENEMY_LURKER.getWidth(), Textures.ENEMY_LURKER.getHeight());
 		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
 		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		this.rectangle.setFill(Textures.ENEMY_LURKER.getImagePattern());
-		this.moveSpeed = 50;
-		this.adjustDelay = 500;
-		this.player = player;
-		this.velocity = new V2d(0, 0);
-		this.enemyFade = new FadeTransition(Duration.millis(200), rectangle);
+		this.player = graphicComponent;
+		this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
 	    this.enemyFade.setFromValue(1.0);
 	    this.enemyFade.setToValue(0.0);
 	    this.enemyFade.setCycleCount(4);
@@ -75,10 +71,10 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent {
 	private void updateImage(final Point2D position) {
 		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
 		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
-		if (System.currentTimeMillis() - adjustDirectionTimer >= adjustDelay) {
-			V2d directionToPlayer = new V2d(this.player.getPosition(), new P2d(position.getX() - rectangle.getWidth() / 2, position.getY() - rectangle.getHeight() / 2))
+		if (System.currentTimeMillis() - adjustDirectionTimer >= ADJUST_DELAY) {
+			V2d directionToPlayer = new V2d(new P2d(player.getNode().getX(), player.getNode().getY()), new P2d(position.getX() - rectangle.getWidth() / 2, position.getY() - rectangle.getHeight() / 2))
 					.getNormalized()
-					.mul(moveSpeed);
+					.mul(MOVE_SPEED);
 			rectangle.setRotate(GameMath.toDegrees((Math.atan(directionToPlayer.y / directionToPlayer.x))));
     		adjustDirectionTimer = System.currentTimeMillis();
     	}
@@ -105,7 +101,7 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Object getNode() {
+	public Rectangle getNode() {
 		return rectangle;
 	}
 
@@ -113,7 +109,7 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void onRemoved(EventHandler<ActionEvent> event) {
+	public void onRemoved(final EventHandler<ActionEvent> event) {
 		enemyFade.setOnFinished(event);
 		enemyFade.play();
 	}

@@ -19,6 +19,7 @@ public class InputController {
 	private boolean isShooting;
 	private boolean newLevel;
 	private Direction lastDir;
+	private Direction currentDir;
 	private final PlayerGraphicComponent graphic;
 	private final PhysicsComponent physics; 
 	private final Scene scene;
@@ -33,14 +34,45 @@ public class InputController {
 		this.physics = (PhysicsComponent) this.player.getGameObject()
 		        .getComponent(PhysicsComponent.class).get();
 		this.lastDir = Direction.UP;
+		this.currentDir = Direction.IDLE;
 	}
 	
 	public void initInput(){
 		this.scene.setOnKeyPressed(key -> {
-			this.setMoving(key.getCode(), true);
+			switch (key.getCode()) {
+			case A: this.currentDir = Direction.LEFT;
+				break;
+			case D: this.currentDir = Direction.RIGHT;
+				break;
+			case W: this.currentDir = Direction.UP;
+				break;
+			case S: this.currentDir = Direction.DOWN;
+				break;
+			case L: this.newLevel = true;
+				break;
+			case SPACE: this.isShooting = true;;
+			break;
+			default:
+				break;
+			}
 		});
 		scene.setOnKeyReleased(key -> {
-			this.setMoving(key.getCode(), false);
+			switch (key.getCode()) {
+			case A: this.currentDir = Direction.IDLE;
+				break;
+			case D: this.currentDir = Direction.IDLE;
+				break;
+			case W: this.currentDir = Direction.IDLE;
+				break;
+			case S: this.currentDir = Direction.IDLE;
+				break;
+			case L: this.newLevel = false;
+				break;
+			case SPACE: this.isShooting = false;
+			break;
+			default:
+				break;
+			}
 		});
 	}
 	public void updateInput() {
@@ -54,43 +86,39 @@ public class InputController {
 				this.shoot(this.physics.getDirection());
 			}
 		}
-		this.move(isMoveDown, Direction.DOWN);
-		this.move(isMoveUp, Direction.UP);
-		this.move(isMoveRight, Direction.RIGHT);
-		this.move(isMoveLeft, Direction.LEFT);
-		if (this.notMoving()) {
-			this.physics.setVelocity(Direction.IDLE.getPoint());
-			this.physics.setDirection(Direction.IDLE);
-			this.graphic.setDirection(Direction.IDLE);
-			this.physics.resetBlocked();
-		}
+		this.move(this.currentDir);
+//		if (this.notMoving()) {
+//			this.physics.setVelocity(Direction.IDLE.getPoint());
+//			this.physics.setDirection(Direction.IDLE);
+//			this.graphic.setDirection(Direction.IDLE);
+//			this.physics.resetBlocked();
+//		}
 	}
 
-	private void setMoving(final KeyCode key, final boolean isMoving) {
-		switch (key) {
-		case A: this.isMoveLeft = isMoving;
-			break;
-		case D: this.isMoveRight = isMoving;
-			break;
-		case W: this.isMoveUp = isMoving;
-			break;
-		case S: this.isMoveDown = isMoving;
-			break;
-		case L: this.newLevel = isMoving;
-			break;
-		case SPACE: this.isShooting = isMoving;
-		break;
-		default:
-			break;
-		}
+	private void setMoving(final KeyCode key) {
+//		switch (key) {
+//		case A: this.currentDir = Direction.LEFT;
+//			break;
+//		case D: this.currentDir = Direction.RIGHT;
+//			break;
+//		case W: this.currentDir = Direction.UP;
+//			break;
+//		case S: this.currentDir = Direction.DOWN;
+//			break;
+//		case L: this.newLevel = isMoving;
+//			break;
+//		case SPACE: this.isShooting = isMoving;
+//		break;
+//		default:
+//			break;
+//		}
 	}
 	private void shoot(final Direction direction) {
 		((ShootingComponent) player.getGameObject().getComponent(ShootingComponent.class).get())
 		    .shoot(direction.getPoint());
 	}
 	
-	private void move(final boolean isMoving, final Direction direction) {
-		if (isMoving) {
+	private void move(final Direction direction) {
 			this.lastDir = direction;
 			this.physics.setVelocity(direction.getPoint());
 			this.physics.setDirection(direction);
@@ -98,7 +126,6 @@ public class InputController {
                             this.physics.resetBlocked();
                         }
 			this.graphic.setDirection(direction);
-		} 
 	}
 	
 	private boolean notMoving() {

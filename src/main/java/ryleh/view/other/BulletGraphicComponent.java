@@ -66,7 +66,7 @@ public class BulletGraphicComponent implements GraphicComponent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Object getNode() {
+	public Rectangle getNode() {
 		return rectangle;
 	}
 }

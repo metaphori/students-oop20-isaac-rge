@@ -18,7 +18,11 @@ import ryleh.view.Textures;
 public class FireGraphicComponent implements GraphicComponent {
 
 	private Rectangle rectangle;
-	private AnimationLoop animFire = new AnimationLoop(List.of(Textures.FIRE1.getImagePattern(), Textures.FIRE2.getImagePattern()), 10);
+	private static final int ANIM_DURATION = 10;
+
+	private AnimationLoop animFire = new AnimationLoop(List.of(Textures.FIRE1.getImagePattern(),
+															   Textures.FIRE2.getImagePattern()), 
+													   ANIM_DURATION);
 	
 	/**
 	 * Creates the new Instance of FireGraphicComponent.
@@ -70,7 +74,7 @@ public class FireGraphicComponent implements GraphicComponent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Object getNode() {
+	public Rectangle getNode() {
 		return rectangle;
 	}
 

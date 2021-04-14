@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
+import javafx.scene.shape.Rectangle;
 
 /**
  * This is the interface for the graphic model of the view of any type of entity.
@@ -26,7 +27,7 @@ public interface GraphicComponent {
     /**
      * @return The node related to the GraphicComponent.
      */
-    Object getNode();
+    Rectangle getNode();
 
     /**
      * The method that specifies the actions to be done when a GraphicComponent needs to be removed from the view.

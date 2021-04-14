@@ -19,6 +19,7 @@ public class EnemyShooterGraphicComponent implements GraphicComponent {
 
 	private Rectangle rectangle;
 	private FadeTransition enemyFade;
+	private static final int FADE_DURATION = 200;
 	
 	/**
 	 * Creates a new Instance of EnemyGrapohicComponent.
@@ -26,7 +27,7 @@ public class EnemyShooterGraphicComponent implements GraphicComponent {
 	public EnemyShooterGraphicComponent() {
 		this.rectangle = new Rectangle(Textures.ENEMY_SHOOTER.getHeight(), Textures.ENEMY_SHOOTER.getHeight());
 		this.rectangle.setFill(Textures.ENEMY_SHOOTER.getImagePattern());
-		this.enemyFade = new FadeTransition(Duration.millis(200), rectangle);
+		this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
 	    this.enemyFade.setFromValue(1.0);
 	    this.enemyFade.setToValue(0.0);
 	    this.enemyFade.setCycleCount(4);
@@ -42,7 +43,7 @@ public class EnemyShooterGraphicComponent implements GraphicComponent {
 		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
 		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		this.rectangle.setFill(Textures.ENEMY_SHOOTER.getImagePattern());
-		this.enemyFade = new FadeTransition(Duration.millis(200), rectangle);
+		this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
 	    this.enemyFade.setFromValue(1.0);
 	    this.enemyFade.setToValue(0.0);
 	    this.enemyFade.setCycleCount(4);
@@ -71,7 +72,7 @@ public class EnemyShooterGraphicComponent implements GraphicComponent {
 	 * {@inheritDoc}
 	 */
 	@Override
-    public Object getNode() {
+    public Rectangle getNode() {
         return rectangle;
     }
 

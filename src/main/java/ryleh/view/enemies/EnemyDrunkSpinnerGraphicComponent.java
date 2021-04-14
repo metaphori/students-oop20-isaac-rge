@@ -19,8 +19,9 @@ import ryleh.view.Textures;
 public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent {
 
 	private Rectangle rectangle;
-    private double angle = 0;
+    private double angle;
 	private FadeTransition enemyFade;
+	private static final int FADE_DURATION = 200;
 	
 	/**
 	 * Creates a new Instance of EnemyDrunkSpinnerGraphicComponent.
@@ -28,11 +29,12 @@ public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent {
 	public EnemyDrunkSpinnerGraphicComponent() {
 		this.rectangle = new Rectangle(Textures.ENEMY_DRUNKSPINNER.getWidth(), Textures.ENEMY_DRUNKSPINNER.getHeight());
 		this.rectangle.setFill(Textures.ENEMY_DRUNKSPINNER.getImagePattern());
-		this.enemyFade = new FadeTransition(Duration.millis(200), rectangle);
+		this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
 	    this.enemyFade.setFromValue(1.0);
 	    this.enemyFade.setToValue(0.0);
 	    this.enemyFade.setCycleCount(4);
 	    this.enemyFade.setAutoReverse(true);
+	    this.angle = 0;
 	}
 
 	/**
@@ -44,11 +46,12 @@ public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent {
 		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
 		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		this.rectangle.setFill(Textures.ENEMY_DRUNKSPINNER.getImagePattern());
-		this.enemyFade = new FadeTransition(Duration.millis(200), rectangle);
+		this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
 	    this.enemyFade.setFromValue(1.0);
 	    this.enemyFade.setToValue(0.0);
 	    this.enemyFade.setCycleCount(4);
 	    this.enemyFade.setAutoReverse(true);
+	    this.angle = 0;
 	}
 
 	/**
@@ -85,7 +88,7 @@ public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Object getNode() {
+	public Rectangle getNode() {
 		return rectangle;
 	}
 
@@ -93,7 +96,7 @@ public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void onRemoved(EventHandler<ActionEvent> event) {
+	public void onRemoved(final EventHandler<ActionEvent> event) {
 		enemyFade.setOnFinished(event);
 		enemyFade.play();
 	}

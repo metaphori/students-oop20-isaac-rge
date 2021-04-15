@@ -2,9 +2,9 @@ package ryleh.model.components;
 
 import ryleh.common.P2d;
 import ryleh.common.Timer;
+import ryleh.common.TimerImpl;
 import ryleh.common.V2d;
 import ryleh.controller.events.BulletSpawnEvent;
-import ryleh.model.GameObject;
 import ryleh.model.World;
 
 public class ShootingComponent extends Component {
@@ -18,7 +18,7 @@ public class ShootingComponent extends Component {
     public ShootingComponent(final World world, final double attackSpeed) {
         super(world);
         this.attackSpeed = attackSpeed;
-        timer = new Timer(1000.0 / this.attackSpeed); //Timer class uses milliseconds
+        timer = new TimerImpl(1000.0 / this.attackSpeed); //Timer class uses milliseconds
         timer.startTimer();
     }
     /**
@@ -48,7 +48,7 @@ public class ShootingComponent extends Component {
      */
     public void multiplyAtkSpeed(final double factor) {
         this.attackSpeed *= factor;
-        this.timer = new Timer(1.0 / this.attackSpeed);
+        this.timer = new TimerImpl(1.0 / this.attackSpeed);
     }
     /**
      * Increases attack speed linearly, adding an amount to the number of shoots per second.
@@ -56,7 +56,7 @@ public class ShootingComponent extends Component {
      */
     public void increaseAtkSpeed(final double amount) {
         this.attackSpeed += amount;
-        this.timer = new Timer(1.0 / this.attackSpeed);
+        this.timer = new TimerImpl(1.0 / this.attackSpeed);
     }
     /**
      * Check whether object can shoot or not.

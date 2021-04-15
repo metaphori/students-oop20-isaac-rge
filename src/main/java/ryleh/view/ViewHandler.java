@@ -4,7 +4,9 @@ import java.util.List;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -86,13 +88,15 @@ public class ViewHandler {
     }
 
     /**
-     * A method to remove a GraphicComponent from the list of GraphicComponents and removes it from the scene..
+     * A method to remove a GraphicComponent from the list of GraphicComponents and removes it from the scene.
      * @param graphic The GraphicComponents that needs to be removed from the list of GraphicComponents and from the scene.
      */
     public void removeGraphicComponent(final GraphicComponent graphic) {
     	graphic.onRemoved(e -> {
-    		((AnchorPane) scene.getRoot()).getChildren().filtered(i ->
-            (graphic).getNode().equals(i)).get(0).setVisible(false);
+    		FilteredList<Node> list = ((AnchorPane) scene.getRoot()).getChildren().filtered(i -> (graphic).getNode().equals(i));
+    		if (!list.isEmpty()) {
+    			list.get(0).setVisible(false);
+    		}
     		this.graphicComponents.remove(graphic);
     	});
     }

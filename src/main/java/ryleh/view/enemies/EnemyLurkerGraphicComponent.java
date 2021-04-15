@@ -36,14 +36,7 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent {
 	 * @param graphicComponent The PlayerGraphicComponent that needs to be followed by the EnemyLurker.
 	 */
 	public EnemyLurkerGraphicComponent(final PlayerGraphicComponent graphicComponent) {
-		this.rectangle = new Rectangle(Textures.ENEMY_LURKER.getWidth(), Textures.ENEMY_LURKER.getHeight());
-		this.rectangle.setFill(Textures.ENEMY_LURKER.getImagePattern());
-		this.player = graphicComponent;
-		this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
-	    this.enemyFade.setFromValue(1.0);
-	    this.enemyFade.setToValue(0.0);
-	    this.enemyFade.setCycleCount(4);
-	    this.enemyFade.setAutoReverse(true);
+		this(graphicComponent, new Point2D(0, 0));
 	}
 
 	/**

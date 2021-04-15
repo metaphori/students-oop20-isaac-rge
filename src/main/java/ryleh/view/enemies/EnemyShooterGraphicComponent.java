@@ -25,13 +25,7 @@ public class EnemyShooterGraphicComponent implements GraphicComponent {
 	 * Creates a new Instance of EnemyGrapohicComponent.
 	 */
 	public EnemyShooterGraphicComponent() {
-		this.rectangle = new Rectangle(Textures.ENEMY_SHOOTER.getHeight(), Textures.ENEMY_SHOOTER.getHeight());
-		this.rectangle.setFill(Textures.ENEMY_SHOOTER.getImagePattern());
-		this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
-	    this.enemyFade.setFromValue(1.0);
-	    this.enemyFade.setToValue(0.0);
-	    this.enemyFade.setCycleCount(4);
-	    this.enemyFade.setAutoReverse(true);
+		this(new Point2D(0, 0));
 	}
 
 	/**

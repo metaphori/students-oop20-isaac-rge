@@ -32,15 +32,7 @@ public class EnemySpinnerGraphicComponent implements GraphicComponent {
 	 * Creates a new Instance of EnemySpinnerGraphicComponent.
 	 */
 	public EnemySpinnerGraphicComponent() {
-		this.rectangle = new Rectangle(Textures.ENEMY_SPINNER.getWidth(), Textures.ENEMY_SPINNER.getHeight());
-		this.rectangle.setFill(Textures.ENEMY_SPINNER.getImagePattern());
-		this.rotation = new Rotate();
-		this.rotation.setAngle(GameMath.toDegrees(Math.PI / 60));
-		this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
-	    this.enemyFade.setFromValue(1.0);
-	    this.enemyFade.setToValue(0.0);
-	    this.enemyFade.setCycleCount(4);
-	    this.enemyFade.setAutoReverse(true);
+		this(new Point2D(0, 0));
 	}
 
 	/**

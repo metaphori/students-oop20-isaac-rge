@@ -21,8 +21,7 @@ public class BulletGraphicComponent implements GraphicComponent {
 	 * Creates a new Instance of BulletGraphicComponent.
 	 */
 	public BulletGraphicComponent() {
-		this.rectangle = new Rectangle(Textures.BULLET.getWidth(), Textures.BULLET.getHeight());
-		this.rectangle.setFill(Textures.BULLET.getImagePattern());
+		this(new Point2D(0, 0));
 	}
 	
 	/**

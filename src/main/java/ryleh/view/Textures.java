@@ -140,9 +140,13 @@ public enum Textures {
 	ENEMY_DRUNKSPINNER("assets/texture/enemies/Enemy5.png", 100, 100),
 	
 	/**
-	 * Bullet texture.
+	 * Player Bullet texture.
 	 */
-	BULLET("assets/texture/enemies/Bullet.png", 40, 40);
+	PLAYER_BULLET("assets/texture/player/PlayerBullet.png", 40, 40),
+	/**
+	 * Enemy Bullet texture.
+	 */
+	ENEMY_BULLET("assets/texture/enemies/EnemyBullet.png", 40, 40);
 
 	private String texture;
 	private int width;

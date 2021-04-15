@@ -56,7 +56,7 @@ public final class BasicFactory {
                  .type(bulletType)
                  .position(origin)
                  .with(new BulletComponent(state.getWorld(), origin, direction))
-                 .view(new BulletGraphicComponent(GameMath.toPoint2D(origin)))
+                 .view(new BulletGraphicComponent(GameMath.toPoint2D(origin), bulletType))
                  .bbox(new CircleHitBox(new Circle2d(5)))
                  .zIndex(0)
                  .build();

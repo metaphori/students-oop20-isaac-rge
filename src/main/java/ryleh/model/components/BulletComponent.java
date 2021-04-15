@@ -4,11 +4,11 @@ import java.util.Optional;
 
 import ryleh.common.P2d;
 import ryleh.common.V2d;
+import ryleh.controller.events.EnemyCollisionEvent;
+import ryleh.controller.events.RemoveEntityEvent;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
-import ryleh.model.events.EnemyCollisionEvent;
-import ryleh.model.events.RemoveEntityEvent;
 
 public class BulletComponent extends Component {
 	
@@ -39,7 +39,7 @@ public class BulletComponent extends Component {
 			colliding = this.checkEnemyCollisiom();
 		}
 		if (colliding.isPresent()) {
-			world.notifyWorldEvent(new EnemyCollisionEvent(colliding.get(), object));
+			world.notifyWorldEvent(new EnemyCollisionEvent(colliding.get()));
 		}
 		if (colliding.isPresent() || object.getHitBox().isOutOfBounds(world.getBounds())) {
 			world.notifyWorldEvent(new RemoveEntityEvent(object));

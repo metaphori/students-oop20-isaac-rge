@@ -3,12 +3,12 @@ package ryleh.model.components;
 import java.util.Optional;
 
 import ryleh.controller.Entity;
+import ryleh.controller.events.EnemyCollisionEvent;
+import ryleh.controller.events.GameOverEvent;
+import ryleh.controller.events.ItemPickUpEvent;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
-import ryleh.model.events.EnemyCollisionEvent;
-import ryleh.model.events.GameOverEvent;
-import ryleh.model.events.ItemPickUpEvent;
 
 public class CollisionComponent extends Component {
 	
@@ -16,7 +16,7 @@ public class CollisionComponent extends Component {
 	private boolean hasAlreadyColided = false;
 	
 	/**
-	 * Add a component to check the collision between enemies and player
+	 * Add a component to check the collision between enemies and player.
 	 * @param world
 	 * @param type The type of the concerned GameObject 
 	 */
@@ -35,10 +35,10 @@ public class CollisionComponent extends Component {
 					.findFirst();
 			if (colliding.isPresent()) {
 				if (type.equals(Type.ITEM)) {
-					world.notifyWorldEvent(new ItemPickUpEvent(colliding.get(), object));
+					world.notifyWorldEvent(new ItemPickUpEvent(colliding.get()));
 					this.hasAlreadyColided = true;
 				} else {
-					world.notifyWorldEvent(new EnemyCollisionEvent(colliding.get(), object));
+					world.notifyWorldEvent(new EnemyCollisionEvent(colliding.get()));
 				}
 		    }
 		}

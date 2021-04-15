@@ -2,11 +2,11 @@ package ryleh.controller;
 
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import ryleh.controller.events.NewLevelEvent;
 import ryleh.core.GameState;
 import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
 import ryleh.model.components.ShootingComponent;
-import ryleh.model.events.NewLevelEvent;
 import ryleh.model.physics.Direction;
 import ryleh.view.PlayerGraphicComponent;
 
@@ -45,7 +45,7 @@ public class InputController {
 	}
 	public void updateInput() {
 		if (newLevel) {
-			world.notifyWorldEvent(new NewLevelEvent(this.player.getGameObject()));
+			world.notifyWorldEvent(new NewLevelEvent());
 		}
 		if (isShooting) {
 			if (this.physics.getDirection().equals(Direction.IDLE)) {

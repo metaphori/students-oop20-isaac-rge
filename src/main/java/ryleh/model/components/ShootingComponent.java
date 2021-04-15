@@ -3,9 +3,9 @@ package ryleh.model.components;
 import ryleh.common.P2d;
 import ryleh.common.Timer;
 import ryleh.common.V2d;
+import ryleh.controller.events.BulletSpawnEvent;
 import ryleh.model.GameObject;
 import ryleh.model.World;
-import ryleh.model.events.BulletSpawnEvent;
 
 public class ShootingComponent extends Component {
 

@@ -1,28 +1,33 @@
 package ryleh.model.components;
 
 import java.util.Optional;
-
-import ryleh.controller.Entity;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.events.EnemyCollisionEvent;
-import ryleh.model.events.GameOverEvent;
 import ryleh.model.events.ItemPickUpEvent;
-
-public class CollisionComponent extends Component{
-	private Type type;
+/**
+ *A class used as a Component for GameObjects to get collisions.
+ */
+public class CollisionComponent extends Component {
+	private final Type type;
 	private boolean hasAlreadyColided = false;
-	
-	public CollisionComponent(World world, Type type) {
+	/** 
+	 * A constructor method.
+	 * @param world world instance.
+	 * @param type type of GameObject.
+	 */
+	public CollisionComponent(final World world, final Type type) {
 		super(world);
 		this.type = type;
 		this.hasAlreadyColided = false;
 	}
-	
+	/**
+	 * A method which checks for collisions with other GameObjects and notifies world instance in case of event.
+	 */
 	public void onUpdate(final double deltaTime) {
 		super.onUpdate(deltaTime);
-		if(!this.hasAlreadyColided) {
+		if (!this.hasAlreadyColided) {
 			Optional<GameObject> colliding = world.getGameObjects().stream()
 					.filter(obj -> obj.getType().equals(Type.PLAYER))
 					.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
@@ -37,7 +42,6 @@ public class CollisionComponent extends Component{
 				}
 		    }
 		}
-		
 	}
 
 }

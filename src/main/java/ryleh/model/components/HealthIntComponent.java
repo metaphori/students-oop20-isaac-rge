@@ -1,10 +1,10 @@
 package ryleh.model.components;
 
 import ryleh.common.Timer;
+import ryleh.controller.events.GameOverEvent;
+import ryleh.controller.events.RemoveEntityEvent;
 import ryleh.model.Type;
 import ryleh.model.World;
-import ryleh.model.events.GameOverEvent;
-import ryleh.model.events.RemoveEntityEvent;
 
 public class HealthIntComponent extends Component {
 	
@@ -30,7 +30,7 @@ public class HealthIntComponent extends Component {
 		//TODO should treat GameOver not as an event
 		if (this.currentHp <= 0) {
 			if(object.getType().equals(Type.PLAYER)) {
-				 world.notifyWorldEvent(new GameOverEvent(object));
+				 world.notifyWorldEvent(new GameOverEvent());
 			}
 			else {
 				world.notifyWorldEvent(new RemoveEntityEvent(object));

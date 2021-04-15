@@ -11,6 +11,12 @@ public class BulletSpawnEvent implements Event {
 	private P2d position;
 	private V2d velocity;
 	private GameObject target;
+	/**
+	 * Constructor for the spawn of a bullet.
+	 * @param spawner The Game object which has to spawn the bullet
+	 * @param position Current position of the object
+	 * @param velocity Velocity of the bullet
+	 */
 	public BulletSpawnEvent(final GameObject spawner, final P2d position, final V2d velocity) {
 		this.target = spawner;
 		this.position = position;

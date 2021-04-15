@@ -1,6 +1,10 @@
 package ryleh.controller.events;
 
 public interface EventListener {
-	
-	void notifyEvent(Event e);
+    /**
+     * Notify the happening of an Event.
+     * 
+     * @param e Event to be notified
+     */
+    void notifyEvent(Event e);
 }

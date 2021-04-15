@@ -13,6 +13,10 @@ public class ItemPickUpEvent implements Event {
 	private GameObject target;
 	private HealthIntComponent health;
 	
+	/**
+	 * Constructor for the collision with an Item.
+	 * @param target Player, only this game object can collide with items
+	 */
 	public ItemPickUpEvent(final GameObject target) {
 		this.target = target;
 	}
@@ -23,11 +27,13 @@ public class ItemPickUpEvent implements Event {
 	@Override
 	public void handle(final GameState state) {
 		randomItem();
-		state.getView().getLives().setText("Lives: " +  ((HealthIntComponent) this.target.getComponent(HealthIntComponent.class).get()).getCurrentHp());
 		final ItemGraphicComponent graphic = (ItemGraphicComponent) state
 				.getEntityByType(Type.ITEM).get().getView();
         graphic.setAnimPlayed();
 	}
+	/**
+	 * Method to generate a random buff with pseudo probability.
+	 */
 	private void randomItem() {
 		Random item = new Random();
 		health = (HealthIntComponent) this.target.getComponent(HealthIntComponent.class).get();
@@ -42,9 +48,15 @@ public class ItemPickUpEvent implements Event {
 			break;
 		}
 	}
+	/**
+	 * Heal the target.
+	 */
 	private void healthUp() {
 		health.heal(1);
 	}
+	/**
+	 * Increase max health of the target.
+	 */
 	private void maxHealthUp() {
 		health.setMaxHp(health.getMaxHp() + 1);
 	}

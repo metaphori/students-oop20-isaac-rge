@@ -4,10 +4,9 @@ import ryleh.core.GameState;
 
 public class EnemiesDefeatedEvent implements Event {
 	
-	public EnemiesDefeatedEvent() {
-	}
 	/**
 	 * {@inheritDoc}
+	 * Spawns a new item and a new door after all enemies are defeated
 	 */
 	@Override
 	public void handle(final GameState state) {

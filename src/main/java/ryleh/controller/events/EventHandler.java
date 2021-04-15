@@ -17,6 +17,7 @@ public class EventHandler implements EventListener {
 
     private final GameState gameState;
     private final List<Event> eventQueue;
+    private HealthIntComponent comp;
 
     public EventHandler(final GameState gameState) {
         this.gameState = gameState;
@@ -28,9 +29,6 @@ public class EventHandler implements EventListener {
      * Event Queue and handles their behavior.
      */
     public void checkEvents() {
-        final HealthIntComponent comp = (HealthIntComponent) this.gameState.getPlayer().getGameObject()
-                .getComponent(HealthIntComponent.class).get();
-        this.checkPlayerState();
         this.eventQueue.forEach(e -> {
             if (e instanceof EnemyCollisionEvent) {
                 final EnemyCollisionEvent enemyEvent = (EnemyCollisionEvent) e;
@@ -53,20 +51,32 @@ public class EventHandler implements EventListener {
             } else if (e instanceof NewLevelEvent) {
                 final NewLevelEvent lvl = (NewLevelEvent) e;
                 lvl.handle(this.gameState);
-
             }
         });
         this.eventQueue.clear();
+        this.updateUI();
+        this.checkPlayerState();
     }
-
+    /**
+     * Check the player state so that the graphic component can apply effects in special cases.
+     */
     private void checkPlayerState() {
-        final HealthIntComponent comp = (HealthIntComponent) this.gameState.getPlayer().getGameObject()
-                .getComponent(HealthIntComponent.class).get();
-        final PlayerGraphicComponent playerGraphic = (PlayerGraphicComponent) this.gameState
-                .getEntityByType(Type.PLAYER).get().getView();
+        final PlayerGraphicComponent playerGraphic = (PlayerGraphicComponent) this.gameState.getPlayer().getView();
         playerGraphic.setInvincible(comp.isImmortal());
     }
+    /**
+     * Update game UI after event handling.
+     */
+    private void updateUI() {
+        comp = (HealthIntComponent) this.gameState.getPlayer().getGameObject()
+                .getComponent(HealthIntComponent.class).get();
+        gameState.getView().getLives().setText("Lives: " + comp.getCurrentHp());
+        this.gameState.getView().getLevel().setText("Level: " + this.gameState.getLevelHandler().getnRooms());
+    }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void notifyEvent(final Event e) {
         this.eventQueue.add(e);

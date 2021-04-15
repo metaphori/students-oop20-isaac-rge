@@ -29,31 +29,12 @@ public class EventHandler implements EventListener {
      * Event Queue and handles their behavior.
      */
     public void checkEvents() {
-        this.eventQueue.forEach(e -> {
-            if (e instanceof EnemyCollisionEvent) {
-                final EnemyCollisionEvent enemyEvent = (EnemyCollisionEvent) e;
-                enemyEvent.handle(this.gameState);
-            } else if (e instanceof ItemPickUpEvent) {
-                final ItemPickUpEvent pickUpEvent = (ItemPickUpEvent) e;
-                pickUpEvent.handle(this.gameState);
-            } else if (e instanceof GameOverEvent) {
-                final GameOverEvent over = (GameOverEvent) e;
-                over.handle(this.gameState);
-            } else if (e instanceof BulletSpawnEvent) {
-                final BulletSpawnEvent spawn = (BulletSpawnEvent) e;
-                spawn.handle(this.gameState);
-            } else if (e instanceof RemoveEntityEvent) {
-                final RemoveEntityEvent remove = (RemoveEntityEvent) e;
-                remove.handle(this.gameState);
-            } else if (e instanceof EnemiesDefeatedEvent) {
-                final EnemiesDefeatedEvent defeat = (EnemiesDefeatedEvent) e;
-                defeat.handle(this.gameState);
-            } else if (e instanceof NewLevelEvent) {
-                final NewLevelEvent lvl = (NewLevelEvent) e;
-                lvl.handle(this.gameState);
-            }
-        });
-        this.eventQueue.clear();
+        if (!this.eventQueue.isEmpty()) {
+            this.eventQueue.forEach(e -> {
+                e.handle(this.gameState);
+            });
+            this.eventQueue.clear();
+        }
         this.updateUI();
         this.checkPlayerState();
     }

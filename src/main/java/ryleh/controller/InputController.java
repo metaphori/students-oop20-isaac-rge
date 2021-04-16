@@ -2,6 +2,7 @@ package ryleh.controller;
 
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import ryleh.core.GameEngine;
 import ryleh.core.GameState;
 import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
@@ -52,7 +53,7 @@ public class InputController {
 			case S: this.currentDir = Direction.DOWN;
 				isMoveDown = true;
 			        break;
-			case L: this.newLevel = true;
+			case L: this.newLevel = GameEngine.isDeveloper();
 				break;
 			case SPACE: this.isShooting = true;;
 			break;
@@ -98,7 +99,7 @@ public class InputController {
 		    this.currentDir = Direction.IDLE;
 		} else if (this.currentDir.equals(Direction.DOWN) && !isMoveDown) {
                     this.currentDir = Direction.IDLE;
-                } if (this.currentDir.equals(Direction.LEFT) && !isMoveLeft) {
+                } else if (this.currentDir.equals(Direction.LEFT) && !isMoveLeft) {
                     this.currentDir = Direction.IDLE;
                 } else if (this.currentDir.equals(Direction.RIGHT) && !isMoveRight) {
                     this.currentDir = Direction.IDLE;

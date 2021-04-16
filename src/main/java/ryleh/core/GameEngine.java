@@ -18,6 +18,13 @@ public final class GameEngine {
     private static Timeline loop;
     private RylehPauseMenu pauseMenu;
     private Stage primaryStage;
+    /**
+     * If True, the game runs in developer mode, otherwise it will run is release mode.
+     * While release mode is the normal way to play, developer exists only for debugging purposes.
+     * Note: in developer mode player HP doesn't decrease, level changing can be done by pressing "L" key,
+     * current level can be set to maximum by pressing "O" key plus other features. 
+     */
+    private static boolean isDeveloper;
 
     /**
      * Initializes engine's game state and the frequency (period) of game loop.
@@ -53,7 +60,6 @@ public final class GameEngine {
                 rylehState.updateState(period);
             }
         }); // oneFrame
-
         // sets the game world's game loop (Timeline)
         loop = new Timeline(oneFrame);
         loop.setCycleCount(Animation.INDEFINITE);
@@ -84,6 +90,14 @@ public final class GameEngine {
     private void renderGameOver() {
         loop.stop();
         new RylehGameOverMenu(this.primaryStage).show();
+    }
+
+    public static boolean isDeveloper() {
+        return isDeveloper;
+    }
+
+    public static void setDeveloper(final boolean isDeveloper) {
+        GameEngine.isDeveloper = isDeveloper;
     }
 
 }

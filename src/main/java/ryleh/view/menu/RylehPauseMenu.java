@@ -3,12 +3,15 @@ package ryleh.view.menu;
 
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -36,6 +39,13 @@ public class RylehPauseMenu {
             } 
         };
         factory.getBox().getChildren().add(factory.createCustomButton("Resume", "Resume the game", resume));
+        Node developButton = factory.createCustomButton("Developer Mode: OFF", "Enable/Disable developer mode", 
+                () -> {
+                    GameEngine.setDeveloper(!GameEngine.isDeveloper());
+                    ((Text) ((HBox) factory.getBox().getChildren().get(1)).getChildren().get(1))
+                    .setText("Developer Mode: " + (GameEngine.isDeveloper() ? "ON" : "OFF"));
+                });
+        factory.getBox().getChildren().add(developButton);
         factory.getBox().getChildren().add(factory.createCustomButton("Quit Game", "Exit to desktop", () -> {
             factory.createCustomAlert("Do you really want to quit?");
         }));
@@ -70,5 +80,9 @@ public class RylehPauseMenu {
         pauseScene.setFill(Color.TRANSPARENT);
         popupStage.setScene(pauseScene);
         popupStage.show();
+    }
+
+    public String getDevButtonText(final boolean isDeveloper) {
+        return isDeveloper ? "ON" : "OFF";
     }
 }

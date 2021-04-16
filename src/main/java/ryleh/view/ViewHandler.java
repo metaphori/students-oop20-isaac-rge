@@ -17,6 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 import ryleh.Ryleh;
 import ryleh.common.Config;
 import ryleh.view.enemies.EnemyDrunkGraphicComponent;
@@ -25,14 +26,18 @@ import ryleh.view.enemies.EnemyDrunkGraphicComponent;
  * A class to Completely handle the view.
  */
 public class ViewHandler {
-
-    private Stage stage;
+	/**
+	 * Duration of fading transition for item effect text.
+	 */
+    private static final double FT_DURATION = 4000;
+	private Stage stage;
     private List<GraphicComponent> graphicComponents;
     private Scene scene;
     private Parent root;
     private Rectangle rectangle;
     private Text lives;
     private Text level;
+    private Text item;
     private Font font;
 
     /**
@@ -47,11 +52,13 @@ public class ViewHandler {
                 		.toExternalForm(), 37 * Config.SCALE_MODIFIER);
         this.setLives();
         this.setLevel();
+        this.setItemPickUp();
         root = new AnchorPane();
         root.setStyle("-fx-background-color: black;");
         ((AnchorPane) root).getChildren().add(rectangle); 
         ((AnchorPane) root).getChildren().add(this.lives);
         ((AnchorPane) root).getChildren().add(this.level);
+        ((AnchorPane) root).getChildren().add(this.item);
         scene = new Scene(root);
         this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
@@ -64,7 +71,6 @@ public class ViewHandler {
         //this.stage.setFullScreen(true);
         this.graphicComponents = new ArrayList<>();
     }
-
     /**
      * A method to set the text that represents the current level.
      */
@@ -75,7 +81,17 @@ public class ViewHandler {
         this.level.setY((Config.STANDARD_HEIGHT / 9) * 1);
         this.level.setFill(Color.WHITE);
 	}
-
+    /**
+     * A method to set the text that represents the current item effect.
+     */
+    private void setItemPickUp() {
+    	this.item = new Text("Item effect:");
+        this.item.setFont(this.font);
+        this.item.setX((Config.STANDARD_WIDTH / 16) * 2);
+        this.item.setY((Config.STANDARD_HEIGHT / 9) * 8 + (20 * Config.SCALE_MODIFIER));
+        this.item.setFill(Color.WHITE);
+        this.item.setVisible(false);
+	}
     /**
      * A method to set the text that represents the remaining lives.
      */
@@ -108,7 +124,13 @@ public class ViewHandler {
     public Text getLives() {
 		return this.lives;
 	}
-
+    /**
+     * A method that returns the last item effect.
+     * @return the number of remaining lives.
+     */
+    public Text getItemPickUp() {
+		return this.item;
+	}
     /**
      * A method that returns the current level number.
      * @return the current level number.
@@ -126,6 +148,7 @@ public class ViewHandler {
       ((AnchorPane) root).getChildren().add(rectangle);
       ((AnchorPane) root).getChildren().add(this.lives);
       ((AnchorPane) root).getChildren().add(this.level);
+      ((AnchorPane) root).getChildren().add(this.item);
       scene.setRoot(root);
  	}
 
@@ -160,5 +183,17 @@ public class ViewHandler {
 	 */
 	public Scene getScene() {
 		return scene;
+	}
+	/**
+	 * A method that sets visibility of item to true and plays a fading transition for the item effects text.
+	 */
+	public void playFt() {
+		this.item.setVisible(true);
+		final FadeTransition ft = new FadeTransition(Duration.millis(FT_DURATION), this.item);
+        ft.setFromValue(1.0);
+        ft.setToValue(0);
+        ft.setCycleCount(1);
+        ft.setAutoReverse(false);
+        ft.play();
 	}
 }

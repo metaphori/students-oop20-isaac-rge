@@ -5,10 +5,13 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Separator;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -24,8 +27,14 @@ public class RylehPauseMenu {
     private final Scene pauseScene;
     private final Stage primaryStage;
     private final MenuFactory factory;
+    private final Separator separator;
+    private final BorderPane pane;
+    private final VBox box;
 
     public RylehPauseMenu(final Stage primaryStage) {
+    	this.separator = new Separator();
+        this.pane = new BorderPane();
+        this.box = new VBox();
         factory = new MenuFactoryImpl();
         this.primaryStage = primaryStage;
         factory.setLevelFont(Font.loadFont(Ryleh.class.getResource("/assets/fonts/manaspc.ttf")
@@ -38,26 +47,28 @@ public class RylehPauseMenu {
                 GameEngine.resumeEngine();
             } 
         };
-        factory.getBox().getChildren().add(factory.createCustomButton("Resume", "Resume the game", resume));
+
+        this.box.getChildren().add(factory.createCustomButton("Resume", "Resume the game", resume));
         Node developButton = factory.createCustomButton("Developer Mode: OFF", "Enable/Disable developer mode", 
                 () -> {
                     GameEngine.setDeveloper(!GameEngine.isDeveloper());
-                    ((Text) ((HBox) factory.getBox().getChildren().get(1)).getChildren().get(1))
+                    ((Text) ((HBox) this.box.getChildren().get(1)).getChildren().get(1))
                     .setText("Developer Mode: " + (GameEngine.isDeveloper() ? "ON" : "OFF"));
                 });
-        factory.getBox().getChildren().add(developButton);
-        factory.getBox().getChildren().add(factory.createCustomButton("Quit Game", "Exit to desktop", () -> {
+        this.box.getChildren().add(developButton);
+        this.box.getChildren().add(factory.createCustomButton("Resume", "Resume the game", resume));
+        this.box.getChildren().add(factory.createCustomButton("Quit Game", "Exit to desktop", () -> {
             factory.createCustomAlert("Do you really want to quit?");
         }));
-        factory.getSeparator().setOrientation(Orientation.HORIZONTAL);
-        factory.getSeparator().setTranslateX(factory.getScaledSize() / 2);
+        this.separator.setOrientation(Orientation.HORIZONTAL);
+        this.separator.setTranslateX(factory.getScaledSize() / 2);
         factory.getDescription().setFont(new Font(factory.getScaledSize()));
         factory.getDescription().setFill(factory.getStartColor());
-        factory.getDescription().setTranslateY(factory.getSeparator().getTranslateY() + 10);
-        factory.getBox().setAlignment(Pos.CENTER_LEFT);
-        factory.getBox().setTranslateX(factory.getScaledSize());
-        factory.getBox().getChildren().addAll(factory.getSeparator(), factory.getDescription());
-        factory.getPane().setLeft(factory.getBox());
+        factory.getDescription().setTranslateY(this.separator.getTranslateY() + 10);
+        this.box.setAlignment(Pos.CENTER_LEFT);
+        this.box.setTranslateX(factory.getScaledSize());
+        this.box.getChildren().addAll(this.separator, factory.getDescription());
+        this.pane.setLeft(this.box);
 
         popupStage = new Stage(StageStyle.TRANSPARENT);
         popupStage.initOwner(primaryStage);
@@ -67,7 +78,7 @@ public class RylehPauseMenu {
                    resume.run();
             }
         });
-        pauseScene = new Scene(factory.getPane(), Config.STANDARD_WIDTH, Config.STANDARD_HEIGHT);
+        pauseScene = new Scene(this.pane, Config.STANDARD_WIDTH, Config.STANDARD_HEIGHT);
     }
 
     /**
@@ -76,7 +87,7 @@ public class RylehPauseMenu {
     */
     public void renderPauseMenu() {
         this.primaryStage.getScene().getRoot().setEffect(new GaussianBlur());
-        factory.getPane().setStyle("-fx-background-color: rgba(255, 255, 255, 0.1);");
+        this.pane.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1);");
         pauseScene.setFill(Color.TRANSPARENT);
         popupStage.setScene(pauseScene);
         popupStage.show();

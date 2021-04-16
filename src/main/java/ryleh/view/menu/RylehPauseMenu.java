@@ -56,7 +56,6 @@ public class RylehPauseMenu {
                     .setText("Developer Mode: " + (GameEngine.isDeveloper() ? "ON" : "OFF"));
                 });
         this.box.getChildren().add(developButton);
-        this.box.getChildren().add(factory.createCustomButton("Resume", "Resume the game", resume));
         this.box.getChildren().add(factory.createCustomButton("Quit Game", "Exit to desktop", () -> {
             factory.createCustomAlert("Do you really want to quit?");
         }));

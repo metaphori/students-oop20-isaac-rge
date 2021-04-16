@@ -28,7 +28,8 @@ public class GameState {
     private final World world;
     private final List<Entity> entities;
     private final Map<String, String> gameVars;
-    private boolean isGameOver = false;
+    private boolean isGameOver;
+    private boolean isVictory;
     private final EventHandler eventHandler;
     private final InputController input;
     private final LevelHandler levelHandler;
@@ -66,7 +67,7 @@ public class GameState {
 	view.addGraphicComponent(player.getView());
 	world.addGameObject(player.getGameObject());
 	entities.add(player);
-	//player.getGameObject().setPosition(levelHandler.getPosition(levelHandler.playerSpawn));
+
 	((PhysicsComponent) player.getGameObject().getComponent(PhysicsComponent.class).get())
 	    .setPosition(levelHandler.getPosition(levelHandler.getPlayerSpawn()));
 
@@ -78,7 +79,7 @@ public class GameState {
 		}
 	});
 	input.initInput();
-	levelHandler.debug();
+	GameEngine.runDebugger(() -> levelHandler.printSpawnPoints());
 
     }
 
@@ -101,8 +102,9 @@ public class GameState {
     public boolean isGameOver() {
         return isGameOver;
     }
-    public void callGameOver() {
+    public void callGameOver(final boolean victory) {
         this.isGameOver = true;
+        this.isVictory = victory;
     }
 
     public ViewHandler getView() {
@@ -126,5 +128,8 @@ public class GameState {
     }
     public List<Entity> getEntities() {
 	return this.entities;
+    }
+    public boolean isVictory() {
+        return this.isVictory;
     }
 }

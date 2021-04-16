@@ -9,6 +9,8 @@ import ryleh.common.P2d;
 import ryleh.common.Pair;
 import ryleh.common.Rectangle2d;
 import ryleh.controller.Entity;
+import ryleh.controller.events.GameOverEvent;
+import ryleh.core.GameEngine;
 import ryleh.core.GameState;
 import ryleh.core.factories.BasicFactory;
 import ryleh.core.factories.EnemyFactory;
@@ -33,20 +35,25 @@ public class LevelHandler {
     public static final double ITEM_SPAWN_DISTANCE = 1;
     private int entityCounter;
 
-	//the number of spawn points is determined
-	private final Map<Pair<Integer, Integer>, Entity> spawnPoints;
-	private static final int COLUMNS = 9;
-	private static final int ROWS = 5;
-	private int nEnemies;
-	private boolean hasItem;
-	private int nRooms;
-	private final LevelDesigner designer;
-	private final GameState gameState;
-	private final P2d boundsCoord;
-	private final double boundsWidth;
-	private final double boundsHeight;
-	private final Pair<Integer, Integer> playerSpawn;
-	
+    /**
+     * The number of levels required to advance and win the game.
+     */
+    private static final int LAST_LEVEL = 30;
+//the number of spawn points is determined
+    private final Map<Pair<Integer, Integer>, Entity> spawnPoints;
+    private static final int COLUMNS = 9;
+    private static final int ROWS = 5;
+    private int nEnemies;
+    private boolean hasItem;
+    private int nRooms;
+    private final LevelDesigner designer;
+    private final GameState gameState;
+    private final P2d boundsCoord;
+    private final double boundsWidth;
+    private final double boundsHeight;
+    private final Pair<Integer, Integer> playerSpawn;
+    private final Pair<Integer, Integer> doorSpawn;
+
 	public LevelHandler(final GameState gameState) {
 	    this.gameState = gameState;
 	    final World world = gameState.getWorld();
@@ -56,6 +63,7 @@ public class LevelHandler {
 	    boundsWidth = world.getWidthBound();
 	    boundsHeight = world.getHeightBound();
 	    playerSpawn = new Pair<>(COLUMNS / 2, ROWS - 1);
+	    doorSpawn = new Pair<>(COLUMNS / 2, 0);
 	    nEnemies = 0;
 	    hasItem = false;
 	    entityCounter = 0;
@@ -77,6 +85,10 @@ public class LevelHandler {
 		designer.clearLevel();
 		hasItem = false;
 		nRooms++;
+		if (nRooms >= LAST_LEVEL + 1) {
+		    gameState.callGameOver(true);
+		    return;
+		}
 		entityCounter = 0;
 		final List<Type> entityList = designer.generateLevelEntities();
 		for (final Type elem : entityList) {
@@ -151,7 +163,8 @@ public class LevelHandler {
 		Pair<Integer, Integer> random;
 		do {
 			 random = new Pair<>(generator.nextInt(COLUMNS), generator.nextInt(ROWS));
-		} while (spawnPoints.containsKey(random) && entityCounter < ROWS * COLUMNS || random.equals(playerSpawn));
+		} while (spawnPoints.containsKey(random) && entityCounter < ROWS * COLUMNS || random.equals(playerSpawn)
+		        || random.equals(doorSpawn));
 		entityCounter++;
 		return random;
 	}
@@ -218,9 +231,11 @@ public class LevelHandler {
 	 */
 	public void decreaseEnemies() {
 		nEnemies--;
-		System.out.println(nEnemies);
+		GameEngine.runDebugger(() -> System.out.println(nEnemies));
 		if (noEnemies()) {
-		    System.out.println("nEnemies e'" + nEnemies + " quindi spawno l'item");
+		    GameEngine.runDebugger(() ->  {
+		        System.out.println("nEnemies e'" + nEnemies + " quindi spawno l'item");
+		    });
 		    spawnItem();
 		    spawnDoor();
 		}
@@ -238,9 +253,26 @@ public class LevelHandler {
 	public Collection<Entity> getEntities() {
 		return spawnPoints.values();
 	}
-	
-	public void debug() {
-		spawnPoints.forEach((k,v) -> System.out.println("chiave" + k + "\t valore" + v));
+	/**
+	 * Sets current level.
+	 * @param level Level to be set.
+	 */
+	public void setLevel(final int level) {
+	    this.nRooms = level;
+	    this.designer.setLevel(level);
+	}
+	/**
+	 * Sets current level to last level.
+	 * @return Max Level attribute.
+	 */
+	public static int getMaxLevel() {
+	    return LAST_LEVEL;
+	}
+	/**
+	 * Prints current spawnPoints map. Used for debugging purposes.
+	 */
+	public void printSpawnPoints() {
+	    spawnPoints.forEach((k, v) -> System.out.println("chiave" + k + "\t valore" + v));
 	}
 	
 }

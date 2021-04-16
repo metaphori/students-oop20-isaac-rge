@@ -28,13 +28,7 @@ public class EnemyDrunkGraphicComponent implements GraphicComponent {
 	 * Creates a new Instance of EnemyDrunkGraphicComponent.
 	 */
 	public EnemyDrunkGraphicComponent() {
-		this.rectangle = new Rectangle(Textures.ENEMY_DRUNK.getWidth(), Textures.ENEMY_DRUNK.getHeight());
-		this.rectangle.setFill(Textures.ENEMY_DRUNK.getImagePattern());
-		this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
-	    this.enemyFade.setFromValue(1.0);
-	    this.enemyFade.setToValue(0.0);
-	    this.enemyFade.setCycleCount(4);
-	    this.enemyFade.setAutoReverse(true);
+		this(new Point2D(0, 0));
 	}
 
 	/**

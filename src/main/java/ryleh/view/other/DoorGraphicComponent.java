@@ -19,21 +19,14 @@ public class DoorGraphicComponent implements GraphicComponent {
 
 	private Rectangle rectangle;
 	private boolean animPlayed;
-	private static final int ANIM_DURATION = 5;
-	private AnimationLoop animDoor = new AnimationLoop(List.of(Textures.DOOR1.getImagePattern(), 
-															   Textures.DOOR2.getImagePattern(), 
-															   Textures.DOOR3.getImagePattern(), 
-															   Textures.DOOR4.getImagePattern(), 
-															   Textures.DOOR5.getImagePattern()), 
-														ANIM_DURATION);
+	private static final int ANIM_DURATION = 250;
+	private AnimationLoop animDoor;
 	
 	/**
 	 * Creates a new Instance of BulletGraphicComponent.
 	 */
 	public DoorGraphicComponent() {
-		this.rectangle = new Rectangle(Textures.DOOR1.getWidth(), Textures.DOOR1.getHeight());
-		this.rectangle.setFill(Textures.DOOR1.getImagePattern());
-		this.animPlayed = false;
+		this(new Point2D(0, 0));
 	}
 	
 	/**
@@ -41,7 +34,17 @@ public class DoorGraphicComponent implements GraphicComponent {
 	 * @param position The position at which the DoorGraphicComponent needs to be initialized.
 	 */
 	public DoorGraphicComponent(final Point2D position) {
-
+		this.rectangle = new Rectangle(Textures.DOOR1.getWidth(), Textures.DOOR1.getHeight());
+		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
+		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
+		this.rectangle.setFill(Textures.DOOR1.getImagePattern());
+		this.animPlayed = false;
+		this.animDoor = new AnimationLoop(List.of(Textures.DOOR1.getImagePattern(), 
+												   Textures.DOOR2.getImagePattern(), 
+												   Textures.DOOR3.getImagePattern(), 
+												   Textures.DOOR4.getImagePattern(), 
+												   Textures.DOOR5.getImagePattern()), 
+										   ANIM_DURATION, rectangle);
 	}
 	
 	/**
@@ -49,14 +52,6 @@ public class DoorGraphicComponent implements GraphicComponent {
 	 */
 	public void setAnimPlayed() {
 		animPlayed = true;
-	}
-
-	/**
-	 * A method to play the animation when needed.
-	 */
-	public void playAnimation() {
-		rectangle = animDoor.setFrame(rectangle);
-		animDoor.incTimer();
 	}
 	
 	/**
@@ -75,7 +70,10 @@ public class DoorGraphicComponent implements GraphicComponent {
 		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
 		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		if (animPlayed) {
-			this.playAnimation();
+			if (this.isAnimFinished()) {
+				animDoor.stop();
+				rectangle.setFill(animDoor.getLastFrame());
+			}
 		}
 	}
 
@@ -86,6 +84,8 @@ public class DoorGraphicComponent implements GraphicComponent {
 	public void onAdded(final Scene scene) {
 		Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
+        this.animPlayed = true;
+        animDoor.play();
 	}
 	
 	/**
@@ -101,6 +101,5 @@ public class DoorGraphicComponent implements GraphicComponent {
 	 */
 	@Override
 	public void onRemoved(final EventHandler<ActionEvent> event) {
-		// TODO Auto-generated method stub
 	}
 }

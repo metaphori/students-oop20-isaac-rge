@@ -1,6 +1,7 @@
 package ryleh.core.factories;
 
 import ryleh.common.Circle2d;
+
 import ryleh.common.GameMath;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
@@ -16,6 +17,7 @@ import ryleh.model.components.ShootingComponent;
 import ryleh.view.PlayerGraphicComponent;
 import ryleh.model.physics.CircleHitBox;
 import ryleh.view.other.BulletGraphicComponent;
+import ryleh.view.other.DoorGraphicComponent;
 import ryleh.view.other.FireGraphicComponent;
 import ryleh.view.other.ItemGraphicComponent;
 import ryleh.view.other.RockGraphicComponent;
@@ -54,7 +56,7 @@ public final class BasicFactory {
                  .type(bulletType)
                  .position(origin)
                  .with(new BulletComponent(state.getWorld(), origin, direction))
-                 .view(new BulletGraphicComponent(GameMath.toPoint2D(origin)))
+                 .view(new BulletGraphicComponent(GameMath.toPoint2D(origin), bulletType))
                  .bbox(new CircleHitBox(new Circle2d(5)))
                  .zIndex(0)
                  .build();
@@ -100,5 +102,19 @@ public final class BasicFactory {
          state.getWorld().addGameObject(e.getGameObject());
          state.getView().addGraphicComponent(e.getView());
          return e;
+     }
+     
+     public Entity createDoor(final GameState state, final P2d position) {
+    	 Entity e = GameEngine.entityBuilder()
+    			 .type(Type.DOOR)
+    			 .position(position)
+    			 .with(new CollisionComponent(state.getWorld(), Type.DOOR))
+    			 .view(new DoorGraphicComponent(GameMath.toPoint2D(position)))
+    			 .bbox(new CircleHitBox(new Circle2d(75)))
+    			 .zIndex(1)
+    			 .build();
+    	 state.getWorld().addGameObject(e.getGameObject());
+    	 state.getView().addGraphicComponent(e.getView());
+    	 return e;
      }
 }

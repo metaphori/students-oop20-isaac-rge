@@ -1,6 +1,7 @@
 package ryleh.view.other;
 
 import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
@@ -18,18 +19,14 @@ import ryleh.view.Textures;
 public class FireGraphicComponent implements GraphicComponent {
 
 	private Rectangle rectangle;
-	private static final int ANIM_DURATION = 10;
-
-	private AnimationLoop animFire = new AnimationLoop(List.of(Textures.FIRE1.getImagePattern(),
-															   Textures.FIRE2.getImagePattern()), 
-													   ANIM_DURATION);
+	private static final int ANIM_DURATION = 400;
+	private AnimationLoop animFire; 
 	
 	/**
 	 * Creates the new Instance of FireGraphicComponent.
 	 */
 	public FireGraphicComponent() {
-		this.rectangle = new Rectangle(Textures.FIRE1.getWidth(), Textures.FIRE1.getHeight());
-		this.rectangle.setFill(Textures.FIRE1.getImagePattern());
+		this(new Point2D(0, 0));
 	}
 
 	/**
@@ -41,14 +38,9 @@ public class FireGraphicComponent implements GraphicComponent {
 		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
 		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		this.rectangle.setFill(Textures.FIRE1.getImagePattern());
-	}
-
-	/**
-	 * A method to update the state of this GraphicComponent in the view.
-	 */
-	private void updateImage() {
-		rectangle = animFire.setFrame(rectangle);
-		animFire.incTimer();
+		this.animFire = new AnimationLoop(List.of(Textures.FIRE1.getImagePattern(),
+													Textures.FIRE2.getImagePattern()), 
+													ANIM_DURATION, rectangle);
 	}
 
 	/**
@@ -58,7 +50,6 @@ public class FireGraphicComponent implements GraphicComponent {
 	public void render(final Point2D position, final double deltaTime) {
 		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
 		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
-		this.updateImage();
 	}
 
 	/**
@@ -68,6 +59,7 @@ public class FireGraphicComponent implements GraphicComponent {
 	public void onAdded(final Scene scene) {
 		Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
+        animFire.play();
 	}
 
 	/**

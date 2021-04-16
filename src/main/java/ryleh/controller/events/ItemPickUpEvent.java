@@ -23,13 +23,12 @@ public class ItemPickUpEvent implements Event {
 
 	/**
 	 * {@inheritDoc}
+	 * Starts the opening animation of the item
 	 */
 	@Override
 	public void handle(final GameState state) {
 		randomItem();
-		final ItemGraphicComponent graphic = (ItemGraphicComponent) state
-				.getEntityByType(Type.ITEM).get().getView();
-        graphic.setAnimPlayed();
+		((ItemGraphicComponent) state.getEntityByType(Type.ITEM).get().getView()).setAnimPlayed();
 	}
 	/**
 	 * Method to generate a random buff with pseudo probability.

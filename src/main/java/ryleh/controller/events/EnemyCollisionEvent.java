@@ -21,8 +21,7 @@ public class EnemyCollisionEvent implements Event {
 	@Override
 	public void handle(final GameState state) {
 		if (this.target.getComponent(HealthIntComponent.class).isPresent()) {
-			HealthIntComponent comp = (HealthIntComponent) this.target.getComponent(HealthIntComponent.class).get();
-			comp.damage(1);
+			((HealthIntComponent) this.target.getComponent(HealthIntComponent.class).get()).damage(1);
 		}
 	}
 	

@@ -27,7 +27,10 @@ public class RylehGameOverMenu {
         menu.setPreserveRatio(true);
         pane.getChildren().add(menu);
         pane.setStyle("-fx-background-color: rgba(0, 0, 0, 1);");
-        pane.setOnMouseClicked((e) -> Platform.exit());
+        pane.setOnMouseClicked((e) -> {
+            Platform.exit();
+            System.exit(0);
+        });
         this.primaryStage.getScene().setRoot(pane);
     }
 

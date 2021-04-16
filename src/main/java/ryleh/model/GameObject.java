@@ -60,9 +60,9 @@ public interface GameObject {
     /*
      * 
      */
-	void setzIndex(int zIndex);
-	/*
-	 * 
-	 */
-	int getzIndex();
+    void setzIndex(int zIndex);
+    /*
+     * 
+     */
+    int getzIndex();
 }

@@ -1,7 +1,9 @@
 package ryleh.controller.events;
 
+import ryleh.core.GameEngine;
 import ryleh.core.GameState;
 import ryleh.model.GameObject;
+import ryleh.model.Type;
 import ryleh.model.components.HealthIntComponent;
 
 public class EnemyCollisionEvent implements Event {
@@ -16,12 +18,13 @@ public class EnemyCollisionEvent implements Event {
 	}
 	/**
 	 * {@inheritDoc}
-	 * Decreases actual target health
+	 * Decreases actual target health (if target is "PLAYER", health will be decreased only in release mode).
 	 */
 	@Override
 	public void handle(final GameState state) {
-		if (this.target.getComponent(HealthIntComponent.class).isPresent()) {
-			((HealthIntComponent) this.target.getComponent(HealthIntComponent.class).get()).damage(1);
+		if (this.target.getComponent(HealthIntComponent.class).isPresent() 
+		    && !(this.target.getType().equals(Type.PLAYER) && GameEngine.isDeveloper())) {
+		        ((HealthIntComponent) this.target.getComponent(HealthIntComponent.class).get()).damage(1);
 		}
 	}
 	

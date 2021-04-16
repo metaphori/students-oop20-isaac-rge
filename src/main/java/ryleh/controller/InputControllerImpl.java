@@ -2,6 +2,8 @@ package ryleh.controller;
 
 import javafx.scene.Scene;
 import ryleh.controller.events.NewLevelEvent;
+import ryleh.controller.levels.LevelHandler;
+import ryleh.core.GameEngine;
 import ryleh.core.GameState;
 import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
@@ -21,9 +23,11 @@ public class InputControllerImpl implements InputController {
     private final PhysicsComponent physics;
     private final Scene scene;
     private final Entity player;
+    private final GameState state;
     private final World world;
 
     public InputControllerImpl(final GameState state) {
+        this.state = state;
         this.scene = state.getView().getScene();
         this.world = state.getWorld();
         this.player = state.getPlayer();
@@ -53,7 +57,16 @@ public class InputControllerImpl implements InputController {
                 isMoveDown = true;
                 break;
             case L:
-                world.notifyWorldEvent(new NewLevelEvent());
+                if (GameEngine.isDeveloper()) {
+                    world.notifyWorldEvent(new NewLevelEvent());
+                }
+                break;
+            case K:
+                if (GameEngine.isDeveloper()) {
+                    final LevelHandler levels = state.getLevelHandler();
+                    levels.setLevel(LevelHandler.getMaxLevel() - 1);
+                    state.generateNewLevel();
+                }
                 break;
             case SPACE:
                 this.isShooting = true;

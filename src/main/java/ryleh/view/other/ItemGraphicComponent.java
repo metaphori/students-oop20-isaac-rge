@@ -19,11 +19,8 @@ public class ItemGraphicComponent implements GraphicComponent{
 
 	private Rectangle rectangle;
 	private boolean animPlayed;
-	private static final int ANIM_DURATION = 10;
-	private AnimationLoop animItem = new AnimationLoop(List.of(Textures.ITEM1.getImagePattern(), 
-															   Textures.ITEM2.getImagePattern(), 
-															   Textures.ITEM3.getImagePattern()), 
-													   ANIM_DURATION);	
+	private static final int ANIM_DURATION = 200;
+	private AnimationLoop animItem;
 	
 	
 	/**
@@ -45,6 +42,10 @@ public class ItemGraphicComponent implements GraphicComponent{
 		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		this.rectangle.setFill(Textures.ITEM1.getImagePattern());
 		this.animPlayed = false;
+		this.animItem = new AnimationLoop(List.of(Textures.ITEM1.getImagePattern(), 
+				   								  Textures.ITEM2.getImagePattern(), 
+				   								  Textures.ITEM3.getImagePattern()), 
+										  		  ANIM_DURATION, rectangle);
 	}
 
 	/**
@@ -55,14 +56,6 @@ public class ItemGraphicComponent implements GraphicComponent{
 	}
 	
 	/**
-	 * A method to play the animation when needed.
-	 */
-	public void playAnimation() {
-		rectangle = animItem.setFrame(rectangle);
-		animItem.incTimer();
-	}
-	
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -70,7 +63,12 @@ public class ItemGraphicComponent implements GraphicComponent{
 		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
 		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		if (animPlayed) {
-			this.playAnimation();
+			if (isAnimFinished()) {
+				animItem.stop();
+				rectangle.setVisible(false);
+			} else {
+				animItem.play();
+			}
 		}
 	}
 
@@ -103,9 +101,5 @@ public class ItemGraphicComponent implements GraphicComponent{
 	 */
 	@Override
 	public void onRemoved(final EventHandler<ActionEvent> event) {
-		if (isAnimFinished()) {
-			event.handle(null);
-		}
-		this.playAnimation();
 	}	
 }

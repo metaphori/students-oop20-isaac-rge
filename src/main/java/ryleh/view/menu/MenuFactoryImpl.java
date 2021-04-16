@@ -26,14 +26,8 @@ public class MenuFactoryImpl implements MenuFactory {
     private Color startColor;
     private Color hoverColor;
     private Text description;
-    private VBox box;
-    private Separator separator;
-    private BorderPane pane;
 
     public MenuFactoryImpl() {
-        separator = new Separator();
-        pane = new BorderPane();
-        box = new VBox();
         description = new Text("");
         hoverColor = Color.CADETBLUE;
         startColor = Color.CORNFLOWERBLUE;
@@ -147,28 +141,7 @@ public class MenuFactoryImpl implements MenuFactory {
      * {@inheritDoc}
      */
 	@Override
-	public VBox getBox() {
-		return box;
-	}
-	/**
-     * {@inheritDoc}
-     */
-	@Override
 	public void setLevelFont(final Font levelFont) {
 		this.levelFont = levelFont;
-	}
-	/**
-     * {@inheritDoc}
-     */
-	@Override
-	public Separator getSeparator() {
-		return separator;
-	}
-	/**
-     * {@inheritDoc}
-     */
-	@Override
-	public BorderPane getPane() {
-		return pane;
 	}
 }

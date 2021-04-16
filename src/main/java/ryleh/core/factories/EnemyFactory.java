@@ -79,7 +79,7 @@ public class EnemyFactory {
                  .with(new HealthIntComponent(state.getWorld(),1))
                  .with(new CollisionComponent(state.getWorld(), Type.ENEMY_DRUNK))
                  .view(new EnemyDrunkGraphicComponent(GameMath.toPoint2D(position)))
-                 .bbox(new CircleHitBox(new Circle2d(75)))
+                 .bbox(new CircleHitBox(new Circle2d(55)))
                  .zIndex(0)
                  .build();
          state.getWorld().addGameObject(e.getGameObject());
@@ -94,7 +94,7 @@ public class EnemyFactory {
                  .with(new HealthIntComponent(state.getWorld(),1))
                  .with(new CollisionComponent(state.getWorld(), Type.ENEMY_LURKER))
                  .view(new EnemyLurkerGraphicComponent((PlayerGraphicComponent) state.getPlayer().getView(), GameMath.toPoint2D(position)))
-                 .bbox(new CircleHitBox(new Circle2d(75)))
+                 .bbox(new CircleHitBox(new Circle2d(55)))
                  .zIndex(9)
                  .build();
          state.getWorld().addGameObject(e.getGameObject());
@@ -110,7 +110,7 @@ public class EnemyFactory {
                  .with(new HealthIntComponent(state.getWorld(),1))
                  .with(new CollisionComponent(state.getWorld(), Type.ENEMY_DRUNKSPINNER))
                  .view(new EnemyDrunkSpinnerGraphicComponent(GameMath.toPoint2D(position)))
-                 .bbox(new CircleHitBox(new Circle2d(75)))
+                 .bbox(new CircleHitBox(new Circle2d(55)))
                  .zIndex(8)
                  .build();
          state.getWorld().addGameObject(e.getGameObject());

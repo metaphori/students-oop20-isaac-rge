@@ -1,19 +1,15 @@
 package ryleh.model.components;
 
 import java.util.Optional;
-
-import ryleh.controller.Entity;
 import ryleh.controller.events.EnemyCollisionEvent;
-import ryleh.controller.events.GameOverEvent;
 import ryleh.controller.events.ItemPickUpEvent;
-import ryleh.controller.events.NewLevelEvent;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
 
 public class CollisionComponent extends Component {
 	
-	private Type type;
+	private final Type type;
 	private boolean hasAlreadyColided = false;
 	//private boolean doorCollidable;
 	
@@ -32,7 +28,9 @@ public class CollisionComponent extends Component {
 	public void setDoorCollidable() {
 		//this.doorCollidable = true;
 	}
-	
+	/**
+	 * A method which checks for collisions with other GameObjects and notifies world instance in case of event.
+	 */
 	public void onUpdate(final double deltaTime) {
 		super.onUpdate(deltaTime);
 		if (!this.hasAlreadyColided) {

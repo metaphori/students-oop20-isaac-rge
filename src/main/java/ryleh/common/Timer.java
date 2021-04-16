@@ -12,5 +12,10 @@ public interface Timer {
      * Starts a new timer.
      */
     void startTimer();
+    /**
+     * Sets a new Wait time.
+     * @param wait Time, in milliseconds, to wait
+     */
+    void setWaitTime(double wait);
 
 }

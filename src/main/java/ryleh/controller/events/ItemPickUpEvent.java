@@ -6,6 +6,7 @@ import ryleh.core.GameState;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.components.HealthIntComponent;
+import ryleh.model.components.ShootingComponent;
 import ryleh.view.other.ItemGraphicComponent;
 
 public class ItemPickUpEvent implements Event {
@@ -41,22 +42,28 @@ public class ItemPickUpEvent implements Event {
 			break;
 		case 1: this.maxHealthUp();
 			break;
-		case 2: healthUp();
+		case 2: this.shootSpeedUp();
 			break;
 		default:
 			break;
 		}
 	}
 	/**
-	 * Heal the target.
+	 * Heals the target.
 	 */
 	private void healthUp() {
 		health.heal(1);
 	}
 	/**
-	 * Increase max health of the target.
+	 * Increases max health of the target.
 	 */
 	private void maxHealthUp() {
 		health.setMaxHp(health.getMaxHp() + 1);
+	}
+	/**
+	 * Increases the attack speed.
+	 */
+	private void shootSpeedUp() {
+	    ((ShootingComponent) this.target.getComponent(ShootingComponent.class).get()).increaseAtkSpeed(0.25);
 	}
 }

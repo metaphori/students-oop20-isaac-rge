@@ -48,7 +48,7 @@ public class ShootingComponent extends Component {
      */
     public void multiplyAtkSpeed(final double factor) {
         this.attackSpeed *= factor;
-        this.timer = new TimerImpl(1.0 / this.attackSpeed);
+        this.timer.setWaitTime(1000.0 / this.attackSpeed);
     }
     /**
      * Increases attack speed linearly, adding an amount to the number of shoots per second.
@@ -56,7 +56,7 @@ public class ShootingComponent extends Component {
      */
     public void increaseAtkSpeed(final double amount) {
         this.attackSpeed += amount;
-        this.timer = new TimerImpl(1.0 / this.attackSpeed);
+        this.timer.setWaitTime(1000.0 / this.attackSpeed);
     }
     /**
      * Check whether object can shoot or not.
@@ -65,5 +65,4 @@ public class ShootingComponent extends Component {
     public boolean canShoot() {
         return this.timer.isElapsed();
     }
-
 }

@@ -6,6 +6,7 @@ import ryleh.controller.Entity;
 import ryleh.controller.events.EnemyCollisionEvent;
 import ryleh.controller.events.GameOverEvent;
 import ryleh.controller.events.ItemPickUpEvent;
+import ryleh.controller.events.NewLevelEvent;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
@@ -14,7 +15,7 @@ public class CollisionComponent extends Component {
 	
 	private Type type;
 	private boolean hasAlreadyColided = false;
-	private boolean doorCollidable;
+	//private boolean doorCollidable;
 	
 	/**
 	 * Add a component to check the collision between enemies and player.
@@ -25,11 +26,11 @@ public class CollisionComponent extends Component {
 		super(world);
 		this.type = type;
 		this.hasAlreadyColided = false;
-		this.doorCollidable = false;
+		//this.doorCollidable = false;
 	}
 	
 	public void setDoorCollidable() {
-		this.doorCollidable = true;
+		//this.doorCollidable = true;
 	}
 	
 	public void onUpdate(final double deltaTime) {
@@ -43,7 +44,9 @@ public class CollisionComponent extends Component {
 				if (type.equals(Type.ITEM)) {
 					world.notifyWorldEvent(new ItemPickUpEvent(colliding.get()));
 					this.hasAlreadyColided = true;
-				} else {
+				/*} else if (type.equals(Type.DOOR)) {
+					world.notifyWorldEvent(new NewLevelEvent());
+				*/} else {
 					world.notifyWorldEvent(new EnemyCollisionEvent(colliding.get()));
 				}
 		    }

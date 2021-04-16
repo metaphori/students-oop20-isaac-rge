@@ -20,6 +20,7 @@ public class DoorGraphicComponent implements GraphicComponent {
 	private Rectangle rectangle;
 	private boolean animPlayed;
 	private static final int ANIM_DURATION = 250;
+	private static final int TOTAL_ANIM_DURATION = 1250;
 	private AnimationLoop animDoor;
 	
 	/**
@@ -77,6 +78,10 @@ public class DoorGraphicComponent implements GraphicComponent {
 		}
 	}
 
+	public int getTotalAnimDuration() {
+		return DoorGraphicComponent.TOTAL_ANIM_DURATION;
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */

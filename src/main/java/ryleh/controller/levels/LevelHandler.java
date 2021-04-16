@@ -211,7 +211,8 @@ public class LevelHandler {
 	 * Spawns a door. This method is called at the end of the level, when all enemies are defeated.
 	 */
 	public void spawnDoor() {
-		//BasicFactory.getInstance().createDoor(this.getPosition(new Pair<>(0,2)));
+		gameState.addEntity(BasicFactory.getInstance()
+				.createDoor(this.gameState, this.getPosition(new Pair<>(0,2))));
 	}
 	/**
 	 * Decreases enemies. If nEnemies equals 0, then we are at the end of the level. 

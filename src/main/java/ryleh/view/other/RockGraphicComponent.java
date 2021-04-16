@@ -21,8 +21,7 @@ public class RockGraphicComponent implements GraphicComponent {
 	 * Creates a new Instance of the RockGraphicComponent.
 	 */
 	public RockGraphicComponent() {
-		this.rectangle = new Rectangle(Textures.ROCK.getWidth(), Textures.ROCK.getHeight());
-		this.rectangle.setFill(Textures.ROCK2.getImagePattern());
+		this(new Point2D(0, 0));
 	}
 
 	/**

@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import ryleh.model.Type;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
 
@@ -16,24 +17,41 @@ import ryleh.view.Textures;
 public class BulletGraphicComponent implements GraphicComponent {
 
 	private Rectangle rectangle;
+	private Type type;
 	
 	/**
 	 * Creates a new Instance of BulletGraphicComponent.
+	 * @param type The type of the generated bullet.
 	 */
-	public BulletGraphicComponent() {
-		this.rectangle = new Rectangle(Textures.BULLET.getWidth(), Textures.BULLET.getHeight());
-		this.rectangle.setFill(Textures.BULLET.getImagePattern());
+	public BulletGraphicComponent(final Type type) {
+		this(new Point2D(0, 0), type);
 	}
 	
 	/**
 	 * Creates a new Instance of BulletGraphicComponent with the given initial position.
 	 * @param position The position at which the BulletGraphicComponent needs to be initialized.
+	 * @param type The type of the generated bullet.
 	 */
-	public BulletGraphicComponent(final Point2D position) {
-		this.rectangle = new Rectangle(Textures.BULLET.getWidth(), Textures.BULLET.getHeight());
+	public BulletGraphicComponent(final Point2D position, final Type type) {
+		this.rectangle = new Rectangle(Textures.PLAYER_BULLET.getWidth(), Textures.PLAYER_BULLET.getHeight());
+		this.type = type;
 		this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
 		this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
-		this.rectangle.setFill(Textures.BULLET.getImagePattern());
+		this.setBulletType();
+	}
+	
+	/**
+	 * A method to set the correct type of bullet and the related Texture.
+	 */
+	public void setBulletType() {
+		switch (type) {
+		case PLAYER_BULLET: rectangle.setFill(Textures.PLAYER_BULLET.getImagePattern());
+			break;
+		case ENEMY_BULLET: rectangle.setFill(Textures.ENEMY_BULLET.getImagePattern());
+			break;
+		default:
+			break;
+		}
 	}
 	
 	/**

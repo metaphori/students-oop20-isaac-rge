@@ -13,6 +13,7 @@ import ryleh.common.Config;
 import ryleh.common.P2d;
 import ryleh.controller.Entity;
 import ryleh.controller.InputController;
+import ryleh.controller.InputControllerImpl;
 import ryleh.controller.events.EventHandler;
 import ryleh.controller.levels.LevelHandler;
 import ryleh.core.factories.BasicFactory;
@@ -42,7 +43,7 @@ public class GameState {
         gameVars.put("Version", "0.1");
         this.levelHandler = new LevelHandler(this);
         this.player = BasicFactory.getInstance().createPlayer(this, levelHandler.getPosition(levelHandler.getPlayerSpawn()));
-        input = new InputController(this);
+        input = new InputControllerImpl(this);
         //AudioPlayer.playBackGround();
         this.generateNewLevel();
     }

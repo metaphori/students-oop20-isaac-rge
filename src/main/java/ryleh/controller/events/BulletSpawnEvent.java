@@ -27,8 +27,6 @@ public class BulletSpawnEvent implements Event {
 	 */
 	@Override
 	public void handle(final GameState state) {
-		state.addEntity(
-                BasicFactory.getInstance().createBullet(state, 
-                this.position, this.velocity, this.target.getType()));
+		state.addEntity(BasicFactory.getInstance().createBullet(state, this.position, this.velocity, this.target.getType()));
 	}
 }

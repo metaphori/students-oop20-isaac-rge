@@ -10,6 +10,7 @@ import ryleh.core.GameState;
 import ryleh.model.Type;
 import ryleh.model.components.BulletComponent;
 import ryleh.model.components.CollisionComponent;
+import ryleh.model.components.DoorComponent;
 import ryleh.model.components.HealthIntComponent;
 import ryleh.model.components.PhysicsComponent;
 import ryleh.model.components.ShootingComponent;
@@ -102,15 +103,16 @@ public final class BasicFactory {
          state.getView().addGraphicComponent(e.getView());
          return e;
      }
-     
+
      public Entity createDoor(final GameState state, final P2d position) {
-    	 Entity e = GameEngine.entityBuilder()
+    	DoorGraphicComponent door = new DoorGraphicComponent(GameMath.toPoint2D(position));
+    	Entity e = GameEngine.entityBuilder()
     			 .type(Type.DOOR)
     			 .position(position)
-    			 .with(new CollisionComponent(state.getWorld(), Type.DOOR))
-    			 .view(new DoorGraphicComponent(GameMath.toPoint2D(position)))
+    			 .view(door)
+    			 .with(new DoorComponent(state.getWorld(), door.getTotalAnimDuration()))
     			 .bbox(new CircleHitBox(new Circle2d(75)))
-    			 .zIndex(1)
+    			 .zIndex(0)
     			 .build();
     	 state.getWorld().addGameObject(e.getGameObject());
     	 state.getView().addGraphicComponent(e.getView());

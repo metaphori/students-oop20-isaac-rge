@@ -11,5 +11,4 @@ public interface InputController {
      * Actions to perform every loop.
      */
     void updateInput();
-
 }

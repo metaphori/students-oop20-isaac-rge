@@ -22,7 +22,7 @@ import ryleh.model.World;
 public class LevelHandler {
 
     /**
-     * This values represent the minimum distances from player's spawn point of each type of entity.
+     * These values represent the minimum distances from player's spawn point of each type of entity.
      * Level Handler uses this values when generating level entities. 
      */
     public static final double DRUNK_SPAWN_DISTANCE = 2;
@@ -39,7 +39,7 @@ public class LevelHandler {
      * The number of levels required to advance and win the game.
      */
     private static final int LAST_LEVEL = 30;
-//the number of spawn points is determined
+    //the number of spawn points is determined
     private final Map<Pair<Integer, Integer>, Entity> spawnPoints;
     private static final int COLUMNS = 9;
     private static final int ROWS = 5;

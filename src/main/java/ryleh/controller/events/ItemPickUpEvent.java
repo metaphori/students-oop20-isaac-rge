@@ -7,12 +7,17 @@ import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.components.HealthIntComponent;
 import ryleh.model.components.ShootingComponent;
+import ryleh.model.items.FireSpeedItem;
+import ryleh.model.items.HealItem;
+import ryleh.model.items.Item;
+import ryleh.model.items.MaxHealthItem;
 import ryleh.view.other.ItemGraphicComponent;
 
 public class ItemPickUpEvent implements Event {
 	
 	private GameObject target;
 	private HealthIntComponent health;
+	private Item item;
 	
 	/**
 	 * Constructor for the collision with an Item.
@@ -28,42 +33,24 @@ public class ItemPickUpEvent implements Event {
 	 */
 	@Override
 	public void handle(final GameState state) {
-		randomItem();
+		randomItem(state);
 		((ItemGraphicComponent) state.getEntityByType(Type.ITEM).get().getView()).setAnimPlayed();
 	}
 	/**
 	 * Method to generate a random buff with pseudo probability.
 	 */
-	private void randomItem() {
-		Random item = new Random();
-		health = (HealthIntComponent) this.target.getComponent(HealthIntComponent.class).get();
-		switch (item.nextInt(3)) {
-		case 0: this.healthUp();
+	private void randomItem(final GameState state) {
+		Random random = new Random();
+		switch (random.nextInt(3)) {
+		case 0: item = new HealItem();
 			break;
-		case 1: this.maxHealthUp();
+		case 1: item = new MaxHealthItem();
 			break;
-		case 2: this.shootSpeedUp();
+		case 2: item = new FireSpeedItem();
 			break;
 		default:
 			break;
 		}
-	}
-	/**
-	 * Heals the target.
-	 */
-	private void healthUp() {
-		health.heal(1);
-	}
-	/**
-	 * Increases max health of the target.
-	 */
-	private void maxHealthUp() {
-		health.setMaxHp(health.getMaxHp() + 1);
-	}
-	/**
-	 * Increases the attack speed.
-	 */
-	private void shootSpeedUp() {
-	    ((ShootingComponent) this.target.getComponent(ShootingComponent.class).get()).increaseAtkSpeed(0.25);
+		item.apply(state);
 	}
 }

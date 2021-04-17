@@ -2,16 +2,9 @@ package ryleh.controller.events;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-import ryleh.controller.Entity;
 import ryleh.core.GameState;
-import ryleh.core.factories.BasicFactory;
-import ryleh.model.GameObject;
-import ryleh.model.Type;
 import ryleh.model.components.HealthIntComponent;
 import ryleh.view.PlayerGraphicComponent;
-import ryleh.view.other.ItemGraphicComponent;
 
 public class EventHandler implements EventListener {
 

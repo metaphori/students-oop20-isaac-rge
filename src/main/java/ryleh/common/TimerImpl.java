@@ -30,6 +30,13 @@ public class TimerImpl implements Timer {
 		}
 	}
 	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setWaitTime(final double wait) {
+	    this.elapsedMills = wait;
+	}
+	/**
 	 * Checks if the timer is already working.
 	 * @return True if it's going on, false otherwise
 	 */

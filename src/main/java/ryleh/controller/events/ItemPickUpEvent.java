@@ -6,12 +6,17 @@ import ryleh.core.GameState;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.components.HealthIntComponent;
+import ryleh.model.components.ShootingComponent;
+import ryleh.model.items.FireSpeedItem;
+import ryleh.model.items.HealItem;
+import ryleh.model.items.Item;
+import ryleh.model.items.MaxHealthItem;
 import ryleh.view.other.ItemGraphicComponent;
 
 public class ItemPickUpEvent implements Event {
 	private final GameObject target;
 	private HealthIntComponent health;
-	private GameState gs;
+	private Item item;
 	/**
 	 * Constructor for the collision with an Item.
 	 * @param target Player, only this game object can collide with items
@@ -26,26 +31,25 @@ public class ItemPickUpEvent implements Event {
 	 */
 	@Override
 	public void handle(final GameState state) {
-		this.gs = state;
-		randomItem();
+		randomItem(state);
 		((ItemGraphicComponent) state.getEntityByType(Type.ITEM).get().getView()).setAnimPlayed();
 	}
 	/**
 	 * Method to generate a random buff with pseudo probability.
 	 */
-	private void randomItem() {
-		Random item = new Random();
-		health = (HealthIntComponent) this.target.getComponent(HealthIntComponent.class).get();
-		switch (item.nextInt(3)) {
-		case 0: this.healthUp();
+	private void randomItem(final GameState state) {
+		Random random = new Random();
+		switch (random.nextInt(3)) {
+		case 0: item = new HealItem();
 			break;
-		case 1: this.maxHealthUp();
+		case 1: item = new MaxHealthItem();
 			break;
-		case 2: healthUp();
+		case 2: item = new FireSpeedItem();
 			break;
 		default:
 			break;
 		}
+		item.apply(state);
 	}
 	/**
 	 * Heal the target and updates game UI with item effect.

@@ -4,9 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.Timer;
-
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
@@ -22,7 +20,7 @@ public class AnimationLoop {
 	private int currentFrame;
 	
 	/**
-	 * Creates a new Instance of AnimationLoop with the given list of Frames and duration of each frame.
+	 * Creates a new Instance of AnimationLoop with the given list of Frames, the duration of each frame and the rectangle.
 	 * @param frames An ordered list of the frames that form the animation.
 	 * @param duration The number of loops needed to wait between each frame of the animation.
 	 * @param rectangle The rectangle that needs to be filled with the correct frame.

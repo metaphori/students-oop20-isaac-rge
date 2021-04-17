@@ -1,20 +1,15 @@
 package ryleh.view.enemies;
 
-
-
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-import ryleh.common.Config;
 import ryleh.common.GameMath;
 import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;

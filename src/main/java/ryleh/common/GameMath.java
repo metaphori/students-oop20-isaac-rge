@@ -3,6 +3,7 @@ package ryleh.common;
 import java.util.Random;
 
 import javafx.geometry.Point2D;
+import ryleh.view.ViewHandler;
 
 /**
  * A class that provides utility methods for mathematical necessities.
@@ -141,7 +142,7 @@ public class GameMath {
 	 * @return a Point2D equivalent value.
 	 */
     public static Point2D toPoint2D(final P2d point) {
-        return new Point2D(point.x * Config.SCALE_MODIFIER, point.y * Config.SCALE_MODIFIER);
+        return new Point2D(point.x * ViewHandler.SCALE_MODIFIER, point.y * ViewHandler.SCALE_MODIFIER);
     }
 }
 

@@ -19,8 +19,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import ryleh.Ryleh;
-import ryleh.common.Config;
 import ryleh.core.GameEngine;
+import ryleh.view.ViewHandler;
 
 public class RylehPauseMenu {
     private final Stage popupStage;
@@ -77,7 +77,7 @@ public class RylehPauseMenu {
                    resume.run();
             }
         });
-        pauseScene = new Scene(this.pane, Config.STANDARD_WIDTH, Config.STANDARD_HEIGHT);
+        pauseScene = new Scene(this.pane, ViewHandler.STANDARD_WIDTH, ViewHandler.STANDARD_HEIGHT);
     }
 
     /**

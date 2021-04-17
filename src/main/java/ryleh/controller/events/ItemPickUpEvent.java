@@ -41,8 +41,12 @@ public class ItemPickUpEvent implements Event {
 		Random random = new Random();
 		switch (random.nextInt(3)) {
 		case 0: item = new HealItem();
+		    state.getView().getItemPickUp().setText("Item effect: health up!");
+		    state.getView().playFt();
 			break;
 		case 1: item = new MaxHealthItem();
+		    state.getView().getItemPickUp().setText("Item effect: max health up!");
+		    state.getView().playFt();
 			break;
 		case 2: item = new FireSpeedItem();
 			break;
@@ -54,17 +58,17 @@ public class ItemPickUpEvent implements Event {
 	/**
 	 * Heal the target and updates game UI with item effect.
 	 */
-	private void healthUp() {
-		gs.getView().getItemPickUp().setText("Item effect: health up!");
-		gs.getView().playFt();
-		health.heal(1);
-	}
-	/**
-	 * Increase max health of the target and updates game UI with item effect.
-	 */
-	private void maxHealthUp() {
-		gs.getView().getItemPickUp().setText("Item effect: max health up!");
-		gs.getView().playFt();
-		health.setMaxHp(health.getMaxHp() + 1);
-	}
+//	private void healthUp() {
+//		gs.getView().getItemPickUp().setText("Item effect: health up!");
+//		gs.getView().playFt();
+//		health.heal(1);
+//	}
+//	/**
+//	 * Increase max health of the target and updates game UI with item effect.
+//	 */
+//	private void maxHealthUp() {
+//		gs.getView().getItemPickUp().setText("Item effect: max health up!");
+//		gs.getView().playFt();
+//		health.setMaxHp(health.getMaxHp() + 1);
+//	}
 }

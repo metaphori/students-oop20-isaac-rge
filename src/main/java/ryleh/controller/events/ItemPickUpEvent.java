@@ -41,12 +41,12 @@ public class ItemPickUpEvent implements Event {
 		Random random = new Random();
 		switch (random.nextInt(3)) {
 		case 0: item = new HealItem();
-		    state.getView().getItemPickUp().setText("Item effect: health up!");
-		    state.getView().playFt();
+		    state.getView().getGameUi().getItemPickUp().setText("Item effect: health up!");
+		    state.getView().getGameUi().playFt();
 			break;
 		case 1: item = new MaxHealthItem();
-		    state.getView().getItemPickUp().setText("Item effect: max health up!");
-		    state.getView().playFt();
+		    state.getView().getGameUi().getItemPickUp().setText("Item effect: max health up!");
+		    state.getView().getGameUi().playFt();
 			break;
 		case 2: item = new FireSpeedItem();
 			break;

@@ -1,6 +1,6 @@
 package ryleh.model.items;
 
-import ryleh.core.GameState;
+import ryleh.controller.core.GameState;
 import ryleh.model.components.HealthIntComponent;
 
 public class MaxHealthItem implements Item {

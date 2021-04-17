@@ -1,6 +1,6 @@
 package ryleh.controller.events;
 
-import ryleh.core.GameState;
+import ryleh.controller.core.GameState;
 
 public class GameOverEvent implements Event {
 

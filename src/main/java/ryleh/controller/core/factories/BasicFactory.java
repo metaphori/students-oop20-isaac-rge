@@ -1,12 +1,13 @@
-package ryleh.core.factories;
+package ryleh.controller.core.factories;
 
 import ryleh.common.Circle2d;
 import ryleh.common.GameMath;
 import ryleh.common.Point2d;
 import ryleh.common.Vector2d;
 import ryleh.controller.Entity;
-import ryleh.core.GameEngine;
-import ryleh.core.GameState;
+import ryleh.controller.EntityImpl;
+import ryleh.controller.core.GameEngine;
+import ryleh.controller.core.GameState;
 import ryleh.model.Type;
 import ryleh.model.components.BulletComponent;
 import ryleh.model.components.CollisionComponent;
@@ -35,7 +36,7 @@ public final class BasicFactory {
     }
 
      public Entity createPlayer(final GameState state, final Point2d position) {
-         Entity e = GameEngine.entityBuilder()
+         EntityImpl e = GameEngine.entityBuilder()
                  .type(Type.PLAYER)
                  .position(position)
                  .with(new PhysicsComponent(state.getWorld(), 1000))
@@ -64,8 +65,8 @@ public final class BasicFactory {
          state.getView().addGraphicComponent(e.getView());
          return e;
      }
-     public Entity createRock(final GameState state, final Point2d position) {
-         Entity e = GameEngine.entityBuilder()
+     public EntityImpl createRock(final GameState state, final Point2d position) {
+         EntityImpl e = GameEngine.entityBuilder()
                  .type(Type.ROCK)
                  .position(position)
                  .view(new RockGraphicComponent(GameMath.toPoint2D(position)))
@@ -76,8 +77,8 @@ public final class BasicFactory {
          state.getView().addGraphicComponent(e.getView());
          return e;
      }
-     public Entity createItem(final GameState state, final Point2d position) {
-         Entity e = GameEngine.entityBuilder()
+     public EntityImpl createItem(final GameState state, final Point2d position) {
+         EntityImpl e = GameEngine.entityBuilder()
                          .type(Type.ITEM)
                          .position(position)
                          .with(new CollisionComponent(state.getWorld(), Type.ITEM))
@@ -90,8 +91,8 @@ public final class BasicFactory {
          return e;
      }
 
-     public Entity createFire(final GameState state, final Point2d position) {
-         Entity e = GameEngine.entityBuilder()
+     public EntityImpl createFire(final GameState state, final Point2d position) {
+         EntityImpl e = GameEngine.entityBuilder()
                          .type(Type.FIRE)
                          .position(position)
                          .with(new CollisionComponent(state.getWorld(), Type.FIRE))
@@ -104,9 +105,9 @@ public final class BasicFactory {
          return e;
      }
 
-     public Entity createDoor(final GameState state, final Point2d position) {
+     public EntityImpl createDoor(final GameState state, final Point2d position) {
     	DoorGraphicComponent door = new DoorGraphicComponent(GameMath.toPoint2D(position));
-    	Entity e = GameEngine.entityBuilder()
+    	EntityImpl e = GameEngine.entityBuilder()
     			 .type(Type.DOOR)
     			 .position(position)
     			 .view(door)

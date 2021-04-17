@@ -1,71 +1,25 @@
 package ryleh.model;
 
-import java.util.ArrayList;
 import java.util.List;
+
 import ryleh.common.Point2d;
-import ryleh.common.Rectangle2d;
 import ryleh.common.Shape2d;
 import ryleh.controller.events.Event;
-import ryleh.controller.events.EventListener;
-import ryleh.core.GameEngine;
 
-public class World {
+public interface World {
 
-    private List<GameObject> gameObjects;
-    private final Rectangle2d bounds; 
-    private int rylehId;
-    private static final int BOUNDS_WIDTH = 1407;
-    private static final int BOUNDS_HEIGHT = 736;
-    private static final int BOUNDS_UPPER_LEFT_X = 252;
-    private static final int BOUNDS_UPPER_LEFT_Y = 172;
+    List<GameObject> getGameObjects();
 
+    String generateId(String type);
 
-    private final EventListener eventListener;
+    boolean isOutOfBounds(Point2d position);
 
-    public World(final EventListener eventListener) {
-        this.eventListener = eventListener;
-        this.gameObjects = new ArrayList<>();
-        bounds = new Rectangle2d(BOUNDS_WIDTH, BOUNDS_HEIGHT, BOUNDS_UPPER_LEFT_X, BOUNDS_UPPER_LEFT_Y);
-        GameEngine.runDebugger(() -> System.out.println(bounds.getUpperLeft() + " " + bounds.getLowerRight()));
-    }
+    void addGameObject(GameObject object);
 
-    public List<GameObject> getGameObjects() {
-        return gameObjects;
-    }
+    Shape2d getBounds();
 
-    public void setGameObjects(final List<GameObject> gameObjects) {
-        this.gameObjects = gameObjects;
-    }
+    void removeGameObject(GameObject gameObject);
 
-    public String generateId(final String type) {
-        rylehId++;
-        return type + "RY" + this.rylehId;
-    }
-
-    public boolean isOutOfBounds(final Point2d position) {
-        return !bounds.contains(position);
-    }
-
-    public void addGameObject(GameObject object) {
-        gameObjects.add(object);
-        object.onAdded(this);
-    }
-    public double getWidthBound() {
-    	return bounds.getWidth();
-    }
-    public double getHeightBound() {
-    	return bounds.getHeight();
-    }
-
-    public Shape2d getBounds() {
-        return this.bounds;
-    }
-
-    public void removeGameObject(final GameObject gameObject) {
-    	this.gameObjects.remove(gameObject);
-    }
-    public void notifyWorldEvent(Event e) {
-    	this.eventListener.notifyEvent(e);
-    }
+    void notifyWorldEvent(Event event);
 
 }

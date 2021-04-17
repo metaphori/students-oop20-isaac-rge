@@ -1,10 +1,10 @@
 package ryleh.controller;
 
 import javafx.scene.Scene;
+import ryleh.controller.core.GameEngine;
+import ryleh.controller.core.GameState;
 import ryleh.controller.events.NewLevelEvent;
 import ryleh.controller.levels.LevelHandler;
-import ryleh.core.GameEngine;
-import ryleh.core.GameState;
 import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
 import ryleh.model.components.ShootingComponent;

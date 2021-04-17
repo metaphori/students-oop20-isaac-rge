@@ -8,11 +8,11 @@ import java.util.Random;
 import ryleh.common.Point2d;
 import ryleh.common.Pair;
 import ryleh.common.Rectangle2d;
-import ryleh.controller.Entity;
-import ryleh.core.GameEngine;
-import ryleh.core.GameState;
-import ryleh.core.factories.BasicFactory;
-import ryleh.core.factories.EnemyFactory;
+import ryleh.controller.EntityImpl;
+import ryleh.controller.core.GameEngine;
+import ryleh.controller.core.GameState;
+import ryleh.controller.core.factories.BasicFactory;
+import ryleh.controller.core.factories.EnemyFactory;
 import ryleh.model.Type;
 import ryleh.model.World;
 
@@ -48,7 +48,7 @@ public class LevelHandler {
      * The number of levels required to advance and win the game.
      */
     private static final int LAST_LEVEL = 30;
-    private final Map<Pair<Integer, Integer>, Entity> spawnPoints;
+    private final Map<Pair<Integer, Integer>, EntityImpl> spawnPoints;
     private static final int COLUMNS = 9;
     private static final int ROWS = 5;
     private int nEnemies;
@@ -68,8 +68,8 @@ public class LevelHandler {
         this.designer = new LevelDesigner();
         spawnPoints = new HashMap<>();
         boundsCoord = ((Rectangle2d) world.getBounds()).getUpperLeft();
-        boundsWidth = world.getWidthBound();
-        boundsHeight = world.getHeightBound();
+        boundsWidth = ((Rectangle2d) world.getBounds()).getWidth();
+        boundsHeight = ((Rectangle2d) world.getBounds()).getHeight();
         playerSpawn = new Pair<>(COLUMNS / 2, ROWS - 1);
         doorSpawn = new Pair<>(COLUMNS / 2, 0);
         nEnemies = 0;
@@ -101,7 +101,7 @@ public class LevelHandler {
         final List<Type> entityList = designer.generateLevelEntities();
         for (final Type elem : entityList) {
             Pair<Integer, Integer> temp = new Pair<>(0, 0);
-            Entity entity = new Entity();
+            EntityImpl entity = new EntityImpl();
             boolean skip = false;
             switch (elem) {
             case ENEMY_DRUNK:
@@ -192,7 +192,7 @@ public class LevelHandler {
      * @param entity
      * Add the given entity to the list of entities of current level.
      */
-    private void addEntity(final Pair<Integer, Integer> temp, final Entity entity) {
+    private void addEntity(final Pair<Integer, Integer> temp, final EntityImpl entity) {
         spawnPoints.put(temp, entity);
         entity.getGameObject().setPosition(getPosition(temp));
     }
@@ -243,7 +243,7 @@ public class LevelHandler {
      * 
      * @return the list of entities inside the current level.
      */
-    public Collection<Entity> getEntities() {
+    public Collection<EntityImpl> getEntities() {
         return spawnPoints.values();
     }
     /**

@@ -14,12 +14,12 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import ryleh.view.ViewHandler;
+import ryleh.view.ViewHandlerImpl;
 
 public class MenuFactoryImpl implements MenuFactory {
 	
 	private static final int SIZE = 40;
-    private int scaledSize = (int) (ViewHandler.SCALE_MODIFIER * SIZE);
+    private int scaledSize = (int) (ViewHandlerImpl.SCALE_MODIFIER * SIZE);
     private Font levelFont;
     private Color startColor;
     private Color hoverColor;
@@ -33,7 +33,7 @@ public class MenuFactoryImpl implements MenuFactory {
 
     public MenuFactoryImpl(final int scale) {
         this();
-        this.scaledSize = (int) (ViewHandler.SCALE_MODIFIER * scale);
+        this.scaledSize = (int) (ViewHandlerImpl.SCALE_MODIFIER * scale);
     }
     /**
      * {@inheritDoc}
@@ -61,8 +61,8 @@ public class MenuFactoryImpl implements MenuFactory {
         container.setAlignment(Pos.CENTER);
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Quit Game");
-        window.setWidth(ViewHandler.STANDARD_WIDTH / 3);
-        window.setHeight(ViewHandler.STANDARD_HEIGHT / 3);
+        window.setWidth(ViewHandlerImpl.STANDARD_WIDTH / 3);
+        window.setHeight(ViewHandlerImpl.STANDARD_HEIGHT / 3);
         window.setScene(new Scene(container));
         window.setResizable(false);
         window.showAndWait();

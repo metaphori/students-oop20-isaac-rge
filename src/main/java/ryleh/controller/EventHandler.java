@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import ryleh.controller.Entity;
+import ryleh.controller.EntityImpl;
+import ryleh.controller.core.GameState;
+import ryleh.controller.core.factories.BasicFactory;
 import ryleh.controller.events.Event;
 import ryleh.controller.events.EventListener;
-import ryleh.core.GameState;
-import ryleh.core.factories.BasicFactory;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.components.HealthIntComponent;

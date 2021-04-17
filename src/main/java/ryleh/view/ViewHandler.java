@@ -39,16 +39,19 @@ public class ViewHandler {
     /**
      * The modifier to set the correct proportion of the view.
      */
-	public static final double SCALE_MODIFIER = (double) (ViewHandler.STANDARD_WIDTH / 1920.0);
-	private Stage stage;
+    public static final double SCALE_MODIFIER = (double) (ViewHandler.STANDARD_WIDTH / 1920.0);
+	  private Stage stage;
     private List<GraphicComponent> graphicComponents;
     private Scene scene;
     private Parent root;
-    private Rectangle rectangle;
+    private final Rectangle rectangle;
     private Text lives;
     private Text level;
     private Text item;
-    private Font font;
+    private Text tutorialCommands;
+    private Text tutorialObjective;
+    private final Font font;
+    private boolean isFirstRoom;
 
     /**
      * Creates a new Instance of ViewHandler with the given stage.
@@ -62,6 +65,7 @@ public class ViewHandler {
                 		.toExternalForm(), 37 * SCALE_MODIFIER);
         this.setLives();
         this.setLevel();
+        this.setTutorial();
         this.setItemPickUp();
         root = new AnchorPane();
         root.setStyle("-fx-background-color: black;");
@@ -69,6 +73,7 @@ public class ViewHandler {
         ((AnchorPane) root).getChildren().add(this.lives);
         ((AnchorPane) root).getChildren().add(this.level);
         ((AnchorPane) root).getChildren().add(this.item);
+        ((AnchorPane) root).getChildren().add(this.tutorialCommands);
         scene = new Scene(root);
         this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
@@ -80,22 +85,40 @@ public class ViewHandler {
         this.stage.setFullScreen(false);
         //this.stage.setFullScreen(true);
         this.graphicComponents = new ArrayList<>();
+        this.isFirstRoom = true;
     }
     /**
      * A method to set the text that represents the current level.
      */
     private void setLevel() {
-    	this.level = new Text("Level: 1");
+    	this.level = new Text();
         this.level.setFont(this.font);
         this.level.setX((STANDARD_WIDTH / 16) * 2 + (75 * SCALE_MODIFIER));
         this.level.setY((STANDARD_HEIGHT / 9) * 1);
         this.level.setFill(Color.WHITE);
 	}
     /**
+     * A method to set the tutorial text that will appear on the first level.
+     */
+    private void setTutorial() {
+    	this.tutorialCommands = new Text("List of commands:\n W -> move forward \n A -> move left \n S -> move downward \n D -> move right \n Spacebar -> shoot");
+        this.tutorialCommands.setFont(this.font);
+        this.tutorialCommands.setX((Config.STANDARD_WIDTH / 16) * 3 + (75 * Config.SCALE_MODIFIER));
+        this.tutorialCommands.setY((Config.STANDARD_HEIGHT / 9) * 3);
+        this.tutorialCommands.setFill(Color.WHITE);
+        this.tutorialObjective = new Text("In order to win you must \nbeat level 20.\nAfter defeating all \nenemies on a level a \ndoor will open and bring \nyou to the next level.\n"
+        		+ "Every 3 levels an \nitem will spawn.\n"
+        		+ "If you lose all your \nlives you will lose.\nGood luck and have fun!");
+        this.tutorialObjective.setFont(this.font);
+        this.tutorialObjective.setX((Config.STANDARD_WIDTH / 16) * 8 + (75 * Config.SCALE_MODIFIER));
+        this.tutorialObjective.setY((Config.STANDARD_HEIGHT / 9) * 2);
+        this.tutorialObjective.setFill(Color.WHITE);
+    }
+    /**
      * A method to set the text that represents the current item effect.
      */
     private void setItemPickUp() {
-    	this.item = new Text("Item effect:");
+    	this.item = new Text();
         this.item.setFont(this.font);
         this.item.setX((STANDARD_WIDTH / 16) * 2);
         this.item.setY((STANDARD_HEIGHT / 9) * 8 + (20 * SCALE_MODIFIER));
@@ -119,7 +142,7 @@ public class ViewHandler {
      */
     public void removeGraphicComponent(final GraphicComponent graphic) {
     	graphic.onRemoved(e -> {
-    		FilteredList<Node> list = ((AnchorPane) scene.getRoot()).getChildren().filtered(i -> (graphic).getNode().equals(i));
+    		final FilteredList<Node> list = ((AnchorPane) scene.getRoot()).getChildren().filtered(i -> graphic.getNode().equals(i));
     		if (!list.isEmpty()) {
     			list.get(0).setVisible(false);
     		}
@@ -159,6 +182,11 @@ public class ViewHandler {
       ((AnchorPane) root).getChildren().add(this.lives);
       ((AnchorPane) root).getChildren().add(this.level);
       ((AnchorPane) root).getChildren().add(this.item);
+      if (this.isFirstRoom) {
+    	  ((AnchorPane) root).getChildren().add(this.tutorialCommands);
+    	  ((AnchorPane) root).getChildren().add(this.tutorialObjective);
+    	  this.isFirstRoom = false;
+      }
       scene.setRoot(root);
  	}
 

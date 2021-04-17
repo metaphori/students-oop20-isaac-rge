@@ -64,6 +64,7 @@ public class ViewHandler {
         ((AnchorPane) root).getChildren().add(this.level);
         ((AnchorPane) root).getChildren().add(this.item);
         ((AnchorPane) root).getChildren().add(this.tutorialCommands);
+        ((AnchorPane) root).getChildren().add(this.tutorialObjective);
         scene = new Scene(root);
         this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override

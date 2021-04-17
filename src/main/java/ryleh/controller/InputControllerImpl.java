@@ -36,6 +36,9 @@ public class InputControllerImpl implements InputController {
         this.currentDir = this.physics.getDirection();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void initInput() {
         this.scene.setOnKeyPressed(key -> {
@@ -102,6 +105,9 @@ public class InputControllerImpl implements InputController {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateInput() {
         this.stillMoving();

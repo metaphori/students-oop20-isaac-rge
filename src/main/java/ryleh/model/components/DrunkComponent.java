@@ -2,8 +2,8 @@ package ryleh.model.components;
 
 import java.util.Optional;
 import ryleh.common.GameMath;
-import ryleh.common.P2d;
-import ryleh.common.V2d;
+import ryleh.common.Point2d;
+import ryleh.common.Vector2d;
 import ryleh.controller.events.EnemyCollisionEvent;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
@@ -13,8 +13,8 @@ import ryleh.model.World;
  */
 public class DrunkComponent extends Component {
 	
-	private V2d velocity;
-	private P2d position;
+	private Vector2d velocity;
+	private Point2d position;
     private double angleAdjustRate = GameMath.randomInRange(0, 0.15);
     private double directionAngle = GameMath.toDegrees(GameMath.randomInRange(-1, 1) * Math.PI * 2);
     private static final double MOVE_SPEED = 0.05;
@@ -27,8 +27,8 @@ public class DrunkComponent extends Component {
      */
 	public DrunkComponent(final World world) {
 		super(world);
-		this.position = new P2d(0, 0);
-		this.velocity = new V2d(0, 0);
+		this.position = new Point2d(0, 0);
+		this.velocity = new Vector2d(0, 0);
 	}
 	/**
 	 * {@inheritDoc}
@@ -61,7 +61,7 @@ public class DrunkComponent extends Component {
 	 * @param deltaTime time passed between each frame.
 	 */
 	private void move(final double deltaTime) {
-		final V2d directionVector = V2d.fromAngle(directionAngle).mulLocal(MOVE_SPEED);
+		final Vector2d directionVector = Vector2d.fromAngle(directionAngle).mulLocal(MOVE_SPEED);
 	    this.velocity.addLocal(directionVector).getNormalized().mulLocal(deltaTime * TPF); //add time per frame value to mulLocal
 	    this.position = this.position.sum(this.velocity);
 	    object.setPosition(this.position);
@@ -71,8 +71,8 @@ public class DrunkComponent extends Component {
 	 */
 	private void checkScreenBounds() {
 		if (object.getHitBox().isOutOfBounds(world.getBounds()) || this.isCollidingWithRock()) {
-				this.velocity.x = -this.velocity.x;
-				this.velocity.y = -this.velocity.y;
+				this.velocity.setX(-this.velocity.getX());
+				this.velocity.setY(-this.velocity.getY());
 	    }
 	}
 	/**

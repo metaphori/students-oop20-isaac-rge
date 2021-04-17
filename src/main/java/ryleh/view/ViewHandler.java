@@ -40,7 +40,7 @@ public class ViewHandler {
      * The modifier to set the correct proportion of the view.
      */
     public static final double SCALE_MODIFIER = (double) (ViewHandler.STANDARD_WIDTH / 1920.0);
-	  private Stage stage;
+    private Stage stage;
     private List<GraphicComponent> graphicComponents;
     private Scene scene;
     private Parent root;
@@ -107,7 +107,7 @@ public class ViewHandler {
         this.tutorialCommands.setX((STANDARD_WIDTH / 16) * 3 + (75 * SCALE_MODIFIER));
         this.tutorialCommands.setY((STANDARD_HEIGHT / 9) * 3);
         this.tutorialCommands.setFill(Color.WHITE);
-        this.tutorialObjective = new Text("In order to win you must \nbeat level 20.\nAfter defeating all \nenemies on a level a \ndoor will open and bring \nyou to the next level.\n"
+        this.tutorialObjective = new Text("In order to win you must \nbeat level 30.\nAfter defeating all \nenemies on a level a \ndoor will open and bring \nyou to the next level.\n"
         		+ "Every 3 levels an \nitem will spawn.\n"
         		+ "If you lose all your \nlives you will lose.\nGood luck and have fun!");
         this.tutorialObjective.setFont(this.font);

@@ -2,8 +2,8 @@ package ryleh.model.components;
 
 import java.util.Optional;
 
-import ryleh.common.P2d;
-import ryleh.common.V2d;
+import ryleh.common.Point2d;
+import ryleh.common.Vector2d;
 import ryleh.controller.events.EnemyCollisionEvent;
 import ryleh.controller.events.RemoveEntityEvent;
 import ryleh.model.GameObject;
@@ -12,14 +12,14 @@ import ryleh.model.World;
 
 public class BulletComponent extends Component {
 	
-	private P2d position;
+	private Point2d position;
 	private int speed = 10;
-	private V2d velocity;
+	private Vector2d velocity;
 
-	public BulletComponent(final World world, final P2d origin, final V2d direction) {
+	public BulletComponent(final World world, final Point2d origin, final Vector2d direction) {
 		super(world);
 		this.position = origin;
-		this.velocity = direction.mul(speed);
+		this.velocity = direction.multiply(speed);
 	   // this.velocity = new V2d(0, 0);
 	}
 	@Override
@@ -69,7 +69,7 @@ public class BulletComponent extends Component {
 				.findFirst();
 	}
 	protected void move(final double dt) {
-		this.position = this.position.sum(velocity.mul(dt * 0.1));
+		this.position = this.position.sum(velocity.multiply(dt * 0.1));
 		object.setPosition(this.position);
 	}
 

@@ -1,8 +1,8 @@
 package ryleh.model.components;
 
 import java.util.Optional;
-import ryleh.common.P2d;
-import ryleh.common.V2d;
+import ryleh.common.Point2d;
+import ryleh.common.Vector2d;
 import ryleh.controller.Entity;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
@@ -11,23 +11,23 @@ import ryleh.model.World;
  * A class that provides the Component for lurker enemy type.
  */
 public class LurkerComponent extends Component {
-	private long adjustDirectionTimer = System.currentTimeMillis();
-	private static final long ADJUST_DELAY = 250;
-	private static final int MOVE_SPEED = 50;
-	private static final double TPF = 0.016;
-	private P2d position;
-	private V2d velocity;
-	private final GameObject player; 
-	/**
-	 * Constructor method.
-	 * @param world World instance.
-	 * @param entity Entity instance.
-	 */
+    private long adjustDirectionTimer = System.currentTimeMillis();
+    private static final long ADJUST_DELAY = 250;
+    private static final int MOVE_SPEED = 50;
+    private static final double TPF = 0.016;
+    private Point2d position;
+    private Vector2d velocity;
+    private final GameObject player; 
+    /**
+     * Constructor method.
+     * @param world World instance.
+     * @param entity Entity instance.
+     */
 	public LurkerComponent(final World world, final Entity entity) {
 		super(world);
 	    player = entity.getGameObject();
-	    this.position = new P2d(0, 0);
-	    this.velocity = new V2d(0, 0);
+	    this.position = new Point2d(0, 0);
+	    this.velocity = new Vector2d(0, 0);
 	}
 	/**
 	 * {@inheritDoc}
@@ -54,8 +54,8 @@ public class LurkerComponent extends Component {
 			adjustVelocity();
 			adjustDirectionTimer = System.currentTimeMillis();
 		}
-	    this.position.x = this.position.x + this.velocity.x;
-	    this.position.y = this.position.y + this.velocity.y;
+	    this.position.setX(this.position.getX() + this.velocity.getX());
+	    this.position.setY(this.position.getY() + this.velocity.getY());
 	    object.setPosition(this.position);
 	}
 	/**
@@ -63,18 +63,18 @@ public class LurkerComponent extends Component {
 	 */
 	private void checkScreenBounds() {
 		if (object.getHitBox().isOutOfBounds(world.getBounds()) || this.isCollidingWithRock()) {
-			this.velocity.x = -this.velocity.x;
-	        this.velocity.y = -this.velocity.y;
+			this.velocity.setX(-this.velocity.getX()); 
+			this.velocity.setY(-this.velocity.getY()); 
 	    }
 	}
 	/**
 	 * Adjusts velocity vector to follow player direction.
 	 */
 	private void adjustVelocity() {
-		final V2d directionToPlayer = new V2d(player.getPosition(), this.position)
+		final Vector2d directionToPlayer = new Vector2d(player.getPosition(), this.position)
 								.getNormalized()
-								.mul(MOVE_SPEED);
-		velocity = velocity.addLocal(directionToPlayer).mul(TPF);
+								.multiply(MOVE_SPEED);
+		velocity = velocity.addLocal(directionToPlayer).multiply(TPF);
 	}
 	/**
 	 * Checks if the GameObject collided with a rock.

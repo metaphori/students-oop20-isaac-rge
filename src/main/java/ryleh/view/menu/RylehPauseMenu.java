@@ -27,12 +27,11 @@ public class RylehPauseMenu {
     private final Scene pauseScene;
     private final Stage primaryStage;
     private final MenuFactory factory;
-    private final Separator separator;
     private final BorderPane pane;
     private final VBox box;
 
     public RylehPauseMenu(final Stage primaryStage) {
-    	this.separator = new Separator();
+        final Separator separator = new Separator();
         this.pane = new BorderPane();
         this.box = new VBox();
         factory = new MenuFactoryImpl();
@@ -59,14 +58,14 @@ public class RylehPauseMenu {
         this.box.getChildren().add(factory.createCustomButton("Quit Game", "Exit to desktop", () -> {
             factory.createCustomAlert("Do you really want to quit?");
         }));
-        this.separator.setOrientation(Orientation.HORIZONTAL);
-        this.separator.setTranslateX(factory.getScaledSize() / 2);
+        separator.setOrientation(Orientation.HORIZONTAL);
+        separator.setTranslateX(factory.getScaledSize() / 2);
         factory.getDescription().setFont(new Font(factory.getScaledSize()));
         factory.getDescription().setFill(factory.getStartColor());
-        factory.getDescription().setTranslateY(this.separator.getTranslateY() + 10);
+        factory.getDescription().setTranslateY(separator.getTranslateY() + 10);
         this.box.setAlignment(Pos.CENTER_LEFT);
         this.box.setTranslateX(factory.getScaledSize());
-        this.box.getChildren().addAll(this.separator, factory.getDescription());
+        this.box.getChildren().addAll(separator, factory.getDescription());
         this.pane.setLeft(this.box);
 
         popupStage = new Stage(StageStyle.TRANSPARENT);
@@ -90,9 +89,5 @@ public class RylehPauseMenu {
         pauseScene.setFill(Color.TRANSPARENT);
         popupStage.setScene(pauseScene);
         popupStage.show();
-    }
-
-    public String getDevButtonText(final boolean isDeveloper) {
-        return isDeveloper ? "ON" : "OFF";
     }
 }

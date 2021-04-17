@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 import javafx.geometry.Point2D;
 import javafx.stage.Stage;
-import ryleh.common.P2d;
+import ryleh.common.Point2d;
 import ryleh.controller.Entity;
 import ryleh.controller.InputController;
 import ryleh.controller.InputControllerImpl;
@@ -91,8 +91,8 @@ public class GameState {
         input.updateInput();
         for (final Entity object : this.entities) {
             object.getGameObject().onUpdate(dt);
-            object.getView().render(toPoint2D(new P2d(
-                    object.getGameObject().getPosition().x, object.getGameObject().getPosition().y)), dt);
+            object.getView().render(toPoint2D(new Point2d(
+                    object.getGameObject().getPosition().getX(), object.getGameObject().getPosition().getY())), dt);
         }
         eventHandler.checkEvents();
     }
@@ -109,8 +109,9 @@ public class GameState {
 	return view;
     }
 	
-    private Point2D toPoint2D (final P2d point) {
-        return new Point2D(point.x * ViewHandler.SCALE_MODIFIER, point.y * ViewHandler.SCALE_MODIFIER);
+    private Point2D toPoint2D(final Point2d point) {
+        return new Point2D(point.getX() * ViewHandler.SCALE_MODIFIER, point.getY() * ViewHandler.SCALE_MODIFIER);
+
     }
 	
     public LevelHandler getLevelHandler() {

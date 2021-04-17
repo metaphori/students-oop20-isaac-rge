@@ -1,6 +1,6 @@
 package ryleh.core;
 
-import ryleh.common.P2d;
+import ryleh.common.Point2d;
 import ryleh.controller.Entity;
 import ryleh.model.GameObject;
 import ryleh.model.GameObjectImpl;
@@ -24,12 +24,12 @@ public class EntityBuilder {
         return this;
     }
 
-    public EntityBuilder position(final P2d position) {
+    public EntityBuilder position(final Point2d position) {
         object.setPosition(position);
         return this;
     }
     public EntityBuilder position(final int x, final int y) {
-        object.setPosition(new P2d(x, y));
+        object.setPosition(new Point2d(x, y));
         return this;
     }
 

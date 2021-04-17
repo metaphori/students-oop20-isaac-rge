@@ -12,7 +12,6 @@ import javafx.util.Duration;
 import ryleh.common.GameMath;
 import ryleh.common.P2d;
 import ryleh.common.V2d;
-import ryleh.model.GameObject;
 import ryleh.view.GraphicComponent;
 import ryleh.view.PlayerGraphicComponent;
 import ryleh.view.Textures;

@@ -2,7 +2,6 @@ package ryleh.view;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
-import ryleh.common.Config;
 
 /**
  * An enumeration class that contains all the textures needed, with their path, width and height.
@@ -33,7 +32,6 @@ public enum Textures {
 	 * Player up Texture-frame 4.
 	 */
 	PLAYER_UP4("assets/texture/player/PlayerUp4.png", 120, 120),
-	
 	
 	/**
 	 * Player right texture-frame 1.
@@ -177,7 +175,7 @@ public enum Textures {
 	 * @return The scaled width of a Texture.
 	 */
 	public int getWidth() {
-		return (int) (this.width * Config.SCALE_MODIFIER);
+		return (int) (this.width * ViewHandler.SCALE_MODIFIER);
 	}
 	
 	/**
@@ -185,6 +183,6 @@ public enum Textures {
 	 * @return The scaled height of a Texture.
 	 */
 	public int getHeight() {
-		return (int) (this.height * Config.SCALE_MODIFIER);
+		return (int) (this.height * ViewHandler.SCALE_MODIFIER);
 	}
 }

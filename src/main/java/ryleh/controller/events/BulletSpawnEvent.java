@@ -2,8 +2,8 @@ package ryleh.controller.events;
 
 import ryleh.common.Point2d;
 import ryleh.common.Vector2d;
-import ryleh.core.GameState;
-import ryleh.core.factories.BasicFactory;
+import ryleh.controller.core.GameState;
+import ryleh.controller.core.factories.BasicFactory;
 import ryleh.model.GameObject;
 
 public class BulletSpawnEvent implements Event {

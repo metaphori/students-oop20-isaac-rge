@@ -3,7 +3,7 @@ package ryleh.controller.events;
 import java.util.Optional;
 
 import ryleh.controller.Entity;
-import ryleh.core.GameState;
+import ryleh.controller.core.GameState;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 

@@ -1,4 +1,4 @@
-package ryleh.core;
+package ryleh.controller.core;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -35,7 +35,7 @@ public final class GameEngine {
     public void initGame(final Stage stage) {
         this.primaryStage = stage;
         this.period = 1000 / 60;
-        this.rylehState = new GameState(stage);
+        this.rylehState = new GameStateImpl(stage);
         this.pauseMenu = new RylehPauseMenu(stage);
         this.primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, key -> {
             if (key.getCode().equals(KeyCode.P) && !rylehState.isGameOver()) {

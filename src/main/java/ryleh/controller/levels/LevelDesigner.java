@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
 
-import ryleh.core.GameEngine;
+import ryleh.controller.core.GameEngine;
 import ryleh.model.Type;
 //to determine WHICH entities are going to be spawned
 

@@ -1,11 +1,11 @@
-package ryleh.core;
+package ryleh.controller.core;
 
 import ryleh.common.Point2d;
-import ryleh.controller.Entity;
+import ryleh.controller.EntityImpl;
 import ryleh.model.GameObject;
 import ryleh.model.GameObjectImpl;
 import ryleh.model.Type;
-import ryleh.model.World;
+import ryleh.model.WorldImpl;
 import ryleh.model.components.Component;
 import ryleh.model.physics.HitBox;
 import ryleh.view.GraphicComponent;
@@ -52,8 +52,8 @@ public class EntityBuilder {
         return this;
     }
 
-    public Entity build() {
-        return new Entity(graphic, object);
+    public EntityImpl build() {
+        return new EntityImpl(graphic, object);
     }
 
     public EntityBuilder zIndex(final int zIndex) {

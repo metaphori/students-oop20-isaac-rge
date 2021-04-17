@@ -1,7 +1,7 @@
 package ryleh.controller.events;
 
-import ryleh.core.GameEngine;
-import ryleh.core.GameState;
+import ryleh.controller.core.GameEngine;
+import ryleh.controller.core.GameState;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.components.HealthIntComponent;

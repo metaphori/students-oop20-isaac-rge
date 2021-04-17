@@ -2,7 +2,7 @@ package ryleh.controller.events;
 
 import java.util.Random;
 
-import ryleh.core.GameState;
+import ryleh.controller.core.GameState;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.components.HealthIntComponent;

@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import ryleh.view.ViewHandler;
+import ryleh.view.ViewHandlerImpl;
 
 public class RylehGameOverMenu {
     private final Stage primaryStage;
@@ -15,7 +15,7 @@ public class RylehGameOverMenu {
         this.primaryStage = primaryStage;
         final String imagePath = victory ? "/assets/texture/menu/victory.png" : "/assets/texture/menu/gameOver.png";
         this.gameOverImage = new Image(imagePath, 
-                (double) ViewHandler.STANDARD_WIDTH, (double) ViewHandler.STANDARD_HEIGHT, true, true);
+                (double) ViewHandlerImpl.STANDARD_WIDTH, (double) ViewHandlerImpl.STANDARD_HEIGHT, true, true);
     }
 
     /**

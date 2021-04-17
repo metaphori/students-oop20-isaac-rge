@@ -1,33 +1,28 @@
 package ryleh.controller;
 
-import ryleh.core.EntityBuilder;
 import ryleh.model.GameObject;
 import ryleh.view.GraphicComponent;
 
-public class Entity {
+public interface Entity {
+    /**
+     * Gets the View of this entity.
+     * @return The View of this entity.
+     */
+    GraphicComponent getView();
+    /**
+     * Sets the View of this entity.
+     * @param view View to be set.
+     */
+    void setView(GraphicComponent view);
+    /**
+     * Gets the GameObject of this entity.
+     * @return The GameObject of this entity.
+     */
+    GameObject getGameObject();
+    /**
+     * Sets the GameObject of this entity.
+     * @param gameObject GameObject to be set.
+     */
+    void setGameObject(GameObject gameObject);
 
-    private GraphicComponent view;
-    private GameObject gameObject;
-
-    public Entity(final GraphicComponent view, final GameObject gameObject) {
-        super();
-        this.view = view;
-        this.gameObject = gameObject;
-    }
-
-    public Entity() {
-    }
-
-    public GraphicComponent getView() {
-        return view;
-    }
-    public void setView(final GraphicComponent view) {
-        this.view = view;
-    }
-    public GameObject getGameObject() {
-        return gameObject;
-    }
-    public void setGameObject(final GameObject gameObject) {
-        this.gameObject = gameObject;
-    }
 }

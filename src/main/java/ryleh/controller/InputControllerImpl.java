@@ -5,6 +5,7 @@ import ryleh.controller.core.GameEngine;
 import ryleh.controller.core.GameState;
 import ryleh.controller.events.NewLevelEvent;
 import ryleh.controller.levels.LevelHandler;
+import ryleh.controller.levels.LevelHandlerImpl;
 import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
 import ryleh.model.components.ShootingComponent;
@@ -67,7 +68,7 @@ public class InputControllerImpl implements InputController {
             case K:
                 if (GameEngine.isDeveloper()) {
                     final LevelHandler levels = state.getLevelHandler();
-                    levels.setLevel(LevelHandler.getMaxLevel() - 1);
+                    levels.setLevel(LevelHandlerImpl.getMaxLevel() - 1);
                     state.generateNewLevel();
                 }
                 break;

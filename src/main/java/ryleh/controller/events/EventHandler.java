@@ -45,7 +45,7 @@ public class EventHandler implements EventListener {
         comp = (HealthIntComponent) this.gameState.getPlayer().getGameObject()
                 .getComponent(HealthIntComponent.class).get();
         gameState.getView().getLives().setText("Lives: " + comp.getCurrentHp());
-        this.gameState.getView().getLevel().setText("Level: " + this.gameState.getLevelHandler().getnRooms());
+        this.gameState.getView().getLevel().setText("Level: " + this.gameState.getLevelHandler().getRoomsCount());
     }
 
     /**

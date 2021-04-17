@@ -24,5 +24,4 @@ public interface Entity {
      * @param gameObject GameObject to be set.
      */
     void setGameObject(GameObject gameObject);
-
 }

@@ -9,8 +9,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import ryleh.Ryleh;
-import ryleh.common.Config;
 import ryleh.core.GameEngine;
+import ryleh.view.ViewHandler;
 
 public class RylehMainMenu extends MenuFactoryImpl {
 
@@ -49,7 +49,7 @@ public class RylehMainMenu extends MenuFactoryImpl {
         this.box.setTranslateX(factory.getScaledSize());
         this.box.getChildren().addAll(this.separator, factory.getDescription());
         this.pane.setLeft(this.box);
-        this.primaryStage.setScene(new Scene(this.pane, Config.STANDARD_WIDTH, Config.STANDARD_HEIGHT));
+        this.primaryStage.setScene(new Scene(this.pane, ViewHandler.STANDARD_WIDTH, ViewHandler.STANDARD_HEIGHT));
         this.primaryStage.setResizable(false);
         this.primaryStage.setTitle("Ryleh's Call");
         this.primaryStage.show();

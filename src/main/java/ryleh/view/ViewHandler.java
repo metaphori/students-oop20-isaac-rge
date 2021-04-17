@@ -1,7 +1,7 @@
 package ryleh.view;
+
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.collections.transformation.FilteredList;
@@ -9,18 +9,16 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import ryleh.Ryleh;
-import ryleh.common.Config;
-import ryleh.view.enemies.EnemyDrunkGraphicComponent;
 
 /**
  * A class to Completely handle the view.
@@ -30,9 +28,21 @@ public class ViewHandler {
 	 * Duration of fading transition for item effect text.
 	 */
     private static final double FT_DURATION = 4000;
-	private final Stage stage;
-    private final List<GraphicComponent> graphicComponents;
-    private final Scene scene;
+    /**
+    *The width of the screen. 
+    */
+    public static final int STANDARD_WIDTH = (int) Screen.getPrimary().getBounds().getWidth();
+	/**
+	 * the height of the screen.
+	 */
+    public static final int STANDARD_HEIGHT = (int) Screen.getPrimary().getBounds().getHeight();
+    /**
+     * The modifier to set the correct proportion of the view.
+     */
+    public static final double SCALE_MODIFIER = (double) (ViewHandler.STANDARD_WIDTH / 1920.0);
+	  private Stage stage;
+    private List<GraphicComponent> graphicComponents;
+    private Scene scene;
     private Parent root;
     private final Rectangle rectangle;
     private Text lives;
@@ -52,7 +62,7 @@ public class ViewHandler {
         this.rectangle = new Rectangle(Textures.BACKGROUND.getWidth(), Textures.BACKGROUND.getHeight());
         this.rectangle.setFill(Textures.BACKGROUND.getImagePattern());
         this.font = Font.loadFont(Ryleh.class.getResource("/assets/fonts/manaspc.ttf")
-                		.toExternalForm(), 37 * Config.SCALE_MODIFIER);
+                		.toExternalForm(), 37 * SCALE_MODIFIER);
         this.setLives();
         this.setLevel();
         this.setTutorial();
@@ -83,8 +93,8 @@ public class ViewHandler {
     private void setLevel() {
     	this.level = new Text();
         this.level.setFont(this.font);
-        this.level.setX((Config.STANDARD_WIDTH / 16) * 2 + (75 * Config.SCALE_MODIFIER));
-        this.level.setY((Config.STANDARD_HEIGHT / 9) * 1);
+        this.level.setX((STANDARD_WIDTH / 16) * 2 + (75 * SCALE_MODIFIER));
+        this.level.setY((STANDARD_HEIGHT / 9) * 1);
         this.level.setFill(Color.WHITE);
 	}
     /**
@@ -110,8 +120,8 @@ public class ViewHandler {
     private void setItemPickUp() {
     	this.item = new Text();
         this.item.setFont(this.font);
-        this.item.setX((Config.STANDARD_WIDTH / 16) * 2);
-        this.item.setY((Config.STANDARD_HEIGHT / 9) * 8 + (20 * Config.SCALE_MODIFIER));
+        this.item.setX((STANDARD_WIDTH / 16) * 2);
+        this.item.setY((STANDARD_HEIGHT / 9) * 8 + (20 * SCALE_MODIFIER));
         this.item.setFill(Color.WHITE);
         this.item.setVisible(false);
 	}
@@ -121,8 +131,8 @@ public class ViewHandler {
 	private void setLives() {
     	this.lives = new Text("Lives: 3");
         this.lives.setFont(this.font);
-        this.lives.setX((Config.STANDARD_WIDTH / 16) * 11 + (50 * Config.SCALE_MODIFIER));
-        this.lives.setY((Config.STANDARD_HEIGHT / 9) * 1);
+        this.lives.setX((STANDARD_WIDTH / 16) * 11 + (50 * SCALE_MODIFIER));
+        this.lives.setY((STANDARD_HEIGHT / 9) * 1);
         this.lives.setFill(Color.WHITE);
     }
 

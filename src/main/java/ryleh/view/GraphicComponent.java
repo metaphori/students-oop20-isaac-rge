@@ -10,7 +10,6 @@ import javafx.scene.shape.Rectangle;
  * This is the interface for the graphic model of the view of any type of entity.
  */
 public interface GraphicComponent {
-	
 	/**
 	 * Updates the view of a GraphicComponent associated to an entity.
 	 * @param position The position at which the view needs to be located.

@@ -1,9 +1,9 @@
 package ryleh.model.components;
 
-import ryleh.common.P2d;
+import ryleh.common.Point2d;
 import ryleh.common.Timer;
 import ryleh.common.TimerImpl;
-import ryleh.common.V2d;
+import ryleh.common.Vector2d;
 import ryleh.controller.events.BulletSpawnEvent;
 import ryleh.model.World;
 
@@ -26,7 +26,7 @@ public class ShootingComponent extends Component {
      * @param velocity given to the bullet.
      * @param origin of bullet spawning.
      */
-    public void shoot(final V2d velocity, final P2d origin) {
+    public void shoot(final Vector2d velocity, final Point2d origin) {
         if (timer.isElapsed()) {
             world.notifyWorldEvent(new BulletSpawnEvent(object, origin, velocity));
             this.timer.startTimer();
@@ -36,7 +36,7 @@ public class ShootingComponent extends Component {
      * Shoot a bullet at game object's position with the given velocity only if attack speed's timer is elapsed.
      * @param velocity
      */
-    public void shoot(final V2d velocity) {
+    public void shoot(final Vector2d velocity) {
         if (timer.isElapsed()) {
             world.notifyWorldEvent(new BulletSpawnEvent(object, object.getHitBox().getForm().getCenter(), velocity));
             this.timer.startTimer();

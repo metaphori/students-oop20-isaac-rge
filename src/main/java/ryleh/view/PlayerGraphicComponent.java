@@ -21,39 +21,31 @@ public class PlayerGraphicComponent implements GraphicComponent {
 	private Direction lastDir;
 	private FadeTransition playerFade;
 	private Boolean invincible;
-	private static final int ANIM_DURATION = 5;
+	/**
+	 * Duration of each frame of the animation.
+	 */
+	private static final int ANIM_DURATION = 90;
+	/**
+	 * Duration of the fade animation.
+	 */
 	private static final int FADE_DURATION = 200;
 	
-	private AnimationLoop animRight = new AnimationLoop(
-			List.of(Textures.PLAYER_RIGHT.getImagePattern(), Textures.PLAYER_RIGHT2.getImagePattern(), Textures.PLAYER_RIGHT.getImagePattern(), Textures.PLAYER_RIGHT4.getImagePattern()), ANIM_DURATION);
-	private AnimationLoop animLeft = new AnimationLoop(
-			List.of(Textures.PLAYER_LEFT.getImagePattern(), Textures.PLAYER_LEFT2.getImagePattern(), Textures.PLAYER_LEFT.getImagePattern(), Textures.PLAYER_LEFT4.getImagePattern()), ANIM_DURATION);
-	private AnimationLoop animUp = new AnimationLoop(
-			List.of(Textures.PLAYER_UP.getImagePattern(), Textures.PLAYER_UP2.getImagePattern(), Textures.PLAYER_UP.getImagePattern(), Textures.PLAYER_UP4.getImagePattern()), ANIM_DURATION);
-	private AnimationLoop animDown = new AnimationLoop(
-			List.of(Textures.PLAYER_DOWN.getImagePattern(), Textures.PLAYER_DOWN2.getImagePattern(), Textures.PLAYER_DOWN.getImagePattern(), Textures.PLAYER_DOWN4.getImagePattern()), ANIM_DURATION);
+	private AnimationLoop currentLoop;
+	private AnimationLoop animRight;
+	private AnimationLoop animLeft;
+	private AnimationLoop animUp;
+	private AnimationLoop animDown;
 	
 	/**
 	 * Creates a new Instance of PlayerGraphicComponent.
 	 */
 	public PlayerGraphicComponent() {
-		this.rectangle = new Rectangle(Textures.PLAYER_DOWN.getWidth(), Textures.PLAYER_DOWN.getHeight());
-		this.rectangle.setFill(Textures.PLAYER_DOWN.getImagePattern());
-	
-		this.playerFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
-		this.playerFade.setFromValue(1.0);
-		this.playerFade.setToValue(0.0);
-		this.playerFade.setCycleCount(4);
-		this.playerFade.setAutoReverse(true);
-	
-		this.invincible = false;
-		this.direction = Direction.IDLE;
-		this.lastDir = Direction.IDLE;
+		this(new Point2D(0, 0));
 	}
 	
 	/**
 	 * Creates a new Instance of PlayerGraphicComponent with the given initial position.
-	 * @param position The position at witch the PlayerGraphicComponent needs to be inizialized.
+	 * @param position The position at witch the PlayerGraphicComponent needs to be initialized.
 	 */
 	public PlayerGraphicComponent(final Point2D position) {
 		this.rectangle = new Rectangle(Textures.PLAYER_DOWN.getWidth(), Textures.PLAYER_DOWN.getHeight());
@@ -67,9 +59,19 @@ public class PlayerGraphicComponent implements GraphicComponent {
 	    this.playerFade.setCycleCount(4);
 	    this.playerFade.setAutoReverse(true);
 
+	    this.animRight = new AnimationLoop(
+				List.of(Textures.PLAYER_RIGHT2.getImagePattern(), Textures.PLAYER_RIGHT.getImagePattern(), Textures.PLAYER_RIGHT4.getImagePattern()), ANIM_DURATION, rectangle);
+	    animLeft = new AnimationLoop(
+				List.of(Textures.PLAYER_LEFT2.getImagePattern(), Textures.PLAYER_LEFT.getImagePattern(), Textures.PLAYER_LEFT4.getImagePattern()), ANIM_DURATION, rectangle);
+	    animUp = new AnimationLoop(
+				List.of(Textures.PLAYER_UP2.getImagePattern(), Textures.PLAYER_UP.getImagePattern(), Textures.PLAYER_UP4.getImagePattern()), ANIM_DURATION, rectangle);
+	    animDown = new AnimationLoop(
+				List.of(Textures.PLAYER_DOWN2.getImagePattern(), Textures.PLAYER_DOWN.getImagePattern(), Textures.PLAYER_DOWN4.getImagePattern()), ANIM_DURATION, rectangle);
+
 	    this.invincible = false;
 		this.direction = Direction.IDLE;
 		this.lastDir = Direction.IDLE;
+		this.currentLoop = animDown;
 	}
 
 	/**
@@ -79,50 +81,43 @@ public class PlayerGraphicComponent implements GraphicComponent {
 	private void updateImage(final Direction direction) {
 		switch (direction) {
 		case RIGHT:
-			if (!rectangle.getFill().equals(Textures.PLAYER_RIGHT.getImagePattern()) && lastDir != Direction.RIGHT) {
-				rectangle = animRight.setFrame(rectangle);
-				animRight.resetTimer();
+			if (lastDir != Direction.RIGHT) {
+				currentLoop.stop();
+				currentLoop = animRight;
+				animRight.play();
 				lastDir = Direction.RIGHT;
-			} else {
-				animRight.incTimer();
-				rectangle = animRight.setFrame(rectangle);
 			}
 			break;
 
 		case LEFT:
-			if (!rectangle.getFill().equals(Textures.PLAYER_LEFT.getImagePattern()) && lastDir != Direction.LEFT) {
-				rectangle = animLeft.setFrame(rectangle);
-				animLeft.resetTimer();
+			if (lastDir != Direction.LEFT) {
+				currentLoop.stop();
+				currentLoop = animLeft;
+				animLeft.play();
 				lastDir = Direction.LEFT;
-			} else {
-				animLeft.incTimer();
-				rectangle = animLeft.setFrame(rectangle);
 			}
 			break;
 
 		case UP:
-			if (!rectangle.getFill().equals(Textures.PLAYER_UP.getImagePattern()) && lastDir != Direction.UP) {
-				rectangle = animUp.setFrame(rectangle);
-				animUp.resetTimer();
+			if (lastDir != Direction.UP) {
+				currentLoop.stop();
+				currentLoop = animUp;
+				animUp.play();
 				lastDir = Direction.UP;
-			} else {
-				animUp.incTimer();
-				rectangle = animUp.setFrame(rectangle);
 			}
 			break;
 
 		case DOWN:
-			if (!rectangle.getFill().equals(Textures.PLAYER_DOWN.getImagePattern()) && lastDir != Direction.DOWN) {
-				rectangle = animDown.setFrame(rectangle);
-				animDown.resetTimer();
+			if (lastDir != Direction.DOWN) {
+				currentLoop.stop();
+				currentLoop = animDown;
+				animDown.play();
 				lastDir = Direction.DOWN;
-			} else {
-				animDown.incTimer();
-				rectangle = animDown.setFrame(rectangle);
 			}
 			break;
 
 		case IDLE:
+			currentLoop.stop();
 			switch (lastDir) {
 			case RIGHT:
 				rectangle.setFill(Textures.PLAYER_RIGHT.getImagePattern());
@@ -139,6 +134,7 @@ public class PlayerGraphicComponent implements GraphicComponent {
 			default:
 				break;
 			}
+			lastDir = Direction.IDLE;
 		default:
 			break;
 		}

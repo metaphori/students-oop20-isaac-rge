@@ -9,8 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 import javafx.geometry.Point2D;
 import javafx.stage.Stage;
-import ryleh.common.Config;
-import ryleh.common.P2d;
+import ryleh.common.Point2d;
 import ryleh.controller.Entity;
 import ryleh.controller.InputController;
 import ryleh.controller.InputControllerImpl;
@@ -21,14 +20,14 @@ import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
 import ryleh.view.ViewHandler;
-import ryleh.view.media.AudioPlayer;
 
 public class GameState {
     private final ViewHandler view;
     private final World world;
     private final List<Entity> entities;
     private final Map<String, String> gameVars;
-    private boolean isGameOver = false;
+    private boolean isGameOver;
+    private boolean isVictory;
     private final EventHandler eventHandler;
     private final InputController input;
     private final LevelHandler levelHandler;
@@ -66,7 +65,7 @@ public class GameState {
 	view.addGraphicComponent(player.getView());
 	world.addGameObject(player.getGameObject());
 	entities.add(player);
-	//player.getGameObject().setPosition(levelHandler.getPosition(levelHandler.playerSpawn));
+
 	((PhysicsComponent) player.getGameObject().getComponent(PhysicsComponent.class).get())
 	    .setPosition(levelHandler.getPosition(levelHandler.getPlayerSpawn()));
 
@@ -78,7 +77,7 @@ public class GameState {
 		}
 	});
 	input.initInput();
-	levelHandler.debug();
+	GameEngine.runDebugger(() -> levelHandler.printSpawnPoints());
 
     }
 
@@ -92,8 +91,8 @@ public class GameState {
         input.updateInput();
         for (final Entity object : this.entities) {
             object.getGameObject().onUpdate(dt);
-            object.getView().render(toPoint2D(new P2d(
-                    object.getGameObject().getPosition().x, object.getGameObject().getPosition().y)), dt);
+            object.getView().render(toPoint2D(new Point2d(
+                    object.getGameObject().getPosition().getX(), object.getGameObject().getPosition().getY())), dt);
         }
         eventHandler.checkEvents();
     }
@@ -101,16 +100,18 @@ public class GameState {
     public boolean isGameOver() {
         return isGameOver;
     }
-    public void callGameOver() {
+    public void callGameOver(final boolean victory) {
         this.isGameOver = true;
+        this.isVictory = victory;
     }
 
     public ViewHandler getView() {
 	return view;
     }
 	
-    private Point2D toPoint2D (final P2d point) {
-        return new Point2D(point.x * Config.SCALE_MODIFIER, point.y * Config.SCALE_MODIFIER);
+    private Point2D toPoint2D(final Point2d point) {
+        return new Point2D(point.getX() * ViewHandler.SCALE_MODIFIER, point.getY() * ViewHandler.SCALE_MODIFIER);
+
     }
 	
     public LevelHandler getLevelHandler() {
@@ -126,5 +127,8 @@ public class GameState {
     }
     public List<Entity> getEntities() {
 	return this.entities;
+    }
+    public boolean isVictory() {
+        return this.isVictory;
     }
 }

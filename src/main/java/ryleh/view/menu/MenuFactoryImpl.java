@@ -5,8 +5,6 @@ import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Separator;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -16,12 +14,12 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import ryleh.common.Config;
+import ryleh.view.ViewHandler;
 
 public class MenuFactoryImpl implements MenuFactory {
 	
 	private static final int SIZE = 40;
-    private int scaledSize = (int) (Config.SCALE_MODIFIER * SIZE);
+    private int scaledSize = (int) (ViewHandler.SCALE_MODIFIER * SIZE);
     private Font levelFont;
     private Color startColor;
     private Color hoverColor;
@@ -35,7 +33,7 @@ public class MenuFactoryImpl implements MenuFactory {
 
     public MenuFactoryImpl(final int scale) {
         this();
-        this.scaledSize = (int) (Config.SCALE_MODIFIER * scale);
+        this.scaledSize = (int) (ViewHandler.SCALE_MODIFIER * scale);
     }
     /**
      * {@inheritDoc}
@@ -47,7 +45,15 @@ public class MenuFactoryImpl implements MenuFactory {
         final VBox container = new VBox();
         final Text question = new Text(text);
         question.setFont(new Font(scaledSize));
-        confirm.getChildren().add(createCustomButton("YES", "", () -> Platform.exit()));
+        confirm.getChildren().add(createCustomButton("YES", "", () -> {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Platform.exit();
+                    System.exit(0);
+                }
+            });
+        }));
         confirm.getChildren().add(createCustomButton("NO", "", () -> window.close()));
         confirm.setAlignment(Pos.CENTER);
         container.getChildren().add(question);
@@ -55,8 +61,8 @@ public class MenuFactoryImpl implements MenuFactory {
         container.setAlignment(Pos.CENTER);
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Quit Game");
-        window.setWidth(Config.STANDARD_WIDTH / 3);
-        window.setHeight(Config.STANDARD_HEIGHT / 3);
+        window.setWidth(ViewHandler.STANDARD_WIDTH / 3);
+        window.setHeight(ViewHandler.STANDARD_HEIGHT / 3);
         window.setScene(new Scene(container));
         window.setResizable(false);
         window.showAndWait();

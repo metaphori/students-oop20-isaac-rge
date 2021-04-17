@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javafx.geometry.Point2D;
-import ryleh.common.P2d;
+import ryleh.common.Point2d;
 import ryleh.model.components.Component;
 import ryleh.model.physics.CircleHitBox;
 import ryleh.model.physics.HitBox;
@@ -13,14 +13,14 @@ import ryleh.model.physics.HitBox;
 public class GameObjectImpl implements GameObject {
     private Type type;
     private String id;
-    private P2d position;
+    private Point2d position;
     private World world;
     private HitBox box;
     private List<Component> components;
     private int zIndex;
 
     public GameObjectImpl() {
-        position = new P2d(0,0);
+        position = new Point2d(0,0);
         components = new ArrayList<>();
         this.box = new CircleHitBox(190);
     }
@@ -38,11 +38,11 @@ public class GameObjectImpl implements GameObject {
     }
 
     @Override
-    public P2d getPosition() {
+    public Point2d getPosition() {
         return position;
     }
     @Override
-    public void setPosition(final P2d position) {
+    public void setPosition(final Point2d position) {
         this.position = position;
         box.getForm().setPosition(position);
     }

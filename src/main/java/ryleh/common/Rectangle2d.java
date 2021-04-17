@@ -1,73 +1,142 @@
 package ryleh.common;
 
-public class Rectangle2d implements Shape2d{
+public class Rectangle2d implements Shape2d {
 
-    public int height;
-    public int width;
-    public P2d upperLeft;
-    public P2d lowerLeft;
-    public P2d upperRight;
-    public P2d lowerRight;
+    private final int height;
+    private final int width;
+    private Point2d upperLeft;
+    private Point2d lowerLeft;
+    private Point2d upperRight;
+    private Point2d lowerRight;
 
-    /*
-     * This constructor is used to instantiate a 2D rectangle that is oriented horizontally
+    /**
+     * This constructor is used to instantiate a 2D rectangle that is oriented horizontally.
+     * @param width Width of the rectangle.
+     * @param height Height of the rectangle.
+     * @param upperLeftX X coordinate of the upper left vertex of the rectangle.
+     * @param upperLeftY Y coordinate of the upper left vertex of the rectangle.
      */
     public Rectangle2d(final int width, final int height, final int upperLeftX, final int upperLeftY) {
         super();
         this.height = height;
         this.width = width;
-        this.upperLeft = new P2d(upperLeftX, upperLeftY);
-        this.lowerLeft = new P2d(upperLeftX, upperLeftY + height);
-        this.upperRight = new P2d(upperLeftX + width, upperLeftY);
-        this.lowerRight = upperLeft.sum(new V2d(this.width, this.height));
+        this.upperLeft = new Point2d(upperLeftX, upperLeftY);
+        this.lowerLeft = new Point2d(upperLeftX, upperLeftY + height);
+        this.upperRight = new Point2d(upperLeftX + width, upperLeftY);
+        this.lowerRight = getUpperLeft().sum(new Vector2d(width, height));
 
     }
-    /*
-     * This constructor is used to instantiate a 2D rectangle whose orientation is not "simply" horizontal
+    /**
+     * This constructor is used to instantiate a 2D rectangle whose orientation is not "simply" horizontal.
+     * @param upperLeft Upper left vertex of the rectangle.
+     * @param lowerLeft Lower left vertex of the rectangle.
+     * @param lowerRight Lower right vertex of the rectangle.
+     * @param upperRight Upper right vertex of the rectangle.
      */
-    public Rectangle2d(final P2d upperLeft, final P2d lowerLeft, final P2d lowerRight, final P2d upperRight) {
+    public Rectangle2d(final Point2d upperLeft, final Point2d lowerLeft, final Point2d lowerRight, final Point2d upperRight) {
         super();
         this.upperLeft = upperLeft;
         this.lowerLeft = lowerLeft;
         this.lowerRight = lowerRight;
         this.upperRight = upperRight;
-        this.width = (int) new V2d(upperLeft, upperRight).module();
-        this.height = (int) new V2d(upperLeft, lowerLeft).module();
+        this.width = (int) new Vector2d(upperLeft, upperRight).module();
+        this.height = (int) new Vector2d(upperLeft, lowerLeft).module();
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean contains(final P2d position) {
-        return position.x > this.upperLeft.x
-               && position.x < this.upperRight.x 
-               && position.y > this.upperLeft.y 
-               && position.y < this.lowerLeft.y;
+    public boolean contains(final Point2d position) {
+        return position.getX() > this.getUpperLeft().getX()
+               && position.getX() < this.upperRight.getX() 
+               && position.getY() > this.getUpperLeft().getY() 
+               && position.getY() < this.lowerLeft.getY();
     }
-
+    /**
+     * Used to determine if a rectangle is contained completely in this rectangle.
+     * @param rectangle Rectangle inside this rectangle.
+     * @return True if all vertices of the inner rectangle are contained into the outer rectangle.
+     */
     public boolean contains(final Rectangle2d rectangle) {
-        return this.contains(rectangle.upperLeft) 
-                && this.contains(rectangle.lowerRight)
+        return this.contains(rectangle.getUpperLeft()) 
+                && this.contains(rectangle.getLowerRight())
                 && this.contains(rectangle.upperRight)
                 && this.contains(rectangle.lowerLeft);
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setPosition(final P2d position) {
-        final V2d transform = new V2d(this.upperLeft, position);
-        this.upperLeft = this.upperLeft.sum(transform);
+    public void setPosition(final Point2d position) {
+        final Vector2d transform = new Vector2d(this.getUpperLeft(), position);
+        this.setUpperLeft(this.getUpperLeft().sum(transform));
         this.upperRight = this.upperRight.sum(transform);
         this.lowerLeft = this.lowerLeft.sum(transform);
-        this.lowerRight = this.lowerRight.sum(transform);
+        this.setLowerRight(this.getLowerRight().sum(transform));
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public P2d getPosition() {
-        return this.upperLeft;
+    public Point2d getPosition() {
+        return this.getUpperLeft();
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    //TODO no implementation right now!
-    public boolean intersect(Shape2d shape) {
+    public boolean intersect(final Shape2d shape) {
         return false;
     }
-	@Override
-	public P2d getCenter() {
-		return new P2d((this.upperLeft.x +this.lowerRight.x)/2,(this.upperLeft.y+this.lowerRight.y)/2);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Point2d getCenter() {
+        return new Point2d((this.getUpperLeft().getX() + this.getLowerRight().getX()) / 2, 
+                this.getUpperLeft().getY() + this.getLowerRight().getY() / 2);
+    }
+    /**
+     * Gets upper left vertex of the rectangle.
+     * @return Upper left vertex.
+     */
+    public Point2d getUpperLeft() {
+        return upperLeft;
+    }
+    /**
+     * Sets upper left vertex of the rectangle. 
+     * @param upperLeft Vertex to be set.
+     */
+    public void setUpperLeft(final Point2d upperLeft) {
+        this.upperLeft = upperLeft;
+    }
+    /**
+     * Gets lower right vertex of the rectangle.
+     * @return Lower right vertex.
+     */
+    public Point2d getLowerRight() {
+        return lowerRight;
+    }
+    /**
+     * Sets lower right vertex of the rectangle. 
+     * @param lowerRight Vertex to be set.
+     */
+    public void setLowerRight(final Point2d lowerRight) {
+        this.lowerRight = lowerRight;
+    }
+    /**
+     * Gets Height of the rectangle.
+     * @return Height of the rectangle.
+     */
+    public int getHeight() {
+        return height;
+    }
+    /**
+     * Gets Width of the rectangle.
+     * @return Width of the rectangle.
+     */
+    public int getWidth() {
+        return width;
+    }
 
 }

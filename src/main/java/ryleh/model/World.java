@@ -2,36 +2,31 @@ package ryleh.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import ryleh.common.P2d;
+import ryleh.common.Point2d;
 import ryleh.common.Rectangle2d;
 import ryleh.common.Shape2d;
 import ryleh.controller.events.Event;
 import ryleh.controller.events.EventListener;
+import ryleh.core.GameEngine;
 
 public class World {
 
     private List<GameObject> gameObjects;
     private final Rectangle2d bounds; 
-    private int rylehId = 0;
-    private static final int WORLD_WIDTH = 1920;
-    private static final int WORLD_HEIGHT = 1080;
-    //private static double boundsWidthProportion = 0.900;
-    //private static double boundsHeightProportion = 0.800;
+    private int rylehId;
+    private static final int BOUNDS_WIDTH = 1407;
+    private static final int BOUNDS_HEIGHT = 736;
+    private static final int BOUNDS_UPPER_LEFT_X = 252;
+    private static final int BOUNDS_UPPER_LEFT_Y = 172;
+
 
     private final EventListener eventListener;
 
     public World(final EventListener eventListener) {
-    	this.eventListener = eventListener;
+        this.eventListener = eventListener;
         this.gameObjects = new ArrayList<>();
-        //final int upperLeftX =  (int) Math.round((this.WORLD_WIDTH * (1 - boundsWidthProportion)) / 2);
-        //final int upperLeftY = (int) Math.round((World.WORLD_HEIGHT - boundsHeightProportion * World.WORLD_HEIGHT) / 2);
-
-        //bounds = new Rectangle2d((int) Math.round(boundsWidthProportion * WORLD_WIDTH), 
-        //                (int) Math.round(boundsHeightProportion * WORLD_HEIGHT),
-        //                upperLeftX, upperLeftY);
-        bounds = new Rectangle2d(1407, 736, 252, 172);
-
-        System.out.println(bounds.upperLeft + " " + bounds.lowerRight);
+        bounds = new Rectangle2d(BOUNDS_WIDTH, BOUNDS_HEIGHT, BOUNDS_UPPER_LEFT_X, BOUNDS_UPPER_LEFT_Y);
+        GameEngine.runDebugger(() -> System.out.println(bounds.getUpperLeft() + " " + bounds.getLowerRight()));
     }
 
     public List<GameObject> getGameObjects() {
@@ -47,7 +42,7 @@ public class World {
         return type + "RY" + this.rylehId;
     }
 
-    public boolean isOutOfBounds(final P2d position) {
+    public boolean isOutOfBounds(final Point2d position) {
         return !bounds.contains(position);
     }
 
@@ -56,19 +51,18 @@ public class World {
         object.onAdded(this);
     }
     public double getWidthBound() {
-    	return bounds.width;
+    	return bounds.getWidth();
     }
     public double getHeightBound() {
-    	return bounds.height;
+    	return bounds.getHeight();
     }
 
     public Shape2d getBounds() {
         return this.bounds;
     }
 
-    public void removeGameObject(GameObject gameObject) {
+    public void removeGameObject(final GameObject gameObject) {
     	this.gameObjects.remove(gameObject);
-		//to  check if needed to remove components
     }
     public void notifyWorldEvent(Event e) {
     	this.eventListener.notifyEvent(e);

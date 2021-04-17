@@ -18,6 +18,14 @@ public final class GameEngine {
     private static Timeline loop;
     private RylehPauseMenu pauseMenu;
     private Stage primaryStage;
+    /**
+     * If True, the game runs in developer mode, otherwise it will run is release mode.
+     * While release mode is the normal way to play, developer exists only for debugging purposes.
+     * Note: in developer mode player HP doesn't decrease, level changing can be done by pressing "L" key,
+     * current level can be set to maximum by pressing "O" key plus other features. 
+     */
+    private static boolean isDeveloper;
+    private static boolean debugOn;
 
     /**
      * Initializes engine's game state and the frequency (period) of game loop.
@@ -38,7 +46,7 @@ public final class GameEngine {
     }
 
     /**
-     * Uses a JavaFx class, called Timeline, to handle one keyframe (that corresponds to one gameloop's update). 
+     * Uses a JavaFx class, called "Timeline", to handle one "Keyframe" (that corresponds to one gameloop's update). 
      * This operation is done once every "period"
      */
     public void mainLoop() {
@@ -48,12 +56,11 @@ public final class GameEngine {
             @Override
             public void handle(final ActionEvent event) {
                 if (rylehState.isGameOver()) {
-                    renderGameOver();
+                    renderGameOver(rylehState.isVictory());
                 }
                 rylehState.updateState(period);
             }
         }); // oneFrame
-
         // sets the game world's game loop (Timeline)
         loop = new Timeline(oneFrame);
         loop.setCycleCount(Animation.INDEFINITE);
@@ -81,9 +88,28 @@ public final class GameEngine {
     /**
      * This method is called when the game is over. Stops game loop and render the game over scene.
      */
-    private void renderGameOver() {
+    private void renderGameOver(final boolean victory) {
         loop.stop();
-        new RylehGameOverMenu(this.primaryStage).show();
+        new RylehGameOverMenu(this.primaryStage, victory).show();
+    }
+    /**
+     * Current mode the game is playing.
+     * @return True if you are currently in Developer mode. False if you are in Release mode.
+     */
+    public static boolean isDeveloper() {
+        return isDeveloper;
+    }
+    /**
+     * Sets current game mode.
+     * @param isDeveloper True if you want to set Developer mode. Use False for Release mode.
+     */
+    public static void setDeveloper(final boolean isDeveloper) {
+        GameEngine.isDeveloper = isDeveloper;
+    }
+    public static void runDebugger(final Runnable action) {
+        if (GameEngine.debugOn) {
+            action.run();
+        }
     }
 
 }

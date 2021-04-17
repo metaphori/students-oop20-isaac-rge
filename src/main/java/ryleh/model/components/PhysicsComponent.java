@@ -1,26 +1,26 @@
 package ryleh.model.components;
 
-import ryleh.common.P2d;
-import ryleh.common.V2d;
+import ryleh.common.Point2d;
+import ryleh.common.Vector2d;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.physics.Direction;
 
 public class PhysicsComponent extends Component {
-    private V2d velocity;
-    private P2d position;
+    private Vector2d velocity;
+    private Point2d position;
     private int speed;
     private Direction direction;
     private Direction lastDirection;
     private Direction blocked;
-    private P2d lastPos;
+    private Point2d lastPos;
 
     public PhysicsComponent(final World world, final int speed) {
         super(world);
-        this.position = new P2d(0, 0);
-        this.velocity = new V2d(0, 0);
-        this.lastPos = new P2d(0, 0);
+        this.position = new Point2d(0, 0);
+        this.velocity = new Vector2d(0, 0);
+        this.lastPos = new Point2d(0, 0);
         this.speed = speed;
         this.direction = Direction.IDLE;
         this.lastDirection = Direction.DOWN;
@@ -46,8 +46,8 @@ public class PhysicsComponent extends Component {
     }
 
     protected void move (final double dt) {
-        lastPos = new P2d(this.position.x, this.position.y);
-        this.position = this.position.sum(velocity.mul(0.001*dt));
+        lastPos = new Point2d(this.position.getX(), this.position.getY());
+        this.position = this.position.sum(velocity.multiply(0.001 * dt));
         object.setPosition(this.position);
     }
 
@@ -65,15 +65,15 @@ public class PhysicsComponent extends Component {
     }
 
     public void setVelocityX(final int sign) {
-        this.velocity.x = sign * speed;
+        this.velocity.setX(sign * speed); 
     }
 
     public void setVelocityY(final int sign) {
-        this.velocity.y = sign * speed;
+        this.velocity.setY(sign * speed);
     }
 
-    public void setVelocity(final V2d velocity) {
-        this.velocity = velocity.mul(speed);
+    public void setVelocity(final Vector2d velocity) {
+        this.velocity = velocity.multiply(speed);
     }
 
     public void setDirection(final Direction direction) { 
@@ -95,7 +95,7 @@ public class PhysicsComponent extends Component {
         this.blocked = Direction.IDLE;
     }
     //THIS IS A PRIMITIVE METHOD WITH NO WAY OF CHECKING BOUNDS OR HITBOXES
-	public void setPosition(P2d position) {
+	public void setPosition(Point2d position) {
 		this.lastPos = position;
 		this.position = position;
 		object.setPosition(this.position);

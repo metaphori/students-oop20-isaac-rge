@@ -27,14 +27,7 @@ public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent {
 	 * Creates a new Instance of EnemyDrunkSpinnerGraphicComponent.
 	 */
 	public EnemyDrunkSpinnerGraphicComponent() {
-		this.rectangle = new Rectangle(Textures.ENEMY_DRUNKSPINNER.getWidth(), Textures.ENEMY_DRUNKSPINNER.getHeight());
-		this.rectangle.setFill(Textures.ENEMY_DRUNKSPINNER.getImagePattern());
-		this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
-	    this.enemyFade.setFromValue(1.0);
-	    this.enemyFade.setToValue(0.0);
-	    this.enemyFade.setCycleCount(4);
-	    this.enemyFade.setAutoReverse(true);
-	    this.angle = 0;
+		this(new Point2D(0, 0));
 	}
 
 	/**

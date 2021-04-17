@@ -14,11 +14,9 @@ import ryleh.model.items.MaxHealthItem;
 import ryleh.view.other.ItemGraphicComponent;
 
 public class ItemPickUpEvent implements Event {
-	
-	private GameObject target;
+	private final GameObject target;
 	private HealthIntComponent health;
 	private Item item;
-	
 	/**
 	 * Constructor for the collision with an Item.
 	 * @param target Player, only this game object can collide with items
@@ -52,5 +50,21 @@ public class ItemPickUpEvent implements Event {
 			break;
 		}
 		item.apply(state);
+	}
+	/**
+	 * Heal the target and updates game UI with item effect.
+	 */
+	private void healthUp() {
+		gs.getView().getItemPickUp().setText("Item effect: health up!");
+		gs.getView().playFt();
+		health.heal(1);
+	}
+	/**
+	 * Increase max health of the target and updates game UI with item effect.
+	 */
+	private void maxHealthUp() {
+		gs.getView().getItemPickUp().setText("Item effect: max health up!");
+		gs.getView().playFt();
+		health.setMaxHp(health.getMaxHp() + 1);
 	}
 }

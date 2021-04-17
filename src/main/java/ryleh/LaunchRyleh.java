@@ -1,8 +1,8 @@
 package ryleh;
 
-public final class NewRyleh {
+public final class LaunchRyleh {
 
-    private NewRyleh() {
+    private LaunchRyleh() {
     }
     public static void main(final String[] args) {
         Ryleh.main(args);

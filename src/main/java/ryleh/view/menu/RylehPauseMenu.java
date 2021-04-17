@@ -3,33 +3,35 @@ package ryleh.view.menu;
 
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Separator;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import ryleh.Ryleh;
-import ryleh.common.Config;
 import ryleh.core.GameEngine;
+import ryleh.view.ViewHandler;
 
 public class RylehPauseMenu {
     private final Stage popupStage;
     private final Scene pauseScene;
     private final Stage primaryStage;
     private final MenuFactory factory;
-    private final Separator separator;
     private final BorderPane pane;
     private final VBox box;
 
     public RylehPauseMenu(final Stage primaryStage) {
-    	this.separator = new Separator();
+        final Separator separator = new Separator();
         this.pane = new BorderPane();
         this.box = new VBox();
         factory = new MenuFactoryImpl();
@@ -44,18 +46,26 @@ public class RylehPauseMenu {
                 GameEngine.resumeEngine();
             } 
         };
+
         this.box.getChildren().add(factory.createCustomButton("Resume", "Resume the game", resume));
+        Node developButton = factory.createCustomButton("Developer Mode: OFF", "Enable/Disable developer mode", 
+                () -> {
+                    GameEngine.setDeveloper(!GameEngine.isDeveloper());
+                    ((Text) ((HBox) this.box.getChildren().get(1)).getChildren().get(1))
+                    .setText("Developer Mode: " + (GameEngine.isDeveloper() ? "ON" : "OFF"));
+                });
+        this.box.getChildren().add(developButton);
         this.box.getChildren().add(factory.createCustomButton("Quit Game", "Exit to desktop", () -> {
             factory.createCustomAlert("Do you really want to quit?");
         }));
-        this.separator.setOrientation(Orientation.HORIZONTAL);
-        this.separator.setTranslateX(factory.getScaledSize() / 2);
+        separator.setOrientation(Orientation.HORIZONTAL);
+        separator.setTranslateX(factory.getScaledSize() / 2);
         factory.getDescription().setFont(new Font(factory.getScaledSize()));
         factory.getDescription().setFill(factory.getStartColor());
-        factory.getDescription().setTranslateY(this.separator.getTranslateY() + 10);
+        factory.getDescription().setTranslateY(separator.getTranslateY() + 10);
         this.box.setAlignment(Pos.CENTER_LEFT);
         this.box.setTranslateX(factory.getScaledSize());
-        this.box.getChildren().addAll(this.separator, factory.getDescription());
+        this.box.getChildren().addAll(separator, factory.getDescription());
         this.pane.setLeft(this.box);
 
         popupStage = new Stage(StageStyle.TRANSPARENT);
@@ -66,7 +76,7 @@ public class RylehPauseMenu {
                    resume.run();
             }
         });
-        pauseScene = new Scene(this.pane, Config.STANDARD_WIDTH, Config.STANDARD_HEIGHT);
+        pauseScene = new Scene(this.pane, ViewHandler.STANDARD_WIDTH, ViewHandler.STANDARD_HEIGHT);
     }
 
     /**

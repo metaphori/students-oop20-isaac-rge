@@ -1,13 +1,13 @@
 package ryleh.common;
 
 public interface Shape2d {
-    boolean contains(P2d point);
+    boolean contains(Point2d point);
 
-    void setPosition(P2d position);
+    void setPosition(Point2d position);
 
-    P2d getPosition();
+    Point2d getPosition();
 
     boolean intersect(Shape2d shape);
     
-    P2d getCenter();
+    Point2d getCenter();
 }

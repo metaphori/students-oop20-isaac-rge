@@ -7,7 +7,7 @@ import ryleh.controller.events.RemoveEntityEvent;
 import ryleh.model.Type;
 import ryleh.model.World;
 
-public class HealthIntComponent extends Component {
+public class HealthIntComponent extends AbstractComponent {
 	
 	private int currentHp;
     private int maxHp;
@@ -24,17 +24,16 @@ public class HealthIntComponent extends Component {
 
     @Override
 	public void onUpdate(final double deltaTime) {
-		super.onUpdate(deltaTime);
 		if (timer.isElapsed()) {
 			this.isImmortal = false;
 		}
 		//TODO should treat GameOver not as an event
 		if (this.currentHp <= 0) {
-			if (object.getType().equals(Type.PLAYER)) {
-				 world.notifyWorldEvent(new GameOverEvent());
+			if (super.getObject().getType().equals(Type.PLAYER)) {
+				 super.getWorld().notifyWorldEvent(new GameOverEvent());
 			}
 			else {
-				world.notifyWorldEvent(new RemoveEntityEvent(object));
+				super.getWorld().notifyWorldEvent(new RemoveEntityEvent(super.getObject()));
 			}
 	    }
 	}
@@ -43,7 +42,7 @@ public class HealthIntComponent extends Component {
      * Decreases currentHp. If it's below zero, it will call a death event.
      */
     public void damage(final int dmg) {
-    	if (object.getType().equals(Type.PLAYER) ) {
+    	if (super.getObject().getType().equals(Type.PLAYER) ) {
     		if (!this.isImmortal) {
                 this.currentHp -= dmg;
             	this.setImmortality();

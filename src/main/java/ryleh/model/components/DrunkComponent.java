@@ -11,7 +11,7 @@ import ryleh.model.World;
 /**
  * A class that provides the Component for drunk enemy type.
  */
-public class DrunkComponent extends Component {
+public class DrunkComponent extends AbstractComponent {
 	
 	private Vector2d velocity;
 	private Point2d position;
@@ -64,13 +64,13 @@ public class DrunkComponent extends Component {
 		final Vector2d directionVector = Vector2d.fromAngle(directionAngle).mulLocal(MOVE_SPEED);
 	    this.velocity.addLocal(directionVector).getNormalized().mulLocal(deltaTime * TPF); //add time per frame value to mulLocal
 	    this.position = this.position.sum(this.velocity);
-	    object.setPosition(this.position);
+	    super.getObject().setPosition(this.position);
 	}
 	/**
 	 * Checks game world bounds or collision with a rock and if true bounces back.
 	 */
 	private void checkScreenBounds() {
-		if (object.getHitBox().isOutOfBounds(world.getBounds()) || this.isCollidingWithRock()) {
+		if (super.getObject().getHitBox().isOutOfBounds(super.getWorld().getBounds()) || this.isCollidingWithRock()) {
 				this.velocity.setX(-this.velocity.getX());
 				this.velocity.setY(-this.velocity.getY());
 	    }
@@ -80,9 +80,9 @@ public class DrunkComponent extends Component {
 	 * @return boolean value of collision check.
 	 */
 	private boolean isCollidingWithRock() {
-		final Optional<GameObject> colliding = world.getGameObjects().stream()
+		final Optional<GameObject> colliding = super.getWorld().getGameObjects().stream()
 				.filter(obj -> obj.getType().equals(Type.ROCK))
-				.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
+				.filter(obj -> obj.getHitBox().isCollidingWith(super.getObject().getHitBox()))
 	    		.findFirst();
 	    return colliding.isPresent();
 	 }

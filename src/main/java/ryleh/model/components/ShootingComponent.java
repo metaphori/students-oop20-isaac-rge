@@ -7,7 +7,7 @@ import ryleh.common.Vector2d;
 import ryleh.controller.events.BulletSpawnEvent;
 import ryleh.model.World;
 
-public class ShootingComponent extends Component {
+public class ShootingComponent extends AbstractComponent {
 
     private double attackSpeed;
     private Timer timer;
@@ -28,7 +28,7 @@ public class ShootingComponent extends Component {
      */
     public void shoot(final Vector2d velocity, final Point2d origin) {
         if (timer.isElapsed()) {
-            world.notifyWorldEvent(new BulletSpawnEvent(object, origin, velocity));
+            super.getWorld().notifyWorldEvent(new BulletSpawnEvent(super.getObject(), origin, velocity));
             this.timer.startTimer();
         }
     }
@@ -38,7 +38,8 @@ public class ShootingComponent extends Component {
      */
     public void shoot(final Vector2d velocity) {
         if (timer.isElapsed()) {
-            world.notifyWorldEvent(new BulletSpawnEvent(object, object.getHitBox().getForm().getCenter(), velocity));
+            super.getWorld().notifyWorldEvent(new BulletSpawnEvent(super.getObject(), 
+                    super.getObject().getHitBox().getForm().getCenter(), velocity));
             this.timer.startTimer();
         }
     }
@@ -64,5 +65,11 @@ public class ShootingComponent extends Component {
      */
     public boolean canShoot() {
         return this.timer.isElapsed();
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onUpdate(final double deltaTime) {
     }
 }

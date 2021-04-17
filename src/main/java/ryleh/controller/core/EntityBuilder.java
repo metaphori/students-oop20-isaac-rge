@@ -6,7 +6,7 @@ import ryleh.model.GameObject;
 import ryleh.model.GameObjectImpl;
 import ryleh.model.Type;
 import ryleh.model.WorldImpl;
-import ryleh.model.components.Component;
+import ryleh.model.components.AbstractComponent;
 import ryleh.model.physics.HitBox;
 import ryleh.view.GraphicComponent;
 
@@ -33,7 +33,7 @@ public class EntityBuilder {
         return this;
     }
 
-    public EntityBuilder with(final Component component) {
+    public EntityBuilder with(final AbstractComponent component) {
         try {
             object.addComponent(component);
         } catch (IllegalStateException e){

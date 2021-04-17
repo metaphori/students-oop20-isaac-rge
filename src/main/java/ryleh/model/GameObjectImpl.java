@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import javafx.geometry.Point2D;
 import ryleh.common.Point2d;
-import ryleh.model.components.Component;
+import ryleh.model.components.AbstractComponent;
 import ryleh.model.physics.CircleHitBox;
 import ryleh.model.physics.HitBox;
 
@@ -16,7 +16,7 @@ public class GameObjectImpl implements GameObject {
     private Point2d position;
     private World world;
     private HitBox box;
-    private List<Component> components;
+    private List<AbstractComponent> components;
     private int zIndex;
 
     public GameObjectImpl() {
@@ -47,15 +47,15 @@ public class GameObjectImpl implements GameObject {
         box.getForm().setPosition(position);
     }
     @Override
-    public List<Component> getComponents() {
+    public List<AbstractComponent> getComponents() {
         return components;
     }
     @Override
-    public Optional<? extends Component> getComponent(final Class<? extends Component> type) {
+    public Optional<? extends AbstractComponent> getComponent(final Class<? extends AbstractComponent> type) {
         return components.stream().filter(type::isInstance).findAny();
     }
     @Override
-    public void addComponent(final Component component) {
+    public void addComponent(final AbstractComponent component) {
         if (this.components.stream().anyMatch(i -> component.getClass().isInstance(i))) {
             throw new IllegalStateException();
         }

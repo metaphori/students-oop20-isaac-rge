@@ -10,7 +10,7 @@ import ryleh.model.World;
 /**
  * A class that provides the Component for lurker enemy type.
  */
-public class LurkerComponent extends Component {
+public class LurkerComponent extends AbstractComponent {
     private long adjustDirectionTimer = System.currentTimeMillis();
     private static final long ADJUST_DELAY = 250;
     private static final int MOVE_SPEED = 50;
@@ -56,13 +56,13 @@ public class LurkerComponent extends Component {
 		}
 	    this.position.setX(this.position.getX() + this.velocity.getX());
 	    this.position.setY(this.position.getY() + this.velocity.getY());
-	    object.setPosition(this.position);
+	    super.getObject().setPosition(this.position);
 	}
 	/**
 	 * Checks game world bounds or collision with a rock and if true bounces back.
 	 */
 	private void checkScreenBounds() {
-		if (object.getHitBox().isOutOfBounds(world.getBounds()) || this.isCollidingWithRock()) {
+		if (super.getObject().getHitBox().isOutOfBounds(super.getWorld().getBounds()) || this.isCollidingWithRock()) {
 			this.velocity.setX(-this.velocity.getX()); 
 			this.velocity.setY(-this.velocity.getY()); 
 	    }
@@ -81,9 +81,9 @@ public class LurkerComponent extends Component {
 	 * @return boolean value of collision check.
 	 */
 	private boolean isCollidingWithRock() {
-		final Optional<GameObject> colliding = world.getGameObjects().stream()
+		final Optional<GameObject> colliding = super.getWorld().getGameObjects().stream()
 				.filter(obj -> obj.getType().equals(Type.ROCK))
-				.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
+				.filter(obj -> obj.getHitBox().isCollidingWith(super.getObject().getHitBox()))
 	    		.findFirst();
 	    return colliding.isPresent();
 	}

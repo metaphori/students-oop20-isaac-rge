@@ -7,7 +7,7 @@ import ryleh.model.World;
 /**
  * A class that provides the Component for spinner enemy type.
  */
-public class SpinnerComponent extends Component {
+public class SpinnerComponent extends AbstractComponent {
 	private final ShootingComponent shooting;
 	private Point2d position;
 	private static final double BULLET_SPEED = 0.15;

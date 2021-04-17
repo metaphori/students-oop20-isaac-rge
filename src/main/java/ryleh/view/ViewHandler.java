@@ -74,6 +74,7 @@ public class ViewHandler {
         ((AnchorPane) root).getChildren().add(this.level);
         ((AnchorPane) root).getChildren().add(this.item);
         ((AnchorPane) root).getChildren().add(this.tutorialCommands);
+        ((AnchorPane) root).getChildren().add(this.tutorialObjective);
         scene = new Scene(root);
         this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
@@ -103,15 +104,15 @@ public class ViewHandler {
     private void setTutorial() {
     	this.tutorialCommands = new Text("List of commands:\n W -> move forward \n A -> move left \n S -> move downward \n D -> move right \n Spacebar -> shoot");
         this.tutorialCommands.setFont(this.font);
-        this.tutorialCommands.setX((Config.STANDARD_WIDTH / 16) * 3 + (75 * Config.SCALE_MODIFIER));
-        this.tutorialCommands.setY((Config.STANDARD_HEIGHT / 9) * 3);
+        this.tutorialCommands.setX((STANDARD_WIDTH / 16) * 3 + (75 * SCALE_MODIFIER));
+        this.tutorialCommands.setY((STANDARD_HEIGHT / 9) * 3);
         this.tutorialCommands.setFill(Color.WHITE);
         this.tutorialObjective = new Text("In order to win you must \nbeat level 20.\nAfter defeating all \nenemies on a level a \ndoor will open and bring \nyou to the next level.\n"
         		+ "Every 3 levels an \nitem will spawn.\n"
         		+ "If you lose all your \nlives you will lose.\nGood luck and have fun!");
         this.tutorialObjective.setFont(this.font);
-        this.tutorialObjective.setX((Config.STANDARD_WIDTH / 16) * 8 + (75 * Config.SCALE_MODIFIER));
-        this.tutorialObjective.setY((Config.STANDARD_HEIGHT / 9) * 2);
+        this.tutorialObjective.setX((STANDARD_WIDTH / 16) * 8 + (75 * SCALE_MODIFIER));
+        this.tutorialObjective.setY((STANDARD_HEIGHT / 9) * 2);
         this.tutorialObjective.setFill(Color.WHITE);
     }
     /**

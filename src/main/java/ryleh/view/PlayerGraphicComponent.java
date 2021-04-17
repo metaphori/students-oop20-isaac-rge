@@ -21,7 +21,13 @@ public class PlayerGraphicComponent implements GraphicComponent {
 	private Direction lastDir;
 	private FadeTransition playerFade;
 	private Boolean invincible;
+	/**
+	 * Duration of each frame of the animation.
+	 */
 	private static final int ANIM_DURATION = 90;
+	/**
+	 * Duration of the fade animation.
+	 */
 	private static final int FADE_DURATION = 200;
 	
 	private AnimationLoop currentLoop;
@@ -133,10 +139,6 @@ public class PlayerGraphicComponent implements GraphicComponent {
 			break;
 		}
 	}
-	
-	
-	
-	
 	
 	/**
 	 * {@inheritDoc}

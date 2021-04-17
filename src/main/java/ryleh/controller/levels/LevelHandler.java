@@ -21,7 +21,7 @@ import ryleh.model.World;
 public class LevelHandler {
 
     /**
-     * This values represent the minimum distances from player's spawn point of each type of entity.
+     * These values represent the minimum distances from player's spawn point of each type of entity.
      * Level Handler uses this values when generating level entities. 
      */
     /** Drunk's spawn point minimum distance from player spawn point.

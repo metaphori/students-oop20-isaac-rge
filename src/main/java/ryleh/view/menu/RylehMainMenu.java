@@ -9,14 +9,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import ryleh.Ryleh;
-import ryleh.common.Config;
 import ryleh.core.GameEngine;
+import ryleh.view.ViewHandler;
 /**
  * This class represents the game's main menu. It uses MenuFactory to instantiate graphic parts inside the constructor.
  * To render it, call "show" method. 
  */
 public class RylehMainMenu {
-
     private final Stage primaryStage;
     private final MenuFactory factory;
 
@@ -49,7 +48,7 @@ public class RylehMainMenu {
         box.setTranslateX(factory.getScaledSize());
         box.getChildren().addAll(separator, factory.getDescription());
         pane.setLeft(box);
-        this.primaryStage.setScene(new Scene(pane, Config.STANDARD_WIDTH, Config.STANDARD_HEIGHT));
+        this.primaryStage.setScene(new Scene(pane, ViewHandler.STANDARD_WIDTH, ViewHandler.STANDARD_HEIGHT));
         this.primaryStage.setResizable(false);
         this.primaryStage.setTitle("Ryleh's Call");
     }

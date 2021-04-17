@@ -19,7 +19,7 @@ public class BulletComponent extends Component {
 	public BulletComponent(final World world, final Point2d origin, final Vector2d direction) {
 		super(world);
 		this.position = origin;
-		this.velocity = direction.mulLocal(speed);
+		this.velocity = direction.multiply(speed);
 	   // this.velocity = new V2d(0, 0);
 	}
 	@Override

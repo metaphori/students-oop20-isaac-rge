@@ -20,10 +20,10 @@ public class Rectangle2d implements Shape2d {
         super();
         this.height = height;
         this.width = width;
-        this.setUpperLeft(new Point2d(upperLeftX, upperLeftY));
+        this.upperLeft = new Point2d(upperLeftX, upperLeftY);
         this.lowerLeft = new Point2d(upperLeftX, upperLeftY + height);
         this.upperRight = new Point2d(upperLeftX + width, upperLeftY);
-        this.setLowerRight(getUpperLeft().sum(new Vector2d(this.getWidth(), this.getHeight())));
+        this.lowerRight = getUpperLeft().sum(new Vector2d(width, height));
 
     }
     /**
@@ -35,9 +35,9 @@ public class Rectangle2d implements Shape2d {
      */
     public Rectangle2d(final Point2d upperLeft, final Point2d lowerLeft, final Point2d lowerRight, final Point2d upperRight) {
         super();
-        this.setUpperLeft(upperLeft);
+        this.upperLeft = upperLeft;
         this.lowerLeft = lowerLeft;
-        this.setLowerRight(lowerRight);
+        this.lowerRight = lowerRight;
         this.upperRight = upperRight;
         this.width = (int) new Vector2d(upperLeft, upperRight).module();
         this.height = (int) new Vector2d(upperLeft, lowerLeft).module();
@@ -96,21 +96,45 @@ public class Rectangle2d implements Shape2d {
         return new Point2d((this.getUpperLeft().getX() + this.getLowerRight().getX()) / 2, 
                 this.getUpperLeft().getY() + this.getLowerRight().getY() / 2);
     }
+    /**
+     * Gets upper left vertex of the rectangle.
+     * @return Upper left vertex.
+     */
     public Point2d getUpperLeft() {
         return upperLeft;
     }
+    /**
+     * Sets upper left vertex of the rectangle. 
+     * @param upperLeft Vertex to be set.
+     */
     public void setUpperLeft(final Point2d upperLeft) {
         this.upperLeft = upperLeft;
     }
+    /**
+     * Gets lower right vertex of the rectangle.
+     * @return Lower right vertex.
+     */
     public Point2d getLowerRight() {
         return lowerRight;
     }
-    public void setLowerRight(Point2d lowerRight) {
+    /**
+     * Sets lower right vertex of the rectangle. 
+     * @param lowerRight Vertex to be set.
+     */
+    public void setLowerRight(final Point2d lowerRight) {
         this.lowerRight = lowerRight;
     }
+    /**
+     * Gets Height of the rectangle.
+     * @return Height of the rectangle.
+     */
     public int getHeight() {
         return height;
     }
+    /**
+     * Gets Width of the rectangle.
+     * @return Width of the rectangle.
+     */
     public int getWidth() {
         return width;
     }

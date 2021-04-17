@@ -30,7 +30,7 @@ public class ViewHandler {
 	 * Duration of fading transition for item effect text.
 	 */
     private static final double FT_DURATION = 4000;
-	private Stage stage;
+    private Stage stage;
     private List<GraphicComponent> graphicComponents;
     private Scene scene;
     private Parent root;

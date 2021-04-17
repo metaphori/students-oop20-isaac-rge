@@ -47,7 +47,15 @@ public class MenuFactoryImpl implements MenuFactory {
         final VBox container = new VBox();
         final Text question = new Text(text);
         question.setFont(new Font(scaledSize));
-        confirm.getChildren().add(createCustomButton("YES", "", () -> Platform.exit()));
+        confirm.getChildren().add(createCustomButton("YES", "", () -> {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Platform.exit();
+                    System.exit(0);
+                }
+            });
+        }));
         confirm.getChildren().add(createCustomButton("NO", "", () -> window.close()));
         confirm.setAlignment(Pos.CENTER);
         container.getChildren().add(question);

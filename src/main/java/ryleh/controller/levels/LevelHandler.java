@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import ryleh.common.P2d;
+import ryleh.common.Point2d;
 import ryleh.common.Pair;
 import ryleh.common.Rectangle2d;
 import ryleh.controller.Entity;
@@ -48,7 +48,7 @@ public class LevelHandler {
     private int nRooms;
     private final LevelDesigner designer;
     private final GameState gameState;
-    private final P2d boundsCoord;
+    private final Point2d boundsCoord;
     private final double boundsWidth;
     private final double boundsHeight;
     private final Pair<Integer, Integer> playerSpawn;
@@ -59,7 +59,7 @@ public class LevelHandler {
 	    final World world = gameState.getWorld();
 	    this.designer = new LevelDesigner();
 	    spawnPoints = new HashMap<>();
-	    boundsCoord = ((Rectangle2d) world.getBounds()).upperLeft;
+	    boundsCoord = ((Rectangle2d) world.getBounds()).getUpperLeft();
 	    boundsWidth = world.getWidthBound();
 	    boundsHeight = world.getHeightBound();
 	    playerSpawn = new Pair<>(COLUMNS / 2, ROWS - 1);
@@ -149,9 +149,9 @@ public class LevelHandler {
 	 * @param position
 	 * @return P2d representing position converted into world's coordinates
 	 */
-	public P2d getPosition(final Pair<Integer, Integer> position) {
-		return new P2d(((boundsWidth / COLUMNS)) * position.getX() + boundsCoord.x + (boundsWidth / (COLUMNS * 2)),
-				((boundsHeight / ROWS)) * position.getY() + boundsCoord.y + (boundsHeight / (ROWS * 2)));
+	public Point2d getPosition(final Pair<Integer, Integer> position) {
+		return new Point2d(((boundsWidth / COLUMNS)) * position.getX() + boundsCoord.getX() + (boundsWidth / (COLUMNS * 2)),
+				((boundsHeight / ROWS)) * position.getY() + boundsCoord.getY() + (boundsHeight / (ROWS * 2)));
 	}
 	/**
 	 * @return a random position inside the map of SpawnPoints

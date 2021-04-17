@@ -1,15 +1,15 @@
 package ryleh.controller.events;
 
-import ryleh.common.P2d;
-import ryleh.common.V2d;
+import ryleh.common.Point2d;
+import ryleh.common.Vector2d;
 import ryleh.core.GameState;
 import ryleh.core.factories.BasicFactory;
 import ryleh.model.GameObject;
 
 public class BulletSpawnEvent implements Event {
 	
-	private P2d position;
-	private V2d velocity;
+	private Point2d position;
+	private Vector2d velocity;
 	private GameObject target;
 	/**
 	 * Constructor for the spawn of a bullet.
@@ -17,7 +17,7 @@ public class BulletSpawnEvent implements Event {
 	 * @param position Current position of the object
 	 * @param velocity Velocity of the bullet
 	 */
-	public BulletSpawnEvent(final GameObject spawner, final P2d position, final V2d velocity) {
+	public BulletSpawnEvent(final GameObject spawner, final Point2d position, final Vector2d velocity) {
 		this.target = spawner;
 		this.position = position;
 		this.velocity = velocity;

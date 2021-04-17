@@ -1,7 +1,7 @@
 package ryleh.model.components;
 
-import ryleh.common.P2d;
-import ryleh.common.V2d;
+import ryleh.common.Point2d;
+import ryleh.common.Vector2d;
 import ryleh.model.GameObject;
 import ryleh.model.World;
 /**
@@ -9,7 +9,7 @@ import ryleh.model.World;
  */
 public class SpinnerComponent extends Component {
 	private final ShootingComponent shooting;
-	private P2d position;
+	private Point2d position;
 	private static final double BULLET_SPEED = 0.15;
 	private static final double ANGLE_INCREASE =  Math.PI / 40;
 	private double angle;
@@ -20,7 +20,7 @@ public class SpinnerComponent extends Component {
 	public SpinnerComponent(final World world) {
 		super(world);
 		this.shooting = new ShootingComponent(world, 2);
-		this.position = new P2d(0, 0);
+		this.position = new Point2d(0, 0);
 		this.angle = 0;
 	}
 	/**
@@ -44,11 +44,11 @@ public class SpinnerComponent extends Component {
 	 * A method that calls shoot method from ShootingComponent towards a direction given internal rotation angle value if the shooter is able to shoot.
 	 */
 	private void shoot() {
-		final V2d direction = new V2d(this.position.x * Math.cos(this.angle) - position.y * Math.sin(this.angle),
-				position.x * Math.sin(this.angle) + position.y * Math.cos(this.angle))
-				.getNormalized()
+	    final Vector2d direction = new Vector2d(this.position.getX() * Math.cos(this.angle) - position.getY() * Math.sin(this.angle),
+	            position.getX() * Math.sin(this.angle) + position.getY() * Math.cos(this.angle))
+	            .getNormalized()
 	            .mulLocal(BULLET_SPEED);
-		shooting.shoot(direction);
+	    shooting.shoot(direction);
 	}
 	/**
 	 * Method that increases rotation angle value and resets it if angle > 360°.

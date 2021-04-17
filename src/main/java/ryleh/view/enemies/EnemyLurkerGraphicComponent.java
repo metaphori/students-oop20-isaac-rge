@@ -10,8 +10,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import ryleh.common.GameMath;
-import ryleh.common.P2d;
-import ryleh.common.V2d;
+import ryleh.common.Point2d;
+import ryleh.common.Vector2d;
 import ryleh.model.GameObject;
 import ryleh.view.GraphicComponent;
 import ryleh.view.PlayerGraphicComponent;
@@ -65,10 +65,10 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent {
 		rectangle.setX(position.getX() - rectangle.getWidth() / 2);
 		rectangle.setY(position.getY() - rectangle.getHeight() / 2);
 		if (System.currentTimeMillis() - adjustDirectionTimer >= ADJUST_DELAY) {
-			V2d directionToPlayer = new V2d(new P2d(player.getNode().getX(), player.getNode().getY()), new P2d(position.getX() - rectangle.getWidth() / 2, position.getY() - rectangle.getHeight() / 2))
+			Vector2d directionToPlayer = new Vector2d(new Point2d(player.getNode().getX(), player.getNode().getY()), new Point2d(position.getX() - rectangle.getWidth() / 2, position.getY() - rectangle.getHeight() / 2))
 					.getNormalized()
-					.mul(MOVE_SPEED);
-			rectangle.setRotate(GameMath.toDegrees((Math.atan(directionToPlayer.y / directionToPlayer.x))));
+					.multiply(MOVE_SPEED);
+			rectangle.setRotate(GameMath.toDegrees(Math.atan(directionToPlayer.getY() / directionToPlayer.getX())));
     		adjustDirectionTimer = System.currentTimeMillis();
     	}
 	}

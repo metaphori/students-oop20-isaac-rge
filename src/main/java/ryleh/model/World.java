@@ -2,7 +2,7 @@ package ryleh.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import ryleh.common.P2d;
+import ryleh.common.Point2d;
 import ryleh.common.Rectangle2d;
 import ryleh.common.Shape2d;
 import ryleh.controller.events.Event;
@@ -26,7 +26,7 @@ public class World {
         this.eventListener = eventListener;
         this.gameObjects = new ArrayList<>();
         bounds = new Rectangle2d(BOUNDS_WIDTH, BOUNDS_HEIGHT, BOUNDS_UPPER_LEFT_X, BOUNDS_UPPER_LEFT_Y);
-        GameEngine.runDebugger(() -> System.out.println(bounds.upperLeft + " " + bounds.lowerRight));
+        GameEngine.runDebugger(() -> System.out.println(bounds.getUpperLeft() + " " + bounds.getLowerRight()));
     }
 
     public List<GameObject> getGameObjects() {
@@ -42,7 +42,7 @@ public class World {
         return type + "RY" + this.rylehId;
     }
 
-    public boolean isOutOfBounds(final P2d position) {
+    public boolean isOutOfBounds(final Point2d position) {
         return !bounds.contains(position);
     }
 
@@ -51,10 +51,10 @@ public class World {
         object.onAdded(this);
     }
     public double getWidthBound() {
-    	return bounds.width;
+    	return bounds.getWidth();
     }
     public double getHeightBound() {
-    	return bounds.height;
+    	return bounds.getHeight();
     }
 
     public Shape2d getBounds() {

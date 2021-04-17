@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javafx.geometry.Point2D;
-import ryleh.common.P2d;
+import ryleh.common.Point2d;
 import ryleh.model.components.Component;
 import ryleh.model.physics.HitBox;
 
@@ -20,11 +20,11 @@ public interface GameObject {
     /*
      * 
      */
-    P2d getPosition();
+    Point2d getPosition();
     /*
      * 
      */
-    void setPosition(P2d position);
+    void setPosition(Point2d position);
 
     /*
      * 

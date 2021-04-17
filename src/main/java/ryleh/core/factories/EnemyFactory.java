@@ -4,8 +4,8 @@ import javafx.geometry.Point2D;
 import ryleh.common.Circle2d;
 import ryleh.common.Config;
 import ryleh.common.GameMath;
-import ryleh.common.P2d;
-import ryleh.common.V2d;
+import ryleh.common.Point2d;
+import ryleh.common.Vector2d;
 import ryleh.controller.Entity;
 import ryleh.core.GameEngine;
 import ryleh.core.GameState;
@@ -41,7 +41,7 @@ public class EnemyFactory {
             }
             return instance;
     }
-     public Entity createEnemyShooter(final GameState state, final P2d position) {
+     public Entity createEnemyShooter(final GameState state, final Point2d position) {
          Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_SHOOTER)
                  .position(position)
@@ -56,7 +56,7 @@ public class EnemyFactory {
          state.getView().addGraphicComponent(e.getView());
          return e;
      }
-     public Entity createEnemySpinner(final GameState state, final P2d position) {
+     public Entity createEnemySpinner(final GameState state, final Point2d position) {
          Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_SPINNER)
                  .position(position)
@@ -71,7 +71,7 @@ public class EnemyFactory {
          state.getView().addGraphicComponent(e.getView());
          return e;
      }
-     public Entity createEnemyDrunk(final GameState state, final P2d position) {
+     public Entity createEnemyDrunk(final GameState state, final Point2d position) {
          Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_DRUNK)
                  .position(position)
@@ -86,7 +86,7 @@ public class EnemyFactory {
          state.getView().addGraphicComponent(e.getView());
          return e;
      }
-     public Entity createEnemyLurker(final GameState state, final P2d position) {
+     public Entity createEnemyLurker(final GameState state, final Point2d position) {
          Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_LURKER)
                  .position(position)
@@ -101,7 +101,7 @@ public class EnemyFactory {
          state.getView().addGraphicComponent(e.getView());
          return e;
      }
-     public Entity createEnemyDrunkSpinner(final GameState state, final P2d position) {
+     public Entity createEnemyDrunkSpinner(final GameState state, final Point2d position) {
          Entity e = GameEngine.entityBuilder()
                  .type(Type.ENEMY_DRUNKSPINNER)
                  .position(position)

@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Optional;
 import javafx.geometry.Point2D;
 import javafx.stage.Stage;
-import ryleh.common.Config;
 import ryleh.common.P2d;
 import ryleh.controller.Entity;
 import ryleh.controller.InputController;
@@ -21,7 +20,6 @@ import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
 import ryleh.view.ViewHandler;
-import ryleh.view.media.AudioPlayer;
 
 public class GameState {
     private final ViewHandler view;
@@ -96,7 +94,7 @@ public class GameState {
             object.getView().render(toPoint2D(new P2d(
                     object.getGameObject().getPosition().x, object.getGameObject().getPosition().y)), dt);
         }
-        eventHandler.checkEvents();      	
+        eventHandler.checkEvents();
     }
 
     public boolean isGameOver() {
@@ -112,7 +110,7 @@ public class GameState {
     }
 	
     private Point2D toPoint2D (final P2d point) {
-        return new Point2D(point.x * Config.SCALE_MODIFIER, point.y * Config.SCALE_MODIFIER);
+        return new Point2D(point.x * ViewHandler.SCALE_MODIFIER, point.y * ViewHandler.SCALE_MODIFIER);
     }
 	
     public LevelHandler getLevelHandler() {

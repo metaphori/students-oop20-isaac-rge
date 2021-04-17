@@ -1,34 +1,25 @@
 package ryleh.core.factories;
 
-import javafx.geometry.Point2D;
 import ryleh.common.Circle2d;
-import ryleh.common.Config;
 import ryleh.common.GameMath;
 import ryleh.common.P2d;
-import ryleh.common.V2d;
 import ryleh.controller.Entity;
 import ryleh.core.GameEngine;
 import ryleh.core.GameState;
 import ryleh.model.Type;
-import ryleh.model.World;
-import ryleh.model.components.BulletComponent;
 import ryleh.model.components.CollisionComponent;
 import ryleh.model.components.DrunkComponent;
 import ryleh.model.components.HealthIntComponent;
 import ryleh.model.components.LurkerComponent;
-import ryleh.model.components.PhysicsComponent;
 import ryleh.view.PlayerGraphicComponent;
 import ryleh.model.physics.CircleHitBox;
 import ryleh.model.components.ShooterComponent;
 import ryleh.model.components.SpinnerComponent;
-import ryleh.view.ViewHandler;
 import ryleh.view.enemies.EnemyDrunkGraphicComponent;
 import ryleh.view.enemies.EnemyDrunkSpinnerGraphicComponent;
 import ryleh.view.enemies.EnemyLurkerGraphicComponent;
 import ryleh.view.enemies.EnemyShooterGraphicComponent;
 import ryleh.view.enemies.EnemySpinnerGraphicComponent;
-import ryleh.view.other.BulletGraphicComponent;
-import ryleh.view.other.RockGraphicComponent;
 
 public class EnemyFactory {
      private static EnemyFactory instance;

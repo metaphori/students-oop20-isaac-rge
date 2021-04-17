@@ -15,10 +15,13 @@ import ryleh.view.Textures;
 /**
  * A class that provides the GraphicComponent of the view related to the Item Entity.
  */
-public class ItemGraphicComponent implements GraphicComponent{
+public class ItemGraphicComponent implements GraphicComponent {
 
 	private Rectangle rectangle;
 	private boolean animPlayed;
+	/**
+	 * The duration of each frame of the animation.
+	 */
 	private static final int ANIM_DURATION = 200;
 	private AnimationLoop animItem;
 	
@@ -27,9 +30,7 @@ public class ItemGraphicComponent implements GraphicComponent{
 	 * Creates a new Instance of ItemGraphicComponent.
 	 */
 	public ItemGraphicComponent() {
-		this.rectangle = new Rectangle(Textures.ITEM1.getWidth(), Textures.ITEM1.getHeight());
-		this.rectangle.setFill(Textures.ITEM1.getImagePattern());
-		this.animPlayed = false;
+		this(new Point2D(0, 0));
 	}
 	
 	/**

@@ -1,7 +1,6 @@
 package ryleh.view.other;
 
 import java.util.List;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
@@ -19,6 +18,9 @@ import ryleh.view.Textures;
 public class FireGraphicComponent implements GraphicComponent {
 
 	private Rectangle rectangle;
+	/**
+	 * The duration of each frame of the Animation.
+	 */
 	private static final int ANIM_DURATION = 400;
 	private AnimationLoop animFire; 
 	

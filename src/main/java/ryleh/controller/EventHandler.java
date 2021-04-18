@@ -2,18 +2,12 @@ package ryleh.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import ryleh.controller.EntityImpl;
 import ryleh.controller.core.GameState;
-import ryleh.controller.core.factories.BasicFactory;
 import ryleh.controller.events.Event;
 import ryleh.controller.events.EventListener;
-import ryleh.model.GameObject;
-import ryleh.model.Type;
 import ryleh.model.components.HealthIntComponent;
 import ryleh.view.PlayerGraphicComponent;
-import ryleh.view.other.ItemGraphicComponent;
 
 public class EventHandler implements EventListener {
 
@@ -40,19 +34,22 @@ public class EventHandler implements EventListener {
         this.updateUI();
         this.checkPlayerState();
     }
+
     /**
-     * Check the player state so that the graphic component can apply effects in special cases.
+     * Check the player state so that the graphic component can apply effects in
+     * special cases.
      */
     private void checkPlayerState() {
         final PlayerGraphicComponent playerGraphic = (PlayerGraphicComponent) this.gameState.getPlayer().getView();
         playerGraphic.setInvincible(comp.isImmortal());
     }
+
     /**
      * Update game UI after event handling.
      */
     private void updateUI() {
-        comp = (HealthIntComponent) this.gameState.getPlayer().getGameObject()
-                .getComponent(HealthIntComponent.class).get();
+        comp = (HealthIntComponent) this.gameState.getPlayer().getGameObject().getComponent(HealthIntComponent.class)
+                .get();
         gameState.getView().getLives().setText("Lives: " + comp.getCurrentHp());
         this.gameState.getView().getLevel().setText("Level: " + this.gameState.getLevelHandler().getnRooms());
     }

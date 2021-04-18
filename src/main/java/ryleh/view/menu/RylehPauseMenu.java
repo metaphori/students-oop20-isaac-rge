@@ -80,7 +80,7 @@ public class RylehPauseMenu {
                    resume.run();
             }
         });
-        pauseScene = new Scene(this.pane, ViewHandlerImpl.STANDARD_WIDTH, ViewHandlerImpl.STANDARD_HEIGHT);
+        pauseScene = new Scene(this.pane, ViewHandlerImpl.getStandardWidth(), ViewHandlerImpl.getStandardHeight());
     }
 
     /**

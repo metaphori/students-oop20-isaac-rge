@@ -9,13 +9,15 @@ import ryleh.model.Type;
 
 public class RemoveEntityEvent implements Event {
 
-    private GameObject target;
+    private final GameObject target;
+
     public RemoveEntityEvent(final GameObject target) {
         this.target = target;
     }
+
     /**
-     * {@inheritDoc}
-     * Removes the target and decreases the counter of enemies if possible
+     * {@inheritDoc} Removes the target and decreases the counter of enemies if
+     * possible
      */
     @Override
     public void handle(final GameState state) {
@@ -24,13 +26,16 @@ public class RemoveEntityEvent implements Event {
             state.getLevelHandler().decreaseEnemies();
         }
     }
+
     /**
      * Removes the target from the list of entities.
+     * 
      * @param target Game object to be removed
-     * @param state The actual state of the game
+     * @param state  The actual state of the game
      */
     private void removeEntity(final GameObject target, final GameState state) {
-        final Optional<Entity> removable = state.getEntities().stream().filter(e -> e.getGameObject().equals(target)).findAny();
+        final Optional<Entity> removable = state.getEntities().stream().filter(e -> e.getGameObject().equals(target))
+                .findAny();
         if (removable.isPresent()) {
             state.removeEntity(removable.get());
         }
@@ -38,6 +43,7 @@ public class RemoveEntityEvent implements Event {
 
     /**
      * Check if the target is an enemy or not.
+     * 
      * @param type
      * @return
      */

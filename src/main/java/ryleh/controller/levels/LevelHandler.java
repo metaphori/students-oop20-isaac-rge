@@ -10,7 +10,7 @@ public interface LevelHandler {
 
     /**
      * 
-     * @return The number of rooms currently visited. 
+     * @return The number of rooms currently visited.
      */
     int getRoomsCount();
 
@@ -20,7 +20,9 @@ public interface LevelHandler {
     void generateNewLevel();
 
     /**
-     * Converts the coordinates taken from the grid of spawn points into world coordinates. 
+     * Converts the coordinates taken from the grid of spawn points into world
+     * coordinates.
+     * 
      * @param spawnPoint
      * @return P2d representing position converted into world's coordinates
      */
@@ -32,7 +34,7 @@ public interface LevelHandler {
     Pair<Integer, Integer> getPlayerSpawn();
 
     /**
-     * Decreases enemies. If nEnemies equals 0, then we are at the end of the level. 
+     * Decreases enemies. If nEnemies equals 0, then we are at the end of the level.
      */
     void decreaseEnemies();
 
@@ -44,6 +46,7 @@ public interface LevelHandler {
 
     /**
      * Sets current level.
+     * 
      * @param level Level to be set.
      */
     void setLevel(int level);

@@ -7,27 +7,27 @@ import ryleh.model.Type;
 import ryleh.model.components.HealthIntComponent;
 
 public class EnemyCollisionEvent implements Event {
-	
-	private GameObject target;
-	/**
-	 * Constructor for a collision event.
-	 * @param target The target of the event,
-	 */
-	public EnemyCollisionEvent(final GameObject target) {
-		this.target = target;
-	}
-	/**
-	 * {@inheritDoc}
-	 * Decreases actual target health (if target is "PLAYER", health will be decreased only in release mode).
-	 */
-	@Override
-	public void handle(final GameState state) {
-		if (this.target.getComponent(HealthIntComponent.class).isPresent() 
-		    && !(this.target.getType().equals(Type.PLAYER) && GameEngine.isDeveloper())) {
-		        ((HealthIntComponent) this.target.getComponent(HealthIntComponent.class).get()).damage(1);
-		}
-	}
-	
-	
 
+    private final GameObject target;
+
+    /**
+     * Constructor for a collision event.
+     * 
+     * @param target The target of the event,
+     */
+    public EnemyCollisionEvent(final GameObject target) {
+        this.target = target;
+    }
+
+    /**
+     * {@inheritDoc} Decreases actual target health (if target is "PLAYER", health
+     * will be decreased only in release mode).
+     */
+    @Override
+    public void handle(final GameState state) {
+        if (this.target.getComponent(HealthIntComponent.class).isPresent()
+                && !(this.target.getType().equals(Type.PLAYER) && GameEngine.isDeveloper())) {
+            ((HealthIntComponent) this.target.getComponent(HealthIntComponent.class).get()).damage(1);
+        }
+    }
 }

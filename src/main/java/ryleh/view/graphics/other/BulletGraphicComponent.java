@@ -75,7 +75,7 @@ public class BulletGraphicComponent implements GraphicComponent {
      */
     @Override
     public void onAdded(final Scene scene) {
-        Parent root = scene.getRoot();
+        final Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
     }
 

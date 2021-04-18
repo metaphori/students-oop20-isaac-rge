@@ -33,8 +33,6 @@ public class GameUI {
     private Text lives;
     private Text level;
     private Text item;
-    private Text tutorialCommands;
-    private Text tutorialObjective;
     private final List<Text> tutorialUi;
     private final Font font;
 
@@ -67,24 +65,25 @@ public class GameUI {
      * A method to set the tutorial text that will appear on the first level.
      */
     private void setTutorial() {
-        this.tutorialCommands = new Text(
+        final Text tutorialObjective;
+        final Text tutorialCommands = new Text(
                 "List of commands:\n W -> move forward \n A -> move left \n S -> move downward \n D -> move right \n Spacebar -> shoot");
-        this.tutorialCommands.setFont(this.font);
-        this.tutorialCommands.setX((ViewHandlerImpl.getStandardWidth() / SCREEN_WIDTH_RATIO) * 2
+        tutorialCommands.setFont(this.font);
+        tutorialCommands.setX((ViewHandlerImpl.getStandardWidth() / SCREEN_WIDTH_RATIO) * 2
                 + PIXEL_CORRECTION * ViewHandlerImpl.getScaleModifier());
-        this.tutorialCommands.setY((ViewHandlerImpl.getStandardHeight() / SCREEN_HEIGHT_RATIO) * 3);
-        this.tutorialCommands.setFill(Color.WHITE);
-        this.tutorialObjective = new Text(
+        tutorialCommands.setY((ViewHandlerImpl.getStandardHeight() / SCREEN_HEIGHT_RATIO) * 3);
+        tutorialCommands.setFill(Color.WHITE);
+        tutorialObjective = new Text(
                 "In order to win you must \nbeat level 30.\nAfter defeating all \nenemies on a level a \ndoor will open and bring \nyou to the next level.\n"
                         + "Every 3 levels an \nitem will spawn.\n"
                         + "If you lose all your \nlives you will lose.\nGood luck and have fun!");
-        this.tutorialObjective.setFont(this.font);
-        this.tutorialObjective.setX((ViewHandlerImpl.getStandardWidth() / SCREEN_WIDTH_RATIO) * 8
+        tutorialObjective.setFont(this.font);
+        tutorialObjective.setX((ViewHandlerImpl.getStandardWidth() / SCREEN_WIDTH_RATIO) * 8
                 + PIXEL_CORRECTION * ViewHandlerImpl.getScaleModifier());
-        this.tutorialObjective.setY((ViewHandlerImpl.getStandardHeight() / SCREEN_HEIGHT_RATIO) * 3);
-        this.tutorialObjective.setFill(Color.WHITE);
-        this.tutorialUi.add(this.tutorialCommands);
-        this.tutorialUi.add(this.tutorialObjective);
+        tutorialObjective.setY((ViewHandlerImpl.getStandardHeight() / SCREEN_HEIGHT_RATIO) * 3);
+        tutorialObjective.setFill(Color.WHITE);
+        tutorialUi.add(tutorialCommands);
+        tutorialUi.add(tutorialObjective);
     }
 
     /**

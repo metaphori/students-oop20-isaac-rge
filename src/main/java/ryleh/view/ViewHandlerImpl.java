@@ -31,15 +31,33 @@ public class ViewHandlerImpl implements ViewHandler {
     /**
     *The width of the screen. 
     */
-    public static final int STANDARD_WIDTH = (int) Screen.getPrimary().getBounds().getWidth();
+    public static int STANDARD_WIDTH = (int) Screen.getPrimary().getBounds().getWidth();
 	/**
 	 * the height of the screen.
 	 */
-    public static final int STANDARD_HEIGHT = (int) Screen.getPrimary().getBounds().getHeight();
+    public static int STANDARD_HEIGHT = (int) Screen.getPrimary().getBounds().getHeight();
     /**
      * The modifier to set the correct proportion of the view.
      */
-    public static final double SCALE_MODIFIER = (double) (ViewHandlerImpl.STANDARD_WIDTH / 1920.0);
+    public static double SCALE_MODIFIER = (double) (ViewHandlerImpl.STANDARD_WIDTH / 1920.0);
+    public static int getSTANDARD_WIDTH() {
+        return STANDARD_WIDTH;
+    }
+    public static void setSTANDARD_WIDTH(int sTANDARD_WIDTH) {
+        STANDARD_WIDTH = sTANDARD_WIDTH;
+    }
+    public static int getSTANDARD_HEIGHT() {
+        return STANDARD_HEIGHT;
+    }
+    public static void setSTANDARD_HEIGHT(int sTANDARD_HEIGHT) {
+        STANDARD_HEIGHT = sTANDARD_HEIGHT;
+    }
+    public static double getSCALE_MODIFIER() {
+        return SCALE_MODIFIER;
+    }
+    public static void setSCALE_MODIFIER(double sCALE_MODIFIER) {
+        SCALE_MODIFIER = sCALE_MODIFIER;
+    }
     private Stage stage;
     private List<GraphicComponent> graphicComponents;
     private Scene scene;

@@ -17,6 +17,7 @@ import ryleh.controller.InputControllerImpl;
 import ryleh.controller.core.factories.BasicFactory;
 import ryleh.controller.events.EventHandler;
 import ryleh.controller.levels.LevelHandler;
+import ryleh.controller.levels.LevelHandlerImpl;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.WorldImpl;
@@ -40,7 +41,7 @@ public class GameStateImpl implements GameState {
         this.eventHandler = new EventHandler(this);
         world = new WorldImpl(eventHandler);
         entities = new ArrayList<>();
-        this.levelHandler = new LevelHandler(this);
+        this.levelHandler = new LevelHandlerImpl(this);
         this.player = BasicFactory.getInstance().createPlayer(this, levelHandler.getPosition(levelHandler.getPlayerSpawn()));
         input = new InputControllerImpl(this);
         //AudioPlayer.playBackGround();
@@ -85,7 +86,7 @@ public class GameStateImpl implements GameState {
 		}
 	});
 	input.initInput();
-	GameEngine.runDebugger(() -> levelHandler.printSpawnPoints());
+	GameEngine.runDebugger(() -> ((LevelHandlerImpl) levelHandler).printSpawnPoints());
 
     }
     /**

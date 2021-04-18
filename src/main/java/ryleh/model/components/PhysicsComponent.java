@@ -7,7 +7,7 @@ import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.physics.Direction;
 
-public class PhysicsComponent extends Component {
+public class PhysicsComponent extends AbstractComponent {
     private Vector2d velocity;
     private Point2d position;
     private int speed;
@@ -48,7 +48,7 @@ public class PhysicsComponent extends Component {
     protected void move (final double dt) {
         lastPos = new Point2d(this.position.getX(), this.position.getY());
         this.position = this.position.sum(velocity.multiply(0.001 * dt));
-        object.setPosition(this.position);
+        super.getObject().setPosition(this.position);
     }
 
     protected void resetPos() {
@@ -56,12 +56,14 @@ public class PhysicsComponent extends Component {
         this.setVelocityY(0);
         this.setVelocityX(0);
         this.direction = Direction.IDLE;
-        object.setPosition(this.position);
+        super.getObject().setPosition(this.position);
     }
 
     protected boolean canMove() {
-        return !(object.getHitBox().isOutOfBounds(world.getBounds()) || world.getGameObjects().stream()
-                .filter(i -> i.getType().equals(Type.ROCK)).anyMatch(r -> object.getHitBox().isCollidingWith(r.getHitBox())));
+        return !(super.getObject().getHitBox().isOutOfBounds(super.getWorld().getBounds()) 
+                || super.getWorld().getGameObjects().stream()
+                .filter(i -> i.getType().equals(Type.ROCK))
+                .anyMatch(r -> super.getObject().getHitBox().isCollidingWith(r.getHitBox())));
     }
 
     public void setVelocityX(final int sign) {
@@ -98,6 +100,6 @@ public class PhysicsComponent extends Component {
 	public void setPosition(Point2d position) {
 		this.lastPos = position;
 		this.position = position;
-		object.setPosition(this.position);
+		super.getObject().setPosition(this.position);
 	}
 }

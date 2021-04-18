@@ -9,7 +9,7 @@ import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
 
-public class DoorComponent extends Component{
+public class DoorComponent extends AbstractComponent{
 
 	private boolean isCollidable;
 	private Timer timer;
@@ -29,15 +29,14 @@ public class DoorComponent extends Component{
 
 	@Override
 	public void onUpdate(final double deltaTime) {
-		super.onUpdate(deltaTime);
 		if (timer.isElapsed() || isCollidable) {
-			Optional<GameObject> colliding = world.getGameObjects().stream()
+			Optional<GameObject> colliding = super.getWorld().getGameObjects().stream()
 				.filter(obj -> obj.getType().equals(Type.PLAYER))
-				.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
+				.filter(obj -> obj.getHitBox().isCollidingWith(super.getObject().getHitBox()))
 				.findFirst();
 			this.isCollidable = true;
 			if (colliding.isPresent()) {
-				world.notifyWorldEvent(new NewLevelEvent());	
+			    super.getWorld().notifyWorldEvent(new NewLevelEvent());	
 			}
 		}
 	}

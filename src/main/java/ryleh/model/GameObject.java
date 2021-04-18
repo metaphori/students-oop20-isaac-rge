@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import javafx.geometry.Point2D;
 import ryleh.common.Point2d;
-import ryleh.model.components.Component;
+import ryleh.model.components.AbstractComponent;
 import ryleh.model.physics.HitBox;
 
 public interface GameObject {
@@ -29,17 +29,17 @@ public interface GameObject {
     /*
      * 
      */
-    List<Component> getComponents();
+    List<AbstractComponent> getComponents();
 
     /*
      * 
      */
-    Optional<? extends Component> getComponent(Class<? extends Component> type);
+    Optional<? extends AbstractComponent> getComponent(Class<? extends AbstractComponent> type);
 
     /*
      * 
      */
-    void addComponent(Component component);
+    void addComponent(AbstractComponent component);
 
     /*
      * 

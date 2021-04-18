@@ -17,6 +17,7 @@ import ryleh.view.graphics.GraphicComponent;
 public class RockGraphicComponent implements GraphicComponent {
 
     private Rectangle rectangle;
+    private int zIndex;
 
     /**
      * Creates a new Instance of the RockGraphicComponent.
@@ -71,5 +72,21 @@ public class RockGraphicComponent implements GraphicComponent {
     @Override
     public void onRemoved(final EventHandler<ActionEvent> event) {
         event.handle(null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setZindex(final int zIndex) {
+        this.zIndex = zIndex;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getZindex() {
+        return zIndex;
     }
 }

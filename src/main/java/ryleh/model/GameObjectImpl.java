@@ -8,22 +8,31 @@ import ryleh.model.components.AbstractComponent;
 import ryleh.model.physics.CircleHitBox;
 import ryleh.model.physics.HitBox;
 
+/**
+ * A class that provides the implementation of the interface GameObject,
+ * handling the operations related to a GameObject.
+ */
 public class GameObjectImpl implements GameObject {
     private Type type;
     private String id;
     private Point2d position;
     private HitBox box;
     private final List<AbstractComponent> components;
-    private int zIndex;
-    private static final int DEFAULT_HITBOX_RADIUS = 100;
     /**
-     * Default constructor. Instantiate this object with a default position and a default hit box.
+     * The default HitBox radius of a GameObject.
+     */
+    private static final int DEFAULT_HITBOX_RADIUS = 100;
+
+    /**
+     * Default constructor. Instantiate this object with a default position and a
+     * default hit box.
      */
     public GameObjectImpl() {
         position = new Point2d(0, 0);
         components = new ArrayList<>();
         this.box = new CircleHitBox(DEFAULT_HITBOX_RADIUS);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -32,6 +41,7 @@ public class GameObjectImpl implements GameObject {
         this.id = world.generateId("gameObject");
         box.getForm().setPosition(position);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -39,6 +49,7 @@ public class GameObjectImpl implements GameObject {
     public void onUpdate(final double deltaTime) {
         components.forEach(i -> i.onUpdate(deltaTime));
     }
+
     /**
      * {@inheritDoc}
      */
@@ -46,6 +57,7 @@ public class GameObjectImpl implements GameObject {
     public Point2d getPosition() {
         return position;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -54,6 +66,7 @@ public class GameObjectImpl implements GameObject {
         this.position = position;
         box.getForm().setPosition(position);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -61,6 +74,7 @@ public class GameObjectImpl implements GameObject {
     public List<AbstractComponent> getComponents() {
         return components;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -68,6 +82,7 @@ public class GameObjectImpl implements GameObject {
     public Optional<? extends AbstractComponent> getComponent(final Class<? extends AbstractComponent> type) {
         return components.stream().filter(type::isInstance).findAny();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -80,6 +95,7 @@ public class GameObjectImpl implements GameObject {
             component.onAdded(this);
         }
     }
+
     /**
      * {@inheritDoc}
      */
@@ -87,6 +103,7 @@ public class GameObjectImpl implements GameObject {
     public Type getType() {
         return type;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -94,6 +111,7 @@ public class GameObjectImpl implements GameObject {
     public void setType(final Type type) {
         this.type = type;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -101,6 +119,7 @@ public class GameObjectImpl implements GameObject {
     public String toString() {
         return "GameObjectImpl [id=" + id + ", type=" + type + "]";
     }
+
     /**
      * {@inheritDoc}
      */
@@ -108,6 +127,7 @@ public class GameObjectImpl implements GameObject {
     public void setHitBox(final HitBox box) {
         this.box = box;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -115,20 +135,7 @@ public class GameObjectImpl implements GameObject {
     public HitBox getHitBox() {
         return this.box;
     }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setzIndex(final int zIndex) {
-        this.zIndex = zIndex;
-    }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getzIndex() {
-        return this.zIndex;
-    }
+
     /**
      * {@inheritDoc}
      */
@@ -139,6 +146,7 @@ public class GameObjectImpl implements GameObject {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
+
     /**
      * {@inheritDoc}
      */

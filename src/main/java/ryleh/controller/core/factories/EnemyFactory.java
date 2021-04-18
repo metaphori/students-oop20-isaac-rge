@@ -55,12 +55,13 @@ public final class EnemyFactory {
      * @return Entity type instance.
      */
     public EntityImpl createEnemyShooter(final GameState state, final Point2d position) {
+        final EnemyShooterGraphicComponent shooter = new EnemyShooterGraphicComponent(GameMath.toPoint2D(position));
+        shooter.setZindex(1);
         final EntityImpl e = GameEngine.entityBuilder().type(Type.ENEMY_SHOOTER).position(position)
                 .with(new ShooterComponent(state.getWorld(), state.getPlayer()))
                 .with(new HealthIntComponent(state.getWorld(), 1))
-                .with(new CollisionComponent(state.getWorld(), Type.ENEMY_SHOOTER))
-                .view(new EnemyShooterGraphicComponent(GameMath.toPoint2D(position)))
-                .bbox(new CircleHitBox(new Circle2d(HitBoxType.ENEMY.getBoxRadius()))).zIndex(1).build();
+                .with(new CollisionComponent(state.getWorld(), Type.ENEMY_SHOOTER)).view(shooter)
+                .bbox(new CircleHitBox(new Circle2d(HitBoxType.ENEMY.getBoxRadius()))).build();
         state.getWorld().addGameObject(e.getGameObject());
         state.getView().addGraphicComponent(e.getView());
         return e;
@@ -75,11 +76,12 @@ public final class EnemyFactory {
      * @return Entity type instance.
      */
     public EntityImpl createEnemySpinner(final GameState state, final Point2d position) {
+        final EnemySpinnerGraphicComponent spinner = new EnemySpinnerGraphicComponent(GameMath.toPoint2D(position));
+        spinner.setZindex(1);
         final EntityImpl e = GameEngine.entityBuilder().type(Type.ENEMY_SPINNER).position(position)
                 .with(new SpinnerComponent(state.getWorld())).with(new HealthIntComponent(state.getWorld(), 1))
-                .with(new CollisionComponent(state.getWorld(), Type.ENEMY_SPINNER))
-                .view(new EnemySpinnerGraphicComponent(GameMath.toPoint2D(position)))
-                .bbox(new CircleHitBox(new Circle2d(HitBoxType.ENEMY.getBoxRadius()))).zIndex(10).build();
+                .with(new CollisionComponent(state.getWorld(), Type.ENEMY_SPINNER)).view(spinner)
+                .bbox(new CircleHitBox(new Circle2d(HitBoxType.ENEMY.getBoxRadius()))).build();
         state.getWorld().addGameObject(e.getGameObject());
         state.getView().addGraphicComponent(e.getView());
         return e;
@@ -94,11 +96,12 @@ public final class EnemyFactory {
      * @return Entity type instance.
      */
     public EntityImpl createEnemyDrunk(final GameState state, final Point2d position) {
+        final EnemyDrunkGraphicComponent drunk = new EnemyDrunkGraphicComponent(GameMath.toPoint2D(position));
+        drunk.setZindex(0);
         final EntityImpl e = GameEngine.entityBuilder().type(Type.ENEMY_DRUNK).position(position)
                 .with(new DrunkComponent(state.getWorld())).with(new HealthIntComponent(state.getWorld(), 1))
-                .with(new CollisionComponent(state.getWorld(), Type.ENEMY_DRUNK))
-                .view(new EnemyDrunkGraphicComponent(GameMath.toPoint2D(position)))
-                .bbox(new CircleHitBox(new Circle2d(HitBoxType.ENEMY.getBoxRadius()))).zIndex(0).build();
+                .with(new CollisionComponent(state.getWorld(), Type.ENEMY_DRUNK)).view(drunk)
+                .bbox(new CircleHitBox(new Circle2d(HitBoxType.ENEMY.getBoxRadius()))).build();
         state.getWorld().addGameObject(e.getGameObject());
         state.getView().addGraphicComponent(e.getView());
         return e;
@@ -113,13 +116,14 @@ public final class EnemyFactory {
      * @return Entity type instance.
      */
     public EntityImpl createEnemyLurker(final GameState state, final Point2d position) {
+        final EnemyLurkerGraphicComponent lurker = new EnemyLurkerGraphicComponent(
+                (PlayerGraphicComponent) state.getPlayer().getView(), GameMath.toPoint2D(position));
+        lurker.setZindex(1);
         final EntityImpl e = GameEngine.entityBuilder().type(Type.ENEMY_LURKER).position(position)
                 .with(new LurkerComponent(state.getWorld(), state.getPlayer()))
                 .with(new HealthIntComponent(state.getWorld(), 1))
-                .with(new CollisionComponent(state.getWorld(), Type.ENEMY_LURKER))
-                .view(new EnemyLurkerGraphicComponent((PlayerGraphicComponent) state.getPlayer().getView(),
-                        GameMath.toPoint2D(position)))
-                .bbox(new CircleHitBox(new Circle2d(HitBoxType.ENEMY.getBoxRadius()))).zIndex(9).build();
+                .with(new CollisionComponent(state.getWorld(), Type.ENEMY_LURKER)).view(lurker)
+                .bbox(new CircleHitBox(new Circle2d(HitBoxType.ENEMY.getBoxRadius()))).build();
         state.getWorld().addGameObject(e.getGameObject());
         state.getView().addGraphicComponent(e.getView());
         return e;
@@ -134,12 +138,14 @@ public final class EnemyFactory {
      * @return Entity type instance.
      */
     public EntityImpl createEnemyDrunkSpinner(final GameState state, final Point2d position) {
+        final EnemyDrunkSpinnerGraphicComponent drunkSpinner = new EnemyDrunkSpinnerGraphicComponent(
+                GameMath.toPoint2D(position));
+        drunkSpinner.setZindex(1);
         final EntityImpl e = GameEngine.entityBuilder().type(Type.ENEMY_DRUNKSPINNER).position(position)
                 .with(new DrunkComponent(state.getWorld())).with(new SpinnerComponent(state.getWorld()))
                 .with(new HealthIntComponent(state.getWorld(), 1))
-                .with(new CollisionComponent(state.getWorld(), Type.ENEMY_DRUNKSPINNER))
-                .view(new EnemyDrunkSpinnerGraphicComponent(GameMath.toPoint2D(position)))
-                .bbox(new CircleHitBox(new Circle2d(HitBoxType.ENEMY.getBoxRadius()))).zIndex(8).build();
+                .with(new CollisionComponent(state.getWorld(), Type.ENEMY_DRUNKSPINNER)).view(drunkSpinner)
+                .bbox(new CircleHitBox(new Circle2d(HitBoxType.ENEMY.getBoxRadius()))).build();
         state.getWorld().addGameObject(e.getGameObject());
         state.getView().addGraphicComponent(e.getView());
         return e;

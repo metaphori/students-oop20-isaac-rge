@@ -19,10 +19,17 @@ import ryleh.view.graphics.GraphicComponent;
  * EnemySpinner Entity.
  */
 public class EnemySpinnerGraphicComponent implements GraphicComponent {
+    /**
+     * The angle modifier to correctly set the movement of this graphicComponent.
+     */
     private static final int ANGLE_MODIFIER = 60;
     private Rotate rotation;
     private Rectangle rectangle;
     private FadeTransition enemyFade;
+    private int zIndex;
+    /**
+     * The duration of the fade animation of this GraphicComponent.
+     */
     private static final int FADE_DURATION = 200;
 
     /**
@@ -89,5 +96,21 @@ public class EnemySpinnerGraphicComponent implements GraphicComponent {
     public void onRemoved(final EventHandler<ActionEvent> event) {
         enemyFade.setOnFinished(event);
         this.enemyFade.play();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setZindex(final int zIndex) {
+        this.zIndex = zIndex;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getZindex() {
+        return zIndex;
     }
 }

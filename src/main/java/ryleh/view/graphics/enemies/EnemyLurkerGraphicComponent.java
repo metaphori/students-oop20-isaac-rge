@@ -24,11 +24,21 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent {
 
     private Rectangle rectangle;
     private long adjustDirectionTimer = System.currentTimeMillis();
+    /**
+     * A modifier to adjust the movement of this GraphicComponent.
+     */
     private static final long ADJUST_DELAY = 500;
+    /**
+     * The duration of the fade animation of this GraphicComponent.
+     */
     private static final int FADE_DURATION = 200;
+    /**
+     * The movement speed of this GraphicComponent.
+     */
     private static final int MOVE_SPEED = 50;
     private PlayerGraphicComponent player;
     private FadeTransition enemyFade;
+    private int zIndex;
 
     /**
      * Creates a new Instance of EnemyLurkerGraphicComponent with the given player
@@ -72,9 +82,10 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent {
         rectangle.setX(position.getX() - rectangle.getWidth() / 2);
         rectangle.setY(position.getY() - rectangle.getHeight() / 2);
         if (System.currentTimeMillis() - adjustDirectionTimer >= ADJUST_DELAY) {
-            final Vector2d directionToPlayer = new Vector2d(new Point2d(player.getNode().getX(), player.getNode().getY()),
-                    new Point2d(position.getX() - rectangle.getWidth() / 2,
-                            position.getY() - rectangle.getHeight() / 2)).getNormalized().multiply(MOVE_SPEED);
+            final Vector2d directionToPlayer = new Vector2d(
+                    new Point2d(player.getNode().getX(), player.getNode().getY()), new Point2d(
+                            position.getX() - rectangle.getWidth() / 2, position.getY() - rectangle.getHeight() / 2))
+                                    .getNormalized().multiply(MOVE_SPEED);
             rectangle.setRotate(GameMath.toDegrees(Math.atan(directionToPlayer.getY() / directionToPlayer.getX())));
             adjustDirectionTimer = System.currentTimeMillis();
         }
@@ -112,5 +123,21 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent {
     public void onRemoved(final EventHandler<ActionEvent> event) {
         enemyFade.setOnFinished(event);
         enemyFade.play();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setZindex(final int zIndex) {
+        this.zIndex = zIndex;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getZindex() {
+        return zIndex;
     }
 }

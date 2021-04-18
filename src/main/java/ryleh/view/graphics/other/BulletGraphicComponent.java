@@ -18,6 +18,7 @@ import ryleh.view.graphics.GraphicComponent;
 public class BulletGraphicComponent implements GraphicComponent {
 
     private Rectangle rectangle;
+    private int zIndex;
 
     /**
      * Creates a new Instance of BulletGraphicComponent.
@@ -41,6 +42,7 @@ public class BulletGraphicComponent implements GraphicComponent {
 
     /**
      * A method to set the correct type of bullet and the related Texture.
+     * 
      * @param type Type to be set.
      */
     public void setBulletType(final Type type) {
@@ -88,5 +90,21 @@ public class BulletGraphicComponent implements GraphicComponent {
     @Override
     public Rectangle getNode() {
         return rectangle;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setZindex(final int zIndex) {
+        this.zIndex = zIndex;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getZindex() {
+        return zIndex;
     }
 }

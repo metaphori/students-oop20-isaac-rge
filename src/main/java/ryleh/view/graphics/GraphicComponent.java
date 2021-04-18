@@ -40,4 +40,19 @@ public interface GraphicComponent {
      *              to be removed from the view.
      */
     void onRemoved(EventHandler<ActionEvent> event);
+
+    /**
+     * The method that sets the zIndex of a graphicCOmponent in the view.
+     * 
+     * @param zIndex the value of the zIndex that needs to be set to a
+     *               graphicComponent.
+     */
+    void setZindex(int zIndex);
+
+    /**
+     * A method that returns the zIndex of a GraphicComponent.
+     * 
+     * @return The zIndex of a GraphicComponent.
+     */
+    int getZindex();
 }

@@ -19,6 +19,8 @@ import ryleh.view.graphics.GraphicComponent;
 public class FireGraphicComponent implements GraphicComponent {
 
     private Rectangle rectangle;
+    private int zIndex;
+
     /**
      * The duration of each frame of the Animation.
      */
@@ -82,5 +84,21 @@ public class FireGraphicComponent implements GraphicComponent {
     @Override
     public void onRemoved(final EventHandler<ActionEvent> event) {
         event.handle(null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setZindex(final int zIndex) {
+        this.zIndex = zIndex;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getZindex() {
+        return zIndex;
     }
 }

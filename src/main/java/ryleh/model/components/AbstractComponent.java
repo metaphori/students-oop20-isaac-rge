@@ -26,6 +26,7 @@ public abstract class AbstractComponent implements Component {
         this.world = world;
         id = world.generateId("component");
     }
+
     /**
      * {@inheritDoc}
      */
@@ -33,11 +34,13 @@ public abstract class AbstractComponent implements Component {
     public void onAdded(final GameObject object) {
         this.object = object;
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public abstract void onUpdate(double deltaTime);
+
     /**
      * {@inheritDoc}
      */
@@ -45,29 +48,37 @@ public abstract class AbstractComponent implements Component {
     public String toString() {
         return "Component [id=" + id + "]";
     }
+
     /**
-     *  Gets this component ID.
+     * Gets this component ID.
+     * 
      * @return id
      */
     public String getId() {
         return id;
     }
+
     /**
      * Sets this component ID.
+     * 
      * @param id
      */
     public void setId(final String id) {
         this.id = id;
     }
+
     /**
      * Gets the Object to which this component is added.
-     * @return Game object of this component. 
+     * 
+     * @return Game object of this component.
      */
     public GameObject getObject() {
         return object;
     }
+
     /**
      * Get the World where this component is instantiated.
+     * 
      * @return World of this component.
      */
     public World getWorld() {

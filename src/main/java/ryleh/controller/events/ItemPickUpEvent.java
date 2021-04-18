@@ -11,8 +11,7 @@ import ryleh.model.items.MaxHealthItem;
 import ryleh.view.graphics.other.ItemGraphicComponent;
 
 public class ItemPickUpEvent implements Event {
-    private Item item;
-
+  
     /**
      * {@inheritDoc} Starts the opening animation of the item
      */
@@ -26,7 +25,8 @@ public class ItemPickUpEvent implements Event {
      * Method to generate a random buff with pseudo probability.
      */
     private void randomItem(final GameState state) {
-        Random random = new Random();
+        Item item = null;
+        final Random random = new Random();
         switch (random.nextInt(3)) {
         case 0:
             item = new HealItem();

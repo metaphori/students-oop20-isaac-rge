@@ -78,11 +78,9 @@ public class DoorGraphicComponent implements GraphicComponent {
     public void render(final Point2D position, final double deltaTime) {
         rectangle.setX(position.getX() - rectangle.getWidth() / 2);
         rectangle.setY(position.getY() - rectangle.getHeight() / 2);
-        if (animPlayed) {
-            if (this.isAnimFinished()) {
-                animDoor.stop();
-                rectangle.setFill(animDoor.getLastFrame());
-            }
+        if (animPlayed && this.isAnimFinished()) {
+            animDoor.stop();
+            rectangle.setFill(animDoor.getLastFrame());
         }
     }
 
@@ -100,7 +98,7 @@ public class DoorGraphicComponent implements GraphicComponent {
      */
     @Override
     public void onAdded(final Scene scene) {
-        Parent root = scene.getRoot();
+        final Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
         this.animPlayed = true;
         animDoor.play();

@@ -20,6 +20,15 @@ import ryleh.view.graphics.GraphicComponent;
  * A class to Completely handle the view.
  */
 public class ViewHandlerImpl implements ViewHandler {
+
+    private final Stage stage;
+    private final List<GraphicComponent> graphicComponents;
+    private final Scene scene;
+    private Parent root;
+    private final Rectangle rectangle;
+    private final GameUI gameUi;
+    private boolean isFirstRoom;
+
     /**
      * The width of the screen.
      */
@@ -56,14 +65,6 @@ public class ViewHandlerImpl implements ViewHandler {
     public static void setScaleModifier(final double scalemodifier) {
         scaleModifier = scalemodifier;
     }
-
-    private Stage stage;
-    private List<GraphicComponent> graphicComponents;
-    private Scene scene;
-    private Parent root;
-    private final Rectangle rectangle;
-    private final GameUI gameUi;
-    private boolean isFirstRoom;
 
     /**
      * Creates a new Instance of ViewHandler with the given stage.

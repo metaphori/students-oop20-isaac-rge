@@ -14,8 +14,8 @@ import ryleh.view.menu.RylehPauseMenu;
 
 public final class GameEngine {
     private GameState rylehState;
-    private double period;
     private static Timeline loop;
+    private static final double PERIOD = 1000 / 60;
     private RylehPauseMenu pauseMenu;
     private Stage primaryStage;
     /**
@@ -36,15 +36,15 @@ public final class GameEngine {
      */
     public void initGame(final Stage stage) {
         this.primaryStage = stage;
-        this.period = 1000 / 60;
         this.rylehState = new GameStateImpl(stage);
         this.pauseMenu = new RylehPauseMenu(stage);
         this.primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, key -> {
-            if (key.getCode().equals(KeyCode.P) && !rylehState.isGameOver()) {
+            if (key.getCode().equals(KeyCode.P) || key.getCode().equals(KeyCode.ESCAPE) && !rylehState.isGameOver()) {
                 GameEngine.pauseEngine();
                 pauseMenu.renderPauseMenu();
             }
         });
+        this.rylehState.generateNewLevel();
     }
 
     /**
@@ -53,20 +53,20 @@ public final class GameEngine {
      * "period"
      */
     public void mainLoop() {
-        final Duration oneFrameAmt = Duration.millis(period);
+        final Duration oneFrameAmt = Duration.millis(PERIOD);
         final KeyFrame oneFrame = new KeyFrame(oneFrameAmt, new EventHandler<>() {
             @Override
             public void handle(final ActionEvent event) {
                 if (rylehState.isGameOver()) {
                     renderGameOver(rylehState.isVictory());
                 }
-                rylehState.updateState(period);
+                rylehState.updateState(PERIOD);
             }
         }); // oneFrame
         // sets the game world's game loop (Timeline)
         loop = new Timeline(oneFrame);
         loop.setCycleCount(Animation.INDEFINITE);
-        loop.play();
+        loop.play();;
     }
 
     /**
@@ -127,5 +127,5 @@ public final class GameEngine {
             action.run();
         }
     }
-
 }
+

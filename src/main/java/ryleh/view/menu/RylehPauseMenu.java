@@ -72,7 +72,7 @@ public class RylehPauseMenu {
         popupStage.initOwner(primaryStage);
         popupStage.initModality(Modality.APPLICATION_MODAL);
         popupStage.addEventHandler(KeyEvent.KEY_PRESSED, key -> {
-            if (key.getCode().equals(KeyCode.P)) {
+            if (key.getCode().equals(KeyCode.P) || key.getCode().equals(KeyCode.ESCAPE)) {
                    resume.run();
             }
         });

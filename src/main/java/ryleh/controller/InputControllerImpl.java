@@ -7,7 +7,7 @@ import ryleh.controller.events.NewLevelEvent;
 import ryleh.controller.levels.LevelHandler;
 import ryleh.controller.levels.LevelHandlerImpl;
 import ryleh.model.World;
-import ryleh.model.components.PhysicsComponent;
+import ryleh.model.components.PlayerComponent;
 import ryleh.model.components.ShootingComponent;
 import ryleh.model.physics.Direction;
 import ryleh.view.graphics.PlayerGraphicComponent;
@@ -21,7 +21,7 @@ public class InputControllerImpl implements InputController {
     private boolean isShooting;
     private Direction currentDir;
     private final PlayerGraphicComponent graphic;
-    private final PhysicsComponent physics;
+    private final PlayerComponent physics;
     private final Scene scene;
     private final Entity player;
     private final GameState state;
@@ -33,7 +33,7 @@ public class InputControllerImpl implements InputController {
         this.world = state.getWorld();
         this.player = state.getPlayer();
         this.graphic = (PlayerGraphicComponent) this.player.getView();
-        this.physics = (PhysicsComponent) this.player.getGameObject().getComponent(PhysicsComponent.class).get();
+        this.physics = (PlayerComponent) this.player.getGameObject().getComponent(PlayerComponent.class).get();
         this.currentDir = this.physics.getDirection();
     }
 

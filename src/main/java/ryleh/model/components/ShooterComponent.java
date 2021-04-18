@@ -9,8 +9,11 @@ import ryleh.model.World;
  * A class that provides the Component for shooter enemy type.
  */
 public class ShooterComponent extends AbstractComponent {
-	private ShootingComponent shooting;
+	private final ShootingComponent shooting;
 	private Point2d position;
+	/**
+	 * Speed at which bullet entities move.
+	 */
 	private static final double BULLET_SPEED = 0.15;
 	private final Entity player;
 	/**

@@ -49,26 +49,12 @@ public class ItemPickUpEvent implements Event {
 		    state.getView().getGameUi().playFt();
 			break;
 		case 2: item = new FireSpeedItem();
+			state.getView().getGameUi().getItemPickUp().setText("Item effect: atk speed up!");
+			state.getView().getGameUi().playFt();
 			break;
 		default:
 			break;
 		}
 		item.apply(state);
 	}
-	/**
-	 * Heal the target and updates game UI with item effect.
-	 */
-//	private void healthUp() {
-//		gs.getView().getItemPickUp().setText("Item effect: health up!");
-//		gs.getView().playFt();
-//		health.heal(1);
-//	}
-//	/**
-//	 * Increase max health of the target and updates game UI with item effect.
-//	 */
-//	private void maxHealthUp() {
-//		gs.getView().getItemPickUp().setText("Item effect: max health up!");
-//		gs.getView().playFt();
-//		health.setMaxHp(health.getMaxHp() + 1);
-//	}
 }

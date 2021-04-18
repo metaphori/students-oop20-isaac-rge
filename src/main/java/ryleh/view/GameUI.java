@@ -23,7 +23,7 @@ public class GameUI {
      */
     private static final int SCREEN_HEIGHT_RATIO = 9;
     /**
-     * Pixel correction on X,Y coordinates of Text objects.
+     * Pixel correction on X,Y coordinates of Text objects (Lives and Levels).
      */
     private static final int PIXEL_CORRECTION = 75;
     /**
@@ -65,7 +65,7 @@ public class GameUI {
     private void setTutorial() {
     	this.tutorialCommands = new Text("List of commands:\n W -> move forward \n A -> move left \n S -> move downward \n D -> move right \n Spacebar -> shoot");
         this.tutorialCommands.setFont(this.font);
-        this.tutorialCommands.setX((ViewHandlerImpl.STANDARD_WIDTH / SCREEN_WIDTH_RATIO) * 3 + PIXEL_CORRECTION * ViewHandlerImpl.SCALE_MODIFIER);
+        this.tutorialCommands.setX((ViewHandlerImpl.STANDARD_WIDTH / SCREEN_WIDTH_RATIO) * 2 + PIXEL_CORRECTION * ViewHandlerImpl.SCALE_MODIFIER);
         this.tutorialCommands.setY((ViewHandlerImpl.STANDARD_HEIGHT / SCREEN_HEIGHT_RATIO) * 3);
         this.tutorialCommands.setFill(Color.WHITE);
         this.tutorialObjective = new Text("In order to win you must \nbeat level 30.\nAfter defeating all \nenemies on a level a \ndoor will open and bring \nyou to the next level.\n"
@@ -73,7 +73,7 @@ public class GameUI {
         		+ "If you lose all your \nlives you will lose.\nGood luck and have fun!");
         this.tutorialObjective.setFont(this.font);
         this.tutorialObjective.setX((ViewHandlerImpl.STANDARD_WIDTH / SCREEN_WIDTH_RATIO) * 8 + PIXEL_CORRECTION * ViewHandlerImpl.SCALE_MODIFIER);
-        this.tutorialObjective.setY((ViewHandlerImpl.STANDARD_HEIGHT / SCREEN_HEIGHT_RATIO) * 2);
+        this.tutorialObjective.setY((ViewHandlerImpl.STANDARD_HEIGHT / SCREEN_HEIGHT_RATIO) * 3);
         this.tutorialObjective.setFill(Color.WHITE);
         this.tutorialUi.add(this.tutorialCommands);
         this.tutorialUi.add(this.tutorialObjective);

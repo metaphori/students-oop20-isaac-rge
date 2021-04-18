@@ -10,7 +10,13 @@ import ryleh.model.World;
 public class SpinnerComponent extends AbstractComponent {
 	private final ShootingComponent shooting;
 	private Point2d position;
-	private static final double BULLET_SPEED = 0.15;
+	/**
+	 * Speed at which bullet entities move.
+	 */
+	private static final double BULLET_SPEED = 0.30;
+	/**
+	 * Rate at which rotation angle changes.
+	 */
 	private static final double ANGLE_INCREASE =  Math.PI / 40;
 	private double angle;
 	/**
@@ -19,7 +25,7 @@ public class SpinnerComponent extends AbstractComponent {
      */
 	public SpinnerComponent(final World world) {
 		super(world);
-		this.shooting = new ShootingComponent(world, 2);
+		this.shooting = new ShootingComponent(world, 1);
 		this.position = new Point2d(0, 0);
 		this.angle = 0;
 	}

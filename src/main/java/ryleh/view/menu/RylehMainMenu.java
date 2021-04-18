@@ -11,16 +11,20 @@ import javafx.stage.Stage;
 import ryleh.Ryleh;
 import ryleh.controller.core.GameEngine;
 import ryleh.view.ViewHandlerImpl;
+
 /**
- * This class represents the game's main menu. It uses MenuFactory to instantiate graphic parts inside the constructor.
- * To render it, call "show" method. 
+ * This class represents the game's main menu. It uses MenuFactory to
+ * instantiate graphic parts inside the constructor. To render it, call "show"
+ * method.
  */
 public class RylehMainMenu {
     private final Stage primaryStage;
     private final MenuFactory factory;
 
     /**
-     * Creates a new Main Menu with custom buttons and a description for every of them.
+     * Creates a new Main Menu with custom buttons and a description for every of
+     * them.
+     * 
      * @param primaryStage The stage that contains the Menu
      */
     public RylehMainMenu(final Stage primaryStage) {
@@ -29,10 +33,10 @@ public class RylehMainMenu {
         final BorderPane pane = new BorderPane();
         final VBox box = new VBox();
         this.factory = new MenuFactoryImpl();
-        factory.setLevelFont(Font.loadFont(Ryleh.class.getResource("/assets/fonts/saturno.ttf")
-                .toExternalForm(), factory.getScaledSize()));
+        factory.setLevelFont(Font.loadFont(Ryleh.class.getResource("/assets/fonts/saturno.ttf").toExternalForm(),
+                factory.getScaledSize()));
         box.getChildren().add(factory.createCustomButton("Start Game", "Start a new adventure", () -> {
-        final GameEngine engine = new GameEngine();
+            final GameEngine engine = new GameEngine();
             engine.initGame(primaryStage);
             engine.mainLoop();
         }));
@@ -52,6 +56,7 @@ public class RylehMainMenu {
         this.primaryStage.setResizable(false);
         this.primaryStage.setTitle("Ryleh's Call");
     }
+
     /**
      * Shows Ryleh's Call main menu.
      */

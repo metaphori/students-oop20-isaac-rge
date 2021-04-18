@@ -17,8 +17,8 @@ import javafx.stage.Stage;
 import ryleh.view.ViewHandlerImpl;
 
 public class MenuFactoryImpl implements MenuFactory {
-	
-	private static final int SIZE = 40;
+
+    private static final int SIZE = 40;
     private int scaledSize = (int) (ViewHandlerImpl.SCALE_MODIFIER * SIZE);
     private Font levelFont;
     private Color startColor;
@@ -35,11 +35,12 @@ public class MenuFactoryImpl implements MenuFactory {
         this();
         this.scaledSize = (int) (ViewHandlerImpl.SCALE_MODIFIER * scale);
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
-	public void createCustomAlert(final String text) {
+    public void createCustomAlert(final String text) {
         final Stage window = new Stage();
         final HBox confirm = new HBox(scaledSize);
         final VBox container = new VBox();
@@ -67,11 +68,12 @@ public class MenuFactoryImpl implements MenuFactory {
         window.setResizable(false);
         window.showAndWait();
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
-	public Node createCustomButton(final String name, final String description, final Runnable action) {
+    public Node createCustomButton(final String name, final String description, final Runnable action) {
         final HBox hbox = new HBox(name.length());
         final Rectangle side = new Rectangle(scaledSize / 4, scaledSize);
         final Text btnText = new Text(name);
@@ -81,73 +83,81 @@ public class MenuFactoryImpl implements MenuFactory {
         hbox.getChildren().addAll(side, btnText);
         return hbox;
     }
+
     /**
      * Sets some properties and mouse events of the given text.
-     * @param text The text that has to be initialized
+     * 
+     * @param text        The text that has to be initialized
      * @param description The description to bind to the text
-     * @param action The action to run when the mouse is clicked
+     * @param action      The action to run when the mouse is clicked
      */
-	private void createCustomText(final Text text, final String description, final Runnable action) {
+    private void createCustomText(final Text text, final String description, final Runnable action) {
         text.setFont(levelFont);
         text.setTextAlignment(TextAlignment.LEFT);
         text.setFill(startColor);
         text.setSelectionFill(hoverColor);
         text.setOnMouseEntered(event -> {
-                text.setFill(hoverColor);
-                this.description.setText(description);
+            text.setFill(hoverColor);
+            this.description.setText(description);
         });
         text.setOnMouseExited(event -> {
-                this.description.setText("");
-                text.setFill(startColor);
+            this.description.setText("");
+            text.setFill(startColor);
         });
         text.setOnMouseClicked(event -> {
-                action.run();
+            action.run();
         });
     }
-	/**
-	 * Sets some properties of the given rectangle.
-	 * @param Rectangle is the side rectangle 
-	 * @param text The text at which the rectangle has to be binded
-	 */
-	private void createSideRectangle(final Rectangle rectangle, final Text text) {
+
+    /**
+     * Sets some properties of the given rectangle.
+     * 
+     * @param Rectangle is the side rectangle
+     * @param text      The text at which the rectangle has to be binded
+     */
+    private void createSideRectangle(final Rectangle rectangle, final Text text) {
         rectangle.setFill(hoverColor);
         rectangle.setVisible(false);
-        rectangle.visibleProperty().bind(
-                        Bindings.when(text.hoverProperty()).then(true).otherwise(false));
+        rectangle.visibleProperty().bind(Bindings.when(text.hoverProperty()).then(true).otherwise(false));
     }
-	/**
+
+    /**
      * {@inheritDoc}
      */
-	@Override
-	public int getScaledSize() {
-		return scaledSize;
-	}
-	/**
+    @Override
+    public int getScaledSize() {
+        return scaledSize;
+    }
+
+    /**
      * {@inheritDoc}
      */
-	@Override
-	public Color getStartColor() {
-		return startColor;
-	}
-	/**
+    @Override
+    public Color getStartColor() {
+        return startColor;
+    }
+
+    /**
      * {@inheritDoc}
      */
-	@Override
-	public Color getHoverColor() {
-		return hoverColor;
-	}
-	/**
+    @Override
+    public Color getHoverColor() {
+        return hoverColor;
+    }
+
+    /**
      * {@inheritDoc}
      */
-	@Override
-	public Text getDescription() {
-		return description;
-	}
-	/**
+    @Override
+    public Text getDescription() {
+        return description;
+    }
+
+    /**
      * {@inheritDoc}
      */
-	@Override
-	public void setLevelFont(final Font levelFont) {
-		this.levelFont = levelFont;
-	}
+    @Override
+    public void setLevelFont(final Font levelFont) {
+        this.levelFont = levelFont;
+    }
 }

@@ -27,7 +27,6 @@ public class ItemPickUpEvent implements Event {
     private void randomItem(final GameState state) {
         Item item = null;
         final Random random = new Random();
-        Random random = new Random();
         switch (random.nextInt(3)) {
         case 0:
             item = new HealItem();

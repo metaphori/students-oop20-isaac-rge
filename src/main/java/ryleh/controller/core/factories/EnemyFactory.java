@@ -11,16 +11,16 @@ import ryleh.model.components.CollisionComponent;
 import ryleh.model.components.DrunkComponent;
 import ryleh.model.components.HealthIntComponent;
 import ryleh.model.components.LurkerComponent;
-import ryleh.view.PlayerGraphicComponent;
 import ryleh.model.physics.CircleHitBox;
 import ryleh.model.physics.HitBoxType;
+import ryleh.view.graphics.PlayerGraphicComponent;
+import ryleh.view.graphics.enemies.EnemyDrunkGraphicComponent;
+import ryleh.view.graphics.enemies.EnemyDrunkSpinnerGraphicComponent;
+import ryleh.view.graphics.enemies.EnemyLurkerGraphicComponent;
+import ryleh.view.graphics.enemies.EnemyShooterGraphicComponent;
+import ryleh.view.graphics.enemies.EnemySpinnerGraphicComponent;
 import ryleh.model.components.ShooterComponent;
 import ryleh.model.components.SpinnerComponent;
-import ryleh.view.enemies.EnemyDrunkGraphicComponent;
-import ryleh.view.enemies.EnemyDrunkSpinnerGraphicComponent;
-import ryleh.view.enemies.EnemyLurkerGraphicComponent;
-import ryleh.view.enemies.EnemyShooterGraphicComponent;
-import ryleh.view.enemies.EnemySpinnerGraphicComponent;
 
 /**
  * A factory class for enemy entities.

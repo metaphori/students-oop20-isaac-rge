@@ -7,7 +7,7 @@ import ryleh.model.GameObjectImpl;
 import ryleh.model.Type;
 import ryleh.model.components.AbstractComponent;
 import ryleh.model.physics.HitBox;
-import ryleh.view.GraphicComponent;
+import ryleh.view.graphics.GraphicComponent;
 
 public class EntityBuilder {
     private final GameObject object;

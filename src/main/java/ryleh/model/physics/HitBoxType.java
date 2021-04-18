@@ -3,7 +3,7 @@ package ryleh.model.physics;
  * Enum used to determine hitbox radius of different entities.
  */
 public enum HitBoxType {
-    PLAYE(70),
+    PLAYER(70),
     BULLET(5),
     ROCK(75),
     ITEM(30),

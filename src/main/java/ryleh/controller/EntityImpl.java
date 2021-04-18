@@ -1,7 +1,7 @@
 package ryleh.controller;
 
 import ryleh.model.GameObject;
-import ryleh.view.GraphicComponent;
+import ryleh.view.graphics.GraphicComponent;
 
 public class EntityImpl implements Entity {
 

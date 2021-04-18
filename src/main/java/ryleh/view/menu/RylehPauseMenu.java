@@ -18,10 +18,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
-import javafx.beans.value.ChangeListener;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import ryleh.Ryleh;
 import ryleh.controller.core.GameEngine;
 import ryleh.view.ViewHandlerImpl;
@@ -80,7 +76,7 @@ public class RylehPauseMenu {
                    resume.run();
             }
         });
-        pauseScene = new Scene(this.pane, ViewHandlerImpl.STANDARD_WIDTH, ViewHandlerImpl.STANDARD_HEIGHT);
+        pauseScene = new Scene(this.pane, ViewHandlerImpl.getStandardWidth(), ViewHandlerImpl.getStandardHeight());
     }
 
     /**

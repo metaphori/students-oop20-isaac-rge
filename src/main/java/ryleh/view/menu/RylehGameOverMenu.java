@@ -19,7 +19,7 @@ public class RylehGameOverMenu {
     }
 
     /**
-     * Shows the menu into primary stage.
+     * Shows the game over menu into primary stage.
      */
     public void show() {
         final Pane pane = new Pane();

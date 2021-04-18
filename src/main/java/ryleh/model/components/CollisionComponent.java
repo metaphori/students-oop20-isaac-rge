@@ -10,8 +10,7 @@ import ryleh.model.World;
 public class CollisionComponent extends AbstractComponent {
 
     private final Type type;
-    private boolean hasAlreadyColided = false;
-    // private boolean doorCollidable;
+    private boolean hasAlreadyColided;
 
     /**
      * Add a component to check the collision between enemies and player.
@@ -25,10 +24,6 @@ public class CollisionComponent extends AbstractComponent {
         this.hasAlreadyColided = false;
     }
 
-    public void setDoorCollidable() {
-        // this.doorCollidable = true;
-    }
-
     /**
      * {@inheritDoc}
      * 
@@ -38,7 +33,7 @@ public class CollisionComponent extends AbstractComponent {
      */
     public void onUpdate(final double deltaTime) {
         if (!this.hasAlreadyColided) {
-            Optional<GameObject> colliding = super.getWorld().getGameObjects().stream()
+            final Optional<GameObject> colliding = super.getWorld().getGameObjects().stream()
                     .filter(obj -> obj.getType().equals(Type.PLAYER))
                     .filter(obj -> obj.getHitBox().isCollidingWith(super.getObject().getHitBox())).findFirst();
             if (colliding.isPresent()) {

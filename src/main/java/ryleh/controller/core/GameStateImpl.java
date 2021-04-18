@@ -21,7 +21,7 @@ import ryleh.controller.levels.LevelHandlerImpl;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.WorldImpl;
-import ryleh.model.components.PhysicsComponent;
+import ryleh.model.components.PlayerComponent;
 import ryleh.view.ViewHandler;
 import ryleh.view.ViewHandlerImpl;
 
@@ -79,7 +79,7 @@ public class GameStateImpl implements GameState {
         world.addGameObject(player.getGameObject());
         entities.add(player);
 
-        ((PhysicsComponent) player.getGameObject().getComponent(PhysicsComponent.class).get())
+        ((PlayerComponent) player.getGameObject().getComponent(PlayerComponent.class).get())
                 .setPosition(levelHandler.getPosition(levelHandler.getPlayerSpawn()));
 
         entities.addAll(levelHandler.getEntities());

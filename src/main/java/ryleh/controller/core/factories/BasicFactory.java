@@ -13,16 +13,16 @@ import ryleh.model.components.BulletComponent;
 import ryleh.model.components.CollisionComponent;
 import ryleh.model.components.DoorComponent;
 import ryleh.model.components.HealthIntComponent;
-import ryleh.model.components.PhysicsComponent;
+import ryleh.model.components.PlayerComponent;
 import ryleh.model.components.ShootingComponent;
-import ryleh.view.PlayerGraphicComponent;
 import ryleh.model.physics.CircleHitBox;
 import ryleh.model.physics.HitBoxType;
-import ryleh.view.other.BulletGraphicComponent;
-import ryleh.view.other.DoorGraphicComponent;
-import ryleh.view.other.FireGraphicComponent;
-import ryleh.view.other.ItemGraphicComponent;
-import ryleh.view.other.RockGraphicComponent;
+import ryleh.view.graphics.PlayerGraphicComponent;
+import ryleh.view.graphics.other.BulletGraphicComponent;
+import ryleh.view.graphics.other.DoorGraphicComponent;
+import ryleh.view.graphics.other.FireGraphicComponent;
+import ryleh.view.graphics.other.ItemGraphicComponent;
+import ryleh.view.graphics.other.RockGraphicComponent;
 
 /**
  * A factory class for basic entities such as player,bullet,rock,item and fire.
@@ -58,14 +58,14 @@ public final class BasicFactory {
      */
     public Entity createPlayer(final GameState state, final Point2d position) {
         final EntityImpl e = GameEngine.entityBuilder().type(Type.PLAYER).position(position)
-                .with(new PhysicsComponent(state.getWorld(), 1000)).with(new HealthIntComponent(state.getWorld(), 3))
+                .with(new PlayerComponent(state.getWorld(), 1000)).with(new HealthIntComponent(state.getWorld(), 3))
                 .with(new ShootingComponent(state.getWorld(), 1.0))
                 .view(new PlayerGraphicComponent(GameMath.toPoint2D(position)))
                 .bbox(new CircleHitBox(new Circle2d(HitBoxType.PLAYER.getBoxRadius()))).zIndex(1).build();
         state.getWorld().addGameObject(e.getGameObject());
         state.getView().addGraphicComponent(e.getView());
         ((PlayerGraphicComponent) e.getView()).setDirection(
-                ((PhysicsComponent) e.getGameObject().getComponent(PhysicsComponent.class).get()).getDirection());
+                ((PlayerComponent) e.getGameObject().getComponent(PlayerComponent.class).get()).getDirection());
         return e;
     }
 

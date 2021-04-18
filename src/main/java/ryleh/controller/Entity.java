@@ -1,7 +1,7 @@
 package ryleh.controller;
 
 import ryleh.model.GameObject;
-import ryleh.view.GraphicComponent;
+import ryleh.view.graphics.GraphicComponent;
 
 public interface Entity {
     /**
@@ -23,7 +23,7 @@ public interface Entity {
      * 
      * @return The GameObject of this entity.
      */
-    GameObject getGameObject()
+    GameObject getGameObject();
 
     /**
      * Sets the GameObject of this entity.

@@ -44,6 +44,7 @@ public final class GameEngine {
                 pauseMenu.renderPauseMenu();
             }
         });
+        this.rylehState.generateNewLevel();
     }
 
     /**

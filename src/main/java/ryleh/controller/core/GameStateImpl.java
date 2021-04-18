@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import javafx.geometry.Point2D;
 import javafx.stage.Stage;
+import ryleh.common.GameMath;
 import ryleh.common.Point2d;
 import ryleh.controller.Entity;
 import ryleh.controller.InputController;
@@ -18,8 +18,8 @@ import ryleh.controller.levels.LevelHandlerImpl;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.WorldImpl;
-import ryleh.model.components.PhysicsComponent;
 import ryleh.view.ViewHandlerImpl;
+import ryleh.model.components.PlayerComponent;
 
 public class GameStateImpl implements GameState {
     private final ViewHandlerImpl view;
@@ -76,7 +76,7 @@ public class GameStateImpl implements GameState {
         world.addGameObject(player.getGameObject());
         entities.add(player);
 
-        ((PhysicsComponent) player.getGameObject().getComponent(PhysicsComponent.class).get())
+        ((PlayerComponent) player.getGameObject().getComponent(PlayerComponent.class).get())
                 .setPosition(levelHandler.getPosition(levelHandler.getPlayerSpawn()));
 
         entities.addAll(levelHandler.getEntities());
@@ -109,7 +109,7 @@ public class GameStateImpl implements GameState {
         input.updateInput();
         for (final Entity object : this.entities) {
             object.getGameObject().onUpdate(dt);
-            object.getView().render(toPoint2D(new Point2d(object.getGameObject().getPosition().getX(),
+            object.getView().render(GameMath.toPoint2D(new Point2d(object.getGameObject().getPosition().getX(),
                     object.getGameObject().getPosition().getY())), dt);
         }
         eventHandler.checkEvents();
@@ -139,7 +139,7 @@ public class GameStateImpl implements GameState {
     public ViewHandlerImpl getView() {
         return view;
     }
-  
+
     /**
      * {@inheritDoc}
      */

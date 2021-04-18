@@ -19,13 +19,14 @@ import ryleh.view.ViewHandlerImpl;
 public class MenuFactoryImpl implements MenuFactory {
 
     private static final int SIZE = 40;
-    private int scaledSize = (int) (ViewHandlerImpl.SCALE_MODIFIER * SIZE);
+    private int scaledSize;
     private Font levelFont;
     private Color startColor;
     private Color hoverColor;
     private Text description;
 
     public MenuFactoryImpl() {
+        scaledSize = (int) (ViewHandlerImpl.SCALE_MODIFIER * SIZE);
         description = new Text("");
         hoverColor = Color.CADETBLUE;
         startColor = Color.CORNFLOWERBLUE;

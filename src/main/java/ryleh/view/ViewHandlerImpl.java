@@ -14,132 +14,141 @@ import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 /**
  * A class to Completely handle the view.
  */
 public class ViewHandlerImpl implements ViewHandler {
     /**
-     * The width of the screen.
-     */
-    public static final int STANDARD_WIDTH = (int) Screen.getPrimary().getBounds().getWidth();
-    /**
-     * the height of the screen.
-     */
-    public static final int STANDARD_HEIGHT = (int) Screen.getPrimary().getBounds().getHeight();
+    *The width of the screen. 
+    */
+    public static int STANDARD_WIDTH = (int) Screen.getPrimary().getBounds().getWidth();
+	/**
+	 * the height of the screen.
+	 */
+    public static int STANDARD_HEIGHT = (int) Screen.getPrimary().getBounds().getHeight();
     /**
      * The modifier to set the correct proportion of the view.
      */
-    public static final double SCALE_MODIFIER = (double) (STANDARD_WIDTH / 1920.0);
-    private final Stage stage;
-    private final List<GraphicComponent> graphicComponents;
-    private final Scene scene;
+    public static double SCALE_MODIFIER = (double) (ViewHandlerImpl.STANDARD_WIDTH / 1920.0);
+    public static int getSTANDARD_WIDTH() {
+        return STANDARD_WIDTH;
+    }
+    public static void setSTANDARD_WIDTH(int sTANDARD_WIDTH) {
+        STANDARD_WIDTH = sTANDARD_WIDTH;
+    }
+    public static int getSTANDARD_HEIGHT() {
+        return STANDARD_HEIGHT;
+    }
+    public static void setSTANDARD_HEIGHT(int sTANDARD_HEIGHT) {
+        STANDARD_HEIGHT = sTANDARD_HEIGHT;
+    }
+    public static double getSCALE_MODIFIER() {
+        return SCALE_MODIFIER;
+    }
+    public static void setSCALE_MODIFIER(double sCALE_MODIFIER) {
+        SCALE_MODIFIER = sCALE_MODIFIER;
+    }
+    private Stage stage;
+    private List<GraphicComponent> graphicComponents;
+    private Scene scene;
     private Parent root;
     private final Rectangle rectangle;
     private final GameUI gameUi;
-    private boolean isFirstRoom;
+	private boolean isFirstRoom;
 
     /**
      * Creates a new Instance of ViewHandler with the given stage.
-     * 
      * @param stage the stage that needs to be set.
      */
     public ViewHandlerImpl(final Stage stage) {
-        this.gameUi = new GameUI();
+    	this.gameUi = new GameUI();
         this.stage = stage;
         this.rectangle = new Rectangle(Textures.BACKGROUND.getWidth(), Textures.BACKGROUND.getHeight());
         this.rectangle.setFill(Textures.BACKGROUND.getImagePattern());
         root = new AnchorPane();
         root.setStyle("-fx-background-color: black;");
-        ((AnchorPane) root).getChildren().add(rectangle);
+        ((AnchorPane) root).getChildren().add(rectangle); 
         scene = new Scene(root);
         this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(final WindowEvent event) {
-                Platform.exit();
-            }
+                @Override
+                public void handle(final WindowEvent event) {
+                    Platform.exit();
+                }
         });
         this.stage.setScene(scene);
         this.stage.setFullScreen(false);
         this.graphicComponents = new ArrayList<>();
         this.isFirstRoom = true;
     }
-
-    /**
+	/**
      * {@inheritDoc}
      */
     @Override
     public void removeGraphicComponent(final GraphicComponent graphic) {
-        graphic.onRemoved(e -> {
-            final FilteredList<Node> list = ((AnchorPane) scene.getRoot()).getChildren()
-                    .filtered(i -> graphic.getNode().equals(i));
-            if (!list.isEmpty()) {
-                list.get(0).setVisible(false);
-            }
-            this.graphicComponents.remove(graphic);
-        });
+    	graphic.onRemoved(e -> {
+    		final FilteredList<Node> list = ((AnchorPane) scene.getRoot()).getChildren().filtered(i -> graphic.getNode().equals(i));
+    		if (!list.isEmpty()) {
+    			list.get(0).setVisible(false);
+    		}
+    		this.graphicComponents.remove(graphic);
+    	});
     }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void displayLevelScene() {
+      root = new AnchorPane();
+      root.setStyle("-fx-background-color: black;");
+      ((AnchorPane) root).getChildren().add(rectangle);
+      ((AnchorPane) root).getChildren().add(gameUi.getLevel());
+      ((AnchorPane) root).getChildren().add(gameUi.getLives());
+      ((AnchorPane) root).getChildren().add(gameUi.getItemPickUp());
+      if (this.isFirstRoom) {
+    	  for (final Text elem :  gameUi.getTutorial()) {
+    		  ((AnchorPane) root).getChildren().add(elem);
+    	  }
+    	  this.isFirstRoom = false;
+      }
+      scene.setRoot(root);
+ 	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void displayLevelScene() {
-        root = new AnchorPane();
-        root.setStyle("-fx-background-color: black;");
-        ((AnchorPane) root).getChildren().add(rectangle);
-        ((AnchorPane) root).getChildren().add(gameUi.getLevel());
-        ((AnchorPane) root).getChildren().add(gameUi.getLives());
-        ((AnchorPane) root).getChildren().add(gameUi.getItemPickUp());
-        if (this.isFirstRoom) {
-            for (final Text elem : gameUi.getTutorial()) {
-                ((AnchorPane) root).getChildren().add(elem);
-            }
-            this.isFirstRoom = false;
-        }
-        scene.setRoot(root);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
     public void addGraphicComponent(final GraphicComponent graphic) {
-        this.graphicComponents.add(graphic);
-        graphic.onAdded(scene);
-    }
+    	this.graphicComponents.add(graphic);
+    	graphic.onAdded(scene);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
+	/**
+	 * {@inheritDoc}
+	*/
+	@Override
     public List<GraphicComponent> getGraphicComponents() {
-        return graphicComponents;
-    }
+		return graphicComponents;
+	}
 
-    /**
-     * A method that returns the current stage.
-     * 
-     * @return The current stage.
-     */
-    public Stage getStage() {
-        return stage;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Scene getScene() {
-        return scene;
-    }
-
-    /**
-     * A method that returns the current gameUi.
-     * 
-     * @return a GameUI object.
-     */
-    public GameUI getGameUi() {
-        return gameUi;
-    }
+	/**
+	 * A method that returns the current stage.
+	 * @return The current stage.
+	 */
+	public Stage getStage() {
+		return stage;
+	}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Scene getScene() {
+	    return scene;
+	}
+	/**
+	 * A method that returns the current gameUi.
+	 * @return a GameUI object.
+	 */
+	public GameUI getGameUi() {
+		return gameUi;
+	}
 }

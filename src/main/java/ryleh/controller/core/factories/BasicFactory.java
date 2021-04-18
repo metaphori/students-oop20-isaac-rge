@@ -81,9 +81,11 @@ public final class BasicFactory {
      */
     public Entity createBullet(final GameState state, final Point2d origin, final Vector2d direction, final Type type) {
         final Type bulletType = type.equals(Type.PLAYER) ? Type.PLAYER_BULLET : Type.ENEMY_BULLET;
+        final BulletGraphicComponent bullet = new BulletGraphicComponent(GameMath.toPoint2D(origin));
+        bullet.setBulletType(bulletType);
         final Entity e = GameEngine.entityBuilder().type(bulletType).position(origin)
                 .with(new BulletComponent(state.getWorld(), origin, direction))
-                .view(new BulletGraphicComponent(GameMath.toPoint2D(origin), bulletType))
+                .view(bullet)
                 .bbox(new CircleHitBox(new Circle2d(HitBoxType.BULLET.getBoxRadius()))).zIndex(0).build();
         state.getWorld().addGameObject(e.getGameObject());
         state.getView().addGraphicComponent(e.getView());

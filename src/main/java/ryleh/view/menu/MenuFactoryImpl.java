@@ -26,14 +26,13 @@ public class MenuFactoryImpl implements MenuFactory {
     private Text description;
 
     public MenuFactoryImpl() {
-        scaledSize = (int) (ViewHandlerImpl.getScaleModifier() * SIZE);
-        description = new Text("");
-        hoverColor = Color.CADETBLUE;
-        startColor = Color.CORNFLOWERBLUE;
+        this(SIZE);
     }
 
     public MenuFactoryImpl(final int scale) {
-        this();
+        description = new Text("");
+        hoverColor = Color.CADETBLUE;
+        startColor = Color.CORNFLOWERBLUE;
         this.scaledSize = (int) (ViewHandlerImpl.getScaleModifier() * scale);
     }
 

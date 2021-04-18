@@ -20,7 +20,10 @@ import ryleh.view.graphics.GraphicComponent;
  * A class to Completely handle the view.
  */
 public class ViewHandlerImpl implements ViewHandler {
-
+    /**
+     * To calculate scale of window size.
+     */
+    private static final double STANDARD_SCALE = 1920.0;
     private final Stage stage;
     private final List<GraphicComponent> graphicComponents;
     private final Scene scene;
@@ -34,13 +37,13 @@ public class ViewHandlerImpl implements ViewHandler {
      */
     private static int standardWidth = (int) Screen.getPrimary().getBounds().getWidth();
     /**
-     * the height of the screen.
+     * The height of the screen.
      */
     private static int standardHeight = (int) Screen.getPrimary().getBounds().getHeight();
     /**
      * The modifier to set the correct proportion of the view.
      */
-    private static double scaleModifier = (double) (ViewHandlerImpl.standardWidth / 1920.0);
+    private static double scaleModifier = (double) (ViewHandlerImpl.standardWidth / STANDARD_SCALE);
 
     public static int getStandardWidth() {
         return standardWidth;

@@ -19,6 +19,7 @@ import ryleh.view.graphics.GraphicComponent;
  * EnemySpinner Entity.
  */
 public class EnemySpinnerGraphicComponent implements GraphicComponent {
+    private static final int ANGLE_MODIFIER = 60;
     private Rotate rotation;
     private Rectangle rectangle;
     private FadeTransition enemyFade;
@@ -44,7 +45,7 @@ public class EnemySpinnerGraphicComponent implements GraphicComponent {
         this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
         this.rectangle.setFill(Textures.ENEMY_SPINNER.getImagePattern());
         this.rotation = new Rotate();
-        this.rotation.setAngle(GameMath.toDegrees(Math.PI / 60));
+        this.rotation.setAngle(GameMath.toDegrees(Math.PI / ANGLE_MODIFIER));
         this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
         this.enemyFade.setFromValue(1.0);
         this.enemyFade.setToValue(0.0);

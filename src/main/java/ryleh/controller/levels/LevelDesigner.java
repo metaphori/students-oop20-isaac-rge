@@ -10,6 +10,12 @@ import ryleh.model.Type;
 //to determine WHICH entities are going to be spawned
 
 public final class LevelDesigner {
+    /** Above this integer, difficulty range indicates "hard" as difficulty for this level.*/
+    private static final int HARD_MODE = 50;
+    /** Above this integer, difficulty range indicates "medium" as difficulty for this level.*/
+    private static final int MEDIUM_MODE = 50;
+    /** Above this integer, difficulty range indicates "easy" as difficulty for this level.*/
+    private static final int EASY_MODE = 20;
     /**
      * Value used to calculate type of enemies to spawn.
      */
@@ -22,11 +28,11 @@ public final class LevelDesigner {
     private final List<Type> entities;
     private final Random random;
     private final Function<Integer, Integer> difficultyFunction;
-  
     public LevelDesigner() {
         levelNum = 0;
         entities = new ArrayList<>();
         random = new Random();
+        /** This function represents how difficulty raises along with the amount of levels explored.*/
         difficultyFunction = (x) -> (int) (200 * Math.pow(Math.E, -(double) (x) / 7) - 80);
     }
 
@@ -64,19 +70,19 @@ public final class LevelDesigner {
         final int difficulty = (int) (random.nextGaussian() + difficultyRange);
 
         for (int i = 0; i < enemyNumber; i++) {
-            if (difficulty >= 0 && difficulty <= 20) {
+            if (difficulty >= 0 && difficulty <= EASY_MODE) {
                 if (random.nextInt(2) == 0) {
                     entities.add(Type.ENEMY_DRUNK);
                 } else {
                     entities.add(Type.ENEMY_LURKER);
                 }
-            } else if (difficulty > 20 && difficulty <= 50) {
+            } else if (difficulty > EASY_MODE && difficulty <= MEDIUM_MODE) {
                 if (random.nextInt(2) == 0) {
                     entities.add(Type.ENEMY_SHOOTER);
                 } else {
                     entities.add(Type.ENEMY_SPINNER);
                 }
-            } else if (difficulty > 50) {
+            } else if (difficulty > HARD_MODE) {
                 if (random.nextInt(2) == 0) {
                     entities.add(Type.ENEMY_DRUNKSPINNER);
                 } else {

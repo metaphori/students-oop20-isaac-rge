@@ -1,12 +1,14 @@
 package ryleh;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import ryleh.view.menu.RylehMainMenu;
- 
+
 public class Ryleh extends Application {
     public static void main(final String[] args) {
-       launch(args);
+        launch(args);
     }
+
     /**
      * {@inheritDoc}
      */

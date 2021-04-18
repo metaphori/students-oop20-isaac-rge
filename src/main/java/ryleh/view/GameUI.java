@@ -11,6 +11,10 @@ import ryleh.Ryleh;
 
 public class GameUI {
     /**
+     * To adjust lives UI's text indentation.
+     */
+    private static final int LIVES_INDENTATION = 11;
+    /**
      * Duration of fading transition for item effect text.
      */
     private static final double FT_DURATION = 4000;
@@ -104,7 +108,7 @@ public class GameUI {
     private void setLives() {
         this.lives = new Text("Lives: 3");
         this.lives.setFont(this.font);
-        this.lives.setX((ViewHandlerImpl.getStandardWidth() / SCREEN_WIDTH_RATIO) * 11
+        this.lives.setX((ViewHandlerImpl.getStandardWidth() / SCREEN_WIDTH_RATIO) * LIVES_INDENTATION
                 + PIXEL_CORRECTION * ViewHandlerImpl.getScaleModifier());
         this.lives.setY((ViewHandlerImpl.getStandardHeight() / SCREEN_HEIGHT_RATIO) * 1);
         this.lives.setFill(Color.WHITE);

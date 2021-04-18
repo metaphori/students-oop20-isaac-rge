@@ -19,6 +19,7 @@ import ryleh.view.graphics.GraphicComponent;
  */
 public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent {
 
+    private static final int ANGLE_MODIFIER = 40;
     private Rectangle rectangle;
     private double angle;
     private FadeTransition enemyFade;
@@ -55,7 +56,7 @@ public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent {
      * A method to update the state of the graphicComponent in the view.
      */
     private void updateImage() {
-        angle = angle + Math.PI / 40;
+        angle = angle + Math.PI / ANGLE_MODIFIER;
         if (angle >= Math.PI * 2) {
             angle = 0;
         }

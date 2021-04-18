@@ -66,7 +66,7 @@ public final class GameEngine {
         // sets the game world's game loop (Timeline)
         loop = new Timeline(oneFrame);
         loop.setCycleCount(Animation.INDEFINITE);
-        loop.play();;
+        loop.play();
     }
 
     /**

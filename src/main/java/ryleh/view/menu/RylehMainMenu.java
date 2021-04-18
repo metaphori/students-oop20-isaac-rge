@@ -1,6 +1,5 @@
 package ryleh.view.menu;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +18,21 @@ import javafx.util.Pair;
 import ryleh.Ryleh;
 import ryleh.controller.core.GameEngine;
 import ryleh.view.ViewHandlerImpl;
+
 /**
- * This class represents the game's main menu. It uses MenuFactory to instantiate graphic parts inside the constructor.
- * To render it, call "show" method. 
+ * This class represents the game's main menu. It uses MenuFactory to
+ * instantiate graphic parts inside the constructor. To render it, call "show"
+ * method.
  */
 public class RylehMainMenu {
+    /**
+     * Standard scaling of the menu.
+     */
+    private static final double STANDARD_SCALE = 1920.0;
     private final Stage primaryStage;
     private MenuFactory factory;
+    private static final List<Pair<Integer, Integer>> STANDARD_SCALES = List.of(new Pair<>(1920, 1080),
+            new Pair<>(1280, 720), new Pair<>(800, 450));
 
     /**
      * 
@@ -34,6 +41,7 @@ public class RylehMainMenu {
     public RylehMainMenu(final Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
+
     /**
      * Shows Ryleh's Call main menu.
      */
@@ -42,19 +50,21 @@ public class RylehMainMenu {
         this.newMenu();
         this.primaryStage.show();
     }
+
     /**
-     * Creates a new Main Menu with custom buttons and a description for every of them.
+     * Creates a new Main Menu with custom buttons and a description for every of
+     * them.
      *
      */
     public void newMenu() {
         final Separator separator = new Separator();
         final BorderPane pane = new BorderPane();
         final VBox leftBox = new VBox();
-        final VBox rightBox = new VBox(); 
-        factory.setLevelFont(Font.loadFont(Ryleh.class.getResource("/assets/fonts/saturno.ttf")
-                .toExternalForm(), factory.getScaledSize()));
+        final VBox rightBox = new VBox();
+        factory.setLevelFont(Font.loadFont(Ryleh.class.getResource("/assets/fonts/saturno.ttf").toExternalForm(),
+                factory.getScaledSize()));
         leftBox.getChildren().add(factory.createCustomButton("Start Game", "Start a new adventure", () -> {
-        final GameEngine engine = new GameEngine();
+            final GameEngine engine = new GameEngine();
             engine.initGame(primaryStage);
             engine.mainLoop();
         }));
@@ -74,31 +84,31 @@ public class RylehMainMenu {
         rightBox.setTranslateX(-factory.getScaledSize());
         pane.setLeft(leftBox);
         pane.setRight(rightBox);
-        this.primaryStage.setScene(new Scene(pane, ViewHandlerImpl.getStandardWidth(), ViewHandlerImpl.getStandardHeight()));
+        this.primaryStage
+                .setScene(new Scene(pane, ViewHandlerImpl.getStandardWidth(), ViewHandlerImpl.getStandardHeight()));
         this.primaryStage.setResizable(false);
         this.primaryStage.setTitle("Ryleh's Call");
         this.primaryStage.setOnCloseRequest(e -> {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        Platform.exit();
-                        System.exit(0);
-                    }
-                });
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Platform.exit();
+                    System.exit(0);
+                }
+            });
         });
     }
+
     private Node createComboBox() {
         final List<Pair<Integer, Integer>> resolutions = new ArrayList<>();
-        resolutions.add(new Pair<>(1920, 1080));
-        resolutions.add(new Pair<>(1280, 720));
-        resolutions.add(new Pair<>(800, 450));
+        resolutions.addAll(STANDARD_SCALES);
         final ComboBox<Pair<Integer, Integer>> combo = new ComboBox<>();
         combo.setPromptText("Select a Resolution");
         combo.getItems().addAll(resolutions);
         combo.setOnAction(e -> {
             ViewHandlerImpl.setStandardWidth(combo.getValue().getKey());
             ViewHandlerImpl.setStandardHeight(combo.getValue().getValue());
-            ViewHandlerImpl.setScaleModifier(ViewHandlerImpl.getStandardWidth() / 1920.0);
+            ViewHandlerImpl.setScaleModifier(ViewHandlerImpl.getStandardWidth() / STANDARD_SCALE);
             this.show();
         });
         return combo;

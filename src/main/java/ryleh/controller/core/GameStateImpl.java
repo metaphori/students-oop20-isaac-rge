@@ -31,8 +31,10 @@ public class GameStateImpl implements GameState {
     private final InputController input;
     private final LevelHandler levelHandler;
     private final Entity player;
+
     /**
      * Constructor method.
+     * 
      * @param mainStage Stage instance.
      */
     public GameStateImpl(final Stage mainStage) {
@@ -80,10 +82,16 @@ public class GameStateImpl implements GameState {
                 .setPosition(levelHandler.getPosition(levelHandler.getPlayerSpawn()));
 
         entities.addAll(levelHandler.getEntities());
+
+        /**
+         * Sorting the entities based on their GraphicComponent's zIndex, to correctly
+         * set the order of rendering.
+         */
         Collections.sort(entities, new Comparator<Entity>() {
             @Override
             public int compare(final Entity o1, final Entity o2) {
-                return o1.getGameObject().getzIndex() - o2.getGameObject().getzIndex();
+                // return o1.getGameObject().getzIndex() - o2.getGameObject().getzIndex();
+                return o1.getView().getZindex() - o2.getView().getZindex();
             }
         });
         input.initInput();

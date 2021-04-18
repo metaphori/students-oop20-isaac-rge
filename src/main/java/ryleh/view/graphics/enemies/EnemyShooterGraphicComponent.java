@@ -20,6 +20,10 @@ public class EnemyShooterGraphicComponent implements GraphicComponent {
 
     private Rectangle rectangle;
     private FadeTransition enemyFade;
+    private int zIndex;
+    /**
+     * The duration of the fade animation of this GraphicComponent.
+     */
     private static final int FADE_DURATION = 200;
 
     /**
@@ -83,4 +87,19 @@ public class EnemyShooterGraphicComponent implements GraphicComponent {
         enemyFade.play();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setZindex(final int zIndex) {
+        this.zIndex = zIndex;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getZindex() {
+        return zIndex;
+    }
 }

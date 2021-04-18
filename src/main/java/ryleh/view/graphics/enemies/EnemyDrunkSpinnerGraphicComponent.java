@@ -19,10 +19,17 @@ import ryleh.view.graphics.GraphicComponent;
  */
 public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent {
 
+    /**
+     * The modifier to correctly set the angle to update this GraphicComponent.
+     */
     private static final int ANGLE_MODIFIER = 40;
     private Rectangle rectangle;
     private double angle;
     private FadeTransition enemyFade;
+    private int zIndex;
+    /**
+     * The duration of the fade animation of this GraphicComponent.
+     */
     private static final int FADE_DURATION = 200;
 
     /**
@@ -99,4 +106,19 @@ public class EnemyDrunkSpinnerGraphicComponent implements GraphicComponent {
         enemyFade.play();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setZindex(final int zIndex) {
+        this.zIndex = zIndex;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getZindex() {
+        return zIndex;
+    }
 }

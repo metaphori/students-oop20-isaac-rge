@@ -100,15 +100,4 @@ public class EntityBuilder {
     public EntityImpl build() {
         return new EntityImpl(graphic, object);
     }
-
-    /**
-     * Sets the zIndex value for the GameObject.
-     * 
-     * @param zIndex int value.
-     * @return EntityBuilder instance.
-     */
-    public EntityBuilder zIndex(final int zIndex) {
-        object.setzIndex(zIndex);
-        return this;
-    }
 }

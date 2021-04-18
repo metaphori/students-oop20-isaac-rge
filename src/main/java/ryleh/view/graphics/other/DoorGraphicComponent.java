@@ -20,6 +20,8 @@ public class DoorGraphicComponent implements GraphicComponent {
 
     private Rectangle rectangle;
     private boolean animPlayed;
+    private int zIndex;
+
     /**
      * The duration of each frame of the animation.
      */
@@ -117,5 +119,21 @@ public class DoorGraphicComponent implements GraphicComponent {
      */
     @Override
     public void onRemoved(final EventHandler<ActionEvent> event) {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setZindex(final int zIndex) {
+        this.zIndex = zIndex;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getZindex() {
+        return zIndex;
     }
 }

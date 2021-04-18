@@ -24,6 +24,8 @@ public class PlayerGraphicComponent implements GraphicComponent {
     private Direction lastDir;
     private FadeTransition playerFade;
     private Boolean invincible;
+    private int zIndex;
+
     /**
      * Duration of each frame of the animation.
      */
@@ -212,5 +214,21 @@ public class PlayerGraphicComponent implements GraphicComponent {
     @Override
     public void onRemoved(final EventHandler<ActionEvent> event) {
         event.handle(null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setZindex(final int zIndex) {
+        this.zIndex = zIndex;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getZindex() {
+        return zIndex;
     }
 }

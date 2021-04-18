@@ -8,7 +8,7 @@ import ryleh.model.World;
 import ryleh.model.physics.Direction;
 
 public class PlayerComponent extends AbstractComponent {
-    private static final double TIME_MULTIPLIER = 0.01;
+    private static final double TIME_MULTIPLIER = 0.001;
     private Vector2d velocity;
     private Point2d position;
     private final int speed;

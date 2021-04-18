@@ -7,7 +7,7 @@ import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
 
-public class CollisionComponent extends Component {
+public class CollisionComponent extends AbstractComponent {
 
     private final Type type;
     private boolean hasAlreadyColided = false;
@@ -23,7 +23,6 @@ public class CollisionComponent extends Component {
         super(world);
         this.type = type;
         this.hasAlreadyColided = false;
-        // this.doorCollidable = false;
     }
 
     public void setDoorCollidable() {
@@ -31,21 +30,23 @@ public class CollisionComponent extends Component {
     }
 
     /**
+     * {@inheritDoc}
+     * 
      * A method which checks for collisions with other GameObjects and notifies
      * world instance in case of event.
+     * 
      */
     public void onUpdate(final double deltaTime) {
-        super.onUpdate(deltaTime);
         if (!this.hasAlreadyColided) {
-            Optional<GameObject> colliding = world.getGameObjects().stream()
+            Optional<GameObject> colliding = super.getWorld().getGameObjects().stream()
                     .filter(obj -> obj.getType().equals(Type.PLAYER))
-                    .filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox())).findFirst();
+                    .filter(obj -> obj.getHitBox().isCollidingWith(super.getObject().getHitBox())).findFirst();
             if (colliding.isPresent()) {
                 if (type.equals(Type.ITEM)) {
-                    world.notifyWorldEvent(new ItemPickUpEvent());
+                    super.getWorld().notifyWorldEvent(new ItemPickUpEvent());
                     this.hasAlreadyColided = true;
                 } else {
-                    world.notifyWorldEvent(new EnemyCollisionEvent(colliding.get()));
+                    super.getWorld().notifyWorldEvent(new EnemyCollisionEvent(colliding.get()));
                 }
             }
         }

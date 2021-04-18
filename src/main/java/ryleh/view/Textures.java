@@ -68,6 +68,19 @@ public enum Textures {
      * Fire texture-frame 2.
      */
     FIRE2("assets/texture/obstacles/Fire2.png", 140, 140),
+    /**
+     * Fire texture-frame 3.
+     */
+    FIRE3("assets/texture/obstacles/Fire3.png", 140, 140),
+    /**
+     * Fire texture-frame 4.
+     */
+    FIRE4("assets/texture/obstacles/Fire4.png", 140, 140),
+    /**
+     * Fire texture-frame 5.
+     */
+    FIRE5("assets/texture/obstacles/Fire5.png", 140, 140),
+
 
     /**
      * Rock texture 1.
@@ -102,7 +115,7 @@ public enum Textures {
     /**
      * Background1 texture.
      */
-    BACKGROUND("assets/texture/levels/background.png", 1920, 1080),
+    BACKGROUND("assets/texture/levels/Background1.png", 1920, 1080),
     /**
      * Background2 texture.
      */
@@ -115,36 +128,32 @@ public enum Textures {
     /**
      * Item texture-frame 1.
      */
-    ITEM1("assets/texture/items/Chest1.png", 145, 145),
+    ITEM1("assets/texture/items/Chest1.png", 90, 90),
     /**
      * Item texture-frame 2.
      */
-    ITEM2("assets/texture/items/Chest2.png", 145, 145),
-    /**
-     * Item texture-frame 2.
-     */
-    ITEM3("assets/texture/items/Chest3.png", 145, 145),
+    ITEM2("assets/texture/items/Chest2.png", 90, 90),
 
     /**
      * Enemy Drunk texture.
      */
-    ENEMY_DRUNK("assets/texture/enemies/Enemy1.png", 100, 100),
+    ENEMY_DRUNK("assets/texture/enemies/EnemyDrunk.png", 100, 100),
     /**
      * Enemy Shooter texture.
      */
-    ENEMY_SHOOTER("assets/texture/enemies/Enemy2.png", 100, 100),
+    ENEMY_SHOOTER("assets/texture/enemies/EnemyShooter.png", 100, 100),
     /**
      * Enemy Lurker texture.
      */
-    ENEMY_LURKER("assets/texture/enemies/Enemy3.png", 100, 100),
+    ENEMY_LURKER("assets/texture/enemies/EnemyLurker.png", 100, 100),
     /**
      * Enemy Spinner texture.
      */
-    ENEMY_SPINNER("assets/texture/enemies/Enemy4.png", 100, 100),
+    ENEMY_SPINNER("assets/texture/enemies/EnemySpinner.png", 100, 100),
     /**
      * Enemy DrunkSpinner texture.
      */
-    ENEMY_DRUNKSPINNER("assets/texture/enemies/Enemy5.png", 100, 100),
+    ENEMY_DRUNKSPINNER("assets/texture/enemies/EnemyDrunkSpinner.png", 100, 100),
 
     /**
      * Player Bullet texture.

@@ -22,7 +22,7 @@ public class FireGraphicComponent implements GraphicComponent {
     /**
      * The duration of each frame of the Animation.
      */
-    private static final int ANIM_DURATION = 400;
+    private static final int ANIM_DURATION = 300;
     private AnimationLoop animFire;
 
     /**
@@ -44,7 +44,8 @@ public class FireGraphicComponent implements GraphicComponent {
         this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
         this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
         this.rectangle.setFill(Textures.FIRE1.getImagePattern());
-        this.animFire = new AnimationLoop(List.of(Textures.FIRE1.getImagePattern(), Textures.FIRE2.getImagePattern()),
+        this.animFire = new AnimationLoop(List.of(Textures.FIRE1.getImagePattern(), Textures.FIRE2.getImagePattern(),
+                Textures.FIRE3.getImagePattern(), Textures.FIRE4.getImagePattern(), Textures.FIRE5.getImagePattern()),
                 ANIM_DURATION, rectangle);
     }
 

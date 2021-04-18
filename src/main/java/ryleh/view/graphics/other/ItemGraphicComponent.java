@@ -46,8 +46,8 @@ public class ItemGraphicComponent implements GraphicComponent {
         this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
         this.rectangle.setFill(Textures.ITEM1.getImagePattern());
         this.animPlayed = false;
-        this.animItem = new AnimationLoop(List.of(Textures.ITEM1.getImagePattern(), Textures.ITEM2.getImagePattern(),
-                Textures.ITEM3.getImagePattern()), ANIM_DURATION, rectangle);
+        this.animItem = new AnimationLoop(List.of(Textures.ITEM1.getImagePattern(), Textures.ITEM2.getImagePattern()),
+                ANIM_DURATION, rectangle);
     }
 
     /**

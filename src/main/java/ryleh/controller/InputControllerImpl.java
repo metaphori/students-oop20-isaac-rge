@@ -125,7 +125,7 @@ public class InputControllerImpl implements InputController {
      */
     private void spawnBullet(final Direction direction) {
         ((ShootingComponent) player.getGameObject().getComponent(ShootingComponent.class).get())
-                .shoot(direction.getPoint());
+                .shoot(direction.getVector());
     }
 
     /**
@@ -135,7 +135,7 @@ public class InputControllerImpl implements InputController {
      *                  object
      */
     private void move(final Direction direction) {
-        this.physics.setVelocity(direction.getPoint());
+        this.physics.setVelocity(direction.getVector());
         this.physics.setDirection(direction);
         if (!this.physics.getBlocked().equals(direction)) {
             this.physics.resetBlocked();

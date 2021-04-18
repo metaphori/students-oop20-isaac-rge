@@ -7,6 +7,7 @@ import ryleh.controller.core.factories.BasicFactory;
 import ryleh.model.GameObject;
 
 public class BulletSpawnEvent implements Event {
+
     private final Point2d position;
     private final Vector2d velocity;
     private final GameObject target;

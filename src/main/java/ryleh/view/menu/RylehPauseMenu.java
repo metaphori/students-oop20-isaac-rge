@@ -1,5 +1,6 @@
 package ryleh.view.menu;
 
+
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -35,23 +36,24 @@ public class RylehPauseMenu {
         this.box = new VBox();
         factory = new MenuFactoryImpl();
         this.primaryStage = primaryStage;
-        factory.setLevelFont(Font.loadFont(Ryleh.class.getResource("/assets/fonts/manaspc.ttf").toExternalForm(),
-                factory.getScaledSize()));
+        factory.setLevelFont(Font.loadFont(Ryleh.class.getResource("/assets/fonts/manaspc.ttf")
+                .toExternalForm(), factory.getScaledSize()));
         final Runnable resume = new Runnable() {
             @Override
             public void run() {
                 primaryStage.getScene().getRoot().setEffect(null);
                 popupStage.hide();
                 GameEngine.resumeEngine();
-            }
+            } 
         };
 
         this.box.getChildren().add(factory.createCustomButton("Resume", "Resume the game", resume));
-        Node developButton = factory.createCustomButton("Developer Mode: OFF", "Enable/Disable developer mode", () -> {
-            GameEngine.setDeveloper(!GameEngine.isDeveloper());
-            ((Text) ((HBox) this.box.getChildren().get(1)).getChildren().get(1))
+        Node developButton = factory.createCustomButton("Developer Mode: OFF", "Enable/Disable developer mode", 
+                () -> {
+                    GameEngine.setDeveloper(!GameEngine.isDeveloper());
+                    ((Text) ((HBox) this.box.getChildren().get(1)).getChildren().get(1))
                     .setText("Developer Mode: " + (GameEngine.isDeveloper() ? "ON" : "OFF"));
-        });
+                });
         this.box.getChildren().add(developButton);
         this.box.getChildren().add(factory.createCustomButton("Quit Game", "Exit to desktop", () -> {
             factory.createCustomAlert("Do you really want to quit?");
@@ -70,21 +72,22 @@ public class RylehPauseMenu {
         popupStage.initOwner(primaryStage);
         popupStage.initModality(Modality.APPLICATION_MODAL);
         popupStage.addEventHandler(KeyEvent.KEY_PRESSED, key -> {
-            if (key.getCode().equals(KeyCode.P)) {
-                resume.run();
+            if (key.getCode().equals(KeyCode.P) || key.getCode().equals(KeyCode.ESCAPE)) {
+                   resume.run();
             }
         });
-        pauseScene = new Scene(this.pane, ViewHandlerImpl.STANDARD_WIDTH, ViewHandlerImpl.STANDARD_HEIGHT);
+        pauseScene = new Scene(this.pane, ViewHandlerImpl.getStandardWidth(), ViewHandlerImpl.getStandardHeight());
     }
 
     /**
-     * This method will be called every time the player presses the key "P" to pause
-     * the engine inside "GameEngine" class It renders a new pop-up stage that
-     * contains the pause menu.
-     */
+     * This method will be called every time the player presses the key "P" to pause the engine inside "GameEngine" class
+     * It renders a new pop-up stage that contains the pause menu.
+    */
     public void renderPauseMenu() {
         this.primaryStage.getScene().getRoot().setEffect(new GaussianBlur());
         this.pane.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1);");
+        popupStage.setX(primaryStage.getX());
+        popupStage.setY(primaryStage.getY());
         pauseScene.setFill(Color.TRANSPARENT);
         popupStage.setScene(pauseScene);
         popupStage.show();

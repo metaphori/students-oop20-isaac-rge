@@ -10,7 +10,7 @@ import ryleh.model.World;
 public class ShootingComponent extends AbstractComponent {
 
     private double attackSpeed;
-    private Timer timer;
+    private final Timer timer;
     /**
      * @param world 
      * @param attackSpeed Number of shoots per second

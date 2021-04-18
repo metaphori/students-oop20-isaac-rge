@@ -139,12 +139,7 @@ public class GameStateImpl implements GameState {
     public ViewHandlerImpl getView() {
         return view;
     }
-
-    private Point2D toPoint2D(final Point2d point) {
-        return new Point2D(point.getX() * ViewHandlerImpl.SCALE_MODIFIER,
-                point.getY() * ViewHandlerImpl.SCALE_MODIFIER);
-    }
-
+  
     /**
      * {@inheritDoc}
      */

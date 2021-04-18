@@ -14,10 +14,9 @@ import javafx.scene.shape.Rectangle;
  */
 public class AnimationLoop {
 
-    private int frameDuration;
-    private List<ImagePattern> frames;
+    private final List<ImagePattern> frames;
     private boolean cycleFinished;
-    private Timer timer;
+    private final Timer timer;
     private int currentFrame;
 
     /**
@@ -32,13 +31,12 @@ public class AnimationLoop {
      */
     public AnimationLoop(final List<ImagePattern> frames, final int duration, final Rectangle rectangle) {
         this.frames = new ArrayList<>(frames);
-        this.frameDuration = duration;
         this.cycleFinished = false;
         this.currentFrame = 0;
-        this.timer = new Timer(frameDuration, new ActionListener() {
+        this.timer = new Timer(duration, new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                setFrame(rectangle);
+                getNextFrame(rectangle);
                 resetTimer();
             }
         });
@@ -74,7 +72,7 @@ public class AnimationLoop {
      * @return The given rectangle with the correct fillProperty and the correct
      *         frame of the animation.
      */
-    public Rectangle setFrame(final Rectangle rectangle) {
+    public Rectangle getNextFrame(final Rectangle rectangle) {
         currentFrame++;
         if (currentFrame == frames.size()) {
             currentFrame = 0;

@@ -1,4 +1,4 @@
-package ryleh.view;
+package ryleh.view.graphics;
 
 import java.util.List;
 import javafx.animation.FadeTransition;
@@ -11,6 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import ryleh.model.physics.Direction;
+import ryleh.view.AnimationLoop;
+import ryleh.view.Textures;
 
 /**
  * A class that provides the GraphicComponent of the view related to the Player
@@ -154,7 +156,7 @@ public class PlayerGraphicComponent implements GraphicComponent {
      */
     @Override
     public void onAdded(final Scene scene) {
-        Parent root = scene.getRoot();
+        final Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
     }
 

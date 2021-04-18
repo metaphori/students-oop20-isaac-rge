@@ -1,4 +1,4 @@
-package ryleh.view.other;
+package ryleh.view.graphics.other;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,8 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import ryleh.model.Type;
-import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
+import ryleh.view.graphics.GraphicComponent;
 
 /**
  * A class that provides the GraphicComponent of the view related to the Bullet
@@ -75,7 +75,7 @@ public class BulletGraphicComponent implements GraphicComponent {
      */
     @Override
     public void onAdded(final Scene scene) {
-        Parent root = scene.getRoot();
+        final Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
     }
 

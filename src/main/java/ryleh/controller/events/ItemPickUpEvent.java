@@ -8,9 +8,10 @@ import ryleh.model.items.FireSpeedItem;
 import ryleh.model.items.HealItem;
 import ryleh.model.items.Item;
 import ryleh.model.items.MaxHealthItem;
-import ryleh.view.other.ItemGraphicComponent;
+import ryleh.view.graphics.other.ItemGraphicComponent;
 
 public class ItemPickUpEvent implements Event {
+  
     /**
      * {@inheritDoc} Starts the opening animation of the item
      */
@@ -26,6 +27,7 @@ public class ItemPickUpEvent implements Event {
     private void randomItem(final GameState state) {
         Item item = null;
         final Random random = new Random();
+        Random random = new Random();
         switch (random.nextInt(3)) {
         case 0:
             item = new HealItem();

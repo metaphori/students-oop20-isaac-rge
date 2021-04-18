@@ -7,7 +7,7 @@ import ryleh.controller.core.GameState;
 import ryleh.controller.events.Event;
 import ryleh.controller.events.EventListener;
 import ryleh.model.components.HealthIntComponent;
-import ryleh.view.PlayerGraphicComponent;
+import ryleh.view.graphics.PlayerGraphicComponent;
 
 public class EventHandler implements EventListener {
 

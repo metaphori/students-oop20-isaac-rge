@@ -14,12 +14,12 @@ public class RylehGameOverMenu {
     public RylehGameOverMenu(final Stage primaryStage, final boolean victory) {
         this.primaryStage = primaryStage;
         final String imagePath = victory ? "/assets/texture/menu/victory.png" : "/assets/texture/menu/gameOver.png";
-        this.gameOverImage = new Image(imagePath, (double) ViewHandlerImpl.STANDARD_WIDTH,
-                (double) ViewHandlerImpl.STANDARD_HEIGHT, true, true);
+        this.gameOverImage = new Image(imagePath, (double) ViewHandlerImpl.getStandardWidth(),
+                (double) ViewHandlerImpl.getStandardHeight(), true, true);
     }
 
     /**
-     * Shows the menu into primary stage.
+     * Shows the game over menu into primary stage.
      */
     public void show() {
         final Pane pane = new Pane();

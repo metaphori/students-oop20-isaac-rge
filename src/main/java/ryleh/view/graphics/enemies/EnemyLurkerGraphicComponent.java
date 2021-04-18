@@ -1,4 +1,4 @@
-package ryleh.view.enemies;
+package ryleh.view.graphics.enemies;
 
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -12,9 +12,9 @@ import javafx.util.Duration;
 import ryleh.common.GameMath;
 import ryleh.common.Point2d;
 import ryleh.common.Vector2d;
-import ryleh.view.GraphicComponent;
-import ryleh.view.PlayerGraphicComponent;
 import ryleh.view.Textures;
+import ryleh.view.graphics.GraphicComponent;
+import ryleh.view.graphics.PlayerGraphicComponent;
 
 /**
  * A class that provides a GraphicComponent of the view related to the
@@ -72,7 +72,7 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent {
         rectangle.setX(position.getX() - rectangle.getWidth() / 2);
         rectangle.setY(position.getY() - rectangle.getHeight() / 2);
         if (System.currentTimeMillis() - adjustDirectionTimer >= ADJUST_DELAY) {
-            Vector2d directionToPlayer = new Vector2d(new Point2d(player.getNode().getX(), player.getNode().getY()),
+            final Vector2d directionToPlayer = new Vector2d(new Point2d(player.getNode().getX(), player.getNode().getY()),
                     new Point2d(position.getX() - rectangle.getWidth() / 2,
                             position.getY() - rectangle.getHeight() / 2)).getNormalized().multiply(MOVE_SPEED);
             rectangle.setRotate(GameMath.toDegrees(Math.atan(directionToPlayer.getY() / directionToPlayer.getX())));
@@ -93,7 +93,7 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent {
      */
     @Override
     public void onAdded(final Scene scene) {
-        Parent root = scene.getRoot();
+        final Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
     }
 

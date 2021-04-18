@@ -13,7 +13,7 @@ public class EnemyCollisionEvent implements Event {
     /**
      * Constructor for a collision event.
      * 
-     * @param target The target of the event,
+     * @param target The target of the event.
      */
     public EnemyCollisionEvent(final GameObject target) {
         this.target = target;

@@ -26,7 +26,7 @@ public class MenuFactoryImpl implements MenuFactory {
     private Text description;
 
     public MenuFactoryImpl() {
-        scaledSize = (int) (ViewHandlerImpl.SCALE_MODIFIER * SIZE);
+        scaledSize = (int) (ViewHandlerImpl.getScaleModifier() * SIZE);
         description = new Text("");
         hoverColor = Color.CADETBLUE;
         startColor = Color.CORNFLOWERBLUE;
@@ -34,7 +34,7 @@ public class MenuFactoryImpl implements MenuFactory {
 
     public MenuFactoryImpl(final int scale) {
         this();
-        this.scaledSize = (int) (ViewHandlerImpl.SCALE_MODIFIER * scale);
+        this.scaledSize = (int) (ViewHandlerImpl.getScaleModifier() * scale);
     }
 
     /**
@@ -63,8 +63,8 @@ public class MenuFactoryImpl implements MenuFactory {
         container.setAlignment(Pos.CENTER);
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Quit Game");
-        window.setWidth(ViewHandlerImpl.STANDARD_WIDTH / 3);
-        window.setHeight(ViewHandlerImpl.STANDARD_HEIGHT / 3);
+        window.setWidth(ViewHandlerImpl.getStandardWidth() / 3);
+        window.setHeight(ViewHandlerImpl.getStandardHeight() / 3);
         window.setScene(new Scene(container));
         window.setResizable(false);
         window.showAndWait();

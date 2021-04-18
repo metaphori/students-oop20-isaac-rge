@@ -10,7 +10,7 @@ import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
 
-public class BulletComponent extends Component {
+public class BulletComponent extends AbstractComponent {
 	
 	private Point2d position;
 	private int speed = 10;
@@ -22,27 +22,33 @@ public class BulletComponent extends Component {
 		this.velocity = direction.multiply(speed);
 	   // this.velocity = new V2d(0, 0);
 	}
+	/**
+         * {@inheritDoc}
+         */
 	@Override
 	public void onAdded(final GameObject object) {
 		super.onAdded(object);
 		object.setPosition(this.position);
 	}
+	/**
+	 * {@inheritDoc}
+	 */
 	public void onUpdate(final double dt) {
 	    move(dt);
 	    checkCollision();
 	 }
 	private void checkCollision() {
 		Optional<GameObject> colliding = Optional.empty();
-		if (!object.getType().equals(Type.PLAYER_BULLET)) {
+		if (!super.getObject().getType().equals(Type.PLAYER_BULLET)) {
 			colliding = this.checkPlayerCollision();
 		} else {
 			colliding = this.checkEnemyCollisiom();
 		}
 		if (colliding.isPresent()) {
-			world.notifyWorldEvent(new EnemyCollisionEvent(colliding.get()));
+			super.getWorld().notifyWorldEvent(new EnemyCollisionEvent(colliding.get()));
 		}
-		if (colliding.isPresent() || object.getHitBox().isOutOfBounds(world.getBounds())) {
-			world.notifyWorldEvent(new RemoveEntityEvent(object));
+		if (colliding.isPresent() || super.getObject().getHitBox().isOutOfBounds(super.getWorld().getBounds())) {
+			super.getWorld().notifyWorldEvent(new RemoveEntityEvent(super.getObject()));
 		}
 	}
 	/**
@@ -50,10 +56,10 @@ public class BulletComponent extends Component {
 	 * @return An Optional that represents the game object which is colliding with the current bullet
 	 */
 	private Optional<GameObject> checkPlayerCollision() {
-		return world.getGameObjects().stream()
+		return super.getWorld().getGameObjects().stream()
 				.filter(obj -> obj.getType().equals(Type.PLAYER) || obj.getType().equals(Type.ROCK)
 						|| obj.getType().equals(Type.ITEM))
-				.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
+				.filter(obj -> obj.getHitBox().isCollidingWith(super.getObject().getHitBox()))
 				.findFirst();
 	}
 	/**
@@ -61,16 +67,16 @@ public class BulletComponent extends Component {
 	 * @return n Optional that represents the game object which is colliding with the current bullet
 	 */
 	private Optional<GameObject> checkEnemyCollisiom() {
-		return world.getGameObjects().stream()
+		return super.getWorld().getGameObjects().stream()
 				.filter(obj -> obj.getType().equals(Type.ENEMY_DRUNK) || obj.getType().equals(Type.ENEMY_DRUNKSPINNER) 
 						|| obj.getType().equals(Type.ENEMY_LURKER) || obj.getType().equals(Type.ENEMY_SHOOTER) 
 						|| obj.getType().equals(Type.ENEMY_SPINNER) || obj.getType().equals(Type.ROCK) || obj.getType().equals(Type.ITEM))
-				.filter(obj -> obj.getHitBox().isCollidingWith(object.getHitBox()))
+				.filter(obj -> obj.getHitBox().isCollidingWith(super.getObject().getHitBox()))
 				.findFirst();
 	}
 	protected void move(final double dt) {
 		this.position = this.position.sum(velocity.multiply(dt * 0.1));
-		object.setPosition(this.position);
+		super.getObject().setPosition(this.position);
 	}
 
 }

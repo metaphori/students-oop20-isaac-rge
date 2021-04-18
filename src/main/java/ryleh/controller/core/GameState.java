@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import ryleh.controller.Entity;
-import ryleh.controller.EntityImpl;
 import ryleh.controller.levels.LevelHandler;
 import ryleh.model.Type;
 import ryleh.model.World;

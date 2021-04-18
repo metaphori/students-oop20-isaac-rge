@@ -9,7 +9,7 @@ import ryleh.model.Type;
 //to determine WHICH entities are going to be spawned
 
 public final class LevelDesigner {
-	
+
 	private static final int TROUBLE_INCREASER = 4;
 	private static final int TROUBLE_DECREASER = 7;
 	private int levelNum;

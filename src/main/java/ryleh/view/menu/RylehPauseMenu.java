@@ -48,7 +48,7 @@ public class RylehPauseMenu {
         };
 
         this.box.getChildren().add(factory.createCustomButton("Resume", "Resume the game", resume));
-        Node developButton = factory.createCustomButton("Developer Mode: OFF", "Enable/Disable developer mode", 
+        final Node developButton = factory.createCustomButton("Developer Mode: OFF", "Enable/Disable developer mode", 
                 () -> {
                     GameEngine.setDeveloper(!GameEngine.isDeveloper());
                     ((Text) ((HBox) this.box.getChildren().get(1)).getChildren().get(1))

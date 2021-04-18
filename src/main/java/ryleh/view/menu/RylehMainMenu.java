@@ -88,11 +88,11 @@ public class RylehMainMenu {
         });
     }
     private Node createComboBox() {
-        List<Pair<Integer, Integer>> resolutions = new ArrayList<>();
+        final List<Pair<Integer, Integer>> resolutions = new ArrayList<>();
         resolutions.add(new Pair<>(1920, 1080));
         resolutions.add(new Pair<>(1280, 720));
         resolutions.add(new Pair<>(800, 450));
-        ComboBox<Pair<Integer, Integer>> combo = new ComboBox<>();
+        final ComboBox<Pair<Integer, Integer>> combo = new ComboBox<>();
         combo.setPromptText("Select a Resolution");
         combo.getItems().addAll(resolutions);
         combo.setOnAction(e -> {

@@ -1,6 +1,28 @@
 package ryleh.model;
 
 public enum Type {
-    PLAYER, BOSS, ROCK, DOOR, ENEMY_DRUNK, ENEMY_SHOOTER, ITEM, BACKGROUND, PLAYER_BULLET, ENEMY_BULLET, ENEMY_LURKER,
-    ENEMY_SPINNER, ENEMY_DRUNKSPINNER, WALL, FIRE;
+    /** Player entity type. */
+    PLAYER,
+    /** Rock entity type. */
+    ROCK,
+    /** Door entity type. */
+    DOOR,
+    /** Drunk enemy entity type. */
+    ENEMY_DRUNK,
+    /** Shooter enemy entity type. */
+    ENEMY_SHOOTER,
+    /** Item entity type. */
+    ITEM,
+    /** Player's bullet entity type. */
+    PLAYER_BULLET,
+    /** Enemy's bullet entity type. */
+    ENEMY_BULLET,
+    /** Lurker enemy entity type. */
+    ENEMY_LURKER,
+    /** Spinner enemy entity type. */
+    ENEMY_SPINNER, 
+    /** DrunkSpinner enemy entity type. */
+    ENEMY_DRUNKSPINNER,
+    /** Fire entity type. */
+    FIRE;
 }

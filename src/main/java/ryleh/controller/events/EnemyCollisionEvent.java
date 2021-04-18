@@ -8,12 +8,12 @@ import ryleh.model.components.HealthIntComponent;
 
 public class EnemyCollisionEvent implements Event {
 
-    private GameObject target;
+    private final GameObject target;
 
     /**
      * Constructor for a collision event.
      * 
-     * @param target The target of the event,
+     * @param target The target of the event.
      */
     public EnemyCollisionEvent(final GameObject target) {
         this.target = target;
@@ -30,5 +30,4 @@ public class EnemyCollisionEvent implements Event {
             ((HealthIntComponent) this.target.getComponent(HealthIntComponent.class).get()).damage(1);
         }
     }
-
 }

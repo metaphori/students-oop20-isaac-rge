@@ -9,7 +9,7 @@ import ryleh.model.Type;
 
 public class RemoveEntityEvent implements Event {
 
-    private GameObject target;
+    private final GameObject target;
 
     public RemoveEntityEvent(final GameObject target) {
         this.target = target;

@@ -1,4 +1,3 @@
-
 package ryleh.controller.levels;
 
 import java.util.Collection;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import ryleh.controller.core.GameState;
 import ryleh.model.components.HealthIntComponent;
-import ryleh.view.graphics.PlayerGraphicComponent;
+import ryleh.view.PlayerGraphicComponent;
 
 public class EventHandler implements EventListener {
 

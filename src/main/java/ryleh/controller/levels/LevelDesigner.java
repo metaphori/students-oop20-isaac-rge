@@ -10,14 +10,19 @@ import ryleh.model.Type;
 //to determine WHICH entities are going to be spawned
 
 public final class LevelDesigner {
-
-    private static final int TROUBLE_INCREASER = 4;
-    private static final int TROUBLE_DECREASER = 7;
+    /**
+     * Value used to calculate type of enemies to spawn.
+     */
+    private static final int TROUBLE_INCREASER = 2;
+    /**
+     * Value used to calculate type of enemies to spawn.
+     */
+    private static final int TROUBLE_DECREASER = 15;
     private int levelNum;
     private final List<Type> entities;
     private final Random random;
     private final Function<Integer, Integer> difficultyFunction;
-
+  
     public LevelDesigner() {
         levelNum = 0;
         entities = new ArrayList<>();

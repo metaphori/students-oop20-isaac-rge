@@ -3,7 +3,6 @@ package ryleh.controller.events;
 import ryleh.controller.core.GameState;
 
 public interface Event {
-
     /**
      * Perform some actions depending on the specified event.
      * 

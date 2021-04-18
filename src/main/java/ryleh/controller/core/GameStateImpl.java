@@ -3,15 +3,12 @@ package ryleh.controller.core;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import javafx.geometry.Point2D;
 import javafx.stage.Stage;
 import ryleh.common.Point2d;
 import ryleh.controller.Entity;
-import ryleh.controller.EntityImpl;
 import ryleh.controller.InputController;
 import ryleh.controller.InputControllerImpl;
 import ryleh.controller.core.factories.BasicFactory;
@@ -21,8 +18,7 @@ import ryleh.controller.levels.LevelHandlerImpl;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.model.WorldImpl;
-import ryleh.model.components.PlayerComponent;
-import ryleh.view.ViewHandler;
+import ryleh.model.components.PhysicsComponent;
 import ryleh.view.ViewHandlerImpl;
 
 public class GameStateImpl implements GameState {
@@ -35,7 +31,10 @@ public class GameStateImpl implements GameState {
     private final InputController input;
     private final LevelHandler levelHandler;
     private final Entity player;
-
+    /**
+     * Constructor method.
+     * @param mainStage Stage instance.
+     */
     public GameStateImpl(final Stage mainStage) {
         view = new ViewHandlerImpl(mainStage);
         this.eventHandler = new EventHandler(this);
@@ -45,8 +44,6 @@ public class GameStateImpl implements GameState {
         this.player = BasicFactory.getInstance().createPlayer(this,
                 levelHandler.getPosition(levelHandler.getPlayerSpawn()));
         input = new InputControllerImpl(this);
-        // AudioPlayer.playBackGround();
-        this.generateNewLevel();
     }
 
     /**
@@ -79,7 +76,7 @@ public class GameStateImpl implements GameState {
         world.addGameObject(player.getGameObject());
         entities.add(player);
 
-        ((PlayerComponent) player.getGameObject().getComponent(PlayerComponent.class).get())
+        ((PhysicsComponent) player.getGameObject().getComponent(PhysicsComponent.class).get())
                 .setPosition(levelHandler.getPosition(levelHandler.getPlayerSpawn()));
 
         entities.addAll(levelHandler.getEntities());
@@ -98,7 +95,7 @@ public class GameStateImpl implements GameState {
      * {@inheritDoc}
      */
     @Override
-    public void removeEntity(Entity entity) {
+    public void removeEntity(final Entity entity) {
         entities.remove(entity);
         view.removeGraphicComponent(entity.getView());
         world.removeGameObject(entity.getGameObject());
@@ -108,7 +105,7 @@ public class GameStateImpl implements GameState {
      * {@inheritDoc}
      */
     @Override
-    public void updateState(double dt) {
+    public void updateState(final double dt) {
         input.updateInput();
         for (final Entity object : this.entities) {
             object.getGameObject().onUpdate(dt);
@@ -142,12 +139,7 @@ public class GameStateImpl implements GameState {
     public ViewHandlerImpl getView() {
         return view;
     }
-
-    private Point2D toPoint2D(final Point2d point) {
-        return new Point2D(point.getX() * ViewHandlerImpl.getScaleModifier(),
-                point.getY() * ViewHandlerImpl.getScaleModifier());
-    }
-
+  
     /**
      * {@inheritDoc}
      */

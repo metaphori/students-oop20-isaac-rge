@@ -8,9 +8,9 @@ import ryleh.model.GameObject;
 
 public class BulletSpawnEvent implements Event {
 
-    private Point2d position;
-    private Vector2d velocity;
-    private GameObject target;
+    private final Point2d position;
+    private final Vector2d velocity;
+    private final GameObject target;
 
     /**
      * Constructor for the spawn of a bullet.

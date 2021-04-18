@@ -14,8 +14,8 @@ import ryleh.view.menu.RylehPauseMenu;
 
 public final class GameEngine {
     private GameState rylehState;
-    private static final double PERIOD = 1000 / 60;
     private static Timeline loop;
+    private static final double PERIOD = 1000 / 60;
     private RylehPauseMenu pauseMenu;
     private Stage primaryStage;
     /**
@@ -27,6 +27,7 @@ public final class GameEngine {
      */
     private static boolean isDeveloper;
     private static boolean debugOn;
+
     /**
      * Initializes engine's game state and the frequency (period) of game loop. Key
      * code "P" is set to pause engine.
@@ -64,7 +65,7 @@ public final class GameEngine {
         // sets the game world's game loop (Timeline)
         loop = new Timeline(oneFrame);
         loop.setCycleCount(Animation.INDEFINITE);
-        loop.play();
+        loop.play();;
     }
 
     /**
@@ -125,5 +126,5 @@ public final class GameEngine {
             action.run();
         }
     }
-
 }
+

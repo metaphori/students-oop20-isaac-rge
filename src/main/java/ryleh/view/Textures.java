@@ -81,23 +81,23 @@ public enum Textures {
     /**
      * Door texture-frame 1.
      */
-    DOOR1("assets/texture/levels/Door1.png", 190, 190),
+    DOOR1("assets/texture/levels/ManHole1.png", 200, 200),
     /**
      * Door texture-frame 2.
      */
-    DOOR2("assets/texture/levels/Door2.png", 190, 190),
+    DOOR2("assets/texture/levels/ManHole2.png", 200, 200),
     /**
      * Door texture-frame 3.
      */
-    DOOR3("assets/texture/levels/Door3.png", 190, 190),
+    DOOR3("assets/texture/levels/ManHole3.png", 200, 200),
     /**
      * Door texture-frame 4.
      */
-    DOOR4("assets/texture/levels/Door4.png", 190, 190),
+    DOOR4("assets/texture/levels/ManHole4.png", 200, 200),
     /**
      * Door texture-frame 5.
      */
-    DOOR5("assets/texture/levels/Door5.png", 190, 190),
+    DOOR5("assets/texture/levels/ManHole5.png", 200, 200),
 
     /**
      * Background1 texture.

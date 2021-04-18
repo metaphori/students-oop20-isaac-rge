@@ -187,7 +187,7 @@ public enum Textures {
      * @return The scaled width of a Texture.
      */
     public int getWidth() {
-        return (int) (this.width * ViewHandlerImpl.SCALE_MODIFIER);
+        return (int) (this.width * ViewHandlerImpl.getScaleModifier());
     }
 
     /**
@@ -196,6 +196,6 @@ public enum Textures {
      * @return The scaled height of a Texture.
      */
     public int getHeight() {
-        return (int) (this.height * ViewHandlerImpl.SCALE_MODIFIER);
+        return (int) (this.height * ViewHandlerImpl.getScaleModifier());
     }
 }

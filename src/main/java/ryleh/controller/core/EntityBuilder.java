@@ -8,7 +8,7 @@ import ryleh.model.Type;
 import ryleh.model.WorldImpl;
 import ryleh.model.components.AbstractComponent;
 import ryleh.model.physics.HitBox;
-import ryleh.view.GraphicComponent;
+import ryleh.view.graphics.GraphicComponent;
 
 public class EntityBuilder {
     private GameObject object;
@@ -16,7 +16,7 @@ public class EntityBuilder {
 
     public EntityBuilder() {
         object = new GameObjectImpl();
-        graphic = null; //TODO
+        graphic = null; // TODO
     }
 
     public EntityBuilder type(final Type type) {
@@ -28,6 +28,7 @@ public class EntityBuilder {
         object.setPosition(position);
         return this;
     }
+
     public EntityBuilder position(final int x, final int y) {
         object.setPosition(new Point2d(x, y));
         return this;
@@ -36,8 +37,8 @@ public class EntityBuilder {
     public EntityBuilder with(final AbstractComponent component) {
         try {
             object.addComponent(component);
-        } catch (IllegalStateException e){
-            //TODO log system to show into JavaFX Scene
+        } catch (IllegalStateException e) {
+            // TODO log system to show into JavaFX Scene
         }
         return this;
     }
@@ -57,7 +58,7 @@ public class EntityBuilder {
     }
 
     public EntityBuilder zIndex(final int zIndex) {
-	object.setzIndex(zIndex);
-	return this;
+        object.setzIndex(zIndex);
+        return this;
     }
 }

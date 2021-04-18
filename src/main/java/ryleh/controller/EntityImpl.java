@@ -1,7 +1,7 @@
 package ryleh.controller;
 
 import ryleh.model.GameObject;
-import ryleh.view.GraphicComponent;
+import ryleh.view.graphics.GraphicComponent;
 
 public class EntityImpl implements Entity {
 
@@ -13,12 +13,15 @@ public class EntityImpl implements Entity {
         this.view = view;
         this.gameObject = gameObject;
     }
+
     /**
-     * Creates an Entity whose purpose is still not clear. His view and game object need to be set.
+     * Creates an Entity whose purpose is still not clear. His view and game object
+     * need to be set.
      */
     public EntityImpl() {
         super();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -26,6 +29,7 @@ public class EntityImpl implements Entity {
     public GraphicComponent getView() {
         return view;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -33,6 +37,7 @@ public class EntityImpl implements Entity {
     public void setView(final GraphicComponent view) {
         this.view = view;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -40,6 +45,7 @@ public class EntityImpl implements Entity {
     public GameObject getGameObject() {
         return gameObject;
     }
+
     /**
      * {@inheritDoc}
      */

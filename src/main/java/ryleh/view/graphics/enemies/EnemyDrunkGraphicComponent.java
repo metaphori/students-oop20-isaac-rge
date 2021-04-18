@@ -1,4 +1,4 @@
-package ryleh.view.enemies;
+package ryleh.view.graphics.enemies;
 
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -9,8 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
+import ryleh.view.graphics.GraphicComponent;
 
 /**
  * A class that provides the GraphicComponent of the view related to the

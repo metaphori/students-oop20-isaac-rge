@@ -10,7 +10,7 @@ import ryleh.model.World;
 import ryleh.model.components.PhysicsComponent;
 import ryleh.model.components.ShootingComponent;
 import ryleh.model.physics.Direction;
-import ryleh.view.PlayerGraphicComponent;
+import ryleh.view.graphics.PlayerGraphicComponent;
 
 public class InputControllerImpl implements InputController {
 

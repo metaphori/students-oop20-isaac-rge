@@ -1,4 +1,4 @@
-package ryleh.view.other;
+package ryleh.view.graphics.other;
 
 import java.util.List;
 import javafx.event.ActionEvent;
@@ -9,8 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import ryleh.view.AnimationLoop;
-import ryleh.view.GraphicComponent;
 import ryleh.view.Textures;
+import ryleh.view.graphics.GraphicComponent;
 
 /**
  * A class that provides the GraphicComponent of the view related to the Item

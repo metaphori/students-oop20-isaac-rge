@@ -148,7 +148,7 @@ public final class GameMath {
      * @return a Point2D equivalent value.
      */
     public static Point2D toPoint2D(final Point2d point) {
-        return new Point2D(point.getX() * ViewHandlerImpl.SCALE_MODIFIER, point.getY() * ViewHandlerImpl.SCALE_MODIFIER);
+        return new Point2D(point.getX() * ViewHandlerImpl.getScaleModifier(), point.getY() * ViewHandlerImpl.getScaleModifier());
     }
 }
 

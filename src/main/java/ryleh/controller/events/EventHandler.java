@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import ryleh.controller.core.GameState;
 import ryleh.model.components.HealthIntComponent;
-import ryleh.view.PlayerGraphicComponent;
+import ryleh.view.graphics.PlayerGraphicComponent;
 
 public class EventHandler implements EventListener {
 
@@ -31,21 +31,25 @@ public class EventHandler implements EventListener {
         this.updateUI();
         this.checkPlayerState();
     }
+
     /**
-     * Check the player state so that the graphic component can apply effects in special cases.
+     * Check the player state so that the graphic component can apply effects in
+     * special cases.
      */
     private void checkPlayerState() {
         final PlayerGraphicComponent playerGraphic = (PlayerGraphicComponent) this.gameState.getPlayer().getView();
         playerGraphic.setInvincible(comp.isImmortal());
     }
+
     /**
      * Update game UI after event handling.
      */
     private void updateUI() {
-        comp = (HealthIntComponent) this.gameState.getPlayer().getGameObject()
-                .getComponent(HealthIntComponent.class).get();
+        comp = (HealthIntComponent) this.gameState.getPlayer().getGameObject().getComponent(HealthIntComponent.class)
+                .get();
         gameState.getView().getGameUi().getLives().setText("Lives: " + comp.getCurrentHp());
-        this.gameState.getView().getGameUi().getLevel().setText("Level: " + this.gameState.getLevelHandler().getRoomsCount());
+        this.gameState.getView().getGameUi().getLevel()
+                .setText("Level: " + this.gameState.getLevelHandler().getRoomsCount());
     }
 
     /**

@@ -74,7 +74,7 @@ public class RylehMainMenu {
         rightBox.setTranslateX(-factory.getScaledSize());
         pane.setLeft(leftBox);
         pane.setRight(rightBox);
-        this.primaryStage.setScene(new Scene(pane, ViewHandlerImpl.STANDARD_WIDTH, ViewHandlerImpl.STANDARD_HEIGHT));
+        this.primaryStage.setScene(new Scene(pane, ViewHandlerImpl.getStandardWidth(), ViewHandlerImpl.getStandardHeight()));
         this.primaryStage.setResizable(false);
         this.primaryStage.setTitle("Ryleh's Call");
         this.primaryStage.setOnCloseRequest(e -> {
@@ -96,9 +96,9 @@ public class RylehMainMenu {
         combo.setPromptText("Select a Resolution");
         combo.getItems().addAll(resolutions);
         combo.setOnAction(e -> {
-            ViewHandlerImpl.setSTANDARD_WIDTH(combo.getValue().getKey());
-            ViewHandlerImpl.setSTANDARD_HEIGHT(combo.getValue().getValue());
-            ViewHandlerImpl.setSCALE_MODIFIER(ViewHandlerImpl.getSTANDARD_WIDTH() / 1920.0);
+            ViewHandlerImpl.setStandardWidth(combo.getValue().getKey());
+            ViewHandlerImpl.setStandardHeight(combo.getValue().getValue());
+            ViewHandlerImpl.setScaleModifier(ViewHandlerImpl.getStandardWidth() / 1920.0);
             this.show();
         });
         return combo;

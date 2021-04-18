@@ -42,62 +42,68 @@ public class GameStateImpl implements GameState {
         world = new WorldImpl(eventHandler);
         entities = new ArrayList<>();
         this.levelHandler = new LevelHandlerImpl(this);
-        this.player = BasicFactory.getInstance().createPlayer(this, levelHandler.getPosition(levelHandler.getPlayerSpawn()));
+        this.player = BasicFactory.getInstance().createPlayer(this,
+                levelHandler.getPosition(levelHandler.getPlayerSpawn()));
         input = new InputControllerImpl(this);
-        //AudioPlayer.playBackGround();
+        // AudioPlayer.playBackGround();
         this.generateNewLevel();
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public Entity getPlayer() {
-	return this.player;
+        return this.player;
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void addEntity(final Entity entity) {
-    	this.entities.add(entity);
+        this.entities.add(entity);
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void generateNewLevel() {
-	world.getGameObjects().clear();
-	entities.clear();
-	view.getGraphicComponents().clear();
-	view.displayLevelScene();
-	levelHandler.generateNewLevel();
-	view.addGraphicComponent(player.getView());
-	world.addGameObject(player.getGameObject());
-	entities.add(player);
+        world.getGameObjects().clear();
+        entities.clear();
+        view.getGraphicComponents().clear();
+        view.displayLevelScene();
+        levelHandler.generateNewLevel();
+        view.addGraphicComponent(player.getView());
+        world.addGameObject(player.getGameObject());
+        entities.add(player);
 
-	((PhysicsComponent) player.getGameObject().getComponent(PhysicsComponent.class).get())
-	    .setPosition(levelHandler.getPosition(levelHandler.getPlayerSpawn()));
+        ((PhysicsComponent) player.getGameObject().getComponent(PhysicsComponent.class).get())
+                .setPosition(levelHandler.getPosition(levelHandler.getPlayerSpawn()));
 
-	entities.addAll(levelHandler.getEntities());
-	Collections.sort(entities, new Comparator<Entity>() {
-	    @Override
-		public int compare(final Entity o1, final Entity o2) {
-			return o1.getGameObject().getzIndex() - o2.getGameObject().getzIndex();
-		}
-	});
-	input.initInput();
-	GameEngine.runDebugger(() -> ((LevelHandlerImpl) levelHandler).printSpawnPoints());
+        entities.addAll(levelHandler.getEntities());
+        Collections.sort(entities, new Comparator<Entity>() {
+            @Override
+            public int compare(final Entity o1, final Entity o2) {
+                return o1.getGameObject().getzIndex() - o2.getGameObject().getzIndex();
+            }
+        });
+        input.initInput();
+        GameEngine.runDebugger(() -> ((LevelHandlerImpl) levelHandler).printSpawnPoints());
 
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void removeEntity(Entity entity) {
-    	entities.remove(entity);
-    	view.removeGraphicComponent(entity.getView());
-    	world.removeGameObject(entity.getGameObject());
+        entities.remove(entity);
+        view.removeGraphicComponent(entity.getView());
+        world.removeGameObject(entity.getGameObject());
     }
+
     /**
      * {@inheritDoc}
      */
@@ -106,11 +112,12 @@ public class GameStateImpl implements GameState {
         input.updateInput();
         for (final Entity object : this.entities) {
             object.getGameObject().onUpdate(dt);
-            object.getView().render(toPoint2D(new Point2d(
-                    object.getGameObject().getPosition().getX(), object.getGameObject().getPosition().getY())), dt);
+            object.getView().render(toPoint2D(new Point2d(object.getGameObject().getPosition().getX(),
+                    object.getGameObject().getPosition().getY())), dt);
         }
         eventHandler.checkEvents();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -118,6 +125,7 @@ public class GameStateImpl implements GameState {
     public boolean isGameOver() {
         return isGameOver;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -126,16 +134,20 @@ public class GameStateImpl implements GameState {
         this.isGameOver = true;
         this.isVictory = victory;
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public ViewHandlerImpl getView() {
-	return view;
+        return view;
     }
+
     private Point2D toPoint2D(final Point2d point) {
-        return new Point2D(point.getX() * ViewHandlerImpl.SCALE_MODIFIER, point.getY() * ViewHandlerImpl.SCALE_MODIFIER);
+        return new Point2D(point.getX() * ViewHandlerImpl.getScaleModifier(),
+                point.getY() * ViewHandlerImpl.getScaleModifier());
     }
+
     /**
      * {@inheritDoc}
      */
@@ -143,13 +155,15 @@ public class GameStateImpl implements GameState {
     public LevelHandler getLevelHandler() {
         return this.levelHandler;
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public Optional<Entity> getEntityByType(final Type type) {
-	return entities.stream().filter(i -> i.getGameObject().getType().equals(type)).findAny();
+        return entities.stream().filter(i -> i.getGameObject().getType().equals(type)).findAny();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -157,13 +171,15 @@ public class GameStateImpl implements GameState {
     public World getWorld() {
         return this.world;
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public List<Entity> getEntities() {
-	return this.entities;
+        return this.entities;
     }
+
     /**
      * {@inheritDoc}
      */

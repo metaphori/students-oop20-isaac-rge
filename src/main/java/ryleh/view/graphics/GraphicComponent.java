@@ -1,4 +1,4 @@
-package ryleh.view;
+package ryleh.view.graphics;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

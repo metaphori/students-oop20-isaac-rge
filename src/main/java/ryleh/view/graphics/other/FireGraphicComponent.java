@@ -1,5 +1,6 @@
-package ryleh.view.other;
+package ryleh.view.graphics.other;
 
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
@@ -7,36 +8,44 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
-import ryleh.view.GraphicComponent;
+import ryleh.view.AnimationLoop;
 import ryleh.view.Textures;
+import ryleh.view.graphics.GraphicComponent;
 
 /**
- * A class that provides the GraphicComponent of the view related to the Rock
+ * A class that provides the GraphicComponent of the view related to the Fire
  * Entity.
  */
-public class RockGraphicComponent implements GraphicComponent {
+public class FireGraphicComponent implements GraphicComponent {
 
     private Rectangle rectangle;
+    /**
+     * The duration of each frame of the Animation.
+     */
+    private static final int ANIM_DURATION = 400;
+    private AnimationLoop animFire;
 
     /**
-     * Creates a new Instance of the RockGraphicComponent.
+     * Creates the new Instance of FireGraphicComponent.
      */
-    public RockGraphicComponent() {
+    public FireGraphicComponent() {
         this(new Point2D(0, 0));
     }
 
     /**
-     * Creates a new Instance of the RockGraphicComponent with the given initial
+     * Creates a new Instance of FireGraphicCOmponent with the given initial
      * position.
      * 
-     * @param position The position at which the RockGraphicComponent needs to be
+     * @param position The position at which the FireGraphicComponent needs to be
      *                 initialized.
      */
-    public RockGraphicComponent(final Point2D position) {
-        this.rectangle = new Rectangle(Textures.ROCK.getWidth(), Textures.ROCK.getHeight());
+    public FireGraphicComponent(final Point2D position) {
+        this.rectangle = new Rectangle(Textures.FIRE1.getWidth(), Textures.FIRE1.getHeight());
         this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
         this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
-        this.rectangle.setFill(Textures.ROCK2.getImagePattern());
+        this.rectangle.setFill(Textures.FIRE1.getImagePattern());
+        this.animFire = new AnimationLoop(List.of(Textures.FIRE1.getImagePattern(), Textures.FIRE2.getImagePattern()),
+                ANIM_DURATION, rectangle);
     }
 
     /**
@@ -55,6 +64,7 @@ public class RockGraphicComponent implements GraphicComponent {
     public void onAdded(final Scene scene) {
         Parent root = scene.getRoot();
         ((AnchorPane) root).getChildren().add(rectangle);
+        animFire.play();
     }
 
     /**

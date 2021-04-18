@@ -3,6 +3,7 @@ package ryleh.view;
 import java.util.List;
 
 import javafx.scene.Scene;
+import ryleh.view.graphics.GraphicComponent;
 
 public interface ViewHandler {
 
@@ -42,5 +43,4 @@ public interface ViewHandler {
      * @return The current scene.
      */
     Scene getScene();
-
 }

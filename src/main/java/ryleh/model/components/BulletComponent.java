@@ -10,6 +10,7 @@ import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
 
+
 public class BulletComponent extends AbstractComponent {
 	
 	private Point2d position;

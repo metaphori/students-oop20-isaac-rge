@@ -11,7 +11,9 @@ import ryleh.model.components.PlayerComponent;
 import ryleh.model.components.ShootingComponent;
 import ryleh.model.physics.Direction;
 import ryleh.view.graphics.PlayerGraphicComponent;
-
+/**
+ * A class that manages all aspects of an input control and implements InputController interface.
+ */
 public class InputControllerImpl implements InputController {
 
     private boolean isMoveUp;

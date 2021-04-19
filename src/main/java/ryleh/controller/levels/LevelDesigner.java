@@ -7,8 +7,9 @@ import java.util.function.Function;
 
 import ryleh.controller.core.GameEngine;
 import ryleh.model.Type;
-//to determine WHICH entities are going to be spawned
-
+/**
+ * A class that determines which entities are going to be spawned.
+ */
 public final class LevelDesigner {
     /** Above this integer, difficulty range indicates "hard" as difficulty for this level.*/
     private static final int HARD_MODE = 50;

@@ -1,5 +1,7 @@
 package ryleh.common;
-
+/**
+ * This class is an implementation of Timer interface and is used to measure a time range.
+ */
 public class TimerImpl implements Timer {
 
     private double startMills;

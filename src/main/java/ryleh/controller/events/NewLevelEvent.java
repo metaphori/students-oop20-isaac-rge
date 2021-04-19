@@ -1,7 +1,9 @@
 package ryleh.controller.events;
 
 import ryleh.controller.core.GameState;
-
+/**
+ * This class manages a NewLevel Event and implements Event interface.
+ */
 public class NewLevelEvent implements Event {
 
     /**

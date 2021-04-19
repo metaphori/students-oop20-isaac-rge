@@ -1,5 +1,7 @@
 package ryleh.common;
-
+/**
+ * This interface represents a Shape in two dimensions.
+ */
 public interface Shape2d {
     /**
      * Checks if the point is contained within the Shape2d.

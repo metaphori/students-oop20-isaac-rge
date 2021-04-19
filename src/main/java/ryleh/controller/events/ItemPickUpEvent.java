@@ -9,7 +9,9 @@ import ryleh.model.items.HealItem;
 import ryleh.model.items.Item;
 import ryleh.model.items.MaxHealthItem;
 import ryleh.view.graphics.other.ItemGraphicComponent;
-
+/**
+ * This class manages an ItemPickUp Event and implements Event interface.
+ */
 public class ItemPickUpEvent implements Event {
     /**
      * {@inheritDoc} Starts the opening animation of the item

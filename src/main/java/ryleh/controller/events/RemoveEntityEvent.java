@@ -6,7 +6,9 @@ import ryleh.controller.Entity;
 import ryleh.controller.core.GameState;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
-
+/**
+ * This class manages a RemoveEntity Event and implements Event interface.
+ */
 public class RemoveEntityEvent implements Event {
 
     private final GameObject target;

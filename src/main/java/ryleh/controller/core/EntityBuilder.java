@@ -8,7 +8,9 @@ import ryleh.model.Type;
 import ryleh.model.components.AbstractComponent;
 import ryleh.model.physics.HitBox;
 import ryleh.view.graphics.GraphicComponent;
-
+/**
+ * A class to build Entity type objects.
+ */
 public class EntityBuilder {
     private final GameObject object;
     private GraphicComponent graphic;

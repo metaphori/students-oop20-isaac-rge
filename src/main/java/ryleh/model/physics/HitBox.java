@@ -1,7 +1,9 @@
 package ryleh.model.physics;
 
 import ryleh.common.Shape2d;
-
+/**
+ * Hit boxes are zones attached to a game object that represent where that object is collidable.
+ */
 public interface HitBox {
     /** Gets the form of this hit box. Hit boxes should have two-dimensional geometric forms, like rectangle or circle. 
      * @return A two dimensional shape.*/

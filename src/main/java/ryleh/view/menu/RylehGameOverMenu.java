@@ -6,7 +6,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import ryleh.view.ViewHandlerImpl;
-
+/**
+ * This class represents GameOver menu, both victory screen and loss screen.
+ */
 public class RylehGameOverMenu {
     private final Stage primaryStage;
     private final Image gameOverImage;

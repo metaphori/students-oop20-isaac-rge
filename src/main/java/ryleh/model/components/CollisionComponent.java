@@ -6,7 +6,9 @@ import ryleh.controller.events.ItemPickUpEvent;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
-
+/**
+ * Component used to check when there's a collision with the player.
+ */
 public class CollisionComponent extends AbstractComponent {
 
     private final Type type;

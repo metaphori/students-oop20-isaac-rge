@@ -6,7 +6,9 @@ import ryleh.common.TimerImpl;
 import ryleh.common.Vector2d;
 import ryleh.controller.events.BulletSpawnEvent;
 import ryleh.model.World;
-
+/**
+ * A Component that lets you shoot.
+ */
 public class ShootingComponent extends AbstractComponent {
 
     private double attackSpeed;

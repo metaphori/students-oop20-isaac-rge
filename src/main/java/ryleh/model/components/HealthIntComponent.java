@@ -6,7 +6,9 @@ import ryleh.controller.events.GameOverEvent;
 import ryleh.controller.events.RemoveEntityEvent;
 import ryleh.model.Type;
 import ryleh.model.World;
-
+/**
+ * This component is used to track an object's health points. Here, hps are implemented as an integer. 
+ */
 public class HealthIntComponent extends AbstractComponent {
 
     private int currentHp;

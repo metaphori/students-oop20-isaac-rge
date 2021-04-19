@@ -4,7 +4,9 @@ import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-
+/**
+ * Interface for a factory that provides easy JavaFX custom menus creation.
+ */
 public interface MenuFactory {
     /**
      * Creates a new yes or no alert window .

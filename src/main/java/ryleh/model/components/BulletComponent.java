@@ -9,7 +9,9 @@ import ryleh.controller.events.RemoveEntityEvent;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
-
+/**
+ * Component that describes bullet's behavior in the game.
+ */
 public class BulletComponent extends AbstractComponent {
     /**
      * Position of this bullet.

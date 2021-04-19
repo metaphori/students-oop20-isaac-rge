@@ -3,7 +3,9 @@ package ryleh.model.items;
 import ryleh.controller.core.GameEngine;
 import ryleh.controller.core.GameState;
 import ryleh.model.components.HealthIntComponent;
-
+/**
+ * This type of Item augments player's max hp by one.
+ */
 public class MaxHealthItem implements Item {
 
     /**

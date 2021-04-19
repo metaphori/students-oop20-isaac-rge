@@ -15,7 +15,9 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ryleh.view.ViewHandlerImpl;
-
+/**
+ * Implementation of Menu Factory.
+ */
 public class MenuFactoryImpl implements MenuFactory {
 
     private static final int SIZE = 40;

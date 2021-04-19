@@ -119,7 +119,7 @@ public enum Textures {
     /**
      * Background2 texture.
      */
-    BACKGOUND2("assets/texture/levels/Background2.png", 1920, 1080),
+    BACKGROUND2("assets/texture/levels/Background2.png", 1920, 1080),
     /**
      * Background3 texture.
      */

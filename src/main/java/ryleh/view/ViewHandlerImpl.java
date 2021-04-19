@@ -2,6 +2,8 @@ package ryleh.view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import javafx.application.Platform;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.EventHandler;
@@ -28,7 +30,7 @@ public class ViewHandlerImpl implements ViewHandler {
     private final List<GraphicComponent> graphicComponents;
     private final Scene scene;
     private Parent root;
-    private final Rectangle rectangle;
+    private final Rectangle background;
     private final GameUI gameUi;
     private boolean isFirstRoom;
 
@@ -77,11 +79,10 @@ public class ViewHandlerImpl implements ViewHandler {
     public ViewHandlerImpl(final Stage stage) {
         this.gameUi = new GameUI();
         this.stage = stage;
-        this.rectangle = new Rectangle(Textures.BACKGROUND.getWidth(), Textures.BACKGROUND.getHeight());
-        this.rectangle.setFill(Textures.BACKGROUND.getImagePattern());
+        this.background = new Rectangle(Textures.BACKGROUND.getWidth(), Textures.BACKGROUND.getHeight());
         root = new AnchorPane();
         root.setStyle("-fx-background-color: black;");
-        ((AnchorPane) root).getChildren().add(rectangle);
+        ((AnchorPane) root).getChildren().add(background);
         scene = new Scene(root);
         this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
@@ -126,7 +127,20 @@ public class ViewHandlerImpl implements ViewHandler {
     public void displayLevelScene() {
         root = new AnchorPane();
         root.setStyle("-fx-background-color: black;");
-        ((AnchorPane) root).getChildren().add(rectangle);
+        final Random generator = new Random();
+        switch (generator.nextInt(3)) {
+        case 1:
+            this.background.setFill(Textures.BACKGROUND2.getImagePattern());
+            break;
+        case 2:
+            this.background.setFill(Textures.BACKGROUND3.getImagePattern());
+            break;
+        case 0:
+        default:
+            this.background.setFill(Textures.BACKGROUND.getImagePattern());
+            break;
+        }
+        ((AnchorPane) root).getChildren().add(background);
         ((AnchorPane) root).getChildren().add(gameUi.getLevel());
         ((AnchorPane) root).getChildren().add(gameUi.getLives());
         ((AnchorPane) root).getChildren().add(gameUi.getItemPickUp());

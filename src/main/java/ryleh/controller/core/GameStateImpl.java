@@ -40,14 +40,14 @@ public class GameStateImpl implements GameState {
      * @param mainStage Stage instance.
      */
     public GameStateImpl(final Stage mainStage) {
-        view = new ViewHandlerImpl(mainStage);
+        this.view = new ViewHandlerImpl(mainStage);
         this.eventHandler = new EventHandler(this);
-        world = new WorldImpl(eventHandler);
-        entities = new ArrayList<>();
+        this.world = new WorldImpl(eventHandler);
+        this.entities = new ArrayList<>();
         this.levelHandler = new LevelHandlerImpl(this);
         this.player = BasicFactory.getInstance().createPlayer(this,
                 levelHandler.getPosition(levelHandler.getPlayerSpawn()));
-        input = new InputControllerImpl(this);
+        this.input = new InputControllerImpl(this);
     }
 
     /**
@@ -92,7 +92,6 @@ public class GameStateImpl implements GameState {
         Collections.sort(entities, new Comparator<Entity>() {
             @Override
             public int compare(final Entity o1, final Entity o2) {
-                // return o1.getGameObject().getzIndex() - o2.getGameObject().getzIndex();
                 return o1.getView().getZindex() - o2.getView().getZindex();
             }
         });

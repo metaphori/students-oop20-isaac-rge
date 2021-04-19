@@ -28,7 +28,10 @@ public class InputControllerImpl implements InputController {
     private final Entity player;
     private final GameState state;
     private final World world;
-
+    /**
+     * Instantiates an Input controller given the current state of the game.
+     * @param state Current state of the game.
+     */
     public InputControllerImpl(final GameState state) {
         this.state = state;
         this.scene = state.getView().getScene();

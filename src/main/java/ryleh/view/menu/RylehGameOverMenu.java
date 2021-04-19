@@ -3,7 +3,7 @@ package ryleh.view.menu;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import ryleh.view.ViewHandlerImpl;
 
@@ -22,7 +22,7 @@ public class RylehGameOverMenu {
      * Shows the game over menu into primary stage.
      */
     public void show() {
-        final Pane pane = new Pane();
+        final AnchorPane pane = new AnchorPane();
         final ImageView menu = new ImageView(this.gameOverImage);
         menu.setPreserveRatio(true);
         pane.getChildren().add(menu);

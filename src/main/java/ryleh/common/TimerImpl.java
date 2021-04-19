@@ -6,7 +6,10 @@ public class TimerImpl implements Timer {
 
     private double startMills;
     private double elapsedMills;
-
+    /**
+     * Constructor method to instantiate a Timer given the amount of time to wait.
+     * @param waitTime Time to wait.
+     */
     public TimerImpl(final double waitTime) {
         this.reset();
         this.elapsedMills = waitTime;

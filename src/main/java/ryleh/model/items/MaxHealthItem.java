@@ -1,5 +1,6 @@
 package ryleh.model.items;
 
+import ryleh.controller.core.GameEngine;
 import ryleh.controller.core.GameState;
 import ryleh.model.components.HealthIntComponent;
 
@@ -12,6 +13,6 @@ public class MaxHealthItem implements Item {
     @Override
     public void apply(final GameState state) {
         ((HealthIntComponent) state.getPlayer().getGameObject().getComponent(HealthIntComponent.class).get()).increaseMaxHp(1);
-        System.out.println("max heal");
+        GameEngine.runDebugger(() -> System.out.println("max heal"));
     }
 }

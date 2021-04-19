@@ -43,7 +43,6 @@ public class PlayerComponent extends AbstractComponent {
     public void onUpdate(final double dt) {
         if (this.canMove() && !this.blocked.equals(this.direction)) {
             move(dt);
-            return;
         } else {
             this.blocked = this.direction;
             resetPos();

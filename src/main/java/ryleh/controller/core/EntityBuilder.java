@@ -20,7 +20,7 @@ public class EntityBuilder {
      */
     public EntityBuilder() {
         object = new GameObjectImpl();
-        graphic = null; // TODO
+        graphic = null;
     }
 
     /**
@@ -67,7 +67,8 @@ public class EntityBuilder {
         try {
             object.addComponent(component);
         } catch (IllegalStateException e) {
-            System.out.println("Something went wrong....Exception when trying to add component\n");
+            GameEngine.runDebugger(
+                    () -> System.out.println("Something went wrong....Exception when trying to add component\n"));
         }
         return this;
     }

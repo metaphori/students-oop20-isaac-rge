@@ -11,15 +11,16 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import ryleh.view.menu.RylehGameOverMenu;
 import ryleh.view.menu.RylehPauseMenu;
+
 /**
  * This is the main class that initiates the game and the main game loop.
  */
 public final class GameEngine {
-    private GameState rylehState;
     private static Timeline loop;
+    /**
+     * Time elapsed between each update of the game loop.
+     */
     private static final double PERIOD = 1000 / 60;
-    private RylehPauseMenu pauseMenu;
-    private Stage primaryStage;
     /**
      * If True, the game runs in developer mode, otherwise it will run is release
      * mode. While release mode is the normal way to play, developer exists only for
@@ -29,6 +30,9 @@ public final class GameEngine {
      */
     private static boolean isDeveloper;
     private static boolean debugOn;
+    private RylehPauseMenu pauseMenu;
+    private Stage primaryStage;
+    private GameState rylehState;
 
     /**
      * Initializes engine's game state and the frequency (period) of game loop. Key
@@ -65,7 +69,7 @@ public final class GameEngine {
                 rylehState.updateState(PERIOD);
             }
         }); // oneFrame
-        // sets the game world's game loop (Timeline)
+        // sets the world's game loop (Timeline)
         loop = new Timeline(oneFrame);
         loop.setCycleCount(Animation.INDEFINITE);
         loop.play();
@@ -130,4 +134,3 @@ public final class GameEngine {
         }
     }
 }
-

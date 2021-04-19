@@ -9,7 +9,11 @@ public class EntityImpl implements Entity {
 
     private GraphicComponent view;
     private GameObject gameObject;
-
+    /**
+     * Instantiates an Entity given its graphic component and its game object.
+     * @param view Graphic component of this entity. 
+     * @param gameObject Game object of this entity.
+     */
     public EntityImpl(final GraphicComponent view, final GameObject gameObject) {
         super();
         this.view = view;

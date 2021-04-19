@@ -7,7 +7,7 @@ public interface Timer {
     /**
      * Checks if the timer is elapsed.
      * 
-     * @return True if the time is elapsed, false otherwise
+     * @return True if the time is elapsed, false otherwise.
      */
     boolean isElapsed();
 
@@ -19,7 +19,7 @@ public interface Timer {
     /**
      * Sets a new Wait time.
      * 
-     * @param wait Time, in milliseconds, to wait
+     * @param wait Time, in milliseconds, to wait.
      */
     void setWaitTime(double wait);
 

@@ -8,7 +8,7 @@ public interface Event {
     /**
      * Perform some actions depending on the specified event.
      * 
-     * @param state Is the actual state of the game;
+     * @param state is the current state of the game.
      */
     void handle(GameState state);
 }

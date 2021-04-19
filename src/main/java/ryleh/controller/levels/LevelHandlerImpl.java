@@ -69,7 +69,10 @@ public class LevelHandlerImpl implements LevelHandler {
     private final double boundsHeight;
     private final Pair<Integer, Integer> playerSpawn;
     private final Pair<Integer, Integer> doorSpawn;
-
+    /**
+     * Instantiates a Level Handler given the current state of the game.
+     * @param gameState Current state of the game.
+     */
     public LevelHandlerImpl(final GameState gameState) {
         this.gameState = gameState;
         final World world = gameState.getWorld();
@@ -181,13 +184,12 @@ public class LevelHandlerImpl implements LevelHandler {
      *         distance.
      */
     private Pair<Integer, Integer> getRandomSpawnPoint(final double minDistance) {
-        // TODO
         final Random generator = new Random();
         Pair<Integer, Integer> random;
         do {
             random = new Pair<>(generator.nextInt(COLUMNS), generator.nextInt(ROWS));
         } while (spawnPoints.containsKey(random) && entityCounter < ROWS * COLUMNS || random.equals(playerSpawn)
-                || getDistanceFromSpawn(random) < minDistance);
+                || random.equals(doorSpawn) || getDistanceFromSpawn(random) < minDistance);
         entityCounter++;
         return random;
     }

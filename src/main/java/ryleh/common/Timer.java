@@ -1,5 +1,7 @@
 package ryleh.common;
-
+/**
+ * This interface represents a Timer used to measure a time range.
+ */
 public interface Timer {
 
     /**

@@ -8,7 +8,9 @@ import ryleh.controller.levels.LevelHandler;
 import ryleh.model.Type;
 import ryleh.model.World;
 import ryleh.view.ViewHandlerImpl;
-
+/**
+ * This interface represents the state of the game and generates new levels based on a LevelHandler 
+ */
 public interface GameState {
 
     /**

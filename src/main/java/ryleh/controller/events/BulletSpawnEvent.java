@@ -5,7 +5,9 @@ import ryleh.common.Vector2d;
 import ryleh.controller.core.GameState;
 import ryleh.controller.core.factories.BasicFactory;
 import ryleh.model.GameObject;
-
+/**
+ * This class manages a BulletSpawn Event and implements Event interface.
+ */
 public class BulletSpawnEvent implements Event {
 
     private final Point2d position;

@@ -1,4 +1,3 @@
-
 package ryleh.common;
 
 import java.util.Random;

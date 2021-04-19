@@ -20,7 +20,9 @@ import ryleh.model.World;
 import ryleh.model.WorldImpl;
 import ryleh.view.ViewHandlerImpl;
 import ryleh.model.components.PlayerComponent;
-
+/**
+ * This is an implementation of the GameState interface.
+ */
 public class GameStateImpl implements GameState {
     private final ViewHandlerImpl view;
     private final World world;

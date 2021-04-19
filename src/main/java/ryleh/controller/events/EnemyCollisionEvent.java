@@ -5,7 +5,9 @@ import ryleh.controller.core.GameState;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.components.HealthIntComponent;
-
+/**
+ * This class manages an EnemyCollision Event and implements Event interface.
+ */
 public class EnemyCollisionEvent implements Event {
 
     private final GameObject target;

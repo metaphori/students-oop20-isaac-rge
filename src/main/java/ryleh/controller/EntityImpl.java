@@ -2,7 +2,9 @@ package ryleh.controller;
 
 import ryleh.model.GameObject;
 import ryleh.view.graphics.GraphicComponent;
-
+/**
+ * A class that manages the attributes of an Entity type and implements Entity interface.
+ */
 public class EntityImpl implements Entity {
 
     private GraphicComponent view;

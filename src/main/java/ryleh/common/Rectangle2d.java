@@ -1,5 +1,7 @@
 package ryleh.common;
-
+/**
+ * This class represents a Rectangle in two dimensions.
+ */
 public class Rectangle2d implements Shape2d {
 
     private final int height;

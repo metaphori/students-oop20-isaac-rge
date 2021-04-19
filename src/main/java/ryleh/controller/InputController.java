@@ -1,5 +1,7 @@
 package ryleh.controller;
-
+/**
+ * Interface for input control.
+ */
 public interface InputController {
 
     /**

@@ -1,5 +1,7 @@
 package ryleh.controller.events;
-
+/**
+ * This interface manages Event instances.
+ */
 public interface EventListener {
     /**
      * Notify the happening of an Event.

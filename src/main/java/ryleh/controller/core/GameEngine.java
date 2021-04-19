@@ -11,7 +11,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import ryleh.view.menu.RylehGameOverMenu;
 import ryleh.view.menu.RylehPauseMenu;
-
+/**
+ * This is the main class that initiates the game and the main game loop.
+ */
 public final class GameEngine {
     private GameState rylehState;
     private static Timeline loop;

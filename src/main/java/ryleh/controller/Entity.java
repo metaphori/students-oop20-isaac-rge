@@ -2,7 +2,9 @@ package ryleh.controller;
 
 import ryleh.model.GameObject;
 import ryleh.view.graphics.GraphicComponent;
-
+/**
+ * An interface to define an Entity type.
+ */
 public interface Entity {
     /**
      * Gets the View of this entity.

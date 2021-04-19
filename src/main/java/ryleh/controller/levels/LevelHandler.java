@@ -5,7 +5,9 @@ import java.util.Collection;
 import ryleh.common.Pair;
 import ryleh.common.Point2d;
 import ryleh.controller.Entity;
-
+/**
+ * This interface determines how to handle a level implementation.
+ */
 public interface LevelHandler {
 
     /**

@@ -5,7 +5,9 @@ import java.util.List;
 import ryleh.controller.core.GameState;
 import ryleh.model.components.HealthIntComponent;
 import ryleh.view.graphics.PlayerGraphicComponent;
-
+/**
+ * This class manages other Event instances and implements EventListener.
+ */
 public class EventHandler implements EventListener {
 
     private final GameState gameState;

@@ -8,6 +8,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import ryleh.Ryleh;
+
 /**
  * This class is used to handle game UI.
  */
@@ -40,7 +41,7 @@ public class GameUI {
     private Text level;
     private Text item;
     private final List<Text> tutorialUi;
-    private final Font font;
+    private Font font;
 
     /**
      * Creates a new Instance of GameUI.
@@ -108,7 +109,7 @@ public class GameUI {
      * A method to set the text that represents the remaining lives.
      */
     private void setLives() {
-        this.lives = new Text("Lives: 3");
+        this.lives = new Text("");
         this.lives.setFont(this.font);
         this.lives.setX((ViewHandlerImpl.getStandardWidth() / SCREEN_WIDTH_RATIO) * LIVES_INDENTATION
                 + PIXEL_CORRECTION * ViewHandlerImpl.getScaleModifier());
@@ -128,6 +129,41 @@ public class GameUI {
         ft.setCycleCount(1);
         ft.setAutoReverse(false);
         ft.play();
+    }
+
+    /**
+     * This method updates the position of gameUI elements after the ScaleModifier
+     * has been changed.It also calls updateFontScale() method.
+     */
+    public final void updateScale() {
+        this.tutorialUi.get(0).setX((ViewHandlerImpl.getStandardWidth() / SCREEN_WIDTH_RATIO) * 2
+                + PIXEL_CORRECTION * ViewHandlerImpl.getScaleModifier());
+        this.tutorialUi.get(0).setY((ViewHandlerImpl.getStandardHeight() / SCREEN_HEIGHT_RATIO) * 3);
+        this.tutorialUi.get(1).setX((ViewHandlerImpl.getStandardWidth() / SCREEN_WIDTH_RATIO) * 8
+                + PIXEL_CORRECTION * ViewHandlerImpl.getScaleModifier());
+        this.tutorialUi.get(1).setY((ViewHandlerImpl.getStandardHeight() / SCREEN_HEIGHT_RATIO) * 3);
+        this.level.setX((ViewHandlerImpl.getStandardWidth() / SCREEN_WIDTH_RATIO) * 2
+                + PIXEL_CORRECTION * ViewHandlerImpl.getScaleModifier());
+        this.level.setY((ViewHandlerImpl.getStandardHeight() / SCREEN_HEIGHT_RATIO) * 1);
+        this.lives.setX((ViewHandlerImpl.getStandardWidth() / SCREEN_WIDTH_RATIO) * LIVES_INDENTATION
+                + PIXEL_CORRECTION * ViewHandlerImpl.getScaleModifier());
+        this.lives.setY((ViewHandlerImpl.getStandardHeight() / SCREEN_HEIGHT_RATIO) * 1);
+        this.item.setX((ViewHandlerImpl.getStandardWidth() / SCREEN_WIDTH_RATIO) * 2);
+        this.item.setY((ViewHandlerImpl.getStandardHeight() / SCREEN_HEIGHT_RATIO) * 8);
+        updateFontScale();
+    }
+
+    /**
+     * This method updates font size after the ScaleModifier has been changed.
+     */
+    private void updateFontScale() {
+        this.font = Font.loadFont(Ryleh.class.getResource("/assets/fonts/manaspc.ttf").toExternalForm(),
+                FONT_SCALE * ViewHandlerImpl.getScaleModifier());
+        this.level.setFont(this.font);
+        this.item.setFont(this.font);
+        this.lives.setFont(this.font);
+        this.tutorialUi.get(0).setFont(this.font);
+        this.tutorialUi.get(1).setFont(this.font);
     }
 
     /**

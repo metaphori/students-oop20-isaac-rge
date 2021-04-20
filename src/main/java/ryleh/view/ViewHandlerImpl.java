@@ -202,5 +202,6 @@ public class ViewHandlerImpl implements ViewHandler {
             g.getNode().setWidth(g.getTexture().getWidth());
             g.getNode().setHeight(g.getTexture().getHeight());
         }
+        this.gameUi.updateScale();
     }
 }

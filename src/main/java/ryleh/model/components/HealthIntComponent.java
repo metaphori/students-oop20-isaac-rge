@@ -18,8 +18,8 @@ public class HealthIntComponent extends AbstractComponent {
     private static final double WAIT_TIME = 2000;
     /**
      * Instantiate this component in World, given max amount of Health points. 
-     * @param world
-     * @param maxHp
+     * @param world World where this component is added.
+     * @param maxHp Max amount of health points for this component.
      */
     public HealthIntComponent(final World world, final int maxHp) {
         super(world);

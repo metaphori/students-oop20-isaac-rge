@@ -4,7 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ryleh.common.Circle2d;
 import ryleh.common.Rectangle2d;
@@ -53,7 +52,6 @@ class WorldBoundsTest implements EventListener {
 
     @Override
     public void notifyEvent(final Event e) {
-        // TODO Auto-generated method stub
     }
 
 }

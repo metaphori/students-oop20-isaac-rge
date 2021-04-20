@@ -19,6 +19,7 @@ public class BulletGraphicComponent implements GraphicComponent {
 
     private Rectangle rectangle;
     private int zIndex;
+    private Textures texture = Textures.PLAYER_BULLET;
 
     /**
      * Creates a new Instance of BulletGraphicComponent.
@@ -35,7 +36,7 @@ public class BulletGraphicComponent implements GraphicComponent {
      *                 initialized.
      */
     public BulletGraphicComponent(final Point2D position) {
-        this.rectangle = new Rectangle(Textures.PLAYER_BULLET.getWidth(), Textures.PLAYER_BULLET.getHeight());
+        this.rectangle = new Rectangle(texture.getWidth(), texture.getHeight());
         this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
         this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
     }
@@ -48,14 +49,15 @@ public class BulletGraphicComponent implements GraphicComponent {
     public void setBulletType(final Type type) {
         switch (type) {
         case PLAYER_BULLET:
-            rectangle.setFill(Textures.PLAYER_BULLET.getImagePattern());
+            texture = Textures.PLAYER_BULLET;
             break;
         case ENEMY_BULLET:
-            rectangle.setFill(Textures.ENEMY_BULLET.getImagePattern());
+            texture = Textures.ENEMY_BULLET;
             break;
         default:
             break;
         }
+        rectangle.setFill(texture.getImagePattern());
     }
 
     /**
@@ -106,5 +108,13 @@ public class BulletGraphicComponent implements GraphicComponent {
     @Override
     public int getZindex() {
         return zIndex;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Textures getTexture() {
+       return texture;
     }
 }

@@ -20,6 +20,7 @@ public class FireGraphicComponent implements GraphicComponent {
 
     private Rectangle rectangle;
     private int zIndex;
+    private final Textures texture = Textures.FIRE1;
 
     /**
      * The duration of each frame of the Animation.
@@ -42,11 +43,11 @@ public class FireGraphicComponent implements GraphicComponent {
      *                 initialized.
      */
     public FireGraphicComponent(final Point2D position) {
-        this.rectangle = new Rectangle(Textures.FIRE1.getWidth(), Textures.FIRE1.getHeight());
+        this.rectangle = new Rectangle(texture.getWidth(), texture.getHeight());
         this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
         this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
         this.rectangle.setFill(Textures.FIRE1.getImagePattern());
-        this.animFire = new AnimationLoop(List.of(Textures.FIRE1.getImagePattern(), Textures.FIRE2.getImagePattern(),
+        this.animFire = new AnimationLoop(List.of(texture.getImagePattern(), Textures.FIRE2.getImagePattern(),
                 Textures.FIRE3.getImagePattern(), Textures.FIRE4.getImagePattern(), Textures.FIRE5.getImagePattern()),
                 ANIM_DURATION, rectangle);
     }
@@ -100,5 +101,13 @@ public class FireGraphicComponent implements GraphicComponent {
     @Override
     public int getZindex() {
         return zIndex;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Textures getTexture() {
+       return texture;
     }
 }

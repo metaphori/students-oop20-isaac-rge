@@ -121,6 +121,7 @@ public class GameStateImpl implements GameState {
             object.getView().render(GameMath.toPoint2D(new Point2d(object.getGameObject().getPosition().getX(),
                     object.getGameObject().getPosition().getY())), dt);
         }
+        view.onUpdate();
         eventHandler.checkEvents();
     }
 

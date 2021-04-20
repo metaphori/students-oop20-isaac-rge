@@ -21,6 +21,7 @@ public class EnemyShooterGraphicComponent implements GraphicComponent {
     private Rectangle rectangle;
     private FadeTransition enemyFade;
     private int zIndex;
+    private final Textures texture = Textures.ENEMY_SHOOTER;
     /**
      * The duration of the fade animation of this GraphicComponent.
      */
@@ -41,10 +42,10 @@ public class EnemyShooterGraphicComponent implements GraphicComponent {
      *                 initialized.
      */
     public EnemyShooterGraphicComponent(final Point2D position) {
-        this.rectangle = new Rectangle(Textures.ENEMY_SHOOTER.getHeight(), Textures.ENEMY_SHOOTER.getHeight());
+        this.rectangle = new Rectangle(texture.getHeight(), texture.getHeight());
         this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
         this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
-        this.rectangle.setFill(Textures.ENEMY_SHOOTER.getImagePattern());
+        this.rectangle.setFill(texture.getImagePattern());
         this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
         this.enemyFade.setFromValue(1.0);
         this.enemyFade.setToValue(0.0);
@@ -101,5 +102,13 @@ public class EnemyShooterGraphicComponent implements GraphicComponent {
     @Override
     public int getZindex() {
         return zIndex;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Textures getTexture() {
+        return texture;
     }
 }

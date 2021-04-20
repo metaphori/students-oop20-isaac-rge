@@ -43,4 +43,9 @@ public interface ViewHandler {
      * @return The current scene.
      */
     Scene getScene();
+
+    /**
+     * Method to call every GameLoop that resizes every texture.
+     */
+    void onUpdate();
 }

@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.shape.Rectangle;
+import ryleh.view.Textures;
 
 /**
  * This is the interface for the graphic model of the view of any type of
@@ -55,4 +56,9 @@ public interface GraphicComponent {
      * @return The zIndex of a GraphicComponent.
      */
     int getZindex();
+    /**
+     * A Method that returns the current texture of the graphicComponent.
+     * @return The Texture.
+     */
+    Textures getTexture();
 }

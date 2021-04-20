@@ -21,6 +21,7 @@ public class EnemyDrunkGraphicComponent implements GraphicComponent {
     private Rectangle rectangle;
     private FadeTransition enemyFade;
     private int zIndex;
+    private final Textures texture = Textures.ENEMY_DRUNK;
     /**
      * The duration of the fade animation of this GraphicComponent.
      */
@@ -40,10 +41,10 @@ public class EnemyDrunkGraphicComponent implements GraphicComponent {
      * @param position
      */
     public EnemyDrunkGraphicComponent(final Point2D position) {
-        this.rectangle = new Rectangle(Textures.ENEMY_DRUNK.getWidth(), Textures.ENEMY_DRUNK.getHeight());
+        this.rectangle = new Rectangle(texture.getWidth(), texture.getHeight());
         this.rectangle.setX(position.getX());
         this.rectangle.setY(position.getY());
-        this.rectangle.setFill(Textures.ENEMY_DRUNK.getImagePattern());
+        this.rectangle.setFill(texture.getImagePattern());
         this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
         this.enemyFade.setFromValue(1.0);
         this.enemyFade.setToValue(0.0);
@@ -100,5 +101,13 @@ public class EnemyDrunkGraphicComponent implements GraphicComponent {
     @Override
     public int getZindex() {
         return zIndex;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Textures getTexture() {
+       return texture;
     }
 }

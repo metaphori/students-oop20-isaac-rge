@@ -39,6 +39,7 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent {
     private PlayerGraphicComponent player;
     private FadeTransition enemyFade;
     private int zIndex;
+    private final Textures texture = Textures.ENEMY_LURKER;
 
     /**
      * Creates a new Instance of EnemyLurkerGraphicComponent with the given player
@@ -61,10 +62,10 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent {
      *                         be initialized in the view.
      */
     public EnemyLurkerGraphicComponent(final PlayerGraphicComponent graphicComponent, final Point2D position) {
-        this.rectangle = new Rectangle(Textures.ENEMY_LURKER.getWidth(), Textures.ENEMY_LURKER.getHeight());
+        this.rectangle = new Rectangle(texture.getWidth(), texture.getHeight());
         this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
         this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
-        this.rectangle.setFill(Textures.ENEMY_LURKER.getImagePattern());
+        this.rectangle.setFill(texture.getImagePattern());
         this.player = graphicComponent;
         this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
         this.enemyFade.setFromValue(1.0);
@@ -139,5 +140,13 @@ public class EnemyLurkerGraphicComponent implements GraphicComponent {
     @Override
     public int getZindex() {
         return zIndex;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Textures getTexture() {
+        return texture;
     }
 }

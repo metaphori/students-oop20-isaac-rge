@@ -26,6 +26,8 @@ public class ViewHandlerImpl implements ViewHandler {
      * To calculate scale of window size.
      */
     private static final double STANDARD_SCALE = 1920.0;
+    private double lastWidth = Screen.getPrimary().getBounds().getWidth();
+    private double lastHeight = Screen.getPrimary().getBounds().getHeight();
     private final Stage stage;
     private final List<GraphicComponent> graphicComponents;
     private final Scene scene;
@@ -33,34 +35,36 @@ public class ViewHandlerImpl implements ViewHandler {
     private final Rectangle background;
     private final GameUI gameUi;
     private boolean isFirstRoom;
+    private Textures bgTexture = Textures.BACKGROUND;
+    private final double aspectRatio = 16.0 / 9.0;
 
     /**
      * The width of the screen.
      */
-    private static int standardWidth = (int) Screen.getPrimary().getBounds().getWidth();
+    private static double standardWidth = Screen.getPrimary().getBounds().getWidth();
     /**
      * The height of the screen.
      */
-    private static int standardHeight = (int) Screen.getPrimary().getBounds().getHeight();
+    private static double standardHeight = Screen.getPrimary().getBounds().getHeight();
     /**
      * The modifier to set the correct proportion of the view.
      */
-    private static double scaleModifier = (double) (ViewHandlerImpl.standardWidth / STANDARD_SCALE);
+    private static double scaleModifier = ViewHandlerImpl.standardWidth / STANDARD_SCALE;
 
-    public static int getStandardWidth() {
+    public static double getStandardWidth() {
         return standardWidth;
     }
 
-    public static void setStandardWidth(final int standardwidth) {
-        standardWidth = standardwidth;
+    public static void setStandardWidth(final double d) {
+        standardWidth = d;
     }
 
-    public static int getStandardHeight() {
+    public static double getStandardHeight() {
         return standardHeight;
     }
 
-    public static void setStandardHeight(final int standardheight) {
-        standardHeight = standardheight;
+    public static void setStandardHeight(final double d) {
+        standardHeight = d;
     }
 
     public static double getScaleModifier() {
@@ -79,7 +83,7 @@ public class ViewHandlerImpl implements ViewHandler {
     public ViewHandlerImpl(final Stage stage) {
         this.gameUi = new GameUI();
         this.stage = stage;
-        this.background = new Rectangle(Textures.BACKGROUND.getWidth(), Textures.BACKGROUND.getHeight());
+        this.background = new Rectangle(bgTexture.getWidth(), bgTexture.getHeight());
         root = new AnchorPane();
         root.setStyle("-fx-background-color: black;");
         ((AnchorPane) root).getChildren().add(background);
@@ -91,18 +95,9 @@ public class ViewHandlerImpl implements ViewHandler {
             }
         });
         this.stage.setScene(scene);
-        this.stage.setFullScreen(false);
+        this.stage.setResizable(true);
         this.graphicComponents = new ArrayList<>();
         this.isFirstRoom = true;
-        this.stage.setOnCloseRequest(e -> {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    Platform.exit();
-                    System.exit(0);
-                }
-            });
-        });
     }
 
     /**
@@ -130,16 +125,17 @@ public class ViewHandlerImpl implements ViewHandler {
         final Random generator = new Random();
         switch (generator.nextInt(3)) {
         case 1:
-            this.background.setFill(Textures.BACKGROUND2.getImagePattern());
+            this.bgTexture = Textures.BACKGROUND2;
             break;
         case 2:
-            this.background.setFill(Textures.BACKGROUND3.getImagePattern());
+            this.bgTexture = Textures.BACKGROUND3;
             break;
         case 0:
         default:
-            this.background.setFill(Textures.BACKGROUND.getImagePattern());
+            this.bgTexture = Textures.BACKGROUND;
             break;
         }
+        this.background.setFill(bgTexture.getImagePattern());
         ((AnchorPane) root).getChildren().add(background);
         ((AnchorPane) root).getChildren().add(gameUi.getLevel());
         ((AnchorPane) root).getChildren().add(gameUi.getLives());
@@ -194,5 +190,26 @@ public class ViewHandlerImpl implements ViewHandler {
      */
     public GameUI getGameUi() {
         return gameUi;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    public void onUpdate() {
+        if (this.stage.getWidth() != this.lastWidth) {
+            this.stage.setHeight(this.stage.getWidth() / aspectRatio);
+        } else if (this.stage.getHeight() != this.lastHeight) {
+            this.stage.setWidth(this.stage.getHeight() * aspectRatio);
+        }
+        setStandardHeight(this.stage.getHeight());
+        setStandardWidth(this.stage.getWidth());
+        this.lastHeight = getStandardHeight();
+        this.lastWidth = getStandardWidth();
+        setScaleModifier(standardWidth / STANDARD_SCALE);
+        this.background.setWidth(bgTexture.getWidth());
+        this.background.setHeight(bgTexture.getHeight());
+        for (final GraphicComponent g : getGraphicComponents()) {
+            g.getNode().setWidth(g.getTexture().getWidth());
+            g.getNode().setHeight(g.getTexture().getHeight());
+        }
     }
 }

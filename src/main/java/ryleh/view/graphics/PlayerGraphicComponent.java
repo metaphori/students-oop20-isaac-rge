@@ -231,4 +231,12 @@ public class PlayerGraphicComponent implements GraphicComponent {
     public int getZindex() {
         return zIndex;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Textures getTexture() {
+       return Textures.PLAYER_DOWN;
+    }
 }

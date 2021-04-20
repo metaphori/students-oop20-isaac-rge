@@ -21,6 +21,7 @@ public class ItemGraphicComponent implements GraphicComponent {
     private Rectangle rectangle;
     private boolean animPlayed;
     private int zIndex;
+    private final Textures texture = Textures.ITEM1;
 
     /**
      * The duration of each frame of the animation.
@@ -43,12 +44,12 @@ public class ItemGraphicComponent implements GraphicComponent {
      *                 initialized.
      */
     public ItemGraphicComponent(final Point2D position) {
-        this.rectangle = new Rectangle(Textures.ITEM1.getWidth(), Textures.ITEM1.getHeight());
+        this.rectangle = new Rectangle(texture.getWidth(), texture.getHeight());
         this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
         this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
         this.rectangle.setFill(Textures.ITEM1.getImagePattern());
         this.animPlayed = false;
-        this.animItem = new AnimationLoop(List.of(Textures.ITEM1.getImagePattern(), Textures.ITEM2.getImagePattern()),
+        this.animItem = new AnimationLoop(List.of(texture.getImagePattern(), Textures.ITEM2.getImagePattern()),
                 ANIM_DURATION, rectangle);
     }
 
@@ -121,5 +122,13 @@ public class ItemGraphicComponent implements GraphicComponent {
     @Override
     public int getZindex() {
         return zIndex;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Textures getTexture() {
+      return texture;
     }
 }

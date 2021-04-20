@@ -27,6 +27,7 @@ public class EnemySpinnerGraphicComponent implements GraphicComponent {
     private Rectangle rectangle;
     private FadeTransition enemyFade;
     private int zIndex;
+    private final Textures texture = Textures.ENEMY_SPINNER;
     /**
      * The duration of the fade animation of this GraphicComponent.
      */
@@ -47,10 +48,10 @@ public class EnemySpinnerGraphicComponent implements GraphicComponent {
      *                 initialized.
      */
     public EnemySpinnerGraphicComponent(final Point2D position) {
-        this.rectangle = new Rectangle(Textures.ENEMY_SPINNER.getWidth(), Textures.ENEMY_SPINNER.getHeight());
+        this.rectangle = new Rectangle(texture.getWidth(), texture.getHeight());
         this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
         this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
-        this.rectangle.setFill(Textures.ENEMY_SPINNER.getImagePattern());
+        this.rectangle.setFill(texture.getImagePattern());
         this.rotation = new Rotate();
         this.rotation.setAngle(GameMath.toDegrees(Math.PI / ANGLE_MODIFIER));
         this.enemyFade = new FadeTransition(Duration.millis(FADE_DURATION), rectangle);
@@ -112,5 +113,13 @@ public class EnemySpinnerGraphicComponent implements GraphicComponent {
     @Override
     public int getZindex() {
         return zIndex;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Textures getTexture() {
+        return texture;
     }
 }

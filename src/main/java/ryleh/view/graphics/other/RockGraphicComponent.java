@@ -18,6 +18,7 @@ public class RockGraphicComponent implements GraphicComponent {
 
     private Rectangle rectangle;
     private int zIndex;
+    private final Textures texture = Textures.ROCK2;
 
     /**
      * Creates a new Instance of the RockGraphicComponent.
@@ -34,10 +35,10 @@ public class RockGraphicComponent implements GraphicComponent {
      *                 initialized.
      */
     public RockGraphicComponent(final Point2D position) {
-        this.rectangle = new Rectangle(Textures.ROCK.getWidth(), Textures.ROCK.getHeight());
+        this.rectangle = new Rectangle(texture.getWidth(), texture.getHeight());
         this.rectangle.setX(position.getX() - rectangle.getWidth() / 2);
         this.rectangle.setY(position.getY() - rectangle.getHeight() / 2);
-        this.rectangle.setFill(Textures.ROCK2.getImagePattern());
+        this.rectangle.setFill(texture.getImagePattern());
     }
 
     /**
@@ -88,5 +89,13 @@ public class RockGraphicComponent implements GraphicComponent {
     @Override
     public int getZindex() {
         return zIndex;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Textures getTexture() {
+       return texture;
     }
 }

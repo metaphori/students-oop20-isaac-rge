@@ -8,7 +8,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import ryleh.Ryleh;
-
+/**
+ * This class is used to handle game UI.
+ */
 public class GameUI {
     /**
      * To adjust lives UI's text indentation.

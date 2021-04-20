@@ -1,5 +1,7 @@
 package ryleh.model;
-
+/**
+ * This enum represents the type of each game object. Each object added to the world belong to one of these types.
+ */
 public enum Type {
     /** Player entity type. */
     PLAYER,

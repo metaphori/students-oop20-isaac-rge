@@ -3,7 +3,9 @@ package ryleh.model.items;
 import ryleh.controller.core.GameEngine;
 import ryleh.controller.core.GameState;
 import ryleh.model.components.HealthIntComponent;
-
+/**
+ *This type of item heals player's hps by the maximum hps.
+ */
 public class HealItem implements Item {
     /**
      * {@inheritDoc}

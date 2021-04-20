@@ -8,7 +8,9 @@ import ryleh.common.Shape2d;
 import ryleh.controller.core.GameEngine;
 import ryleh.controller.events.Event;
 import ryleh.controller.events.EventListener;
-
+/**
+ * An implementation of Game World. Bounds are represented by a rectangle and game objects are contained inside a list.
+ */
 public class WorldImpl implements World {
 
     private final List<GameObject> gameObjects;

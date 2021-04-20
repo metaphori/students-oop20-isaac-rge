@@ -8,7 +8,9 @@ import ryleh.controller.events.NewLevelEvent;
 import ryleh.model.GameObject;
 import ryleh.model.Type;
 import ryleh.model.World;
-
+/**
+ * Component used to describe door's behavior.
+ */
 public class DoorComponent extends AbstractComponent {
 
     private boolean isCollidable;

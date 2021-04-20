@@ -5,7 +5,10 @@ import java.util.List;
 import ryleh.common.Point2d;
 import ryleh.common.Shape2d;
 import ryleh.controller.events.Event;
-
+/**
+ * Game's world. The World represents the domain of the game, containing all game objects and the bounds where the objects
+ * can move. 
+ */
 public interface World {
     /**
      * Gets the list of game objects added to this world.

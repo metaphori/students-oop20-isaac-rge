@@ -1,6 +1,5 @@
 package ryleh.view.menu;
 
-
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -21,7 +20,9 @@ import javafx.stage.StageStyle;
 import ryleh.Ryleh;
 import ryleh.controller.core.GameEngine;
 import ryleh.view.ViewHandlerImpl;
-
+/**
+ * This class represents this game's pause menu. It is called every time the player presses the pause button.
+ */
 public class RylehPauseMenu {
     private final Stage popupStage;
     private final Scene pauseScene;

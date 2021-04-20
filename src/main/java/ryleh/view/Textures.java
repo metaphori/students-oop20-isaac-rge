@@ -11,7 +11,7 @@ public enum Textures {
     /**
      * Player down Texture-frame 1.
      */
-    PLAYER_DOWN("assets/texture/player/PlayerDown.png", 120, 120),
+    PLAYER_DOWN("assets/texture/player/PlayerDown1.png", 120, 120),
     /**
      * Player down Texture-frame 2.
      */
@@ -19,12 +19,12 @@ public enum Textures {
     /**
      * Player Front Texture-frame 4.
      */
-    PLAYER_DOWN4("assets/texture/player/PlayerDown4.png", 120, 120),
+    PLAYER_DOWN4("assets/texture/player/PlayerDown3.png", 120, 120),
 
     /**
      * Player up Texture-frame 1.
      */
-    PLAYER_UP("assets/texture/player/PlayerUp.png", 120, 120),
+    PLAYER_UP("assets/texture/player/PlayerUp1.png", 120, 120),
     /**
      * Player up Texture-frame 2.
      */
@@ -32,12 +32,12 @@ public enum Textures {
     /**
      * Player up Texture-frame 4.
      */
-    PLAYER_UP4("assets/texture/player/PlayerUp4.png", 120, 120),
+    PLAYER_UP4("assets/texture/player/PlayerUp3.png", 120, 120),
 
     /**
      * Player right texture-frame 1.
      */
-    PLAYER_RIGHT("assets/texture/player/PlayerRight.png", 120, 120),
+    PLAYER_RIGHT("assets/texture/player/PlayerRight1.png", 120, 120),
     /**
      * Player right texture-frame 2.
      */
@@ -45,12 +45,12 @@ public enum Textures {
     /**
      * Player right texture-frame 4.
      */
-    PLAYER_RIGHT4("assets/texture/player/PlayerRight4.png", 120, 120),
+    PLAYER_RIGHT4("assets/texture/player/PlayerRight3.png", 120, 120),
 
     /**
      * Player left texture-frame 1.
      */
-    PLAYER_LEFT("assets/texture/player/PlayerLeft.png", 120, 120),
+    PLAYER_LEFT("assets/texture/player/PlayerLeft1.png", 120, 120),
     /**
      * Player left texture-frame 2.
      */
@@ -58,7 +58,7 @@ public enum Textures {
     /**
      * Player left texture-frame 4.
      */
-    PLAYER_LEFT4("assets/texture/player/PlayerLeft4.png", 120, 120),
+    PLAYER_LEFT4("assets/texture/player/PlayerLeft3.png", 120, 120),
 
     /**
      * Fire texture-frame 1.

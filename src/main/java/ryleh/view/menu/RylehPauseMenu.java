@@ -87,6 +87,8 @@ public class RylehPauseMenu {
     public void renderPauseMenu() {
         this.primaryStage.getScene().getRoot().setEffect(new GaussianBlur());
         this.pane.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1);");
+        popupStage.setWidth(primaryStage.getWidth());
+        popupStage.setHeight(primaryStage.getHeight());
         popupStage.setX(primaryStage.getX());
         popupStage.setY(primaryStage.getY());
         pauseScene.setFill(Color.TRANSPARENT);

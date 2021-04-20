@@ -86,7 +86,7 @@ public class ViewHandlerImpl implements ViewHandler {
         ((AnchorPane) root).getChildren().add(background);
         scene = new Scene(root);
         this.stage.setScene(scene);
-        this.stage.setMaximized(true);
+       // this.stage.setMaximized(true);
         this.graphicComponents = new ArrayList<>();
         this.isFirstRoom = true;
     }

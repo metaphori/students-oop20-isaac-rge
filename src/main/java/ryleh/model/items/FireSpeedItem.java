@@ -7,7 +7,7 @@ import ryleh.model.components.ShootingComponent;
  */
 public class FireSpeedItem implements Item {
 
-    private static final double FACTOR = 0.25;
+    private static final double FACTOR = 0.35;
     /**
      * {@inheritDoc}
      * Increases the attack speed

@@ -15,7 +15,7 @@ public class ShooterComponent extends AbstractComponent {
     /**
      * Speed at which bullet entities move.
      */
-    private static final double BULLET_SPEED = 0.15;
+    private static final double BULLET_SPEED = 0.25;
     private final Entity player;
 
     /**
@@ -28,7 +28,7 @@ public class ShooterComponent extends AbstractComponent {
         super(world);
         this.position = new Point2d(0, 0);
         this.player = player;
-        shooting = new ShootingComponent(world, 0.5);
+        shooting = new ShootingComponent(world, 0.75);
     }
 
     /**

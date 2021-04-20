@@ -8,7 +8,7 @@ public enum HitBoxType {
     /** Bullet standard hitbox.*/
     BULLET(5),
     /** Rock standard hitbox.*/
-    ROCK(75),
+    ROCK(57),
     /** Item standard hitbox.*/
     ITEM(30),
     /** Fire standard hitbox.*/

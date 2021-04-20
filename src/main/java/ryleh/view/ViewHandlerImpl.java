@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javafx.application.Platform;
 import javafx.collections.transformation.FilteredList;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,7 +13,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import ryleh.view.graphics.GraphicComponent;
 
 /**
@@ -88,14 +85,8 @@ public class ViewHandlerImpl implements ViewHandler {
         root.setStyle("-fx-background-color: black;");
         ((AnchorPane) root).getChildren().add(background);
         scene = new Scene(root);
-        this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(final WindowEvent event) {
-                Platform.exit();
-            }
-        });
         this.stage.setScene(scene);
-        this.stage.setResizable(true);
+        this.stage.setMaximized(true);
         this.graphicComponents = new ArrayList<>();
         this.isFirstRoom = true;
     }

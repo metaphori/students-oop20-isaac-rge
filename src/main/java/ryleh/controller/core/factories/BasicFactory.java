@@ -5,7 +5,6 @@ import ryleh.common.GameMath;
 import ryleh.common.Point2d;
 import ryleh.common.Vector2d;
 import ryleh.controller.Entity;
-import ryleh.controller.EntityImpl;
 import ryleh.controller.core.GameEngine;
 import ryleh.controller.core.GameState;
 import ryleh.model.Type;
@@ -59,7 +58,7 @@ public final class BasicFactory {
     public Entity createPlayer(final GameState state, final Point2d position) {
         final PlayerGraphicComponent player = new PlayerGraphicComponent(GameMath.toPoint2D(position));
         player.setZindex(1);
-        final EntityImpl e = GameEngine.entityBuilder().type(Type.PLAYER).position(position)
+        final Entity e = GameEngine.entityBuilder().type(Type.PLAYER).position(position)
                 .with(new PlayerComponent(state.getWorld(), 1000)).with(new HealthIntComponent(state.getWorld(), 3))
                 .with(new ShootingComponent(state.getWorld(), 1.0)).view(player)
                 .bbox(new CircleHitBox(new Circle2d(HitBoxType.PLAYER.getBoxRadius()))).build();
@@ -101,10 +100,10 @@ public final class BasicFactory {
      * @param position Point2d instance.
      * @return Entity type instance.
      */
-    public EntityImpl createRock(final GameState state, final Point2d position) {
+    public Entity createRock(final GameState state, final Point2d position) {
         final RockGraphicComponent rock = new RockGraphicComponent(GameMath.toPoint2D(position));
         rock.setZindex(1);
-        final EntityImpl e = GameEngine.entityBuilder().type(Type.ROCK).position(position).view(rock)
+        final Entity e = GameEngine.entityBuilder().type(Type.ROCK).position(position).view(rock)
                 .bbox(new CircleHitBox(HitBoxType.ROCK.getBoxRadius())).build();
         state.getWorld().addGameObject(e.getGameObject());
         state.getView().addGraphicComponent(e.getView());
@@ -119,10 +118,10 @@ public final class BasicFactory {
      * @param position Point2d instance.
      * @return Entity type instance.
      */
-    public EntityImpl createItem(final GameState state, final Point2d position) {
+    public Entity createItem(final GameState state, final Point2d position) {
         final ItemGraphicComponent item = new ItemGraphicComponent(GameMath.toPoint2D(position));
         item.setZindex(0);
-        final EntityImpl e = GameEngine.entityBuilder().type(Type.ITEM).position(position)
+        final Entity e = GameEngine.entityBuilder().type(Type.ITEM).position(position)
                 .with(new CollisionComponent(state.getWorld(), Type.ITEM)).view(item)
                 .bbox(new CircleHitBox(new Circle2d(HitBoxType.ITEM.getBoxRadius()))).build();
         state.getWorld().addGameObject(e.getGameObject());
@@ -138,10 +137,10 @@ public final class BasicFactory {
      * @param position Point2d instance.
      * @return Entity type instance.
      */
-    public EntityImpl createFire(final GameState state, final Point2d position) {
+    public Entity createFire(final GameState state, final Point2d position) {
         final FireGraphicComponent fire = new FireGraphicComponent(GameMath.toPoint2D(position));
         fire.setZindex(1);
-        final EntityImpl e = GameEngine.entityBuilder().type(Type.FIRE).position(position)
+        final Entity e = GameEngine.entityBuilder().type(Type.FIRE).position(position)
                 .with(new CollisionComponent(state.getWorld(), Type.FIRE)).view(fire)
                 .bbox(new CircleHitBox(new Circle2d(HitBoxType.FIRE.getBoxRadius()))).build();
         state.getWorld().addGameObject(e.getGameObject());
@@ -157,10 +156,10 @@ public final class BasicFactory {
      * @param position Point2d instance.
      * @return Entity type instance.
      */
-    public EntityImpl createDoor(final GameState state, final Point2d position) {
+    public Entity createDoor(final GameState state, final Point2d position) {
         final DoorGraphicComponent door = new DoorGraphicComponent(GameMath.toPoint2D(position));
         door.setZindex(0);
-        final EntityImpl e = GameEngine.entityBuilder().type(Type.DOOR).position(position).view(door)
+        final Entity e = GameEngine.entityBuilder().type(Type.DOOR).position(position).view(door)
                 .with(new DoorComponent(state.getWorld(), door.getTotalAnimDuration()))
                 .bbox(new CircleHitBox(new Circle2d(HitBoxType.DOOR.getBoxRadius()))).build();
         state.getWorld().addGameObject(e.getGameObject());

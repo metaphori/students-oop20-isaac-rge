@@ -1,6 +1,7 @@
 package ryleh.controller.core;
 
 import ryleh.common.Point2d;
+import ryleh.controller.Entity;
 import ryleh.controller.EntityImpl;
 import ryleh.model.GameObject;
 import ryleh.model.GameObjectImpl;
@@ -86,7 +87,7 @@ public class EntityBuilderImpl implements EntityBuilder {
      * {@inheritDoc}
      */
     @Override
-    public EntityImpl build() {
+    public Entity build() {
         return new EntityImpl(graphic, object);
     }
 }

@@ -1,7 +1,7 @@
 package ryleh.controller.core;
 
 import ryleh.common.Point2d;
-import ryleh.controller.EntityImpl;
+import ryleh.controller.Entity;
 import ryleh.model.Type;
 import ryleh.model.components.AbstractComponent;
 import ryleh.model.physics.HitBox;
@@ -65,5 +65,5 @@ public interface EntityBuilder {
      * 
      * @return EntityBuilder instance.
      */
-    EntityImpl build();
+    Entity build();
 }

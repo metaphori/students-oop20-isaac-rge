@@ -1,4 +1,4 @@
-package ryleh.controller.levels;
+package ryleh.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.Random;
 import java.util.function.Function;
 
 import ryleh.controller.core.GameEngine;
-import ryleh.model.Type;
 /**
  * A class that determines which entities are going to be spawned.
  */

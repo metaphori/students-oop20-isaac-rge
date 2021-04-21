@@ -14,6 +14,7 @@ import ryleh.controller.core.GameEngine;
 import ryleh.controller.core.GameState;
 import ryleh.controller.core.factories.BasicFactory;
 import ryleh.controller.core.factories.EnemyFactory;
+import ryleh.model.LevelDesigner;
 import ryleh.model.Type;
 import ryleh.model.World;
 /**

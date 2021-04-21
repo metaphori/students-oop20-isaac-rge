@@ -15,7 +15,6 @@ public class MaxHealthItem implements Item {
     @Override
     public void apply(final GameState state) {
         ((HealthIntComponent) state.getPlayer().getGameObject().getComponent(HealthIntComponent.class).get()).increaseMaxHp(1);
-        System.out.println("max" + ((HealthIntComponent) state.getPlayer().getGameObject().getComponent(HealthIntComponent.class).get()).getMaxHp());
         GameEngine.runDebugger(() -> System.out.println("max heal"));
     }
 }

@@ -2,22 +2,29 @@ package ryleh.view.menu;
 
 import javafx.application.Platform;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import ryleh.view.ViewHandlerImpl;
+
 /**
  * This class represents GameOver menu, both victory screen and loss screen.
  */
 public class RylehGameOverMenu {
     private final Stage primaryStage;
-    private final Image gameOverImage;
+    private final Rectangle bgRectangle;
 
     public RylehGameOverMenu(final Stage primaryStage, final boolean victory) {
+        final ImagePattern gameOverImage;
         this.primaryStage = primaryStage;
+        this.bgRectangle = new Rectangle();
         final String imagePath = victory ? "/assets/texture/menu/victory.png" : "/assets/texture/menu/gameOver.png";
-        this.gameOverImage = new Image(imagePath, (double) ViewHandlerImpl.getStandardWidth(),
-                (double) ViewHandlerImpl.getStandardHeight(), true, true);
+        gameOverImage = new ImagePattern(new Image(imagePath, ViewHandlerImpl.getStandardWidth(),
+                ViewHandlerImpl.getStandardHeight(), true, true));
+        this.bgRectangle.setFill(gameOverImage);
+        bgRectangle.heightProperty().bind(this.primaryStage.heightProperty().asObject());
+        bgRectangle.widthProperty().bind(this.primaryStage.widthProperty().asObject());
     }
 
     /**
@@ -25,9 +32,7 @@ public class RylehGameOverMenu {
      */
     public void show() {
         final AnchorPane pane = new AnchorPane();
-        final ImageView menu = new ImageView(this.gameOverImage);
-        menu.setPreserveRatio(true);
-        pane.getChildren().add(menu);
+        pane.getChildren().add(bgRectangle);
         pane.setStyle("-fx-background-color: rgba(0, 0, 0, 1);");
         pane.setOnMouseClicked((e) -> {
             Platform.exit();

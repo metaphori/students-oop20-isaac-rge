@@ -1,9 +1,10 @@
 package ryleh.view.menu;
 
-import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+
 /**
  * Interface for a factory that provides easy JavaFX custom menus creation.
  */
@@ -16,14 +17,14 @@ public interface MenuFactory {
     void createCustomAlert(String text);
 
     /**
-     * Creates a custom button composed of a text and a side rectangle.
+     * Creates a custom button.
      * 
      * @param name        The text showed on the button
      * @param description The description of the action that the button execute
      * @param action      The action to run when the button is pressed
-     * @return Node HBox which contains the button
+     * @return Button The customized Button
      */
-    Node createCustomButton(String name, String description, Runnable action);
+    Button createCustomButton(String name, String description, Runnable action);
 
     /**
      * 

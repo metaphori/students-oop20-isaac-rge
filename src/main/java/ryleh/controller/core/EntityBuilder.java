@@ -2,37 +2,22 @@ package ryleh.controller.core;
 
 import ryleh.common.Point2d;
 import ryleh.controller.EntityImpl;
-import ryleh.model.GameObject;
-import ryleh.model.GameObjectImpl;
 import ryleh.model.Type;
 import ryleh.model.components.AbstractComponent;
 import ryleh.model.physics.HitBox;
 import ryleh.view.graphics.GraphicComponent;
 /**
- * A class to build Entity type objects.
+ * A builder to make Entity constructing easier and safer.
  */
-public class EntityBuilder {
-    private final GameObject object;
-    private GraphicComponent graphic;
+public interface EntityBuilder {
 
     /**
-     * Constructor method.
-     */
-    public EntityBuilder() {
-        object = new GameObjectImpl();
-        graphic = null;
-    }
-
-    /**
-     * Constructor method.
+     * Sets the type of the GameObject instance.
      * 
      * @param type Type value
      * @return EntityBuilder instance.
      */
-    public EntityBuilder type(final Type type) {
-        object.setType(type);
-        return this;
-    }
+    EntityBuilder type(Type type);
 
     /**
      * Sets the position of a GameObject instance.
@@ -40,10 +25,7 @@ public class EntityBuilder {
      * @param position Point2d instance.
      * @return EntityBuilder instance.
      */
-    public EntityBuilder position(final Point2d position) {
-        object.setPosition(position);
-        return this;
-    }
+    EntityBuilder position(Point2d position);
 
     /**
      * Sets the position of a GameObject instance.
@@ -52,10 +34,7 @@ public class EntityBuilder {
      * @param y int value.
      * @return EntityBuilder instance.
      */
-    public EntityBuilder position(final int x, final int y) {
-        object.setPosition(new Point2d(x, y));
-        return this;
-    }
+    EntityBuilder position(int x, int y);
 
     /**
      * Adds an AbstarctComponent instance to a GameObject.
@@ -63,15 +42,7 @@ public class EntityBuilder {
      * @param component AbstactComponent instance.
      * @return EntityBuilder instance.
      */
-    public EntityBuilder with(final AbstractComponent component) {
-        try {
-            object.addComponent(component);
-        } catch (IllegalStateException e) {
-            GameEngine.runDebugger(
-                    () -> System.out.println("Something went wrong....Exception when trying to add component\n"));
-        }
-        return this;
-    }
+    EntityBuilder with(AbstractComponent component);
 
     /**
      * Sets the GraphicComponent component.
@@ -79,10 +50,7 @@ public class EntityBuilder {
      * @param view GraphicComponent instance.
      * @return EntityBuilder instance.
      */
-    public EntityBuilder view(final GraphicComponent view) {
-        graphic = view;
-        return this;
-    }
+    EntityBuilder view(GraphicComponent view);
 
     /**
      * Sets the HitBox attribute.
@@ -90,17 +58,12 @@ public class EntityBuilder {
      * @param bbox HitBox instance.
      * @return EntityBuilder instance.
      */
-    public EntityBuilder bbox(final HitBox bbox) {
-        object.setHitBox(bbox);
-        return this;
-    }
+    EntityBuilder bbox(HitBox bbox);
 
     /**
      * Creates a new EntityImpl instance with graphic and object attributes.
      * 
      * @return EntityBuilder instance.
      */
-    public EntityImpl build() {
-        return new EntityImpl(graphic, object);
-    }
+    EntityImpl build();
 }

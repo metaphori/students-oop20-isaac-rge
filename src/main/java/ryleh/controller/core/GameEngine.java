@@ -82,7 +82,7 @@ public final class GameEngine {
      * @return an entity builder
      */
     public static EntityBuilder entityBuilder() {
-        return new EntityBuilder();
+        return new EntityBuilderImpl();
     }
 
     /**

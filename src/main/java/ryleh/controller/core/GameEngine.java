@@ -5,12 +5,9 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import ryleh.view.menu.RylehGameOverMenu;
-import ryleh.view.menu.RylehPauseMenu;
 
 /**
  * This is the main class that initiates the game and the main game loop.
@@ -30,7 +27,6 @@ public final class GameEngine {
      */
     private static boolean isDeveloper;
     private static boolean debugOn;
-    private RylehPauseMenu pauseMenu;
     private Stage primaryStage;
     private GameState rylehState;
 
@@ -43,13 +39,6 @@ public final class GameEngine {
     public void initGame(final Stage stage) {
         this.primaryStage = stage;
         this.rylehState = new GameStateImpl(stage);
-        this.pauseMenu = new RylehPauseMenu(stage);
-        this.primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, key -> {
-            if (key.getCode().equals(KeyCode.P) || key.getCode().equals(KeyCode.ESCAPE) && !rylehState.isGameOver()) {
-                GameEngine.pauseEngine();
-                pauseMenu.renderPauseMenu();
-            }
-        });
         this.rylehState.generateNewLevel();
     }
 

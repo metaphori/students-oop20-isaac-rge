@@ -11,8 +11,11 @@ import ryleh.model.components.PlayerComponent;
 import ryleh.model.components.ShootingComponent;
 import ryleh.model.physics.Direction;
 import ryleh.view.graphics.PlayerGraphicComponent;
+import ryleh.view.menu.RylehPauseMenu;
+
 /**
- * A class that manages all aspects of an input control and implements InputController interface.
+ * A class that manages all aspects of an input control and implements
+ * InputController interface.
  */
 public class InputControllerImpl implements InputController {
 
@@ -28,8 +31,12 @@ public class InputControllerImpl implements InputController {
     private final Entity player;
     private final GameState state;
     private final World world;
+
+    private final RylehPauseMenu pauseMenu;
+
     /**
      * Instantiates an Input controller given the current state of the game.
+     * 
      * @param state Current state of the game.
      */
     public InputControllerImpl(final GameState state) {
@@ -40,6 +47,7 @@ public class InputControllerImpl implements InputController {
         this.graphic = (PlayerGraphicComponent) this.player.getView();
         this.physics = (PlayerComponent) this.player.getGameObject().getComponent(PlayerComponent.class).get();
         this.currentDir = this.physics.getDirection();
+        this.pauseMenu = new RylehPauseMenu(this.state.getView().getStage());
     }
 
     /**
@@ -80,6 +88,11 @@ public class InputControllerImpl implements InputController {
             case SPACE:
                 this.isShooting = true;
                 break;
+            case P:
+                this.pauseGame();
+                break;
+            case ESCAPE:
+                this.pauseGame();
             default:
                 break;
             }
@@ -171,5 +184,13 @@ public class InputControllerImpl implements InputController {
         } else if (this.currentDir.equals(Direction.RIGHT) && !isMoveRight) {
             this.currentDir = Direction.IDLE;
         }
+    }
+
+    /**
+     * method to pause the game and enter the game menu.
+     */
+    private void pauseGame() {
+        GameEngine.pauseEngine();
+        pauseMenu.renderPauseMenu();
     }
 }

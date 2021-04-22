@@ -44,14 +44,14 @@ public class RylehPauseMenu {
             public void run() {
                 primaryStage.getScene().getRoot().setEffect(null);
                 popupStage.hide();
-                GameEngine.resumeEngine();
+                factory.getController().resumeGame();
             }
         };
 
         this.box.getChildren().add(factory.createCustomButton("Resume", "Resume the game", resume));
         final Button developButton = factory.createCustomButton("Developer Mode: OFF", "Enable/Disable developer mode",
                 () -> {
-                    GameEngine.setDeveloper(!GameEngine.isDeveloper());
+                    factory.getController().setDeveloperMode();
                     ((Button) this.box.getChildren().get(1))
                             .setText("Developer Mode: " + (GameEngine.isDeveloper() ? "ON" : "OFF"));
                 });

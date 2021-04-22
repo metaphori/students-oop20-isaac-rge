@@ -1,6 +1,5 @@
 package ryleh.view.menu;
 
-import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
@@ -14,6 +13,7 @@ import ryleh.view.ViewHandlerImpl;
 public class RylehGameOverMenu {
     private final Stage primaryStage;
     private final Rectangle bgRectangle;
+    private final MenuFactoryImpl factory = new MenuFactoryImpl();
 
     public RylehGameOverMenu(final Stage primaryStage, final boolean victory) {
         final ImagePattern gameOverImage;
@@ -35,8 +35,7 @@ public class RylehGameOverMenu {
         pane.getChildren().add(bgRectangle);
         pane.setStyle("-fx-background-color: rgba(0, 0, 0, 1);");
         pane.setOnMouseClicked((e) -> {
-            Platform.exit();
-            System.exit(0);
+            factory.getController().quitGame();
         });
         this.primaryStage.getScene().setRoot(pane);
     }

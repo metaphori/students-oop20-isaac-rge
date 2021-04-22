@@ -1,6 +1,5 @@
 package ryleh.view.menu;
 
-import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,6 +14,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import ryleh.controller.menu.MenuController;
+import ryleh.controller.menu.MenuControllerImpl;
 import ryleh.view.ViewHandlerImpl;
 
 /**
@@ -24,6 +25,7 @@ public class MenuFactoryImpl implements MenuFactory {
 
     private static final int SIZE = 40;
     private static final int RADIUS = 200;
+    private final MenuController controller = new MenuControllerImpl();;
     private int scaledSize;
     private Font levelFont;
     private Color startColor;
@@ -52,13 +54,7 @@ public class MenuFactoryImpl implements MenuFactory {
         final Text question = new Text(text);
         question.setFont(new Font(scaledSize));
         confirm.getChildren().add(createCustomButton("YES", "", () -> {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    Platform.exit();
-                    System.exit(0);
-                }
-            });
+            controller.quitGame();
         }));
         confirm.getChildren().add(createCustomButton("NO", "", () -> window.close()));
         confirm.setAlignment(Pos.CENTER);
@@ -137,5 +133,12 @@ public class MenuFactoryImpl implements MenuFactory {
     @Override
     public void setLevelFont(final Font levelFont) {
         this.levelFont = levelFont;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public MenuController getController() {
+        return controller;
     }
 }

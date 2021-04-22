@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import ryleh.controller.menu.MenuController;
 
 /**
  * Interface for a factory that provides easy JavaFX custom menus creation.
@@ -56,4 +57,11 @@ public interface MenuFactory {
      * @param font The Font used by the current Menu
      */
     void setLevelFont(Font font);
+
+    /**
+     * Get the GUI controller.
+     * 
+     * @return The GUI controller
+     */
+    MenuController getController();
 }

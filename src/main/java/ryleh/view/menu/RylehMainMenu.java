@@ -3,7 +3,6 @@ package ryleh.view.menu;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.application.Platform;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -20,7 +19,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import ryleh.Ryleh;
-import ryleh.controller.core.GameEngine;
 import ryleh.view.ViewHandlerImpl;
 
 /**
@@ -69,9 +67,7 @@ public class RylehMainMenu {
         final ImagePattern backgroundImage = new ImagePattern(new Image("/assets/texture/menu/menu.png"));
         final Rectangle bgRectangle = new Rectangle(backgroundImage.getWidth(), backgroundImage.getHeight());
         final Button startBtn = factory.createCustomButton("Start Game", "Start a new adventure", () -> {
-            final GameEngine engine = new GameEngine();
-            engine.initGame(primaryStage);
-            engine.mainLoop();
+            factory.getController().startGame(primaryStage);
         });
         final Button exitBtn = factory.createCustomButton("Quit Game", "Exit to desktop", () -> {
             factory.createCustomAlert("Do you really want to quit?");
@@ -92,15 +88,7 @@ public class RylehMainMenu {
                 .setScene(new Scene(pane, ViewHandlerImpl.getStandardWidth(), ViewHandlerImpl.getStandardHeight()));
         this.primaryStage.setResizable(true);
         this.primaryStage.setTitle("Ryleh's Call");
-        this.primaryStage.setOnCloseRequest(e -> {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    Platform.exit();
-                    System.exit(0);
-                }
-            });
-        });
+        this.primaryStage.setOnCloseRequest(e -> factory.getController().quitGame());
     }
 
     private Node createComboBox() {

@@ -43,7 +43,8 @@ public interface GraphicComponent {
     void onRemoved(EventHandler<ActionEvent> event);
 
     /**
-     * The method that sets the zIndex of a graphicCOmponent in the view.
+     * The method that sets the zIndex of a graphicCOmponent in the view,
+     * which is used to define the right order to render each GraphicComponent.
      * 
      * @param zIndex the value of the zIndex that needs to be set to a
      *               graphicComponent.

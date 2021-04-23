@@ -24,19 +24,39 @@ import ryleh.view.ViewHandlerImpl;
  * player presses the pause button.
  */
 public class RylehPauseMenu {
-    private final Stage popupStage;
-    private final Scene pauseScene;
+    private Stage popupStage;
+    private Scene pauseScene;
     private final Stage primaryStage;
-    private final MenuFactory factory;
-    private final BorderPane pane;
-    private final VBox box;
+    private MenuFactory factory;
+    private BorderPane pane;
+    private VBox box;
 
     public RylehPauseMenu(final Stage primaryStage) {
+       this.primaryStage = primaryStage;
+    }
+
+    /**
+     * This method will be called every time the player presses the key "P" to pause
+     * the engine inside "GameEngine" class It renders a new pop-up stage that
+     * contains the pause menu.
+     */
+    public void renderPauseMenu() {
+        this.newPauseMenu();
+        this.primaryStage.getScene().getRoot().setEffect(new GaussianBlur());
+        this.pane.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1);");
+        popupStage.setWidth(primaryStage.getWidth());
+        popupStage.setHeight(primaryStage.getHeight());
+        popupStage.setX(primaryStage.getX());
+        popupStage.setY(primaryStage.getY());
+        pauseScene.setFill(Color.TRANSPARENT);
+        popupStage.setScene(pauseScene);
+        popupStage.show();
+    }
+    private void newPauseMenu() {
         final Separator separator = new Separator();
         this.pane = new BorderPane();
         this.box = new VBox();
         factory = new MenuFactoryImpl();
-        this.primaryStage = primaryStage;
         factory.setLevelFont(Font.loadFont(Ryleh.class.getResource("/assets/fonts/manaspc.ttf").toExternalForm(),
                 factory.getScaledSize()));
         final Runnable resume = new Runnable() {
@@ -78,22 +98,5 @@ public class RylehPauseMenu {
             }
         });
         pauseScene = new Scene(this.pane, ViewHandlerImpl.getStandardWidth(), ViewHandlerImpl.getStandardHeight());
-    }
-
-    /**
-     * This method will be called every time the player presses the key "P" to pause
-     * the engine inside "GameEngine" class It renders a new pop-up stage that
-     * contains the pause menu.
-     */
-    public void renderPauseMenu() {
-        this.primaryStage.getScene().getRoot().setEffect(new GaussianBlur());
-        this.pane.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1);");
-        popupStage.setWidth(primaryStage.getWidth());
-        popupStage.setHeight(primaryStage.getHeight());
-        popupStage.setX(primaryStage.getX());
-        popupStage.setY(primaryStage.getY());
-        pauseScene.setFill(Color.TRANSPARENT);
-        popupStage.setScene(pauseScene);
-        popupStage.show();
     }
 }

@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import ryleh.controller.menu.MenuController;
 import ryleh.controller.menu.MenuControllerImpl;
@@ -63,8 +64,8 @@ public class MenuFactoryImpl implements MenuFactory {
         container.setAlignment(Pos.CENTER);
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Quit Game");
-        window.setWidth(ViewHandlerImpl.getStandardWidth() / 3);
-        window.setHeight(ViewHandlerImpl.getStandardHeight() / 3);
+        window.setWidth(Screen.getPrimary().getBounds().getWidth() / 3);
+        window.setHeight(Screen.getPrimary().getBounds().getHeight() / 3);
         window.setScene(new Scene(container));
         window.setResizable(false);
         window.showAndWait();

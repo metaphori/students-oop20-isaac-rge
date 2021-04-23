@@ -23,8 +23,8 @@ public class ViewHandlerImpl implements ViewHandler {
      * To calculate scale of window size.
      */
     private static final double STANDARD_SCALE = 1920.0;
-    private double lastWidth = Screen.getPrimary().getBounds().getWidth();
-    private double lastHeight = Screen.getPrimary().getBounds().getHeight();
+    private double lastWidth;
+    private double lastHeight;
     private final Stage stage;
     private final List<GraphicComponent> graphicComponents;
     private final Scene scene;
@@ -88,6 +88,8 @@ public class ViewHandlerImpl implements ViewHandler {
         this.stage.setScene(scene);
         this.graphicComponents = new ArrayList<>();
         this.isFirstRoom = true;
+        this.lastWidth = standardWidth;
+        this.lastHeight = standardHeight;
     }
 
     /**

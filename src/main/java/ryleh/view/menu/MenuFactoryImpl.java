@@ -57,7 +57,7 @@ public class MenuFactoryImpl implements MenuFactory {
         confirm.getChildren().add(createCustomButton("YES", "", () -> {
             controller.quitGame();
         }));
-        confirm.getChildren().add(createCustomButton("NO", "", () -> controller.quitGame()));
+        confirm.getChildren().add(createCustomButton("NO", "", () -> window.close()));
         confirm.setAlignment(Pos.CENTER);
         container.getChildren().add(question);
         container.getChildren().add(confirm);

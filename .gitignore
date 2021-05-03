@@ -11,7 +11,7 @@
 .eclipse-pmd
 .settings/
 bin/
-config/
+#config/
 
 # IDEA #
 .idea/

@@ -7,7 +7,7 @@
 # Eclipse #
 .classpath
 .project
-.checkstyle
+#.checkstyle
 .eclipse-pmd
 .settings/
 bin/

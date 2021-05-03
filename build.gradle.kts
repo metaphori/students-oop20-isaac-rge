@@ -72,8 +72,8 @@ dependencies {
     }
     implementation("junit:junit:_")
     implementation("org.junit.jupiter:junit-jupiter-api:_")
-    runtimeOnly("org.junit.jupiter:junit-jupiter-engine")
-    runtimeOnly("org.junit.vintage:junit-vintage-engine")
+    runtimeOnly("org.junit.jupiter:junit-jupiter-engine:_")
+    runtimeOnly("org.junit.vintage:junit-vintage-engine:_")
     File("lib")
         .takeIf { it.exists() }
         ?.takeIf { it.isDirectory }
